@@ -1,0 +1,26 @@
+{
+  "name": "carpenstar/bybitapi-sdk-derivatives",
+  "type": "library",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Carpenstar",
+      "email": "mighty.vlad@gmail.com"
+    }
+  ],
+  "require": {
+    "php": ">=7.4",
+    "carpenstar/bybitapi-sdk-core": "dev-master"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "^9.5"
+  },
+  "minimum-stability": "dev",
+  "prefer-stable": true,
+  "autoload": {
+    "psr-4": {
+      "Carpenstar\\ByBitAPI\\Derivatives\\": "src/Derivatives",
+      "Carpenstar\\ByBitAPI\\Tests\\": "src/tests"
+    }
+  }
+}
