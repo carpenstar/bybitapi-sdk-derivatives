@@ -1,0 +1,19 @@
+{
+  "name": "carpenstar/bybitapi-sdk-derivatives",
+  "type": "library",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Carpenstar",
+      "email": "mighty.vlad@gmail.com"
+    }
+  ],
+  "require": {
+    "carpenstar/bybitapi-sdk-core": "^3.0.1"
+  },
+  "autoload": {
+    "psr-4": {
+      "Carpenstar\\ByBitAPI\\Derivatives\\": "src/Derivatives"
+    }
+  }
+}
