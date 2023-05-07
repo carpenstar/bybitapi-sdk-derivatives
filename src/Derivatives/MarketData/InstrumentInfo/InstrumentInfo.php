@@ -5,6 +5,10 @@ use Carpenstar\ByBitAPI\Core\Endpoints\PublicEndpoint;
 use Carpenstar\ByBitAPI\Core\Enums\EnumDerivativesCategory;
 use Carpenstar\ByBitAPI\Core\Interfaces\IGetEndpointInterface;
 
+/**
+ * Get launched instruments information.
+ * https://bybit-exchange.github.io/docs/derivatives/public/instrument-info
+ */
 class InstrumentInfo extends PublicEndpoint implements IGetEndpointInterface
 {
     protected string $url = '/derivatives/v3/public/instruments-info';

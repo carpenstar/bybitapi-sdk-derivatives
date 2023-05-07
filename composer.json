@@ -9,7 +9,7 @@
     }
   ],
   "require": {
-    "carpenstar/bybitapi-sdk-core": "^3.0.1"
+    "carpenstar/bybitapi-sdk-core": "dev-master"
   },
   "autoload": {
     "psr-4": {
