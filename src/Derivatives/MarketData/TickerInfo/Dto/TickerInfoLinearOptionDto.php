@@ -1,9 +1,9 @@
 <?php
-namespace Carpenstar\ByBitAPI\Derivatives\MarketData\TickerInfo;
+namespace Carpenstar\ByBitAPI\Derivatives\MarketData\TickerInfo\Dto;
 
 use Carpenstar\ByBitAPI\Core\Objects\ResponseEntity;
 
-class TILinearOptionResponse extends ResponseEntity
+class TickerInfoLinearOptionDto extends ResponseEntity
 {
     /**
      * Derivatives products category
@@ -195,7 +195,7 @@ class TILinearOptionResponse extends ResponseEntity
 
     /**
      * @param string $category
-     * @return TILinearOptionResponse
+     * @return TickerInfoLinearOptionDto
      */
     public function setCategory(string $category): self
     {
@@ -213,7 +213,7 @@ class TILinearOptionResponse extends ResponseEntity
 
     /**
      * @param string $symbol
-     * @return TILinearOptionResponse
+     * @return TickerInfoLinearOptionDto
      */
     public function setSymbol(string $symbol): self
     {
@@ -231,7 +231,7 @@ class TILinearOptionResponse extends ResponseEntity
 
     /**
      * @param float $bidPrice
-     * @return TILinearOptionResponse
+     * @return TickerInfoLinearOptionDto
      */
     public function setBidPrice(float $bidPrice): self
     {
@@ -249,7 +249,7 @@ class TILinearOptionResponse extends ResponseEntity
 
     /**
      * @param float $bidSize
-     * @return TILinearOptionResponse
+     * @return TickerInfoLinearOptionDto
      */
     public function setBidSize(float $bidSize): self
     {
@@ -267,7 +267,7 @@ class TILinearOptionResponse extends ResponseEntity
 
     /**
      * @param string $bidIv
-     * @return TILinearOptionResponse
+     * @return TickerInfoLinearOptionDto
      */
     public function setBidIv(string $bidIv): self
     {
@@ -285,7 +285,7 @@ class TILinearOptionResponse extends ResponseEntity
 
     /**
      * @param float $askPrice
-     * @return TILinearOptionResponse
+     * @return TickerInfoLinearOptionDto
      */
     public function setAskPrice(float $askPrice): self
     {
@@ -303,7 +303,7 @@ class TILinearOptionResponse extends ResponseEntity
 
     /**
      * @param float $askSize
-     * @return TILinearOptionResponse
+     * @return TickerInfoLinearOptionDto
      */
     public function setAskSize(float $askSize): self
     {
@@ -321,7 +321,7 @@ class TILinearOptionResponse extends ResponseEntity
 
     /**
      * @param float $askIv
-     * @return TILinearOptionResponse
+     * @return TickerInfoLinearOptionDto
      */
     public function setAskIv(float $askIv): self
     {
@@ -339,7 +339,7 @@ class TILinearOptionResponse extends ResponseEntity
 
     /**
      * @param float $lastPrice
-     * @return TILinearOptionResponse
+     * @return TickerInfoLinearOptionDto
      */
     public function setLastPrice(float $lastPrice): self
     {
@@ -357,7 +357,7 @@ class TILinearOptionResponse extends ResponseEntity
 
     /**
      * @param float $highPrice24h
-     * @return TILinearOptionResponse
+     * @return TickerInfoLinearOptionDto
      */
     public function setHighPrice24h(float $highPrice24h): self
     {
@@ -375,7 +375,7 @@ class TILinearOptionResponse extends ResponseEntity
 
     /**
      * @param float $lowPrice24h
-     * @return TILinearOptionResponse
+     * @return TickerInfoLinearOptionDto
      */
     public function setLowPrice24h(float $lowPrice24h): self
     {
@@ -393,7 +393,7 @@ class TILinearOptionResponse extends ResponseEntity
 
     /**
      * @param float $markPrice
-     * @return TILinearOptionResponse
+     * @return TickerInfoLinearOptionDto
      */
     public function setMarkPrice(float $markPrice): self
     {
@@ -411,7 +411,7 @@ class TILinearOptionResponse extends ResponseEntity
 
     /**
      * @param float $indexPrice
-     * @return TILinearOptionResponse
+     * @return TickerInfoLinearOptionDto
      */
     public function setIndexPrice(float $indexPrice): self
     {
@@ -429,7 +429,7 @@ class TILinearOptionResponse extends ResponseEntity
 
     /**
      * @param float $markPriceIv
-     * @return TILinearOptionResponse
+     * @return TickerInfoLinearOptionDto
      */
     public function setMarkPriceIv(float $markPriceIv): self
     {
@@ -447,7 +447,7 @@ class TILinearOptionResponse extends ResponseEntity
 
     /**
      * @param float $underlyingPrice
-     * @return TILinearOptionResponse
+     * @return TickerInfoLinearOptionDto
      */
     public function setUnderlyingPrice(float $underlyingPrice): self
     {
@@ -465,7 +465,7 @@ class TILinearOptionResponse extends ResponseEntity
 
     /**
      * @param float $openInterest
-     * @return TILinearOptionResponse
+     * @return TickerInfoLinearOptionDto
      */
     public function setOpenInterest(float $openInterest): self
     {
@@ -483,7 +483,7 @@ class TILinearOptionResponse extends ResponseEntity
 
     /**
      * @param float $turnover24h
-     * @return TILinearOptionResponse
+     * @return TickerInfoLinearOptionDto
      */
     public function setTurnover24h(float $turnover24h): self
     {
@@ -501,7 +501,7 @@ class TILinearOptionResponse extends ResponseEntity
 
     /**
      * @param float $volume24h
-     * @return TILinearOptionResponse
+     * @return TickerInfoLinearOptionDto
      */
     public function setVolume24h(float $volume24h): self
     {
@@ -519,7 +519,7 @@ class TILinearOptionResponse extends ResponseEntity
 
     /**
      * @param float $totalVolume
-     * @return TILinearOptionResponse
+     * @return TickerInfoLinearOptionDto
      */
     public function setTotalVolume(float $totalVolume): self
     {
@@ -537,7 +537,7 @@ class TILinearOptionResponse extends ResponseEntity
 
     /**
      * @param float $totalTurnover
-     * @return TILinearOptionResponse
+     * @return TickerInfoLinearOptionDto
      */
     public function setTotalTurnover(float $totalTurnover): self
     {
@@ -555,7 +555,7 @@ class TILinearOptionResponse extends ResponseEntity
 
     /**
      * @param float $delta
-     * @return TILinearOptionResponse
+     * @return TickerInfoLinearOptionDto
      */
     public function setDelta(float $delta): self
     {
@@ -573,7 +573,7 @@ class TILinearOptionResponse extends ResponseEntity
 
     /**
      * @param float $gamma
-     * @return TILinearOptionResponse
+     * @return TickerInfoLinearOptionDto
      */
     public function setGamma(float $gamma): self
     {
@@ -591,7 +591,7 @@ class TILinearOptionResponse extends ResponseEntity
 
     /**
      * @param float $vega
-     * @return TILinearOptionResponse
+     * @return TickerInfoLinearOptionDto
      */
     public function setVega(float $vega): self
     {
@@ -609,7 +609,7 @@ class TILinearOptionResponse extends ResponseEntity
 
     /**
      * @param float $theta
-     * @return TILinearOptionResponse
+     * @return TickerInfoLinearOptionDto
      */
     public function setTheta(float $theta): self
     {
@@ -627,7 +627,7 @@ class TILinearOptionResponse extends ResponseEntity
 
     /**
      * @param float $predictedDeliveryPrice
-     * @return TILinearOptionResponse
+     * @return TickerInfoLinearOptionDto
      */
     public function setPredictedDeliveryPrice(float $predictedDeliveryPrice): self
     {
@@ -645,7 +645,7 @@ class TILinearOptionResponse extends ResponseEntity
 
     /**
      * @param float $change24h
-     * @return TILinearOptionResponse
+     * @return TickerInfoLinearOptionDto
      */
     public function setChange24h(float $change24h): self
     {

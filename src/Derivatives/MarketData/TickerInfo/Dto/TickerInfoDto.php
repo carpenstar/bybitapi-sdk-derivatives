@@ -1,11 +1,11 @@
 <?php
-namespace Carpenstar\ByBitAPI\Derivatives\MarketData\TickerInfo;
+namespace Carpenstar\ByBitAPI\Derivatives\MarketData\TickerInfo\Dto;
 
 
 use Carpenstar\ByBitAPI\Core\Helpers\DateTimeHelper;
 use Carpenstar\ByBitAPI\Core\Objects\ResponseEntity;
 
-class TIResponse extends ResponseEntity
+class TickerInfoDto extends ResponseEntity
 {
     /**
      * Symbol name
@@ -168,7 +168,7 @@ class TIResponse extends ResponseEntity
 
     /**
      * @param string $symbol
-     * @return TIResponse
+     * @return TickerInfoDto
      */
     private function setSymbol(string $symbol): self
     {
@@ -186,7 +186,7 @@ class TIResponse extends ResponseEntity
 
     /**
      * @param float $bidPrice
-     * @return TIResponse
+     * @return TickerInfoDto
      */
     private function setBidPrice(float $bidPrice): self
     {
@@ -204,7 +204,7 @@ class TIResponse extends ResponseEntity
 
     /**
      * @param float $askPrice
-     * @return TIResponse
+     * @return TickerInfoDto
      */
     private function setAskPrice(float $askPrice): self
     {
@@ -222,7 +222,7 @@ class TIResponse extends ResponseEntity
 
     /**
      * @param float $lastPrice
-     * @return TIResponse
+     * @return TickerInfoDto
      */
     private function setLastPrice(float $lastPrice): self
     {
@@ -240,7 +240,7 @@ class TIResponse extends ResponseEntity
 
     /**
      * @param string $lastTickDirection
-     * @return TIResponse
+     * @return TickerInfoDto
      */
     private function setLastTickDirection(string $lastTickDirection): self
     {
@@ -258,7 +258,7 @@ class TIResponse extends ResponseEntity
 
     /**
      * @param float $prevPrice24h
-     * @return TIResponse
+     * @return TickerInfoDto
      */
     private function setPrevPrice24h(float $prevPrice24h): self
     {
@@ -276,7 +276,7 @@ class TIResponse extends ResponseEntity
 
     /**
      * @param float $price24hPcnt
-     * @return TIResponse
+     * @return TickerInfoDto
      */
     private function setPrice24hPcnt(float $price24hPcnt): self
     {
@@ -294,7 +294,7 @@ class TIResponse extends ResponseEntity
 
     /**
      * @param float $highPrice24h
-     * @return TIResponse
+     * @return TickerInfoDto
      */
     private function setHighPrice24h(float $highPrice24h): self
     {
@@ -312,7 +312,7 @@ class TIResponse extends ResponseEntity
 
     /**
      * @param float $lowPrice24h
-     * @return TIResponse
+     * @return TickerInfoDto
      */
     private function setLowPrice24h(float $lowPrice24h): self
     {
@@ -330,7 +330,7 @@ class TIResponse extends ResponseEntity
 
     /**
      * @param float $prevPrice1h
-     * @return TIResponse
+     * @return TickerInfoDto
      */
     private function setPrevPrice1h(float $prevPrice1h): self
     {
@@ -348,7 +348,7 @@ class TIResponse extends ResponseEntity
 
     /**
      * @param float $markPrice
-     * @return TIResponse
+     * @return TickerInfoDto
      */
     private function setMarkPrice(float $markPrice): self
     {
@@ -366,7 +366,7 @@ class TIResponse extends ResponseEntity
 
     /**
      * @param float $indexPrice
-     * @return TIResponse
+     * @return TickerInfoDto
      */
     private function setIndexPrice(float $indexPrice): self
     {
@@ -384,7 +384,7 @@ class TIResponse extends ResponseEntity
 
     /**
      * @param float $openInterests
-     * @return TIResponse
+     * @return TickerInfoDto
      */
     private function setOpenInterests(float $openInterests): self
     {
@@ -402,7 +402,7 @@ class TIResponse extends ResponseEntity
 
     /**
      * @param float $turnover24h
-     * @return TIResponse
+     * @return TickerInfoDto
      */
     private function setTurnover24h(float $turnover24h): self
     {
@@ -420,7 +420,7 @@ class TIResponse extends ResponseEntity
 
     /**
      * @param float $volume24h
-     * @return TIResponse
+     * @return TickerInfoDto
      */
     private function setVolume24h(float $volume24h): self
     {
@@ -438,7 +438,7 @@ class TIResponse extends ResponseEntity
 
     /**
      * @param float $fundingRate
-     * @return TIResponse
+     * @return TickerInfoDto
      */
     private function setFundingRate(float $fundingRate): self
     {
@@ -456,7 +456,7 @@ class TIResponse extends ResponseEntity
 
     /**
      * @param string $nextFundingTime
-     * @return TIResponse
+     * @return TickerInfoDto
      */
     private function setNextFundingTime(string $nextFundingTime): self
     {
@@ -474,7 +474,7 @@ class TIResponse extends ResponseEntity
 
     /**
      * @param float $predictedDeliveryPrice
-     * @return TIResponse
+     * @return TickerInfoDto
      */
     private function setPredictedDeliveryPrice(float $predictedDeliveryPrice): self
     {
@@ -492,7 +492,7 @@ class TIResponse extends ResponseEntity
 
     /**
      * @param float $basisRate
-     * @return TIResponse
+     * @return TickerInfoDto
      */
     private function setBasisRate(float $basisRate): self
     {
@@ -510,7 +510,7 @@ class TIResponse extends ResponseEntity
 
     /**
      * @param float $deliveryFeeRate
-     * @return TIResponse
+     * @return TickerInfoDto
      */
     private function setDeliveryFeeRate(float $deliveryFeeRate): self
     {
@@ -528,7 +528,7 @@ class TIResponse extends ResponseEntity
 
     /**
      * @param string $deliveryTime
-     * @return TIResponse
+     * @return TickerInfoDto
      */
     private function setDeliveryTime(string $deliveryTime): self
     {
@@ -546,7 +546,7 @@ class TIResponse extends ResponseEntity
 
     /**
      * @param float $openInterestValue
-     * @return TIResponse
+     * @return TickerInfoDto
      */
     private function setOpenInterestValue(float $openInterestValue): self
     {

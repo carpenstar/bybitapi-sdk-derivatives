@@ -3,6 +3,8 @@ namespace Carpenstar\ByBitAPI\Derivatives\MarketData\Kline;
 
 use Carpenstar\ByBitAPI\Core\Endpoints\PublicEndpoint;
 use Carpenstar\ByBitAPI\Core\Interfaces\IGetEndpointInterface;
+use Carpenstar\ByBitAPI\Derivatives\MarketData\Kline\Dto\KlineDto;
+use Carpenstar\ByBitAPI\Derivatives\MarketData\Kline\Options\KlineOptions;
 
 /**
  * Get kline data
@@ -14,11 +16,11 @@ class Kline extends PublicEndpoint implements IGetEndpointInterface
 
     protected function getResponseEntityClassName(): string
     {
-        return KQueryBag::class;
+        return KlineOptions::class;
     }
 
     public function getQueryBagClassName(): string
     {
-        return KResponse::class;
+        return KlineDto::class;
     }
 }

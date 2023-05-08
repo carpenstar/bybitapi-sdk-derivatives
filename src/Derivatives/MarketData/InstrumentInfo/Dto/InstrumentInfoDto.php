@@ -1,5 +1,5 @@
 <?php
-namespace Carpenstar\ByBitAPI\Derivatives\MarketData\InstrumentInfo;
+namespace Carpenstar\ByBitAPI\Derivatives\MarketData\InstrumentInfo\Dto;
 
 use Carpenstar\ByBitAPI\Core\Builders\ResponseBuilder;
 use Carpenstar\ByBitAPI\Core\Helpers\DateTimeHelper;
@@ -7,7 +7,7 @@ use Carpenstar\ByBitAPI\Core\Objects\Collection\EntityCollection;
 use Carpenstar\ByBitAPI\Core\Objects\ResponseEntity;
 use DateTime;
 
-class InstrumentInfoResponse extends ResponseEntity
+class InstrumentInfoDto extends ResponseEntity
 {
     /**
      * Derivatives products category. Keeps empty string `""` when `category` is not passed
@@ -148,7 +148,7 @@ class InstrumentInfoResponse extends ResponseEntity
 
     /**
      * @param EntityCollection $lotSizeFilter
-     * @return InstrumentInfoResponse
+     * @return InstrumentInfoDto
      */
     private function setLotSizeFilter(EntityCollection $lotSizeFilter): self
     {
@@ -166,7 +166,7 @@ class InstrumentInfoResponse extends ResponseEntity
 
     /**
      * @param EntityCollection $priceFilter
-     * @return InstrumentInfoResponse
+     * @return InstrumentInfoDto
      */
     private function setPriceFilter(EntityCollection $priceFilter): self
     {
@@ -176,7 +176,7 @@ class InstrumentInfoResponse extends ResponseEntity
 
     /**
      * @param EntityCollection $leverageFilter
-     * @return InstrumentInfoResponse
+     * @return InstrumentInfoDto
      */
     private function setLeverageFilter(EntityCollection $leverageFilter): self
     {
@@ -194,7 +194,7 @@ class InstrumentInfoResponse extends ResponseEntity
 
     /**
      * @param string|null $settleCoin
-     * @return InstrumentInfoResponse
+     * @return InstrumentInfoDto
      */
     private function setSettleCoin(?string $settleCoin): self
     {
@@ -212,7 +212,7 @@ class InstrumentInfoResponse extends ResponseEntity
 
     /**
      * @param null|int $fundingInterval
-     * @return InstrumentInfoResponse
+     * @return InstrumentInfoDto
      */
     private function setFundingInterval(?int $fundingInterval): self
     {
@@ -238,7 +238,7 @@ class InstrumentInfoResponse extends ResponseEntity
 
     /**
      * @param bool $unifiedMarginTrade
-     * @return InstrumentInfoResponse
+     * @return InstrumentInfoDto
      */
     private function setUnifiedMarginTrade(?bool $unifiedMarginTrade): self
     {
@@ -256,7 +256,7 @@ class InstrumentInfoResponse extends ResponseEntity
 
     /**
      * @param float $priceScale
-     * @return InstrumentInfoResponse
+     * @return InstrumentInfoDto
      */
     private function setPriceScale(?float $priceScale): self
     {
@@ -274,7 +274,7 @@ class InstrumentInfoResponse extends ResponseEntity
 
     /**
      * @param float $deliveryFeeRate
-     * @return InstrumentInfoResponse
+     * @return InstrumentInfoDto
      */
     private function setDeliveryFeeRate(float $deliveryFeeRate): self
     {
@@ -285,7 +285,7 @@ class InstrumentInfoResponse extends ResponseEntity
     /**
      * The delivery timestamp (ms). "0" for perpetual
      * @param int|null $deliveryTime
-     * @return InstrumentInfoResponse
+     * @return InstrumentInfoDto
      */
     private function setDeliveryTime(?int $deliveryTime): self
     {
@@ -306,7 +306,7 @@ class InstrumentInfoResponse extends ResponseEntity
 
     /**
      * @param int $launchTime
-     * @return InstrumentInfoResponse
+     * @return InstrumentInfoDto
      */
     private function setLaunchTime(int $launchTime): self
     {
@@ -332,7 +332,7 @@ class InstrumentInfoResponse extends ResponseEntity
 
     /**
      * @param string|null $quoteCoin
-     * @return InstrumentInfoResponse
+     * @return InstrumentInfoDto
      */
     private function setQuoteCoin(?string $quoteCoin): self
     {
@@ -350,7 +350,7 @@ class InstrumentInfoResponse extends ResponseEntity
 
     /**
      * @param string|null $baseCoin
-     * @return InstrumentInfoResponse
+     * @return InstrumentInfoDto
      */
     private function setBaseCoin(?string $baseCoin): self
     {
@@ -360,7 +360,7 @@ class InstrumentInfoResponse extends ResponseEntity
 
     /**
      * @param string|null $symbol
-     * @return InstrumentInfoResponse
+     * @return InstrumentInfoDto
      */
     private function setSymbol(?string $symbol): self
     {
@@ -379,7 +379,7 @@ class InstrumentInfoResponse extends ResponseEntity
     /**
      * Contract type. `LinearPerpetual`, `InversePerpetual`, `InverseFutures`
      * @param string|null $contractType
-     * @return InstrumentInfoResponse
+     * @return InstrumentInfoDto
      */
     private function setContractType(?string $contractType): self
     {
@@ -397,7 +397,7 @@ class InstrumentInfoResponse extends ResponseEntity
 
     /**
      * @param string|null $status
-     * @return InstrumentInfoResponse
+     * @return InstrumentInfoDto
      */
     private function setStatus(?string $status): self
     {

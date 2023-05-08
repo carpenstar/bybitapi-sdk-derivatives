@@ -1,9 +1,9 @@
 <?php
-namespace Carpenstar\ByBitAPI\Derivatives\MarketData\InstrumentInfo;
+namespace Carpenstar\ByBitAPI\Derivatives\MarketData\InstrumentInfo\Dto;
 
 use Carpenstar\ByBitAPI\Core\Objects\ResponseEntity;
 
-class LeverageFilterItem extends ResponseEntity
+class LeverageFilterItemDto extends ResponseEntity
 {
     /**
      * Min. leverage
@@ -52,7 +52,7 @@ class LeverageFilterItem extends ResponseEntity
 
     /**
      * @param float $maxLeverage
-     * @return LeverageFilterItem
+     * @return LeverageFilterItemDto
      */
     private function setMaxLeverage(float $maxLeverage): self
     {
@@ -70,7 +70,7 @@ class LeverageFilterItem extends ResponseEntity
 
     /**
      * @param float $leverageStep
-     * @return LeverageFilterItem
+     * @return LeverageFilterItemDto
      */
     private function setLeverageStep(float $leverageStep): self
     {

@@ -1,10 +1,10 @@
 <?php
-namespace Carpenstar\ByBitAPI\Derivatives\MarketData\Kline;
+namespace Carpenstar\ByBitAPI\Derivatives\MarketData\Kline\Dto;
 
 use Carpenstar\ByBitAPI\Core\Objects\ResponseEntity;
-use Carpenstar\ByBitAPI\Derivatives\MarketData\IndexPriceKline\IPKKlineItem;
+use Carpenstar\ByBitAPI\Derivatives\MarketData\IndexPriceKline\Dto\IndexPriceKlineItemDto;
 
-class KKlineItem extends ResponseEntity
+class KlineItemDto extends ResponseEntity
 {
     /**
      * @var float $start
@@ -55,7 +55,7 @@ class KKlineItem extends ResponseEntity
 
     /**
      * @param float $start
-     * @return IPKKlineItem
+     * @return IndexPriceKlineItemDto
      */
     public function setStart(float $start): self
     {
@@ -145,7 +145,7 @@ class KKlineItem extends ResponseEntity
 
     /**
      * @param float $volume
-     * @return KKlineItem
+     * @return KlineItemDto
      */
     private function setVolume(float $volume): self
     {
@@ -163,7 +163,7 @@ class KKlineItem extends ResponseEntity
 
     /**
      * @param float $turnover
-     * @return KKlineItem
+     * @return KlineItemDto
      */
     public function setTurnover(float $turnover): self
     {

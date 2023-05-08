@@ -1,9 +1,9 @@
 <?php
-namespace Carpenstar\ByBitAPI\Derivatives\MarketData\InstrumentInfo;
+namespace Carpenstar\ByBitAPI\Derivatives\MarketData\InstrumentInfo\Dto;
 
 use Carpenstar\ByBitAPI\Core\Objects\ResponseEntity;
 
-class LotSizeFilterItem extends ResponseEntity
+class LotSizeFilterItemDto extends ResponseEntity
 {
     private float $maxOrderQty;
 
@@ -21,7 +21,7 @@ class LotSizeFilterItem extends ResponseEntity
 
     /**
      * @param float $maxOrderQty
-     * @return LotSizeFilterItem
+     * @return LotSizeFilterItemDto
      */
     private function setMaxOrderQty(float $maxOrderQty): self
     {
@@ -39,7 +39,7 @@ class LotSizeFilterItem extends ResponseEntity
 
     /**
      * @param float $minOrderQty
-     * @return LotSizeFilterItem
+     * @return LotSizeFilterItemDto
      */
     private function setMinOrderQty(float $minOrderQty): self
     {
@@ -65,7 +65,7 @@ class LotSizeFilterItem extends ResponseEntity
 
     /**
      * @param float $qtyStep
-     * @return LotSizeFilterItem
+     * @return LotSizeFilterItemDto
      */
     private function setQtyStep(float $qtyStep): self
     {

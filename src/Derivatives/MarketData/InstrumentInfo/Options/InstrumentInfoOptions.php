@@ -1,9 +1,9 @@
 <?php
-namespace Carpenstar\ByBitAPI\Derivatives\MarketData\InstrumentInfo;
+namespace Carpenstar\ByBitAPI\Derivatives\MarketData\InstrumentInfo\Options;
 
 use Carpenstar\ByBitAPI\Core\Objects\RequestEntity;
 
-class IIQueryBag extends RequestEntity
+class InstrumentInfoOptions extends RequestEntity
 {
     /**
      * Product type. linear,inverse,option. Default: returns futures
@@ -54,7 +54,7 @@ class IIQueryBag extends RequestEntity
 
     /**
      * @param string $symbol
-     * @return IIQueryBag
+     * @return InstrumentInfoOptions
      */
     public function setSymbol(string $symbol): self
     {
@@ -72,7 +72,7 @@ class IIQueryBag extends RequestEntity
 
     /**
      * @param string $category
-     * @return IIQueryBag
+     * @return InstrumentInfoOptions
      */
     public function setCategory(string $category): self
     {
@@ -90,7 +90,7 @@ class IIQueryBag extends RequestEntity
 
     /**
      * @param string $baseCoin
-     * @return IIQueryBag
+     * @return InstrumentInfoOptions
      */
     public function setBaseCoin(string $baseCoin): self
     {
@@ -108,7 +108,7 @@ class IIQueryBag extends RequestEntity
 
     /**
      * @param int $limit
-     * @return IIQueryBag
+     * @return InstrumentInfoOptions
      */
     public function setLimit(int $limit): self
     {
@@ -126,7 +126,7 @@ class IIQueryBag extends RequestEntity
 
     /**
      * @param string $cursor
-     * @return IIQueryBag
+     * @return InstrumentInfoOptions
      */
     public function setCursor(string $cursor): self
     {

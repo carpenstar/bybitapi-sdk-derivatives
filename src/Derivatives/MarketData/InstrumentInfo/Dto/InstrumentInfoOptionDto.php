@@ -1,5 +1,5 @@
 <?php
-namespace Carpenstar\ByBitAPI\Derivatives\MarketData\InstrumentInfo;
+namespace Carpenstar\ByBitAPI\Derivatives\MarketData\InstrumentInfo\Dto;
 
 use Carpenstar\ByBitAPI\Core\Builders\ResponseBuilder;
 use Carpenstar\ByBitAPI\Core\Helpers\DateTimeHelper;
@@ -8,7 +8,7 @@ use Carpenstar\ByBitAPI\Core\Objects\Collection\EntityCollection;
 use Carpenstar\ByBitAPI\Core\Objects\ResponseEntity;
 use DateTime;
 
-class InstrumentInfoOptionResponse extends ResponseEntity
+class InstrumentInfoOptionDto extends ResponseEntity
 {
     /**
      * @var string $category
