@@ -1,12 +1,12 @@
 <?php
-namespace Carpenstar\ByBitAPI\Derivatives\MarketData\Kline;
+namespace Carpenstar\ByBitAPI\Derivatives\MarketData\IndexPriceKline\Dto;
 
 use Carpenstar\ByBitAPI\Core\Builders\ResponseBuilder;
 use Carpenstar\ByBitAPI\Core\Interfaces\ICollectionInterface;
 use Carpenstar\ByBitAPI\Core\Objects\Collection\EntityCollection;
 use Carpenstar\ByBitAPI\Core\Objects\ResponseEntity;
 
-class KResponse extends ResponseEntity
+class IndexPriceKlineDto extends ResponseEntity
 {
     /**
      * @var string $symbol
@@ -34,7 +34,7 @@ class KResponse extends ResponseEntity
 
         if (!empty($data['list'])) {
             array_map(function ($priceKlineItemData) use ($priceKlineList) {
-                $priceKlineList->push(ResponseBuilder::make(KKlineItem::class, $priceKlineItemData));
+                $priceKlineList->push(ResponseBuilder::make(IndexPriceKlineItemDto::class, $priceKlineItemData));
             }, [$data['list']]);
         }
 

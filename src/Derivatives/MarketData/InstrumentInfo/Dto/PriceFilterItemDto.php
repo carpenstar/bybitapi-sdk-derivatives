@@ -1,9 +1,9 @@
 <?php
-namespace Carpenstar\ByBitAPI\Derivatives\MarketData\InstrumentInfo;
+namespace Carpenstar\ByBitAPI\Derivatives\MarketData\InstrumentInfo\Dto;
 
 use Carpenstar\ByBitAPI\Core\Objects\ResponseEntity;
 
-class PriceFilterItem extends ResponseEntity
+class PriceFilterItemDto extends ResponseEntity
 {
     /**
      * Min. order price
@@ -33,7 +33,7 @@ class PriceFilterItem extends ResponseEntity
 
     /**
      * @param float $minPrice
-     * @return PriceFilterItem
+     * @return PriceFilterItemDto
      */
     private function setMinPrice(float $minPrice): self
     {
@@ -51,7 +51,7 @@ class PriceFilterItem extends ResponseEntity
 
     /**
      * @param float $maxPrice
-     * @return PriceFilterItem
+     * @return PriceFilterItemDto
      */
     private function setMaxPrice(float $maxPrice): self
     {
@@ -69,7 +69,7 @@ class PriceFilterItem extends ResponseEntity
 
     /**
      * @param float $tickSize
-     * @return PriceFilterItem
+     * @return PriceFilterItemDto
      */
     private function setTickSize(float $tickSize): self
     {

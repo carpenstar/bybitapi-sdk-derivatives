@@ -4,6 +4,8 @@ namespace Carpenstar\ByBitAPI\Derivatives\MarketData\InstrumentInfo;
 use Carpenstar\ByBitAPI\Core\Endpoints\PublicEndpoint;
 use Carpenstar\ByBitAPI\Core\Enums\EnumDerivativesCategory;
 use Carpenstar\ByBitAPI\Core\Interfaces\IGetEndpointInterface;
+use Carpenstar\ByBitAPI\Derivatives\MarketData\InstrumentInfo\Dto\InstrumentInfoOptionDto;
+use Carpenstar\ByBitAPI\Derivatives\MarketData\InstrumentInfo\Options\InstrumentInfoOptions;
 
 /**
  * Get launched instruments information.
@@ -15,7 +17,7 @@ class InstrumentInfo extends PublicEndpoint implements IGetEndpointInterface
 
     public function getQueryBagClassName(): string
     {
-        return IIQueryBag::class;
+        return InstrumentInfoOptions::class;
     }
 
     /**
@@ -25,7 +27,7 @@ class InstrumentInfo extends PublicEndpoint implements IGetEndpointInterface
     {
         switch ($this->getParameters()->getCategory()) {
             case EnumDerivativesCategory::CATEGORY_PRODUCT_OPTION:
-                return InstrumentInfoOptionResponse::class;
+                return InstrumentInfoOptionDto::class;
         }
 
         return get_class($this) . "Response";

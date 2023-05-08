@@ -1,56 +1,63 @@
 <?php
-namespace Carpenstar\ByBitAPI\Derivatives\MarketData\IndexPriceKline;
+namespace Carpenstar\ByBitAPI\Derivatives\MarketData\MarkPriceKline\Options;
 
-use Carpenstar\ByBitAPI\Core\Enums\EnumDerivativesCategory;
-use Carpenstar\ByBitAPI\Core\Enums\EnumIntervals;
 use Carpenstar\ByBitAPI\Core\Helpers\DateTimeHelper;
 use Carpenstar\ByBitAPI\Core\Objects\RequestEntity;
 
-class IPKQueryBaq extends RequestEntity
+class MarkPriceKlineOptions extends RequestEntity
 {
     /**
-     * Product type. linear,inverse. Default: linear, but in the response category shows
+     * Product type. linear
      * @var string $category
      */
-    private string $category = EnumDerivativesCategory::CATEGORY_PRODUCT_LINEAR;
+    protected string $category;
 
     /**
      * Symbol name
      * @var string $symbol
      */
-    private string $symbol;
+    protected string $symbol;
 
     /**
      * Kline interval. 1 3 5 15 30 60 120 240 360 720 D M W
      * @var string $interval
      */
-    private string $interval = EnumIntervals::MINUTE_1;
+    protected string $interval;
 
     /**
      * The start timestamp (ms)
-     * @var string $start
+     * @var int $start
      */
-    private string $start;
+    protected int $start;
 
     /**
      * The end timestamp (ms)
-     * @var string $end
+     * @var int $end
      */
-    private string $end;
+    protected int $end;
 
     /**
      * Limit for data size per page. [1, 200]. Default: 200
      * @var int $limit
      */
-    private int $limit = 200;
+    protected int $limit = 200;
+
+    public function __construct()
+    {
+        $this
+            ->setRequiredField('symbol')
+            ->setRequiredField('interval')
+            ->setRequiredField('start')
+            ->setRequiredField('end');
+    }
 
     /**
      * @param string $category
-     * @return $this
+     * @return MarkPriceKlineOptions
      */
     public function setCategory(string $category): self
     {
-        $this->category = $category;
+        $this->category = "linear"; // supports only linear category
         return $this;
     }
 
@@ -64,7 +71,7 @@ class IPKQueryBaq extends RequestEntity
 
     /**
      * @param string $symbol
-     * @return IPKQueryBaq
+     * @return MarkPriceKlineOptions
      */
     public function setSymbol(string $symbol): self
     {
@@ -82,7 +89,7 @@ class IPKQueryBaq extends RequestEntity
 
     /**
      * @param string $interval
-     * @return IPKQueryBaq
+     * @return MarkPriceKlineOptions
      */
     public function setInterval(string $interval): self
     {
@@ -100,7 +107,7 @@ class IPKQueryBaq extends RequestEntity
 
     /**
      * @param string $start
-     * @return IPKQueryBaq
+     * @return MarkPriceKlineOptions
      */
     public function setStart(string $start): self
     {
@@ -109,16 +116,16 @@ class IPKQueryBaq extends RequestEntity
     }
 
     /**
-     * @return string
+     * @return int
      */
-    public function getStart(): string
+    public function getStart(): int
     {
         return $this->start;
     }
 
     /**
      * @param string $end
-     * @return IPKQueryBaq
+     * @return MarkPriceKlineOptions
      */
     public function setEnd(string $end): self
     {
@@ -127,16 +134,16 @@ class IPKQueryBaq extends RequestEntity
     }
 
     /**
-     * @return string
+     * @return int
      */
-    public function getEnd(): string
+    public function getEnd(): int
     {
         return $this->end;
     }
 
     /**
      * @param int $limit
-     * @return IPKQueryBaq
+     * @return MarkPriceKlineOptions
      */
     public function setLimit(int $limit): self
     {

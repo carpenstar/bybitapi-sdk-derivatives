@@ -3,6 +3,7 @@ namespace Carpenstar\ByBitAPI\Derivatives\MarketData\IndexPriceKline;
 
 use Carpenstar\ByBitAPI\Core\Endpoints\PublicEndpoint;
 use Carpenstar\ByBitAPI\Core\Interfaces\IGetEndpointInterface;
+use Carpenstar\ByBitAPI\Derivatives\MarketData\IndexPriceKline\Dto\IndexPriceKlineDto;
 
 /**
  * Get index price kline data
@@ -19,6 +20,6 @@ class IndexPriceKline extends PublicEndpoint implements IGetEndpointInterface
 
     public function getQueryBagClassName(): string
     {
-        return IPKResponse::class;
+        return IndexPriceKlineDto::class;
     }
 }

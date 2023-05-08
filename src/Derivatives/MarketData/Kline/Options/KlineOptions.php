@@ -1,10 +1,10 @@
 <?php
-namespace Carpenstar\ByBitAPI\Derivatives\MarketData\Kline;
+namespace Carpenstar\ByBitAPI\Derivatives\MarketData\Kline\Options;
 
 use Carpenstar\ByBitAPI\Core\Helpers\DateTimeHelper;
 use Carpenstar\ByBitAPI\Core\Objects\RequestEntity;
 
-class KQueryBag extends RequestEntity
+class KlineOptions extends RequestEntity
 {
     /**
      * Product type. linear,inverse. Default: linear
@@ -52,7 +52,7 @@ class KQueryBag extends RequestEntity
 
     /**
      * @param string $category
-     * @return KQueryBag
+     * @return KlineOptions
      */
     public function setCategory(string $category): self
     {
@@ -70,7 +70,7 @@ class KQueryBag extends RequestEntity
 
     /**
      * @param string $symbol
-     * @return KQueryBag
+     * @return KlineOptions
      */
     public function setSymbol(string $symbol): self
     {
@@ -88,7 +88,7 @@ class KQueryBag extends RequestEntity
 
     /**
      * @param string $interval
-     * @return KQueryBag
+     * @return KlineOptions
      */
     public function setInterval(string $interval): self
     {
@@ -106,7 +106,7 @@ class KQueryBag extends RequestEntity
 
     /**
      * @param string $start
-     * @return KQueryBag
+     * @return KlineOptions
      */
     public function setStart(string $start): self
     {
@@ -124,7 +124,7 @@ class KQueryBag extends RequestEntity
 
     /**
      * @param string $end
-     * @return KQueryBag
+     * @return KlineOptions
      */
     public function setEnd(string $end): self
     {
@@ -142,7 +142,7 @@ class KQueryBag extends RequestEntity
 
     /**
      * @param int $limit
-     * @return KQueryBag
+     * @return KlineOptions
      */
     public function setLimit(int $limit): self
     {

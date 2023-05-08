@@ -1,10 +1,10 @@
 <?php
-namespace Carpenstar\ByBitAPI\Derivatives\MarketData\TickerInfo;
+namespace Carpenstar\ByBitAPI\Derivatives\MarketData\TickerInfo\Options;
 
 use Carpenstar\ByBitAPI\Core\Enums\EnumDerivativesCategory;
 use Carpenstar\ByBitAPI\Core\Objects\RequestEntity;
 
-class TIQueryBag extends RequestEntity
+class TickerInfoOptions extends RequestEntity
 {
     private string $category = 'linear';
 
@@ -27,7 +27,7 @@ class TIQueryBag extends RequestEntity
 
     /**
      * @param string $symbol
-     * @return TIQueryBag
+     * @return TickerInfoOptions
      */
     public function setSymbol(string $symbol): self
     {

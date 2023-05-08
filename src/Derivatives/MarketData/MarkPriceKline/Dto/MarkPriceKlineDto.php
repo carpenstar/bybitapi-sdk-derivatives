@@ -1,14 +1,15 @@
 <?php
-namespace Carpenstar\ByBitAPI\Derivatives\MarketData\IndexPriceKline;
+namespace Carpenstar\ByBitAPI\Derivatives\MarketData\MarkPriceKline\Dto;
 
+use Carpenstar\ByBitAPI\Core\Helpers\DateTimeHelper;
 use Carpenstar\ByBitAPI\Core\Objects\ResponseEntity;
 
-class IPKKlineItem extends ResponseEntity
+class MarkPriceKlineDto extends ResponseEntity
 {
     /**
-     * @var float $start
+     * @var \DateTime $start
      */
-    private float $start;
+    private \DateTime $start;
 
     /**
      * @var float $open
@@ -41,28 +42,28 @@ class IPKKlineItem extends ResponseEntity
     }
 
     /**
-     * @param float $start
-     * @return IPKKlineItem
+     * @param int $start
+     * @return MarkPriceKlineDto
      */
-    public function setStart(float $start): self
+    public function setStart(int $start): self
     {
-        $this->start = $start;
+        $this->start = DateTimeHelper::makeFromTimestamp($start);
         return $this;
     }
 
     /**
-     * @return float
+     * @return \DateTime
      */
-    public function getStart(): float
+    public function getStart(): \DateTime
     {
         return $this->start;
     }
 
     /**
      * @param float $open
-     * @return $this
+     * @return MarkPriceKlineDto
      */
-    private function setOpen(float $open): self
+    public function setOpen(float $open): self
     {
         $this->open = $open;
         return $this;
@@ -78,9 +79,9 @@ class IPKKlineItem extends ResponseEntity
 
     /**
      * @param float $high
-     * @return $this
+     * @return MarkPriceKlineDto
      */
-    private function setHigh(float $high): self
+    public function setHigh(float $high): self
     {
         $this->high = $high;
         return $this;
@@ -96,9 +97,9 @@ class IPKKlineItem extends ResponseEntity
 
     /**
      * @param float $low
-     * @return $this
+     * @return MarkPriceKlineDto
      */
-    private function setLow(float $low): self
+    public function setLow(float $low): self
     {
         $this->low = $low;
         return $this;
@@ -114,9 +115,9 @@ class IPKKlineItem extends ResponseEntity
 
     /**
      * @param float $close
-     * @return $this
+     * @return MarkPriceKlineDto
      */
-    private function setClose(float $close): self
+    public function setClose(float $close): self
     {
         $this->close = $close;
         return $this;
