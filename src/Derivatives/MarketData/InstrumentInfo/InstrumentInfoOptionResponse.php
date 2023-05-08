@@ -1,7 +1,7 @@
 <?php
 namespace Carpenstar\ByBitAPI\Derivatives\MarketData\InstrumentInfo;
 
-use Carpenstar\ByBitAPI\Core\Fabrics\ResponseFabric;
+use Carpenstar\ByBitAPI\Core\Builders\ResponseBuilder;
 use Carpenstar\ByBitAPI\Core\Helpers\DateTimeHelper;
 use Carpenstar\ByBitAPI\Core\Interfaces\ICollectionInterface;
 use Carpenstar\ByBitAPI\Core\Objects\Collection\EntityCollection;
@@ -89,13 +89,13 @@ class InstrumentInfoOptionResponse extends ResponseEntity
 
         if (!empty($data['priceFilter'])) {
             array_map(function ($priceFilter) use ($priceFilterCollection) {
-                $priceFilterCollection->push(ResponseFabric::make(PriceFilterItem::class, $priceFilter));
+                $priceFilterCollection->push(ResponseBuilder::make(PriceFilterItem::class, $priceFilter));
             }, [$data['priceFilter']]);
         }
 
         if (!empty($data['lotSizeFilter'])) {
             array_map(function ($lotSizeFilterItem) use ($lotSizeFilterCollection) {
-                $lotSizeFilterCollection->push(ResponseFabric::make(LotSizeFilterItem::class, $lotSizeFilterItem));
+                $lotSizeFilterCollection->push(ResponseBuilder::make(LotSizeFilterItem::class, $lotSizeFilterItem));
             }, [$data['lotSizeFilter']]);
         }
 
