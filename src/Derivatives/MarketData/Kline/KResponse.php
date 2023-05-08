@@ -1,7 +1,7 @@
 <?php
 namespace Carpenstar\ByBitAPI\Derivatives\MarketData\Kline;
 
-use Carpenstar\ByBitAPI\Core\Fabrics\ResponseFabric;
+use Carpenstar\ByBitAPI\Core\Builders\ResponseBuilder;
 use Carpenstar\ByBitAPI\Core\Interfaces\ICollectionInterface;
 use Carpenstar\ByBitAPI\Core\Objects\Collection\EntityCollection;
 use Carpenstar\ByBitAPI\Core\Objects\ResponseEntity;
@@ -34,7 +34,7 @@ class KResponse extends ResponseEntity
 
         if (!empty($data['list'])) {
             array_map(function ($priceKlineItemData) use ($priceKlineList) {
-                $priceKlineList->push(ResponseFabric::make(KKlineItem::class, $priceKlineItemData));
+                $priceKlineList->push(ResponseBuilder::make(KKlineItem::class, $priceKlineItemData));
             }, [$data['list']]);
         }
 
