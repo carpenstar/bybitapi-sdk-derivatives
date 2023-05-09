@@ -83,7 +83,7 @@ class TickerInfoDto extends ResponseEntity
      * Open interest
      * @var float $openInterests
      */
-    private float $openInterests;
+    private ?float $openInterests;
 
     /**
      * Turnover in the last 24 hours
@@ -113,7 +113,7 @@ class TickerInfoDto extends ResponseEntity
      * Predicted delivery price. It has value when 30 min before delivery
      * @var float $predictedDeliveryPrice
      */
-    private float $predictedDeliveryPrice;
+    private ?float $predictedDeliveryPrice;
 
     /**
      * Basis rate for futures
@@ -141,6 +141,7 @@ class TickerInfoDto extends ResponseEntity
 
     public function __construct(array $data)
     {
+
         $this
             ->setSymbol($data['symbol'])
             ->setBidPrice($data['bidPrice'])
@@ -154,14 +155,14 @@ class TickerInfoDto extends ResponseEntity
             ->setPrevPrice1h($data['prevPrice1h'])
             ->setMarkPrice($data['markPrice'])
             ->setIndexPrice($data['indexPrice'])
-            ->setOpenInterests($data['openInterests'])
+            ->setOpenInterests($data['openInterest'])
             ->setTurnover24h($data['turnover24h'])
             ->setVolume24h($data['volume24h'])
             ->setFundingRate($data['fundingRate'])
             ->setNextFundingTime($data['nextFundingTime'])
-            ->setPredictedDeliveryPrice($data['predictedDeliveryPrice'])
-            ->setBasisRate($data['basisRate'])
-            ->setDeliveryFeeRate($data['deliveryFeeRate'])
+            ->setPredictedDeliveryPrice((float)$data['predictedDeliveryPrice'])
+            ->setBasisRate((float)$data['basisRate'])
+            ->setDeliveryFeeRate((float)$data['deliveryFeeRate'])
             ->setDeliveryTime($data['deliveryTime'])
             ->setOpenInterestValue($data['openInterestValue']);
     }
@@ -386,7 +387,7 @@ class TickerInfoDto extends ResponseEntity
      * @param float $openInterests
      * @return TickerInfoDto
      */
-    private function setOpenInterests(float $openInterests): self
+    private function setOpenInterests(?float $openInterests): self
     {
         $this->openInterests = $openInterests;
         return $this;
@@ -397,7 +398,7 @@ class TickerInfoDto extends ResponseEntity
      */
     public function getOpenInterests(): float
     {
-        return $this->openInterests;
+        return (float)$this->openInterests;
     }
 
     /**
@@ -476,7 +477,7 @@ class TickerInfoDto extends ResponseEntity
      * @param float $predictedDeliveryPrice
      * @return TickerInfoDto
      */
-    private function setPredictedDeliveryPrice(float $predictedDeliveryPrice): self
+    private function setPredictedDeliveryPrice(?float $predictedDeliveryPrice): self
     {
         $this->predictedDeliveryPrice = $predictedDeliveryPrice;
         return $this;

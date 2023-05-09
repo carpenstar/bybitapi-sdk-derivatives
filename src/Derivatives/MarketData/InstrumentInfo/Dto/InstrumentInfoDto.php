@@ -104,19 +104,19 @@ class InstrumentInfoDto extends ResponseEntity
 
         if (!empty($data['priceFilter'])) {
             array_map(function ($priceFilter) use ($priceFilterCollection) {
-                $priceFilterCollection->push(ResponseBuilder::make(PriceFilterItem::class, $priceFilter));
+                $priceFilterCollection->push(ResponseBuilder::make(PriceFilterItemDto::class, $priceFilter));
             }, [$data['priceFilter']]);
         }
 
         if (!empty($data['leverageFilter'])) {
             array_map(function ($leverageFilterItem) use ($leverageFilterCollection) {
-                $leverageFilterCollection->push(ResponseBuilder::make(LeverageFilterItem::class, $leverageFilterItem));
+                $leverageFilterCollection->push(ResponseBuilder::make(LeverageFilterItemDto::class, $leverageFilterItem));
             }, [$data['leverageFilter']]);
         }
 
         if (!empty($data['lotSizeFilter'])) {
             array_map(function ($lotSizeFilterItem) use ($lotSizeFilterCollection) {
-                $lotSizeFilterCollection->push(ResponseBuilder::make(LotSizeFilterItem::class, $lotSizeFilterItem));
+                $lotSizeFilterCollection->push(ResponseBuilder::make(LotSizeFilterItemDto::class, $lotSizeFilterItem));
             }, [$data['lotSizeFilter']]);
         }
 

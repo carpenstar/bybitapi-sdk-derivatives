@@ -14,13 +14,13 @@ class Kline extends PublicEndpoint implements IGetEndpointInterface
 {
     protected string $url = "/derivatives/v3/public/kline";
 
-    protected function getResponseEntityClassName(): string
-    {
-        return KlineOptions::class;
-    }
-
-    public function getQueryBagClassName(): string
+    protected function getResponseDTOClass(): string
     {
         return KlineDto::class;
+    }
+
+    public function getRequestOptionsDTOClass(): string
+    {
+        return KlineOptions::class;
     }
 }

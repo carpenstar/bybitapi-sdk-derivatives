@@ -10,12 +10,12 @@ class MarkPriceKline extends PublicEndpoint implements IGetEndpointInterface
 {
     protected string $url = "/derivatives/v3/public/mark-price-kline";
 
-    public function getQueryBagClassName(): string
+    public function getRequestOptionsDTOClass(): string
     {
         return MarkPriceKlineOptions::class;
     }
 
-    protected function getResponseEntityClassName(): string
+    protected function getResponseDTOClass(): string
     {
         return MarkPriceKlineDto::class;
     }

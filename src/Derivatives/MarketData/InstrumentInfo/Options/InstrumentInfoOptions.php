@@ -6,24 +6,16 @@ use Carpenstar\ByBitAPI\Core\Objects\RequestEntity;
 class InstrumentInfoOptions extends RequestEntity
 {
     /**
-     * Product type. linear,inverse,option. Default: returns futures
+     * Product type. linear only supports at now
      * @var string $category
      */
-    protected string $category;
+    protected string $category = "linear";
 
     /**
      * Symbol name. query an option symbol, category is required
      * @var string $symbol
      */
     protected string $symbol;
-
-    /**
-     * Base coin.
-     * Valid when category=option
-     * BTC by default if not passed
-     * @var string $baseCoin
-     */
-    protected string $baseCoin;
 
     /**
      * Limit for data size per page. [1, 1000]. Default: 500
@@ -39,9 +31,7 @@ class InstrumentInfoOptions extends RequestEntity
 
     public function __construct()
     {
-        if (isset($this->symbol) && !empty($this->symbol)) {
-            $this->setRequiredField('category');
-        }
+        $this->setRequiredField('symbol');
     }
 
     /**
@@ -77,24 +67,6 @@ class InstrumentInfoOptions extends RequestEntity
     public function setCategory(string $category): self
     {
         $this->category = $category;
-        return $this;
-    }
-
-    /**
-     * @return string
-     */
-    public function getBaseCoin(): string
-    {
-        return $this->baseCoin;
-    }
-
-    /**
-     * @param string $baseCoin
-     * @return InstrumentInfoOptions
-     */
-    public function setBaseCoin(string $baseCoin): self
-    {
-        $this->baseCoin = $baseCoin;
         return $this;
     }
 

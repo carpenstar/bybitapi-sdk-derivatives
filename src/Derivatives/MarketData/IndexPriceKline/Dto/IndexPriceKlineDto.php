@@ -1,97 +1,133 @@
 <?php
 namespace Carpenstar\ByBitAPI\Derivatives\MarketData\IndexPriceKline\Dto;
 
-use Carpenstar\ByBitAPI\Core\Builders\ResponseBuilder;
-use Carpenstar\ByBitAPI\Core\Interfaces\ICollectionInterface;
-use Carpenstar\ByBitAPI\Core\Objects\Collection\EntityCollection;
+use Carpenstar\ByBitAPI\Core\Helpers\DateTimeHelper;
 use Carpenstar\ByBitAPI\Core\Objects\ResponseEntity;
 
 class IndexPriceKlineDto extends ResponseEntity
 {
     /**
-     * @var string $symbol
+     * @var \DateTime $start
      */
-    private string $symbol;
+    private \DateTime $start;
 
     /**
-     * @var string $category
+     * @var float $open
      */
-    private string $category;
+    private float $open;
 
     /**
-     * @var ICollectionInterface $list
+     * @var float $high
      */
-    private ICollectionInterface $list;
+    private float $high;
 
+    /**
+     * @var float $low
+     */
+    private float $low;
+
+    /**
+     * @var float $close
+     */
+    private float $close;
 
     public function __construct(array $data)
     {
-        $priceKlineList = new EntityCollection();
-
         $this
-            ->setSymbol($data['symbol'])
-            ->setCategory($data['category']);
-
-        if (!empty($data['list'])) {
-            array_map(function ($priceKlineItemData) use ($priceKlineList) {
-                $priceKlineList->push(ResponseBuilder::make(IndexPriceKlineItemDto::class, $priceKlineItemData));
-            }, [$data['list']]);
-        }
-
-        $this->setList($priceKlineList);
+            ->setStart($data[0])
+            ->setOpen($data[1])
+            ->setHigh($data[2])
+            ->setLow($data[3])
+            ->setClose($data[4]);
     }
 
     /**
-     * @param string $symbol
-     * @return $this
+     * @param int $start
+     * @return IndexPriceKlineDto
      */
-    private function setSymbol(string $symbol): self
+    public function setStart(int $start): self
     {
-        $this->symbol = $symbol;
+        $this->start = DateTimeHelper::makeFromTimestamp($start);
         return $this;
     }
 
     /**
-     * @return string
+     * @return \DateTime
      */
-    public function getSymbol(): string
+    public function getStart(): \DateTime
     {
-        return $this->symbol;
+        return $this->start;
     }
 
     /**
-     * @param string $category
+     * @param float $open
      * @return $this
      */
-    private function setCategory(string $category): self
+    private function setOpen(float $open): self
     {
-        $this->category = $category;
+        $this->open = $open;
         return $this;
     }
 
     /**
-     * @return string
+     * @return float
      */
-    public function getCategory(): string
+    public function getOpen(): float
     {
-        return $this->category;
+        return $this->open;
     }
 
     /**
-     * @param ICollectionInterface $list
+     * @param float $high
      * @return $this
      */
-    private function setList(ICollectionInterface $list): self
+    private function setHigh(float $high): self
     {
-        $this->list = $list;
+        $this->high = $high;
         return $this;
     }
 
     /**
-     * @return ICollectionInterface
+     * @return float
      */
-    public function getList(): ICollectionInterface
+    public function getHigh(): float
     {
-        return $this->list;
+        return $this->high;
+    }
+
+    /**
+     * @param float $low
+     * @return $this
+     */
+    private function setLow(float $low): self
+    {
+        $this->low = $low;
+        return $this;
+    }
+
+    /**
+     * @return float
+     */
+    public function getLow(): float
+    {
+        return $this->low;
+    }
+
+    /**
+     * @param float $close
+     * @return $this
+     */
+    private function setClose(float $close): self
+    {
+        $this->close = $close;
+        return $this;
+    }
+
+    /**
+     * @return float
+     */
+    public function getClose(): float
+    {
+        return $this->close;
     }
 }

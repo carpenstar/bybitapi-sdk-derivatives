@@ -10,12 +10,12 @@ class OrderBook extends PublicEndpoint implements IGetEndpointInterface
 {
     protected string $url = "/derivatives/v3/public/order-book/L2";
 
-    public function getQueryBagClassName(): string
+    public function getRequestOptionsDTOClass(): string
     {
         return OrderBookOptions::class;
     }
 
-    protected function getResponseEntityClassName(): string
+    protected function getResponseDTOClass(): string
     {
         return OrderBookDto::class;
     }

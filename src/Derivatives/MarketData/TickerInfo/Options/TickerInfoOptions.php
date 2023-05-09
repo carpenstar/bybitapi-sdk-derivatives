@@ -1,23 +1,21 @@
 <?php
 namespace Carpenstar\ByBitAPI\Derivatives\MarketData\TickerInfo\Options;
 
-use Carpenstar\ByBitAPI\Core\Enums\EnumDerivativesCategory;
 use Carpenstar\ByBitAPI\Core\Objects\RequestEntity;
 
 class TickerInfoOptions extends RequestEntity
 {
-    private string $category = 'linear';
+    /**
+     * Only linear category support at now
+     * @var string $category
+     */
+    protected string $category = 'linear';
 
-    private string $symbol;
+    protected string $symbol;
 
-    public function setCategory(string $category): self
+    public function __construct()
     {
-        if ($category == EnumDerivativesCategory::CATEGORY_PRODUCT_OPTION) {
-            $this->setRequiredField('symbol');
-        }
-        $this->setRequiredField('category');
-        $this->category = $category;
-        return $this;
+        $this->setRequiredField('symbol');
     }
 
     public function getCategory(): string

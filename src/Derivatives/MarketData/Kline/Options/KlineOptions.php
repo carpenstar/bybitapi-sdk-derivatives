@@ -7,57 +7,48 @@ use Carpenstar\ByBitAPI\Core\Objects\RequestEntity;
 class KlineOptions extends RequestEntity
 {
     /**
-     * Product type. linear,inverse. Default: linear
+     * Product type. linear only at now
      * @var string $category
      */
-    private string $category;
+    protected string $category = "linear";
 
     /**
      * Symbol name
      * @var string $symbol
      */
-    private string $symbol;
+    protected string $symbol;
 
     /**
      * Kline interval. 1 3 5 15 30 60 120 240 360 720 D M W
      * @var string $interval
      */
-    private string $interval;
+    protected string $interval;
 
     /**
      * The start timestamp (ms)
      * @var string $start
      */
-    private string $start;
+    protected string $start;
 
     /**
      * The end timestamp (ms)
      * @var string $end
      */
-    private string $end;
+    protected string $end;
 
     /**
      * Limit for data size per page. [1, 200]. Default: 200
      * @var int $limit
      */
-    private int $limit = 200;
+    protected int $limit = 200;
 
     public function __construct()
     {
         $this
-            ->setRequiredField('category')
             ->setRequiredField('symbol')
-            ->setRequiredField('interval');
-    }
-
-    /**
-     * @param string $category
-     * @return KlineOptions
-     */
-    public function setCategory(string $category): self
-    {
-        $this->category = $category;
-        return $this;
+            ->setRequiredField('interval')
+            ->setRequiredField('start')
+            ->setRequiredField('end');
     }
 
     /**
@@ -128,7 +119,7 @@ class KlineOptions extends RequestEntity
      */
     public function setEnd(string $end): self
     {
-        $this->end = $end;
+        $this->end = DateTimeHelper::makeTimestampFromDateString($end);
         return $this;
     }
 
