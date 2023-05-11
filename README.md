@@ -650,7 +650,11 @@ foreach ($result as $interestItem) {
 <details><summary> <b>Параметры запроса:</b></summary>
 
 ```php
+\Carpenstar\ByBitAPI\Derivatives\MarketData\OrderBook\Options\OrderBookOptions::class
 
+$options = (new OrderBookOptions())
+    ->setSymbol("ETHUSDT")
+    ->setLimit(25);
 ```
 </details>
 
@@ -658,7 +662,25 @@ foreach ($result as $interestItem) {
 <details><summary> <b>Структура ответа:</b></summary>
 
 ```php
+\Carpenstar\ByBitAPI\Derivatives\MarketData\OrderBook\Interfaces\IOrderBookResponse::class
 
+interface IOrderBookResponse
+{
+    public function getSymbol(): string;
+    public function getTimestamp(): \DateTime;
+    public function getUpdateId(): int;
+    public function getBid(): ICollectionInterface; // IOrderBookPriceResponse[]
+    public function getAsk(): ICollectionInterface; // IOrderBookPriceResponse[]
+}
+
+
+\Carpenstar\ByBitAPI\Derivatives\MarketData\OrderBook\Interfaces\IOrderBookPriceResponse::class
+
+interface IOrderBookPriceResponse
+{
+    public function getPrice(): float;
+    public function getQuantity(): float;
+}
 ```
 </details>
 
@@ -724,7 +746,11 @@ foreach ($result->getAsk()->all() as $ask) {
 <details><summary> <b>Параметры запроса:</b></summary>
 
 ```php
+\Carpenstar\ByBitAPI\Derivatives\MarketData\PublicTradingHistory\Options\PublicTradingHistoryOptions::class
 
+$options = (new PublicTradingHistoryOptions())
+    ->setSymbol("ETHUSDT")
+    ->setLimit(25);
 ```
 </details>
 
@@ -732,7 +758,18 @@ foreach ($result->getAsk()->all() as $ask) {
 <details><summary> <b>Структура ответа:</b></summary>
 
 ```php
+\Carpenstar\ByBitAPI\Derivatives\MarketData\PublicTradingHistory\Interfaces\IPublicTradingHistoryResponse::class;
 
+interface IPublicTradingHistoryResponse
+{
+    public function getExecId(): string;
+    public function getSymbol(): string;
+    public function getPrice(): float;
+    public function getSize(): float;
+    public function getSide(): string;
+    public function getTime(): \DateTime;
+    public function isBlockTrade(): bool;
+}
 ```
 </details>
 
@@ -756,7 +793,7 @@ foreach ($result as $historyItem) {
     echo "Symbol: {$historyItem->getSymbol()}" . PHP_EOL;
     echo "Price: {$historyItem->getPrice()}" . PHP_EOL;
     echo "Size: {$historyItem->getSize()}". PHP_EOL;
-    echo "Side: {$historyItem->getSide()}" . PHP_EOL;
+    echo "Side: {$historyItem->getSize()}" . PHP_EOL;
     echo "Time: {$historyItem->getTime()->format("Y-m-d H:i:s")}" . PHP_EOL;
     echo "Is Block Trade: {$historyItem->isBlockTrade()}" . PHP_EOL;
     echo "-----" . PHP_EOL;
@@ -796,7 +833,7 @@ foreach ($result as $historyItem) {
 ---
 
 ### Market Data - Risk Limit
-`Carpenstar\ByBitAPI\Derivatives\MarketData\RiskLimit\RiskLimit::class`  
+`\Carpenstar\ByBitAPI\Derivatives\MarketData\RiskLimit\RiskLimit::class`  
 
 <b>[Официальная страница документации](https://bybit-exchange.github.io/docs/derivatives/public/risk-limit)</b>
 

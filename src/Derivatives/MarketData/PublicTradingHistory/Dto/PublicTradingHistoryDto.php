@@ -3,8 +3,9 @@ namespace Carpenstar\ByBitAPI\Derivatives\MarketData\PublicTradingHistory\Dto;
 
 use Carpenstar\ByBitAPI\Core\Helpers\DateTimeHelper;
 use Carpenstar\ByBitAPI\Core\Objects\ResponseEntity;
+use Carpenstar\ByBitAPI\Derivatives\MarketData\PublicTradingHistory\Interfaces\IPublicTradingHistoryResponse;
 
-class PublicTradingHistoryDto extends ResponseEntity
+class PublicTradingHistoryDto extends ResponseEntity implements IPublicTradingHistoryResponse
 {
     /**
      * Execution id

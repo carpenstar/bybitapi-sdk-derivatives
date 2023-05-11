@@ -5,9 +5,10 @@ use Carpenstar\ByBitAPI\Core\Builders\ResponseBuilder;
 use Carpenstar\ByBitAPI\Core\Helpers\DateTimeHelper;
 use Carpenstar\ByBitAPI\Core\Objects\Collection\EntityCollection;
 use Carpenstar\ByBitAPI\Core\Objects\ResponseEntity;
+use Carpenstar\ByBitAPI\Derivatives\MarketData\InstrumentInfo\IInstrumentInfoResponse;
 use DateTime;
 
-class InstrumentInfoDto extends ResponseEntity
+class InstrumentInfoDto extends ResponseEntity implements IInstrumentInfoResponse
 {
     /**
      * Derivatives products category. Keeps empty string `""` when `category` is not passed

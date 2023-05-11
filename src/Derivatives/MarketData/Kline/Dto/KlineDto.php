@@ -3,9 +3,10 @@ namespace Carpenstar\ByBitAPI\Derivatives\MarketData\Kline\Dto;
 
 use Carpenstar\ByBitAPI\Core\Helpers\DateTimeHelper;
 use Carpenstar\ByBitAPI\Core\Objects\ResponseEntity;
+use Carpenstar\ByBitAPI\Derivatives\MarketData\Kline\Interfaces\IKlineDto;
 
 
-class KlineDto extends ResponseEntity
+class KlineDto extends ResponseEntity implements IKlineDto
 {
     /**
      * @var \DateTime $start

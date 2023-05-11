@@ -2,8 +2,9 @@
 namespace Carpenstar\ByBitAPI\Derivatives\MarketData\InstrumentInfo\Dto;
 
 use Carpenstar\ByBitAPI\Core\Objects\ResponseEntity;
+use Carpenstar\ByBitAPI\Derivatives\MarketData\InstrumentInfo\ILeverageFilterItem;
 
-class LeverageFilterItemDto extends ResponseEntity
+class LeverageFilterItemDto extends ResponseEntity implements  ILeverageFilterItem
 {
     /**
      * Min. leverage

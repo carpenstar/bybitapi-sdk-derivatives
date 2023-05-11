@@ -2,8 +2,9 @@
 namespace Carpenstar\ByBitAPI\Derivatives\MarketData\InstrumentInfo\Dto;
 
 use Carpenstar\ByBitAPI\Core\Objects\ResponseEntity;
+use Carpenstar\ByBitAPI\Derivatives\MarketData\InstrumentInfo\IPriceFilterItem;
 
-class PriceFilterItemDto extends ResponseEntity
+class PriceFilterItemDto extends ResponseEntity implements IPriceFilterItem
 {
     /**
      * Min. order price

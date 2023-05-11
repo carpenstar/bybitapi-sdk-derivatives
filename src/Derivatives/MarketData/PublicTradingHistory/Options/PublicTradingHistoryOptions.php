@@ -29,16 +29,6 @@ class PublicTradingHistoryOptions extends RequestEntity
     }
 
     /**
-     * @param string $category
-     * @return PublicTradingHistoryOptions
-     */
-    public function setCategory(string $category): self
-    {
-        $this->category = $category;
-        return $this;
-    }
-
-    /**
      * @return string
      */
     public function getCategory(): string

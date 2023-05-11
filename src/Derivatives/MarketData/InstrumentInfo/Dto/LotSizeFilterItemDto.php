@@ -2,8 +2,9 @@
 namespace Carpenstar\ByBitAPI\Derivatives\MarketData\InstrumentInfo\Dto;
 
 use Carpenstar\ByBitAPI\Core\Objects\ResponseEntity;
+use Carpenstar\ByBitAPI\Derivatives\MarketData\InstrumentInfo\ILotSizeFilterItem;
 
-class LotSizeFilterItemDto extends ResponseEntity
+class LotSizeFilterItemDto extends ResponseEntity implements ILotSizeFilterItem
 {
     private float $maxOrderQty;
 

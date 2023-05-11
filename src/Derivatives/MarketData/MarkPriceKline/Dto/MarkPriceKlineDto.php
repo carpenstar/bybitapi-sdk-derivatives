@@ -3,8 +3,9 @@ namespace Carpenstar\ByBitAPI\Derivatives\MarketData\MarkPriceKline\Dto;
 
 use Carpenstar\ByBitAPI\Core\Helpers\DateTimeHelper;
 use Carpenstar\ByBitAPI\Core\Objects\ResponseEntity;
+use Carpenstar\ByBitAPI\Derivatives\MarketData\MarkPriceKline\Interfaces\IMarkPriceKline;
 
-class MarkPriceKlineDto extends ResponseEntity
+class MarkPriceKlineDto extends ResponseEntity implements IMarkPriceKline
 {
     /**
      * @var \DateTime $start
