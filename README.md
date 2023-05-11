@@ -102,7 +102,7 @@ https://bybit-exchange.github.io/docs/derivatives/public/index-kline
 
 #### Эндпоинт:
 ```php
-    \Carpenstar\ByBitAPI\Derivatives\MarketData\IndexPriceKline\IndexPriceKline::class
+\Carpenstar\ByBitAPI\Derivatives\MarketData\IndexPriceKline\IndexPriceKline::class
 ```
 <details><summary>Параметры запроса:</summary>
 
@@ -123,7 +123,8 @@ https://bybit-exchange.github.io/docs/derivatives/public/index-kline
 ```php
     Carpenstar\ByBitAPI\Derivatives\MarketData\IndexPriceKline\Interfaces\IIndexPriceKlineResponse::class
     
-    interface IIndexPriceKlineResponse {
+    interface IIndexPriceKlineResponse 
+    {
         public function getStart(): \DateTime; // Время тика
         public function getOpen(): float; // Цена открытия тика
         public function getHigh(): float; // Максимальная цена тика
