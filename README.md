@@ -11,10 +11,49 @@
 composer require carpenstar/bybitapi-sdk-derivatives
 ```
 
-## Поддерживаемые эндпоинты и примеры вызова
+## Поддерживаемые эндпоинты:
 
 ### Market Data - Funding Rate History
 https://bybit-exchange.github.io/docs/derivatives/public/funding-rate
+
+#### Эндпоинт: `\Carpenstar\ByBitAPI\Derivatives\MarketData\FundingRateHistory\FundingRateHistory::class`
+
+<details><summary>Параметры запроса:</summary>
+
+```php
+    new \Carpenstar\ByBitAPI\Derivatives\MarketData\FundingRateHistory\Options\FundingRateHistoryOptions();
+    
+    $options = (new FundingRateHistoryOptions())
+        ->setSymbol("BTCUSDT") // Обязательный параметр. Строка с тикером торговой пары.
+        ->setStart("2023-05-10 10:00:00") // Необязательный параметр. Строка даты/времени ОТ которого берется срез данных 
+        ->setEnd("2023-05-10 11:00:00"); // Необязательный параметр. Строка даты/времени ДО которого берется срез данных
+        ->setLimit(200) // Необязательный параметр. Ограничение возвращаемых записей на запрос
+```
+> **Warning**
+> По умолчанию, запрос на эндпоинт `FundingRateHistory::class` возвращает 200 последних записей до текущего момента по определенному символу
+
+> **Warning**
+> При установке временных ограничений на выборку, обязательно следует указывать верхнюю и нижнюю границу при помощи `setStart(string $start)` и `setEnd(string $end)`.
+> Иначе будет возвращена ошибка
+
+</details>  
+
+<details><summary>Структура ответа:</summary>
+
+```php
+    \Carpenstar\ByBitAPI\Derivatives\MarketData\FundingRateHistory\Interfaces\IFundingRateHistoryResponse::class
+
+    interface FundingRateHistoryDto 
+    {
+        public function getSymbol(): string; // Символ торговой пары
+        public function getFundingRate(): float; // Ставка финансирования
+        public function getFundingRateTimestamp(): \DateTime // Время удержания ставки финансирования
+    }
+```
+</details> 
+
+<details><summary>Пример:</summary>
+
 ```php
 use Carpenstar\ByBitAPI\BybitAPI;
 use Carpenstar\ByBitAPI\Derivatives\MarketData\FundingRateHistory\FundingRateHistory;
@@ -29,10 +68,10 @@ $options = (new FundingRateHistoryOptions())->setSymbol("BTCUSDT")->setLimit(3);
 $result = $bybit->rest(FundingRateHistory::class, $options)->getBody()->all();
 
 foreach ($result as $rateItem) {
-echo "Symbol: {$rateItem->getSymbol()}" . PHP_EOL;
-echo "Funding Rate: {$rateItem->getFundingRate()}" . PHP_EOL;
-echo "Funding Rate Timestamp: {$rateItem->getFundingRateTimestamp()->format("Y-m-d H:i:s")}" . PHP_EOL;
-echo "-----" . PHP_EOL;
+    echo "Symbol: {$rateItem->getSymbol()}" . PHP_EOL;
+    echo "Funding Rate: {$rateItem->getFundingRate()}" . PHP_EOL;
+    echo "Funding Rate Timestamp: {$rateItem->getFundingRateTimestamp()->format("Y-m-d H:i:s")}" . PHP_EOL;
+    echo "-----" . PHP_EOL;
 }
 
 /**
@@ -52,10 +91,43 @@ echo "-----" . PHP_EOL;
  * -----
  */
 ```
-<br/>  
+</details>
 
 ### Market Data - Index Price Kline
 https://bybit-exchange.github.io/docs/derivatives/public/index-kline
+
+#### Эндпоинт: `\Carpenstar\ByBitAPI\Derivatives\MarketData\IndexPriceKline\IndexPriceKline::class `
+<details><summary>Параметры запроса:</summary>
+
+```php
+    \Carpenstar\ByBitAPI\Derivatives\MarketData\IndexPriceKline\Options\IndexPriceKlineOptions::class
+    
+    $options = (new IndexPriceKlineOptions())
+        ->setSymbol("BTCUSDT") // Обязательный параметр. Строка с тикером торговой пары.
+        ->setInterval(1) // Обязательный параметр. Размер тика. Возможные значения: 1 3 5 15 30 60 120 240 360 720 D M W
+        ->setStart("2023-05-10 10:00:00") // Обязательный параметр. Строка даты/времени ОТ которого берется срез данных 
+        ->setEnd("2023-05-10 11:00:00"); // Обязательный параметр. Строка даты/времени ДО которого берется срез данных
+        ->setLimit(200) // Необязательный параметр. Ограничение возвращаемых записей на запрос. По умолчанию 200
+```
+</details>
+
+<details><summary>Структура ответа:</summary>
+
+```php
+    Carpenstar\ByBitAPI\Derivatives\MarketData\IndexPriceKline\Interfaces\IIndexPriceKlineResponse::class
+    
+    interface IIndexPriceKlineResponse {
+        public function getStart(): \DateTime; // Время тика
+        public function getOpen(): float; // Цена открытия тика
+        public function getHigh(): float; // Максимальная цена тика
+        public function getLow(): float; // Минимальная цена тика
+        public function getClose(): float; // Цена закрытия тика
+    }
+```
+</details>
+
+<details><summary>Пример:</summary>
+
 ```php
 use Carpenstar\ByBitAPI\BybitAPI;
 use Carpenstar\ByBitAPI\Derivatives\MarketData\IndexPriceKline\IndexPriceKline;
@@ -118,7 +190,7 @@ foreach ($result as $indexPriceKlineItem) {
  * -----
  */
 ```
-<br/>
+</details>
 
 ### Market Data - Instrument Info
 https://bybit-exchange.github.io/docs/derivatives/public/instrument-info

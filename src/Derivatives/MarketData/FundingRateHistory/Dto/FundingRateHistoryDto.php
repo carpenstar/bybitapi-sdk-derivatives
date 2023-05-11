@@ -3,8 +3,9 @@ namespace Carpenstar\ByBitAPI\Derivatives\MarketData\FundingRateHistory\Dto;
 
 use Carpenstar\ByBitAPI\Core\Helpers\DateTimeHelper;
 use Carpenstar\ByBitAPI\Core\Objects\ResponseEntity;
+use Carpenstar\ByBitAPI\Derivatives\MarketData\FundingRateHistory\Interfaces\IFundingRateHistoryResponse;
 
-class FundingRateHistoryDto extends ResponseEntity
+class FundingRateHistoryDto extends ResponseEntity implements IFundingRateHistoryResponse
 {
     /**
      * Symbol name
