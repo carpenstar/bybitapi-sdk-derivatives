@@ -214,6 +214,62 @@ foreach ($result as $indexPriceKlineItem) {
 ```
 </details>
 
+<details><summary><b>Структура ответа:</b></summary>
+
+```php
+\Carpenstar\ByBitAPI\Derivatives\MarketData\InstrumentInfo\InstrumentInfoDto::class
+    
+interface IInstrumentInfoResponse
+{
+     public function getSymbol(): ?string;
+     public function getContractType(): ?string;
+     public function getBaseCoin(): ?string;
+     public function getQuoteCoin(): ?string;
+     public function getSettleCoin(): ?string;
+     public function getFundingInterval(): int;
+     public function getUnifiedMarginTrade(): bool;
+     public function getPriceScale(): float;
+     public function getDeliveryFeeRate(): float;
+     public function getDeliveryTime(): ?\DateTime;
+     public function getLaunchTime(): ?\DateTime;
+     public function getStatus(): ?string;
+     public function getLotSizeFilter(): EntityCollection; // ILotSizeFilterItem[]
+     public function getPriceFilter(): EntityCollection; // IPriceFilterItem[]
+     public function getLeverageFilter(): EntityCollection // ILeverageFilterItem[]; 
+}
+```
+```php
+\Carpenstar\ByBitAPI\Derivatives\MarketData\InstrumentInfo\ILotSizeFilterItem::class
+    
+interface ILotSizeFilterItem
+{
+    public function getMaxOrderQty(): float;
+    public function getMinOrderQty(): float;
+    public function getQtyStep(): float;
+}
+```
+```php
+\Carpenstar\ByBitAPI\Derivatives\MarketData\InstrumentInfo\ILeverageFilterItem::class
+    
+interface ILeverageFilterItem
+{
+    public function getMinLeverage(): int;
+    public function getMaxLeverage(): float;
+    public function getLeverageStep(): float;
+}
+```
+```php
+\Carpenstar\ByBitAPI\Derivatives\MarketData\InstrumentInfo\IPriceFilterItem::class
+    
+interface IPriceFilterItem
+{
+    public function getMinPrice(): float;
+    public function getMaxPrice(): float;
+    public function getTickSize(): float;
+}
+```
+</details>
+
 <details><summary><b>Пример:</b></summary>  
 
 
@@ -310,6 +366,33 @@ foreach ($instrumentInfo->getLotSizeFilter()->all() as $filterItem)
 <b>[Официальная страница документации](https://bybit-exchange.github.io/docs/derivatives/public/kline)</b>
 <details><summary><b>Параметры запроса:</b></summary>
 
+```php
+\Carpenstar\ByBitAPI\Derivatives\MarketData\IndexPriceKline\Options\KlineOptions::class
+
+$options = (new KlineOptions())
+    ->setSymbol("BTCUSDT") // Обязательный параметр. Строка с тикером торговой пары.
+    ->setInterval(1) // Обязательный параметр. Размер тика. Возможные значения: 1 3 5 15 30 60 120 240 360 720 D M W
+    ->setStart("2023-05-10 10:00:00") // Обязательный параметр. Строка даты/времени ОТ которого берется срез данных 
+    ->setEnd("2023-05-10 11:00:00"); // Обязательный параметр. Строка даты/времени ДО которого берется срез данных
+    ->setLimit(200) // Необязательный параметр. Ограничение возвращаемых записей на запрос. По умолчанию 200
+```
+</details>
+
+
+<details><summary><b>Структура ответа:</b></summary>
+
+```php
+interface IKlineDto
+{
+    public function getStart(): \DateTime;
+    public function getOpen(): float;
+    public function getHigh(): float;
+    public function getLow(): float;
+    public function getClose(): float;
+    public function getVolume(): float;
+    public function getTurnover(): float;
+}
+```
 </details>
 
 <details><summary><b>Пример:</b></summary>  
@@ -385,7 +468,39 @@ foreach ($klineData as $klineItem) {
 `\Carpenstar\ByBitAPI\Derivatives\MarketData\MarkPriceKline\MarkPriceKline::class`  
 
 <b>[Официальная страница документации](https://bybit-exchange.github.io/docs/derivatives/public/mark-kline)</b>
-<details><summary><b>Пример:</b></summary>  
+
+<details><summary> <b>Параметры запроса:</b></summary>
+
+```php
+\Carpenstar\ByBitAPI\Derivatives\MarketData\MarkPriceKline\MarkPriceKlineOptions::class
+
+$options = (new MarkPriceKlineOptions())
+    ->setSymbol("BTCUSDT") // Обязательный параметр. Строка с тикером торговой пары.
+    ->setInterval(1) // Обязательный параметр. Размер тика. Возможные значения: 1 3 5 15 30 60 120 240 360 720 D M W
+    ->setStart("2023-05-10 10:00:00") // Обязательный параметр. Строка даты/времени ОТ которого берется срез данных 
+    ->setEnd("2023-05-10 11:00:00"); // Обязательный параметр. Строка даты/времени ДО которого берется срез данных
+    ->setLimit(200) // Необязательный параметр. Ограничение возвращаемых записей на запрос. По умолчанию 200
+```
+</details>
+
+
+<details><summary> <b>Структура ответа:</b></summary>
+
+```php
+Carpenstar\ByBitAPI\Derivatives\MarketData\MarkPriceKline\Interfaces\IMarkPriceKline::class
+
+interface IMarkPriceKline
+{
+    public function getStart(): \DateTime;
+    public function getOpen(): float;
+    public function getHigh(): float;
+    public function getLow(): float;
+    public function getClose(): float;
+}
+```
+</details>
+
+<details><summary> <b>Пример:</b></summary>  
 
 
 ```php
@@ -449,6 +564,38 @@ foreach ($result->all() as $markPrice) {
 `Carpenstar\ByBitAPI\Derivatives\MarketData\OpenInterest\OpenInterest::class`  
 
 <b>[Официальная страница документации](https://bybit-exchange.github.io/docs/derivatives/public/open-interest)</b>
+
+<details><summary> <b>Параметры запроса:</b></summary>
+
+```php
+\Carpenstar\ByBitAPI\Derivatives\MarketData\OpenInterest\Options\OpenInterestOptions::class   
+
+$options = (new OpenInterestOptions())
+    ->setSymbol("ETHUSDT")
+    ->setInterval("1h") 
+    ->setLimit(5);
+    ->setStartTime('2023-05-01 10:00:00')
+    ->setEndTime('2023-05-01 20:00:00'); 
+```
+</details>
+
+
+<details><summary> <b>Структура ответа:</b></summary>
+
+```php
+\Carpenstar\ByBitAPI\Derivatives\MarketData\OpenInterest\Interfaces\IOpenInterestResponse::class
+
+interface IMarkPriceKline
+{
+    public function getStart(): \DateTime;
+    public function getOpen(): float;
+    public function getHigh(): float;
+    public function getLow(): float;
+    public function getClose(): float;
+}
+```
+</details>
+
 <details><summary><b>Пример:</b></summary>  
 
 
@@ -499,8 +646,23 @@ foreach ($result as $interestItem) {
 `\Carpenstar\ByBitAPI\Derivatives\MarketData\OrderBook\OrderBook::class`  
 
 <b>[Официальная страница документации](https://bybit-exchange.github.io/docs/derivatives/public/orderbook)</b>
-<details><summary><b>Пример:</b></summary>  
 
+<details><summary> <b>Параметры запроса:</b></summary>
+
+```php
+
+```
+</details>
+
+
+<details><summary> <b>Структура ответа:</b></summary>
+
+```php
+
+```
+</details>
+
+<details><summary><b>Пример:</b></summary>  
 
 ```php
 use Carpenstar\ByBitAPI\BybitAPI;
@@ -559,8 +721,22 @@ foreach ($result->getAsk()->all() as $ask) {
 
 <b>[Официальная страница документации](https://bybit-exchange.github.io/docs/derivatives/public/trade)</b>
 
-<details><summary><b>Пример:</b></summary>  
+<details><summary> <b>Параметры запроса:</b></summary>
 
+```php
+
+```
+</details>
+
+
+<details><summary> <b>Структура ответа:</b></summary>
+
+```php
+
+```
+</details>
+
+<details><summary><b>Пример:</b></summary>
 
 ```php
 use Carpenstar\ByBitAPI\BybitAPI;
@@ -624,8 +800,22 @@ foreach ($result as $historyItem) {
 
 <b>[Официальная страница документации](https://bybit-exchange.github.io/docs/derivatives/public/risk-limit)</b>
 
-<details><summary><b>Пример:</b></summary>  
+<details><summary> <b>Параметры запроса:</b></summary>
 
+```php
+
+```
+</details>
+
+
+<details><summary> <b>Структура ответа:</b></summary>
+
+```php
+
+```
+</details>
+
+<details><summary><b>Пример:</b></summary>
 
 ```php
 use Carpenstar\ByBitAPI\BybitAPI;
@@ -690,8 +880,22 @@ foreach ($result as $riskItem) {
 
 <b>[Официальная страница документации](https://bybit-exchange.github.io/docs/derivatives/public/ticker)</b>
 
-<details><summary><b>Пример:</b></summary>  
+<details><summary> <b>Параметры запроса:</b></summary>
 
+```php
+
+```
+</details>
+
+
+<details><summary> <b>Структура ответа:</b></summary>
+
+```php
+
+```
+</details>
+
+<details><summary><b>Пример:</b></summary>  
 
 ```php
 use Carpenstar\ByBitAPI\BybitAPI;
