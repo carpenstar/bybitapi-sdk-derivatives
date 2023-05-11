@@ -16,8 +16,10 @@ composer require carpenstar/bybitapi-sdk-derivatives
 ### Market Data - Funding Rate History
 https://bybit-exchange.github.io/docs/derivatives/public/funding-rate
 
-#### Эндпоинт: `\Carpenstar\ByBitAPI\Derivatives\MarketData\FundingRateHistory\FundingRateHistory::class`
-
+#### Эндпоинт:
+```php
+\Carpenstar\ByBitAPI\Derivatives\MarketData\FundingRateHistory\FundingRateHistory::class
+```
 <details><summary>Параметры запроса:</summary>
 
 ```php
