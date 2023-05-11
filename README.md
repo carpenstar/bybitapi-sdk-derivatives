@@ -95,10 +95,15 @@ foreach ($result as $rateItem) {
 ```
 </details>
 
+---
+
 ### Market Data - Index Price Kline
 https://bybit-exchange.github.io/docs/derivatives/public/index-kline
 
-#### Эндпоинт: `\Carpenstar\ByBitAPI\Derivatives\MarketData\IndexPriceKline\IndexPriceKline::class `
+#### Эндпоинт:
+```php
+    \Carpenstar\ByBitAPI\Derivatives\MarketData\IndexPriceKline\IndexPriceKline::class
+```
 <details><summary>Параметры запроса:</summary>
 
 ```php
@@ -194,6 +199,8 @@ foreach ($result as $indexPriceKlineItem) {
 ```
 </details>
 
+---
+
 ### Market Data - Instrument Info
 https://bybit-exchange.github.io/docs/derivatives/public/instrument-info
 ```php
@@ -279,7 +286,8 @@ foreach ($instrumentInfo->getLotSizeFilter()->all() as $filterItem)
  *
  */
 ```
-<br/>  
+
+---
 
 ### Market Data - Kline
 https://bybit-exchange.github.io/docs/derivatives/public/kline
@@ -346,7 +354,8 @@ foreach ($klineData as $klineItem) {
  * -----
  */
 ```
-<br/>  
+
+---
 
 ### Market Data - Mark Price Kline
 https://bybit-exchange.github.io/docs/derivatives/public/mark-kline
@@ -403,7 +412,8 @@ foreach ($result->all() as $markPrice) {
  * ----
  */
 ```
-<br/>  
+
+---
 
 ### Market Data - Open Interest
 https://bybit-exchange.github.io/docs/derivatives/public/open-interest
@@ -448,7 +458,7 @@ foreach ($result as $interestItem) {
 */
 ```
 
-<br/>  
+---
 
 ### Market Data - Order Book
 https://bybit-exchange.github.io/docs/derivatives/public/orderbook
@@ -501,7 +511,8 @@ foreach ($result->getAsk()->all() as $ask) {
 * - Price: 8.2475 Quantity: 4626.09
 */
 ```
-<br/>  
+
+---
 
 ### Market Data - Public Trading History
 https://bybit-exchange.github.io/docs/derivatives/public/trade
@@ -558,7 +569,8 @@ foreach ($result as $historyItem) {
  * ----- 
  */
 ```
-<br/>  
+
+---
 
 ### Market Data - Risk Limit
 https://bybit-exchange.github.io/docs/derivatives/public/risk-limit
@@ -616,7 +628,8 @@ foreach ($result as $riskItem) {
  * ...
  */
 ```
-<br/>  
+
+---
 
 ### Market Data - Ticker Info
 https://bybit-exchange.github.io/docs/derivatives/public/ticker
