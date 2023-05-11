@@ -16,8 +16,9 @@ composer require carpenstar/bybitapi-sdk-derivatives
 ### Market Data - Funding Rate History  
 `\Carpenstar\ByBitAPI\Derivatives\MarketData\FundingRateHistory\FundingRateHistory::class`
 
-[Официальная страница документации](https://bybit-exchange.github.io/docs/derivatives/public/funding-rate)
-<details><summary>Параметры запроса:</summary>
+<b>[Официальная страница документации](https://bybit-exchange.github.io/docs/derivatives/public/funding-rate)</b>
+<details><summary><b>Параметры запроса:</b></summary>  
+
 
 ```php
     new \Carpenstar\ByBitAPI\Derivatives\MarketData\FundingRateHistory\Options\FundingRateHistoryOptions();
@@ -37,7 +38,7 @@ composer require carpenstar/bybitapi-sdk-derivatives
 
 </details>  
 
-<details><summary>Структура ответа:</summary>
+<details><summary><b>Структура ответа:</b></summary>
 
 ```php
     \Carpenstar\ByBitAPI\Derivatives\MarketData\FundingRateHistory\Interfaces\IFundingRateHistoryResponse::class
@@ -51,7 +52,8 @@ composer require carpenstar/bybitapi-sdk-derivatives
 ```
 </details> 
 
-<details><summary>Пример:</summary>
+<details><summary><b>Пример:</b></summary>  
+
 
 ```php
 use Carpenstar\ByBitAPI\BybitAPI;
@@ -97,9 +99,9 @@ foreach ($result as $rateItem) {
 ### Market Data - Index Price Kline
 `\Carpenstar\ByBitAPI\Derivatives\MarketData\IndexPriceKline\IndexPriceKline::class`  
 
-[Официальная страница документации](https://bybit-exchange.github.io/docs/derivatives/public/index-kline)
+<b>[Официальная страница документации](https://bybit-exchange.github.io/docs/derivatives/public/index-kline)</b>
 
-<details><summary>Параметры запроса:</summary>
+<details><summary><b>Параметры запроса:</b></summary>
 
 ```php
     \Carpenstar\ByBitAPI\Derivatives\MarketData\IndexPriceKline\Options\IndexPriceKlineOptions::class
@@ -113,7 +115,7 @@ foreach ($result as $rateItem) {
 ```
 </details>
 
-<details><summary>Структура ответа:</summary>
+<details><summary><b>Структура ответа:</b></summary>
 
 ```php
     Carpenstar\ByBitAPI\Derivatives\MarketData\IndexPriceKline\Interfaces\IIndexPriceKlineResponse::class
@@ -129,7 +131,8 @@ foreach ($result as $rateItem) {
 ```
 </details>
 
-<details><summary>Пример:</summary>
+<details><summary><b>Пример:</b></summary>  
+
 
 ```php
 use Carpenstar\ByBitAPI\BybitAPI;
@@ -200,8 +203,8 @@ foreach ($result as $indexPriceKlineItem) {
 ### Market Data - Instrument Info
 `\Carpenstar\ByBitAPI\Derivatives\MarketData\InstrumentInfo\InstrumentInfo::class`  
 
-[Официальная страница документации](https://bybit-exchange.github.io/docs/derivatives/public/instrument-info)
-<details><summary>Параметры запроса:</summary>
+<b>[Официальная страница документации](https://bybit-exchange.github.io/docs/derivatives/public/instrument-info)</b>
+<details><summary><b>Параметры запроса:</b></summary>
 
 ```php
     \Carpenstar\ByBitAPI\Derivatives\MarketData\InstrumentInfo\Options\InstrumentInfoOptions::class
@@ -211,7 +214,8 @@ foreach ($result as $indexPriceKlineItem) {
 ```
 </details>
 
-<details><summary>Пример:</summary>
+<details><summary><b>Пример:</b></summary>  
+
 
 ```php
 use Carpenstar\ByBitAPI\BybitAPI;
@@ -303,12 +307,13 @@ foreach ($instrumentInfo->getLotSizeFilter()->all() as $filterItem)
 ### Market Data - Kline
 `\Carpenstar\ByBitAPI\Derivatives\MarketData\Kline\Kline::class`  
 
-[Официальная страница документации](https://bybit-exchange.github.io/docs/derivatives/public/kline)
-<details><summary>Параметры запроса:</summary>
+<b>[Официальная страница документации](https://bybit-exchange.github.io/docs/derivatives/public/kline)</b>
+<details><summary><b>Параметры запроса:</b></summary>
 
 </details>
 
-<details><summary>Пример:</summary>
+<details><summary><b>Пример:</b></summary>  
+
 
 ```php
 use Carpenstar\ByBitAPI\BybitAPI;
@@ -379,8 +384,9 @@ foreach ($klineData as $klineItem) {
 ### Market Data - Mark Price Kline
 `\Carpenstar\ByBitAPI\Derivatives\MarketData\MarkPriceKline\MarkPriceKline::class`  
 
-[Официальная страница документации](https://bybit-exchange.github.io/docs/derivatives/public/mark-kline)
-<details><summary>Пример:</summary>
+<b>[Официальная страница документации](https://bybit-exchange.github.io/docs/derivatives/public/mark-kline)</b>
+<details><summary><b>Пример:</b></summary>  
+
 
 ```php
 use Carpenstar\ByBitAPI\BybitAPI;
@@ -442,8 +448,9 @@ foreach ($result->all() as $markPrice) {
 ### Market Data - Open Interest
 `Carpenstar\ByBitAPI\Derivatives\MarketData\OpenInterest\OpenInterest::class`  
 
-[Официальная страница документации](https://bybit-exchange.github.io/docs/derivatives/public/open-interest)
-<details><summary>Пример:</summary>
+<b>[Официальная страница документации](https://bybit-exchange.github.io/docs/derivatives/public/open-interest)</b>
+<details><summary><b>Пример:</b></summary>  
+
 
 ```php
 use Carpenstar\ByBitAPI\BybitAPI;
@@ -491,8 +498,9 @@ foreach ($result as $interestItem) {
 ### Market Data - Order Book
 `\Carpenstar\ByBitAPI\Derivatives\MarketData\OrderBook\OrderBook::class`  
 
-[Официальная страница документации](https://bybit-exchange.github.io/docs/derivatives/public/orderbook)
-<details><summary>Пример:</summary>
+<b>[Официальная страница документации](https://bybit-exchange.github.io/docs/derivatives/public/orderbook)</b>
+<details><summary><b>Пример:</b></summary>  
+
 
 ```php
 use Carpenstar\ByBitAPI\BybitAPI;
@@ -549,9 +557,10 @@ foreach ($result->getAsk()->all() as $ask) {
 ### Market Data - Public Trading History
 `Carpenstar\ByBitAPI\Derivatives\MarketData\PublicTradingHistory\PublicTradingHistory::class`  
 
-[Официальная страница документации](https://bybit-exchange.github.io/docs/derivatives/public/trade)
+<b>[Официальная страница документации](https://bybit-exchange.github.io/docs/derivatives/public/trade)</b>
 
-<details><summary>Пример:</summary>
+<details><summary><b>Пример:</b></summary>  
+
 
 ```php
 use Carpenstar\ByBitAPI\BybitAPI;
@@ -613,9 +622,10 @@ foreach ($result as $historyItem) {
 ### Market Data - Risk Limit
 `Carpenstar\ByBitAPI\Derivatives\MarketData\RiskLimit\RiskLimit::class`  
 
-[Официальная страница документации](https://bybit-exchange.github.io/docs/derivatives/public/risk-limit)
+<b>[Официальная страница документации](https://bybit-exchange.github.io/docs/derivatives/public/risk-limit)</b>
 
-<details><summary>Пример:</summary>
+<details><summary><b>Пример:</b></summary>  
+
 
 ```php
 use Carpenstar\ByBitAPI\BybitAPI;
@@ -678,9 +688,10 @@ foreach ($result as $riskItem) {
 ### Market Data - Ticker Info
 `Carpenstar\ByBitAPI\Derivatives\MarketData\TickerInfo\Options\TickerInfo::class`  
 
-[Официальная страница документации](https://bybit-exchange.github.io/docs/derivatives/public/ticker)
+<b>[Официальная страница документации](https://bybit-exchange.github.io/docs/derivatives/public/ticker)</b>
 
-<details><summary>Пример:</summary>
+<details><summary><b>Пример:</b></summary>  
+
 
 ```php
 use Carpenstar\ByBitAPI\BybitAPI;
