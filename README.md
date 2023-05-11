@@ -377,7 +377,7 @@ foreach ($klineData as $klineItem) {
 ---
 
 ### Market Data - Mark Price Kline
-`\Carpenstar\ByBitAPI\Derivatives\MarketData\MarkPriceKline\MarkPriceKline\MarkPriceKline::class`  
+`\Carpenstar\ByBitAPI\Derivatives\MarketData\MarkPriceKline\MarkPriceKline::class`  
 
 [Официальная страница документации](https://bybit-exchange.github.io/docs/derivatives/public/mark-kline)
 <details><summary>Пример:</summary>
@@ -494,7 +494,7 @@ foreach ($result as $interestItem) {
 [Официальная страница документации](https://bybit-exchange.github.io/docs/derivatives/public/orderbook)
 <details><summary>Пример:</summary>
 
-```php 
+```php
 use Carpenstar\ByBitAPI\BybitAPI;
 use Carpenstar\ByBitAPI\Derivatives\MarketData\OrderBook\OrderBook;
 use Carpenstar\ByBitAPI\Derivatives\MarketData\OrderBook\Options\OrderBookOptions;
@@ -676,7 +676,7 @@ foreach ($result as $riskItem) {
 ---
 
 ### Market Data - Ticker Info
-`Carpenstar\ByBitAPI\Derivatives\MarketData\TickerInfo\Options\TickerInfoOptions::class`  
+`Carpenstar\ByBitAPI\Derivatives\MarketData\TickerInfo\Options\TickerInfo::class`  
 
 [Официальная страница документации](https://bybit-exchange.github.io/docs/derivatives/public/ticker)
 
