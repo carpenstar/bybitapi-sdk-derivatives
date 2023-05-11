@@ -16,10 +16,8 @@ composer require carpenstar/bybitapi-sdk-derivatives
 ### Market Data - Funding Rate History
 https://bybit-exchange.github.io/docs/derivatives/public/funding-rate
 
-#### Эндпоинт:
-```php
-    \Carpenstar\ByBitAPI\Derivatives\MarketData\FundingRateHistory\FundingRateHistory::class
-```
+Эндпоинт: `\Carpenstar\ByBitAPI\Derivatives\MarketData\FundingRateHistory\FundingRateHistory::class`
+
 <details><summary>Параметры запроса:</summary>
 
 ```php
@@ -100,10 +98,8 @@ foreach ($result as $rateItem) {
 ### Market Data - Index Price Kline
 https://bybit-exchange.github.io/docs/derivatives/public/index-kline
 
-#### Эндпоинт:
-```php
-    \Carpenstar\ByBitAPI\Derivatives\MarketData\IndexPriceKline\IndexPriceKline::class
-```
+Эндпоинт: `\Carpenstar\ByBitAPI\Derivatives\MarketData\IndexPriceKline\IndexPriceKline::class`
+
 <details><summary>Параметры запроса:</summary>
 
 ```php
@@ -205,10 +201,8 @@ foreach ($result as $indexPriceKlineItem) {
 ### Market Data - Instrument Info
 https://bybit-exchange.github.io/docs/derivatives/public/instrument-info
 
-#### Эндпоинт:
-```php
-    \Carpenstar\ByBitAPI\Derivatives\MarketData\InstrumentInfo\InstrumentInfo::class
-```
+Эндпоинт: `\Carpenstar\ByBitAPI\Derivatives\MarketData\InstrumentInfo\InstrumentInfo::class`
+
 <details><summary>Параметры запроса:</summary>
 
 ```php
@@ -311,10 +305,7 @@ foreach ($instrumentInfo->getLotSizeFilter()->all() as $filterItem)
 ### Market Data - Kline
 https://bybit-exchange.github.io/docs/derivatives/public/kline
 
-#### Эндпоинт:
-```php
-    \Carpenstar\ByBitAPI\Derivatives\MarketData\Kline\Kline::class
-```
+Эндпоинт: `\Carpenstar\ByBitAPI\Derivatives\MarketData\Kline\Kline::class`
 
 <details><summary>Параметры запроса:</summary>
 
@@ -390,6 +381,8 @@ foreach ($klineData as $klineItem) {
 
 ### Market Data - Mark Price Kline
 https://bybit-exchange.github.io/docs/derivatives/public/mark-kline
+
+Эндпоинт: `\Carpenstar\ByBitAPI\Derivatives\MarketData\MarkPriceKline\MarkPriceKline\MarkPriceKline::class`
 
 <details><summary>Пример:</summary>
 
