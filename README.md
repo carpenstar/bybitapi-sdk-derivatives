@@ -52,9 +52,6 @@ composer require carpenstar/bybitapi-sdk-derivatives
 ```
 </details> 
 
-<details><summary><b>Пример:</b></summary>  
-
-
 ```php
 use Carpenstar\ByBitAPI\BybitAPI;
 use Carpenstar\ByBitAPI\Derivatives\MarketData\FundingRateHistory\FundingRateHistory;
@@ -92,7 +89,6 @@ foreach ($result as $rateItem) {
  * -----
  */
 ```
-</details>
 
 ---
 
@@ -130,9 +126,6 @@ foreach ($result as $rateItem) {
     }
 ```
 </details>
-
-<details><summary><b>Пример:</b></summary>  
-
 
 ```php
 use Carpenstar\ByBitAPI\BybitAPI;
@@ -196,7 +189,6 @@ foreach ($result as $indexPriceKlineItem) {
  * -----
  */
 ```
-</details>
 
 ---
 
@@ -269,9 +261,6 @@ interface IPriceFilterItem
 }
 ```
 </details>
-
-<details><summary><b>Пример:</b></summary>  
-
 
 ```php
 use Carpenstar\ByBitAPI\BybitAPI;
@@ -356,7 +345,6 @@ foreach ($instrumentInfo->getLotSizeFilter()->all() as $filterItem)
  *
  */
 ```
-</details>
 
 ---
 
@@ -394,8 +382,6 @@ interface IKlineDto
 }
 ```
 </details>
-
-<details><summary><b>Пример:</b></summary>  
 
 
 ```php
@@ -460,7 +446,6 @@ foreach ($klineData as $klineItem) {
  * -----
  */
 ```
-</details>
 
 ---
 
@@ -499,9 +484,6 @@ interface IMarkPriceKline
 }
 ```
 </details>
-
-<details><summary> <b>Пример:</b></summary>  
-
 
 ```php
 use Carpenstar\ByBitAPI\BybitAPI;
@@ -556,7 +538,6 @@ foreach ($result->all() as $markPrice) {
  */
 ```
 
-</details>
 
 ---
 
@@ -595,8 +576,6 @@ interface IMarkPriceKline
 }
 ```
 </details>
-
-<details><summary><b>Пример:</b></summary>  
 
 
 ```php
@@ -638,7 +617,6 @@ foreach ($result as $interestItem) {
  * -----
 */
 ```
-</details>
 
 ---
 
@@ -684,7 +662,6 @@ interface IOrderBookPriceResponse
 ```
 </details>
 
-<details><summary><b>Пример:</b></summary>  
 
 ```php
 use Carpenstar\ByBitAPI\BybitAPI;
@@ -734,7 +711,6 @@ foreach ($result->getAsk()->all() as $ask) {
 * - Price: 8.2475 Quantity: 4626.09
 */
 ```
-</details>
 
 ---
 
@@ -772,8 +748,6 @@ interface IPublicTradingHistoryResponse
 }
 ```
 </details>
-
-<details><summary><b>Пример:</b></summary>
 
 ```php
 use Carpenstar\ByBitAPI\BybitAPI;
@@ -828,7 +802,6 @@ foreach ($result as $historyItem) {
  * ----- 
  */
 ```
-</details>
 
 ---
 
@@ -851,8 +824,6 @@ foreach ($result as $historyItem) {
 
 ```
 </details>
-
-<details><summary><b>Пример:</b></summary>
 
 ```php
 use Carpenstar\ByBitAPI\BybitAPI;
@@ -908,7 +879,6 @@ foreach ($result as $riskItem) {
  * ...
  */
 ```
-</details>
 
 ---
 
@@ -931,8 +901,6 @@ foreach ($result as $riskItem) {
 
 ```
 </details>
-
-<details><summary><b>Пример:</b></summary>  
 
 ```php
 use Carpenstar\ByBitAPI\BybitAPI;
@@ -998,4 +966,3 @@ echo "Delivery Time: {$tickerInfo->getDeliveryTime()->format("Y-m-d H:i:s")}" . 
  * Delivery Time: 1970-01-01 00:00:00
  */
 ```
-</details>
