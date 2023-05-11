@@ -813,7 +813,10 @@ foreach ($result as $historyItem) {
 <details><summary> <b>Параметры запроса:</b></summary>
 
 ```php
+\Carpenstar\ByBitAPI\Derivatives\MarketData\RiskLimit\Options\RiskLimitsOptions::class
 
+$options = (new RiskLimitsOptions())
+    ->setSymbol("BTCUSDT");
 ```
 </details>
 
@@ -821,7 +824,18 @@ foreach ($result as $historyItem) {
 <details><summary> <b>Структура ответа:</b></summary>
 
 ```php
+\Carpenstar\ByBitAPI\Derivatives\MarketData\RiskLimit\Interfaces\IRiskLimitsResponse::class;
 
+interface IRiskLimitsResponse
+{
+    public function getId(): string;
+    public function getSymbol(): string;
+    public function getLimit(): int;
+    public function getMaintainMargin(): float;
+    public function getInitialMargin(): float;
+    public function getIsLowerRisk(): int;
+    public function getMaxLeverage(): float;
+}
 ```
 </details>
 
@@ -890,7 +904,10 @@ foreach ($result as $riskItem) {
 <details><summary> <b>Параметры запроса:</b></summary>
 
 ```php
+\Carpenstar\ByBitAPI\Derivatives\MarketData\TickerInfo\Options\TickerInfoOptions::class
 
+$options = (new TickerInfoOptions())
+    ->setSymbol("APTUSDT");
 ```
 </details>
 
@@ -898,7 +915,33 @@ foreach ($result as $riskItem) {
 <details><summary> <b>Структура ответа:</b></summary>
 
 ```php
+\Carpenstar\ByBitAPI\Derivatives\MarketData\TickerInfo\Interfaces\ITickerInfoResponse::class;
 
+interface ITickerInfoResponse
+{
+    public function getSymbol(): string;
+    public function getBidPrice(): float;
+    public function getAskPrice(): float;
+    public function getLastPrice(): float;
+    public function getLastTickDirection(): string;
+    public function getPrevPrice24h(): float;
+    public function getPrice24hPcnt(): float;
+    public function getHighPrice24h(): float;
+    public function getLowPrice24h(): float;
+    public function getPrevPrice1h(): float;
+    public function getMarkPrice(): float;
+    public function getIndexPrice(): float;
+    public function getOpenInterests(): float;
+    public function getTurnover24h(): float;
+    public function getVolume24h(): float;
+    public function getFundingRate(): float;
+    public function getNextFundingTime(): \DateTime;
+    public function getPredictedDeliveryPrice(): float;
+    public function getBasisRate(): float;
+    public function getDeliveryFeeRate(): float;
+    public function getDeliveryTime(): \DateTime;
+    public function getOpenInterestValue(): float;
+}
 ```
 </details>
 

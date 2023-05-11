@@ -2,8 +2,9 @@
 namespace Carpenstar\ByBitAPI\Derivatives\MarketData\RiskLimit\Dto;
 
 use Carpenstar\ByBitAPI\Core\Objects\ResponseEntity;
+use Carpenstar\ByBitAPI\Derivatives\MarketData\RiskLimit\Interfaces\IRiskLimitsResponse;
 
-class RiskLimitsDto extends ResponseEntity
+class RiskLimitsDto extends ResponseEntity implements IRiskLimitsResponse
 {
     /**
      * Risk id
