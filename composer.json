@@ -9,6 +9,7 @@
     }
   ],
   "require": {
+    "php": ">=7.4",
     "carpenstar/bybitapi-sdk-core": "dev-master"
   },
   "autoload": {
