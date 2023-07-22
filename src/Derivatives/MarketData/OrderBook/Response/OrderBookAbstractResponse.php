@@ -5,9 +5,13 @@ use Carpenstar\ByBitAPI\Core\Builders\ResponseBuilder;
 use Carpenstar\ByBitAPI\Core\Helpers\DateTimeHelper;
 use Carpenstar\ByBitAPI\Core\Interfaces\ICollectionInterface;
 use Carpenstar\ByBitAPI\Core\Objects\Collection\EntityCollection;
-use Carpenstar\ByBitAPI\Core\Objects\ResponseEntity;
+use Carpenstar\ByBitAPI\Core\Objects\AbstractResponse;
 
+<<<<<<<< HEAD:src/Derivatives/MarketData/OrderBook/Response/OrderBookResponse.php
 class OrderBookResponse extends ResponseEntity
+========
+class OrderBookAbstractResponse extends AbstractResponse
+>>>>>>>> 4cd7e07 (Version v.3.0.0):src/Derivatives/MarketData/OrderBook/Response/OrderBookAbstractResponse.php
 {
     private string $symbol;
 
@@ -92,7 +96,11 @@ class OrderBookResponse extends ResponseEntity
 
         if (!empty($bids)) {
             array_map(function ($bid) use ($bidList) {
+<<<<<<<< HEAD:src/Derivatives/MarketData/OrderBook/Response/OrderBookResponse.php
                 $bidList->push(ResponseBuilder::make(OrderBookPriceItemResponse::class, $bid));
+========
+                $bidList->push(ResponseBuilder::make(OrderBookPriceItemAbstractResponse::class, $bid));
+>>>>>>>> 4cd7e07 (Version v.3.0.0):src/Derivatives/MarketData/OrderBook/Response/OrderBookAbstractResponse.php
             }, $bids);
         }
 
@@ -113,7 +121,11 @@ class OrderBookResponse extends ResponseEntity
 
         if (!empty($asks)) {
             array_map(function ($ask) use ($askList) {
+<<<<<<<< HEAD:src/Derivatives/MarketData/OrderBook/Response/OrderBookResponse.php
                 $askList->push(ResponseBuilder::make(OrderBookPriceItemResponse::class, $ask));
+========
+                $askList->push(ResponseBuilder::make(OrderBookPriceItemAbstractResponse::class, $ask));
+>>>>>>>> 4cd7e07 (Version v.3.0.0):src/Derivatives/MarketData/OrderBook/Response/OrderBookAbstractResponse.php
             }, $asks);
         }
 

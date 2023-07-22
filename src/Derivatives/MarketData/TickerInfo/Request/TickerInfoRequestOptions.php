@@ -1,9 +1,9 @@
 <?php
 namespace Carpenstar\ByBitAPI\Derivatives\MarketData\TickerInfo\Request;
 
-use Carpenstar\ByBitAPI\Core\Objects\OptionsEntity;
+use Carpenstar\ByBitAPI\Core\Objects\AbstractParameters;
 
-class TickerInfoRequestOptions extends OptionsEntity
+class TickerInfoRequestOptions extends AbstractParameters
 {
     /**
      * Only linear category support at now

@@ -3,7 +3,7 @@ namespace Carpenstar\ByBitAPI\Derivatives\MarketData\InstrumentInfo;
 
 use Carpenstar\ByBitAPI\Core\Endpoints\PublicEndpoint;
 use Carpenstar\ByBitAPI\Core\Interfaces\IGetEndpointInterface;
-use Carpenstar\ByBitAPI\Derivatives\MarketData\InstrumentInfo\Response\InstrumentInfoResponse;
+use Carpenstar\ByBitAPI\Derivatives\MarketData\InstrumentInfo\Response\InstrumentInfoAbstractResponse;
 use Carpenstar\ByBitAPI\Derivatives\MarketData\InstrumentInfo\Request\InstrumentInfoRequestOptions;
 
 /**
@@ -17,7 +17,7 @@ class InstrumentInfo extends PublicEndpoint implements IGetEndpointInterface
         return "/derivatives/v3/public/instruments-info";
     }
 
-    public function getOptionsClassname(): string
+    public function getRequestClassname(): string
     {
         return InstrumentInfoRequestOptions::class;
     }
@@ -27,6 +27,6 @@ class InstrumentInfo extends PublicEndpoint implements IGetEndpointInterface
      */
     protected function getResponseClassname(): string
     {
-        return InstrumentInfoResponse::class;
+        return InstrumentInfoAbstractResponse::class;
     }
 }

@@ -3,7 +3,7 @@ namespace Carpenstar\ByBitAPI\Derivatives\Contract\Account\GetTradingFeeRate;
 
 use Carpenstar\ByBitAPI\Core\Endpoints\PrivateEndpoint;
 use Carpenstar\ByBitAPI\Core\Interfaces\IGetEndpointInterface;
-use Carpenstar\ByBitAPI\Derivatives\Contract\Account\GetTradingFeeRate\Response\GetTradingFeeRateResponse;
+use Carpenstar\ByBitAPI\Derivatives\Contract\Account\GetTradingFeeRate\Response\GetTradingFeeRateAbstractResponse;
 use Carpenstar\ByBitAPI\Derivatives\Contract\Account\GetTradingFeeRate\Request\GetTradingFeeRateRequestOptions;
 
 class GetTradingFeeRate extends PrivateEndpoint implements IGetEndpointInterface
@@ -15,10 +15,10 @@ class GetTradingFeeRate extends PrivateEndpoint implements IGetEndpointInterface
 
     protected function getResponseClassname(): string
     {
-        return GetTradingFeeRateResponse::class;
+        return GetTradingFeeRateAbstractResponse::class;
     }
 
-    protected function getOptionsClassname(): string
+    protected function getRequestClassname(): string
     {
         return GetTradingFeeRateRequestOptions::class;
     }

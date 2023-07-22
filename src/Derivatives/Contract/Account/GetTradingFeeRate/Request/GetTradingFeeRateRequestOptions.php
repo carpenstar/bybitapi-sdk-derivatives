@@ -1,9 +1,9 @@
 <?php
 namespace Carpenstar\ByBitAPI\Derivatives\Contract\Account\GetTradingFeeRate\Request;
 
-use Carpenstar\ByBitAPI\Core\Objects\OptionsEntity;
+use Carpenstar\ByBitAPI\Core\Objects\AbstractParameters;
 
-class GetTradingFeeRateRequestOptions extends OptionsEntity
+class GetTradingFeeRateRequestOptions extends AbstractParameters
 {
     /**
      * Symbol name

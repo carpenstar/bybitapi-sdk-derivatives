@@ -3,7 +3,7 @@ namespace Carpenstar\ByBitAPI\Derivatives\MarketData\FundingRateHistory;
 
 use Carpenstar\ByBitAPI\Core\Endpoints\PublicEndpoint;
 use Carpenstar\ByBitAPI\Core\Interfaces\IGetEndpointInterface;
-use Carpenstar\ByBitAPI\Derivatives\MarketData\FundingRateHistory\Response\FundingRateHistoryResponse;
+use Carpenstar\ByBitAPI\Derivatives\MarketData\FundingRateHistory\Response\FundingRateHistoryAbstractResponse;
 use Carpenstar\ByBitAPI\Derivatives\MarketData\FundingRateHistory\Request\FundingRateHistoryRequestOptions;
 
 class FundingRateHistory extends PublicEndpoint implements IGetEndpointInterface
@@ -13,13 +13,13 @@ class FundingRateHistory extends PublicEndpoint implements IGetEndpointInterface
         return "/derivatives/v3/public/funding/history-funding-rate";
     }
 
-    public function getOptionsClassname(): string
+    public function getRequestClassname(): string
     {
         return FundingRateHistoryRequestOptions::class;
     }
 
     protected function getResponseClassname(): string
     {
-        return FundingRateHistoryResponse::class;
+        return FundingRateHistoryAbstractResponse::class;
     }
 }

@@ -2,9 +2,9 @@
 namespace Carpenstar\ByBitAPI\Derivatives\MarketData\MarkPriceKline\Request;
 
 use Carpenstar\ByBitAPI\Core\Helpers\DateTimeHelper;
-use Carpenstar\ByBitAPI\Core\Objects\OptionsEntity;
+use Carpenstar\ByBitAPI\Core\Objects\AbstractParameters;
 
-class MarkPriceKlineRequestOptions extends OptionsEntity
+class MarkPriceKlineRequestOptions extends AbstractParameters
 {
     /**
      * Product type. linear

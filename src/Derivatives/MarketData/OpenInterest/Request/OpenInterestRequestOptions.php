@@ -2,9 +2,9 @@
 namespace Carpenstar\ByBitAPI\Derivatives\MarketData\OpenInterest\Request;
 
 use Carpenstar\ByBitAPI\Core\Helpers\DateTimeHelper;
-use Carpenstar\ByBitAPI\Core\Objects\OptionsEntity;
+use Carpenstar\ByBitAPI\Core\Objects\AbstractParameters;
 
-class OpenInterestRequestOptions extends OptionsEntity
+class OpenInterestRequestOptions extends AbstractParameters
 {
     /**
      *

@@ -1,9 +1,9 @@
 <?php
 namespace Carpenstar\ByBitAPI\Derivatives\MarketData\OrderBook\Request;
 
-use Carpenstar\ByBitAPI\Core\Objects\OptionsEntity;
+use Carpenstar\ByBitAPI\Core\Objects\AbstractParameters;
 
-class OrderBookRequestOptions extends OptionsEntity
+class OrderBookRequestOptions extends AbstractParameters
 {
     /**
      * @var string $category

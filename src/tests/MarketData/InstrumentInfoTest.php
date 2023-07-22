@@ -4,7 +4,7 @@ namespace Derivatives\MarketData;
 use Carpenstar\ByBitAPI\Core\Enums\EnumOutputMode;
 use Carpenstar\ByBitAPI\Core\Objects\Collection\EntityCollection;
 use Carpenstar\ByBitAPI\Core\Response\CurlResponse;
-use Carpenstar\ByBitAPI\Derivatives\MarketData\InstrumentInfo\Response\InstrumentInfoResponse;
+use Carpenstar\ByBitAPI\Derivatives\MarketData\InstrumentInfo\Response\InstrumentInfoAbstractResponse;
 use PHPUnit\Framework\TestCase;
 
 class InstrumentInfoTest extends TestCase
@@ -14,7 +14,7 @@ class InstrumentInfoTest extends TestCase
     public function testInstrumentInfoResponse()
     {
         $instrumentInfoData = (new CurlResponse(self::$instrumentInfoApiResponse))
-            ->bindEntity(InstrumentInfoResponse::class)
+            ->bindEntity(InstrumentInfoAbstractResponse::class)
             ->handle(EnumOutputMode::MODE_ENTITY);
 
         $this->assertInstanceOf(EntityCollection::class, $instrumentInfoData->getBody());
@@ -22,7 +22,7 @@ class InstrumentInfoTest extends TestCase
         $this->assertNotEmpty($instrumentInfoData->getBody()->count());
 
         $instrumentInfo = $instrumentInfoData->getBody()->fetch();
-        $this->assertInstanceOf(InstrumentInfoResponse::class, $instrumentInfo);
+        $this->assertInstanceOf(InstrumentInfoAbstractResponse::class, $instrumentInfo);
         $this->assertIsString($instrumentInfo->getSymbol());
         $this->assertIsString($instrumentInfo->getContractType());
         $this->assertIsString($instrumentInfo->getStatus());

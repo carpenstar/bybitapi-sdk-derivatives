@@ -1,9 +1,9 @@
 <?php
 namespace Carpenstar\ByBitAPI\Derivatives\MarketData\InstrumentInfo\Request;
 
-use Carpenstar\ByBitAPI\Core\Objects\OptionsEntity;
+use Carpenstar\ByBitAPI\Core\Objects\AbstractParameters;
 
-class InstrumentInfoRequestOptions extends OptionsEntity
+class InstrumentInfoRequestOptions extends AbstractParameters
 {
     /**
      * Product type. linear only supports at now

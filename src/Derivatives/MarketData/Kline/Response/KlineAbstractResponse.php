@@ -2,11 +2,15 @@
 namespace Carpenstar\ByBitAPI\Derivatives\MarketData\Kline\Response;
 
 use Carpenstar\ByBitAPI\Core\Helpers\DateTimeHelper;
-use Carpenstar\ByBitAPI\Core\Objects\ResponseEntity;
+use Carpenstar\ByBitAPI\Core\Objects\AbstractResponse;
 use Carpenstar\ByBitAPI\Derivatives\MarketData\Kline\Interfaces\IKlineDto;
 
 
+<<<<<<<< HEAD:src/Derivatives/MarketData/Kline/Response/KlineResponse.php
 class KlineResponse extends ResponseEntity implements IKlineDto
+========
+class KlineAbstractResponse extends AbstractResponse implements IKlineDto
+>>>>>>>> 4cd7e07 (Version v.3.0.0):src/Derivatives/MarketData/Kline/Response/KlineAbstractResponse.php
 {
     /**
      * @var \DateTime $start
@@ -57,7 +61,11 @@ class KlineResponse extends ResponseEntity implements IKlineDto
 
     /**
      * @param int $start
+<<<<<<<< HEAD:src/Derivatives/MarketData/Kline/Response/KlineResponse.php
      * @return KlineResponse
+========
+     * @return KlineAbstractResponse
+>>>>>>>> 4cd7e07 (Version v.3.0.0):src/Derivatives/MarketData/Kline/Response/KlineAbstractResponse.php
      */
     public function setStart(int $start): self
     {
@@ -147,7 +155,11 @@ class KlineResponse extends ResponseEntity implements IKlineDto
 
     /**
      * @param float $volume
+<<<<<<<< HEAD:src/Derivatives/MarketData/Kline/Response/KlineResponse.php
      * @return KlineResponse
+========
+     * @return KlineAbstractResponse
+>>>>>>>> 4cd7e07 (Version v.3.0.0):src/Derivatives/MarketData/Kline/Response/KlineAbstractResponse.php
      */
     private function setVolume(float $volume): self
     {
@@ -165,7 +177,11 @@ class KlineResponse extends ResponseEntity implements IKlineDto
 
     /**
      * @param float $turnover
+<<<<<<<< HEAD:src/Derivatives/MarketData/Kline/Response/KlineResponse.php
      * @return KlineResponse
+========
+     * @return KlineAbstractResponse
+>>>>>>>> 4cd7e07 (Version v.3.0.0):src/Derivatives/MarketData/Kline/Response/KlineAbstractResponse.php
      */
     public function setTurnover(float $turnover): self
     {
