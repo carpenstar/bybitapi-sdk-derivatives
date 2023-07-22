@@ -3,8 +3,8 @@ namespace Carpenstar\ByBitAPI\Derivatives\MarketData\Kline;
 
 use Carpenstar\ByBitAPI\Core\Endpoints\PublicEndpoint;
 use Carpenstar\ByBitAPI\Core\Interfaces\IGetEndpointInterface;
-use Carpenstar\ByBitAPI\Derivatives\MarketData\Kline\Dto\KlineDto;
-use Carpenstar\ByBitAPI\Derivatives\MarketData\Kline\Options\KlineOptions;
+use Carpenstar\ByBitAPI\Derivatives\MarketData\Kline\Response\KlineResponse;
+use Carpenstar\ByBitAPI\Derivatives\MarketData\Kline\Request\KlineRequestOptions;
 
 /**
  * Get kline data
@@ -12,15 +12,18 @@ use Carpenstar\ByBitAPI\Derivatives\MarketData\Kline\Options\KlineOptions;
  */
 class Kline extends PublicEndpoint implements IGetEndpointInterface
 {
-    protected string $url = "/derivatives/v3/public/kline";
-
-    protected function getResponseDTOClass(): string
+    protected function getEndpointUrl(): string
     {
-        return KlineDto::class;
+        return "/derivatives/v3/public/kline";
     }
 
-    public function getRequestOptionsDTOClass(): string
+    protected function getOptionsClassname(): string
     {
-        return KlineOptions::class;
+        return KlineResponse::class;
+    }
+
+    public function getResponseClassname(): string
+    {
+        return KlineRequestOptions::class;
     }
 }

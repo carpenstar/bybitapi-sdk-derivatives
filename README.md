@@ -1014,3 +1014,147 @@ echo "Delivery Time: {$tickerInfo->getDeliveryTime()->format("Y-m-d H:i:s")}" . 
  * Delivery Time: 1970-01-01 00:00:00
  */
 ```
+### Contract - Account - Get Trading Fee Rate
+`Carpenstar\ByBitAPI\Derivatives\Contract\Account\GetTradingFeeRate\GetTradingFeeRate::class`
+
+<b>[Официальная страница документации](https://bybit-exchange.github.io/docs/derivatives/contract/fee-rate)</b>
+```php
+use Carpenstar\ByBitAPI\BybitAPI;
+use Carpenstar\ByBitAPI\Derivatives\Contract\Account\GetTradingFeeRate\GetTradingFeeRate;
+use Carpenstar\ByBitAPI\Derivatives\Contract\Account\GetTradingFeeRate\Options\GetTradingFeeRateOptions;
+use Carpenstar\ByBitAPI\Derivatives\Contract\Account\GetTradingFeeRate\Dto\GetTradingFeeRateResponse;
+
+$bybit = new BybitAPI('https://api-testnet.bybit.com',"apiKey", "secret");
+
+$feeRateData = $bybit->rest(GetTradingFeeRate::class, (new GetTradingFeeRateOptions()))->getBody()->all();
+$feeRateData = array_slice($feeRateData, 0, 3);
+
+/** @var GetTradingFeeRateResponse $feeRate */
+foreach ($feeRateData as $feeRate) {
+    echo "Symbol: {$feeRate->getSymbol()}" . PHP_EOL;
+    echo "Taker Fee Rate: {$feeRate->getTakerFeeRate()}" . PHP_EOL;
+    echo "Maker Fee Rate: {$feeRate->getMakerFeeRate()}" . PHP_EOL;
+    echo "---" . PHP_EOL;
+}
+
+/**
+ * Result:
+ *
+ * Symbol: CTKUSDT
+ * Taker Fee Rate: 0.0006
+ * Maker Fee Rate: 0.0001
+ * ---
+ * Symbol: FILUSDT
+ * Taker Fee Rate: 0.0006
+ * Maker Fee Rate: 0.0001
+ * ---
+ * Symbol: BLURUSDT
+ * Taker Fee Rate: 0.0006
+ * Maker Fee Rate: 0.0001
+ * ---
+ */
+```
+
+### Contract - Account - Wallet Balance
+`Carpenstar\ByBitAPI\Derivatives\Contract\Account\WalletBalance\WalletBalance::class`
+
+<b>[Официальная страница документации](https://bybit-exchange.github.io/docs/derivatives/contract/wallet)</b>
+```php
+use Carpenstar\ByBitAPI\BybitAPI;
+use Carpenstar\ByBitAPI\Derivatives\Contract\Account\WalletBalance\WalletBalance;
+use Carpenstar\ByBitAPI\Derivatives\Contract\Account\WalletBalance\Options\WalletBalanceOptions;
+use Carpenstar\ByBitAPI\Derivatives\Contract\Account\WalletBalance\Dto\WalletBalanceResponse;
+
+$bybit = new BybitAPI('https://api-testnet.bybit.com',"apiKey", "secret");
+
+$walletBalance = $bybit->rest(WalletBalance::class, (new WalletBalanceOptions()))->getBody()->all();
+$walletBalance = array_slice($walletBalance, 0, 2);
+
+/** @var WalletBalanceResponse $feeRate */
+foreach ($walletBalance as $feeRate) {
+    echo "Coin: {$feeRate->getCoin()}" . PHP_EOL;
+    echo "Equity: {$feeRate->getEquity()}" . PHP_EOL;
+    echo "Wallet Balance: {$feeRate->getWalletBalance()}" . PHP_EOL;
+    echo "Position Margin: {$feeRate->getPositionMargin()}" . PHP_EOL;
+    echo "Available Balance: {$feeRate->getAvailableBalance()}" . PHP_EOL;
+    echo "Order Margin: {$feeRate->getOrderMargin()}" . PHP_EOL;
+    echo "Occ Closing Fee: {$feeRate->getOccClosingFee()}" . PHP_EOL;
+    echo "Occ Funding Fee: {$feeRate->getOccFundingFee()}" . PHP_EOL;
+    echo "Unrealised PnL: {$feeRate->getUnrealisedPnl()}" . PHP_EOL;
+    echo "Cumulative Realised PnL: {$feeRate->getCumRealisedPnl()}" . PHP_EOL;
+    echo "Given Cash: {$feeRate->getGivenCash()}" . PHP_EOL;
+    echo "Service Cash: {$feeRate->getServiceCash()}" . PHP_EOL;
+    echo "Account IM: {$feeRate->getAccountIM()}" . PHP_EOL;
+    echo "Account MM: {$feeRate->getAccountMM()}" . PHP_EOL;
+    echo "-----" . PHP_EOL;
+}
+
+/**
+ * Result:
+ * 
+ * Coin: BTC
+ * Equity: 0.2
+ * Wallet Balance: 0.2
+ * Position Margin: 0
+ * Available Balance: 0.2
+ * Order Margin: 0
+ * Occ Closing Fee: 0
+ * Occ Funding Fee: 0
+ * Unrealised PnL: 0
+ * Cumulative Realised PnL: 0
+ * Given Cash: 0
+ * Service Cash: 0
+ * Account IM:
+ * Account MM:
+ * -----
+ * Coin: ETH
+ * Equity: 0
+ * Wallet Balance: 0
+ * Position Margin: 0
+ * Available Balance: 0
+ * Order Margin: 0
+ * Occ Closing Fee: 0
+ * Occ Funding Fee: 0
+ * Unrealised PnL: 0
+ * Cumulative Realised PnL: 0
+ * Given Cash: 0
+ * Service Cash: 0
+ * Account IM
+ * Account MM
+ * -----
+ */
+```
+
+### Contract - Account - Order - Place Order
+`Carpenstar\ByBitAPI\Derivatives\Contract\Order\PlaceOrder\PlaceOrder::class`
+
+<b>[Официальная страница документации](https://bybit-exchange.github.io/docs/derivatives/contract/place-order)</b>
+```php
+use Carpenstar\ByBitAPI\BybitAPI;
+use Carpenstar\ByBitAPI\Derivatives\Contract\Order\PlaceOrder\PlaceOrder;
+use Carpenstar\ByBitAPI\Derivatives\Contract\Order\PlaceOrder\Request\PlaceOrderRequestOptions;
+use Carpenstar\ByBitAPI\Derivatives\Contract\Order\PlaceOrder\Response\PlaceOrderResponse;
+
+$bybit = new BybitAPI('https://api-testnet.bybit.com',"apiKey", "apiSecret");
+
+$order = $bybit->rest(PlaceOrder::class,
+    (new PlaceOrderRequestOptions())
+        ->setSymbol("LTCUSDT")
+        ->setSide("Buy")
+        ->setOrderType("Market")
+        ->setQty(1)
+        ->setTimeInForce("GoodTillCancel")
+        ->setOrderLinkId(uniqid())
+)->getBody()->fetch();
+
+/** @var PlaceOrderResponse $order */
+echo "Order ID: " . $order->getOrderId() . PHP_EOL;
+echo "Order Link ID: " . $order->getOrderLinkId() . PHP_EOL;
+
+/**
+ * Result:
+ *
+ * Order ID: b75cea8a-6373-4fbb-b82f-ab36e56dbe85
+ * Order Link ID: 64728f00c100d
+ */
+```
