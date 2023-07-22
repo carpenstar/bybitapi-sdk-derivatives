@@ -3,20 +3,23 @@ namespace Carpenstar\ByBitAPI\Derivatives\MarketData\MarkPriceKline;
 
 use Carpenstar\ByBitAPI\Core\Endpoints\PublicEndpoint;
 use Carpenstar\ByBitAPI\Core\Interfaces\IGetEndpointInterface;
-use Carpenstar\ByBitAPI\Derivatives\MarketData\MarkPriceKline\Dto\MarkPriceKlineDto;
-use Carpenstar\ByBitAPI\Derivatives\MarketData\MarkPriceKline\Options\MarkPriceKlineOptions;
+use Carpenstar\ByBitAPI\Derivatives\MarketData\MarkPriceKline\Response\MarkPriceKlineResponse;
+use Carpenstar\ByBitAPI\Derivatives\MarketData\MarkPriceKline\Request\MarkPriceKlineRequestOptions;
 
 class MarkPriceKline extends PublicEndpoint implements IGetEndpointInterface
 {
-    protected string $url = "/derivatives/v3/public/mark-price-kline";
-
-    public function getRequestOptionsDTOClass(): string
+    protected function getEndpointUrl(): string
     {
-        return MarkPriceKlineOptions::class;
+        return "/derivatives/v3/public/mark-price-kline";
     }
 
-    protected function getResponseDTOClass(): string
+    public function getOptionsClassname(): string
     {
-        return MarkPriceKlineDto::class;
+        return MarkPriceKlineRequestOptions::class;
+    }
+
+    protected function getResponseClassname(): string
+    {
+        return MarkPriceKlineResponse::class;
     }
 }

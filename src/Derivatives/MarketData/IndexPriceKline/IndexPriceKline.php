@@ -3,8 +3,8 @@ namespace Carpenstar\ByBitAPI\Derivatives\MarketData\IndexPriceKline;
 
 use Carpenstar\ByBitAPI\Core\Endpoints\PublicEndpoint;
 use Carpenstar\ByBitAPI\Core\Interfaces\IGetEndpointInterface;
-use Carpenstar\ByBitAPI\Derivatives\MarketData\IndexPriceKline\Dto\IndexPriceKlineDto;
-use Carpenstar\ByBitAPI\Derivatives\MarketData\IndexPriceKline\Options\IndexPriceKlineOptions;
+use Carpenstar\ByBitAPI\Derivatives\MarketData\IndexPriceKline\Response\IndexPriceKlineResponse;
+use Carpenstar\ByBitAPI\Derivatives\MarketData\IndexPriceKline\Request\IndexPriceKlineRequestOptions;
 
 /**
  * Get index price kline data
@@ -12,15 +12,18 @@ use Carpenstar\ByBitAPI\Derivatives\MarketData\IndexPriceKline\Options\IndexPric
  */
 class IndexPriceKline extends PublicEndpoint implements IGetEndpointInterface
 {
-    protected string $url = "/derivatives/v3/public/index-price-kline";
-
-    protected function getResponseDTOClass(): string
+    protected function getEndpointUrl(): string
     {
-        return IndexPriceKlineDto::class;
+        return "/derivatives/v3/public/index-price-kline";
     }
 
-    public function getRequestOptionsDTOClass(): string
+    protected function getOptionsClassname(): string
     {
-        return IndexPriceKlineOptions::class;
+        return IndexPriceKlineResponse::class;
+    }
+
+    public function getResponseClassname(): string
+    {
+        return IndexPriceKlineRequestOptions::class;
     }
 }

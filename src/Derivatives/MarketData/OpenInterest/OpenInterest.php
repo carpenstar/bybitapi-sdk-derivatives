@@ -3,20 +3,23 @@ namespace Carpenstar\ByBitAPI\Derivatives\MarketData\OpenInterest;
 
 use Carpenstar\ByBitAPI\Core\Endpoints\PublicEndpoint;
 use Carpenstar\ByBitAPI\Core\Interfaces\IGetEndpointInterface;
-use Carpenstar\ByBitAPI\Derivatives\MarketData\OpenInterest\Dto\OpenInterestDto;
-use Carpenstar\ByBitAPI\Derivatives\MarketData\OpenInterest\Options\OpenInterestOptions;
+use Carpenstar\ByBitAPI\Derivatives\MarketData\OpenInterest\Response\OpenInterestResponse;
+use Carpenstar\ByBitAPI\Derivatives\MarketData\OpenInterest\Request\OpenInterestRequestOptions;
 
 class OpenInterest extends PublicEndpoint implements IGetEndpointInterface
 {
-    protected string $url = "/derivatives/v3/public/open-interest";
-
-    public function getRequestOptionsDTOClass(): string
+    protected function getEndpointUrl(): string
     {
-        return OpenInterestOptions::class;
+        return "/derivatives/v3/public/open-interest";
     }
 
-    protected function getResponseDTOClass(): string
+    public function getOptionsClassname(): string
     {
-        return OpenInterestDto::class;
+        return OpenInterestRequestOptions::class;
+    }
+
+    protected function getResponseClassname(): string
+    {
+        return OpenInterestResponse::class;
     }
 }

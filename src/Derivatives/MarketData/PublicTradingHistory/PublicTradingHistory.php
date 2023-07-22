@@ -3,22 +3,23 @@ namespace Carpenstar\ByBitAPI\Derivatives\MarketData\PublicTradingHistory;
 
 use Carpenstar\ByBitAPI\Core\Endpoints\PublicEndpoint;
 use Carpenstar\ByBitAPI\Core\Interfaces\IGetEndpointInterface;
-use Carpenstar\ByBitAPI\Derivatives\MarketData\PublicTradingHistory\Dto\PublicTradingHistoryDto;
-use Carpenstar\ByBitAPI\Derivatives\MarketData\PublicTradingHistory\Options\PublicTradingHistoryOptions;
-use Carpenstar\ByBitAPI\Derivatives\MarketData\RiskLimit\Dto\RiskLimitsDto;
-use Carpenstar\ByBitAPI\Derivatives\MarketData\RiskLimit\Options\RiskLimitsOptions;
+use Carpenstar\ByBitAPI\Derivatives\MarketData\PublicTradingHistory\Response\PublicTradingHistoryResponse;
+use Carpenstar\ByBitAPI\Derivatives\MarketData\PublicTradingHistory\Request\PublicTradingHistoryRequestOptions;
 
 class PublicTradingHistory extends PublicEndpoint implements IGetEndpointInterface
 {
-    protected string $url = "/derivatives/v3/public/recent-trade";
-
-    public function getRequestOptionsDTOClass(): string
+    protected function getEndpointUrl(): string
     {
-        return PublicTradingHistoryOptions::class;
+        return "/derivatives/v3/public/recent-trade";
     }
 
-    protected function getResponseDTOClass(): string
+    public function getOptionsClassname(): string
     {
-        return PublicTradingHistoryDto::class;
+        return PublicTradingHistoryRequestOptions::class;
+    }
+
+    protected function getResponseClassname(): string
+    {
+        return PublicTradingHistoryResponse::class;
     }
 }

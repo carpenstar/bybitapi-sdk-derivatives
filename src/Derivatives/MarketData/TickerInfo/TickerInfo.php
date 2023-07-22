@@ -3,21 +3,23 @@ namespace Carpenstar\ByBitAPI\Derivatives\MarketData\TickerInfo;
 
 use Carpenstar\ByBitAPI\Core\Endpoints\PublicEndpoint;
 use Carpenstar\ByBitAPI\Core\Interfaces\IGetEndpointInterface;
-use Carpenstar\ByBitAPI\Derivatives\MarketData\TickerInfo\Dto\TickerInfoDto;
-use Carpenstar\ByBitAPI\Derivatives\MarketData\TickerInfo\Options\TickerInfoOptions;
+use Carpenstar\ByBitAPI\Derivatives\MarketData\TickerInfo\Response\TickerInfoResponse;
+use Carpenstar\ByBitAPI\Derivatives\MarketData\TickerInfo\Request\TickerInfoRequestOptions;
 
 class TickerInfo extends PublicEndpoint implements IGetEndpointInterface
 {
-    protected string $url = "/derivatives/v3/public/tickers";
-
-    public function getRequestOptionsDTOClass(): string
+    protected function getEndpointUrl(): string
     {
-        return TickerInfoOptions::class;
+        return "/derivatives/v3/public/tickers";
     }
 
-    protected function getResponseDTOClass(): string
+    public function getOptionsClassname(): string
     {
-        return TickerInfoDto::class;
+        return TickerInfoRequestOptions::class;
     }
 
+    protected function getResponseClassname(): string
+    {
+        return TickerInfoResponse::class;
+    }
 }
