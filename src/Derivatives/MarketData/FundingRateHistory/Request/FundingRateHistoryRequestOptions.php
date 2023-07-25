@@ -2,9 +2,9 @@
 namespace Carpenstar\ByBitAPI\Derivatives\MarketData\FundingRateHistory\Request;
 
 use Carpenstar\ByBitAPI\Core\Helpers\DateTimeHelper;
-use Carpenstar\ByBitAPI\Core\Objects\OptionsEntity;
+use Carpenstar\ByBitAPI\Core\Objects\AbstractParameters;
 
-class FundingRateHistoryRequestOptions extends OptionsEntity
+class FundingRateHistoryRequestOptions extends AbstractParameters
 {
     /**
      * Product type. linear

@@ -2,10 +2,10 @@
 namespace Carpenstar\ByBitAPI\Derivatives\MarketData\MarkPriceKline\Response;
 
 use Carpenstar\ByBitAPI\Core\Helpers\DateTimeHelper;
-use Carpenstar\ByBitAPI\Core\Objects\ResponseEntity;
+use Carpenstar\ByBitAPI\Core\Objects\AbstractResponse;
 use Carpenstar\ByBitAPI\Derivatives\MarketData\MarkPriceKline\Interfaces\IMarkPriceKline;
 
-class MarkPriceKlineResponse extends ResponseEntity implements IMarkPriceKline
+class MarkPriceKlineResponse extends AbstractResponse implements IMarkPriceKline
 {
     /**
      * @var \DateTime $start
@@ -44,7 +44,11 @@ class MarkPriceKlineResponse extends ResponseEntity implements IMarkPriceKline
 
     /**
      * @param int $start
+<<<<<<<< HEAD:src/Derivatives/MarketData/MarkPriceKline/Response/MarkPriceKlineResponse.php
      * @return MarkPriceKlineResponse
+========
+     * @return MarkPriceKlineAbstractResponse
+>>>>>>>> 4cd7e07 (Version v.3.0.0):src/Derivatives/MarketData/MarkPriceKline/Response/MarkPriceKlineAbstractResponse.php
      */
     public function setStart(int $start): self
     {
@@ -62,7 +66,11 @@ class MarkPriceKlineResponse extends ResponseEntity implements IMarkPriceKline
 
     /**
      * @param float $open
+<<<<<<<< HEAD:src/Derivatives/MarketData/MarkPriceKline/Response/MarkPriceKlineResponse.php
      * @return MarkPriceKlineResponse
+========
+     * @return MarkPriceKlineAbstractResponse
+>>>>>>>> 4cd7e07 (Version v.3.0.0):src/Derivatives/MarketData/MarkPriceKline/Response/MarkPriceKlineAbstractResponse.php
      */
     public function setOpen(float $open): self
     {
@@ -80,7 +88,11 @@ class MarkPriceKlineResponse extends ResponseEntity implements IMarkPriceKline
 
     /**
      * @param float $high
+<<<<<<<< HEAD:src/Derivatives/MarketData/MarkPriceKline/Response/MarkPriceKlineResponse.php
      * @return MarkPriceKlineResponse
+========
+     * @return MarkPriceKlineAbstractResponse
+>>>>>>>> 4cd7e07 (Version v.3.0.0):src/Derivatives/MarketData/MarkPriceKline/Response/MarkPriceKlineAbstractResponse.php
      */
     public function setHigh(float $high): self
     {
@@ -98,7 +110,11 @@ class MarkPriceKlineResponse extends ResponseEntity implements IMarkPriceKline
 
     /**
      * @param float $low
+<<<<<<<< HEAD:src/Derivatives/MarketData/MarkPriceKline/Response/MarkPriceKlineResponse.php
      * @return MarkPriceKlineResponse
+========
+     * @return MarkPriceKlineAbstractResponse
+>>>>>>>> 4cd7e07 (Version v.3.0.0):src/Derivatives/MarketData/MarkPriceKline/Response/MarkPriceKlineAbstractResponse.php
      */
     public function setLow(float $low): self
     {
@@ -116,7 +132,11 @@ class MarkPriceKlineResponse extends ResponseEntity implements IMarkPriceKline
 
     /**
      * @param float $close
+<<<<<<<< HEAD:src/Derivatives/MarketData/MarkPriceKline/Response/MarkPriceKlineResponse.php
      * @return MarkPriceKlineResponse
+========
+     * @return MarkPriceKlineAbstractResponse
+>>>>>>>> 4cd7e07 (Version v.3.0.0):src/Derivatives/MarketData/MarkPriceKline/Response/MarkPriceKlineAbstractResponse.php
      */
     public function setClose(float $close): self
     {

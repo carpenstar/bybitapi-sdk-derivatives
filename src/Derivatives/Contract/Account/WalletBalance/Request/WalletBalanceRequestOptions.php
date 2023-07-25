@@ -1,9 +1,9 @@
 <?php
 namespace Carpenstar\ByBitAPI\Derivatives\Contract\Account\WalletBalance\Request;
 
-use Carpenstar\ByBitAPI\Core\Objects\OptionsEntity;
+use Carpenstar\ByBitAPI\Core\Objects\AbstractParameters;
 
-class WalletBalanceRequestOptions extends OptionsEntity
+class WalletBalanceRequestOptions extends AbstractParameters
 {
     protected string $coin;
 

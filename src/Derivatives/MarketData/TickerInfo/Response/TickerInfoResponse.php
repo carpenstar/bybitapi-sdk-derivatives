@@ -3,9 +3,10 @@ namespace Carpenstar\ByBitAPI\Derivatives\MarketData\TickerInfo\Response;
 
 
 use Carpenstar\ByBitAPI\Core\Helpers\DateTimeHelper;
-use Carpenstar\ByBitAPI\Core\Objects\ResponseEntity;
+use Carpenstar\ByBitAPI\Core\Objects\AbstractResponse;
 
-class TickerInfoResponse extends ResponseEntity
+
+class TickerInfoResponse extends AbstractResponse
 {
     /**
      * Symbol name
@@ -169,7 +170,11 @@ class TickerInfoResponse extends ResponseEntity
 
     /**
      * @param string $symbol
+<<<<<<<< HEAD:src/Derivatives/MarketData/TickerInfo/Response/TickerInfoResponse.php
      * @return TickerInfoResponse
+========
+     * @return TickerInfoAbstractResponse
+>>>>>>>> 4cd7e07 (Version v.3.0.0):src/Derivatives/MarketData/TickerInfo/Response/TickerInfoAbstractResponse.php
      */
     private function setSymbol(string $symbol): self
     {
@@ -187,7 +192,11 @@ class TickerInfoResponse extends ResponseEntity
 
     /**
      * @param float $bidPrice
+<<<<<<<< HEAD:src/Derivatives/MarketData/TickerInfo/Response/TickerInfoResponse.php
      * @return TickerInfoResponse
+========
+     * @return TickerInfoAbstractResponse
+>>>>>>>> 4cd7e07 (Version v.3.0.0):src/Derivatives/MarketData/TickerInfo/Response/TickerInfoAbstractResponse.php
      */
     private function setBidPrice(float $bidPrice): self
     {
@@ -205,7 +214,11 @@ class TickerInfoResponse extends ResponseEntity
 
     /**
      * @param float $askPrice
+<<<<<<<< HEAD:src/Derivatives/MarketData/TickerInfo/Response/TickerInfoResponse.php
      * @return TickerInfoResponse
+========
+     * @return TickerInfoAbstractResponse
+>>>>>>>> 4cd7e07 (Version v.3.0.0):src/Derivatives/MarketData/TickerInfo/Response/TickerInfoAbstractResponse.php
      */
     private function setAskPrice(float $askPrice): self
     {
@@ -223,7 +236,11 @@ class TickerInfoResponse extends ResponseEntity
 
     /**
      * @param float $lastPrice
+<<<<<<<< HEAD:src/Derivatives/MarketData/TickerInfo/Response/TickerInfoResponse.php
      * @return TickerInfoResponse
+========
+     * @return TickerInfoAbstractResponse
+>>>>>>>> 4cd7e07 (Version v.3.0.0):src/Derivatives/MarketData/TickerInfo/Response/TickerInfoAbstractResponse.php
      */
     private function setLastPrice(float $lastPrice): self
     {
@@ -241,7 +258,11 @@ class TickerInfoResponse extends ResponseEntity
 
     /**
      * @param string $lastTickDirection
+<<<<<<<< HEAD:src/Derivatives/MarketData/TickerInfo/Response/TickerInfoResponse.php
      * @return TickerInfoResponse
+========
+     * @return TickerInfoAbstractResponse
+>>>>>>>> 4cd7e07 (Version v.3.0.0):src/Derivatives/MarketData/TickerInfo/Response/TickerInfoAbstractResponse.php
      */
     private function setLastTickDirection(string $lastTickDirection): self
     {
@@ -259,7 +280,11 @@ class TickerInfoResponse extends ResponseEntity
 
     /**
      * @param float $prevPrice24h
+<<<<<<<< HEAD:src/Derivatives/MarketData/TickerInfo/Response/TickerInfoResponse.php
      * @return TickerInfoResponse
+========
+     * @return TickerInfoAbstractResponse
+>>>>>>>> 4cd7e07 (Version v.3.0.0):src/Derivatives/MarketData/TickerInfo/Response/TickerInfoAbstractResponse.php
      */
     private function setPrevPrice24h(float $prevPrice24h): self
     {
@@ -277,7 +302,11 @@ class TickerInfoResponse extends ResponseEntity
 
     /**
      * @param float $price24hPcnt
+<<<<<<<< HEAD:src/Derivatives/MarketData/TickerInfo/Response/TickerInfoResponse.php
      * @return TickerInfoResponse
+========
+     * @return TickerInfoAbstractResponse
+>>>>>>>> 4cd7e07 (Version v.3.0.0):src/Derivatives/MarketData/TickerInfo/Response/TickerInfoAbstractResponse.php
      */
     private function setPrice24hPcnt(float $price24hPcnt): self
     {
@@ -295,7 +324,11 @@ class TickerInfoResponse extends ResponseEntity
 
     /**
      * @param float $highPrice24h
+<<<<<<<< HEAD:src/Derivatives/MarketData/TickerInfo/Response/TickerInfoResponse.php
      * @return TickerInfoResponse
+========
+     * @return TickerInfoAbstractResponse
+>>>>>>>> 4cd7e07 (Version v.3.0.0):src/Derivatives/MarketData/TickerInfo/Response/TickerInfoAbstractResponse.php
      */
     private function setHighPrice24h(float $highPrice24h): self
     {
@@ -313,7 +346,11 @@ class TickerInfoResponse extends ResponseEntity
 
     /**
      * @param float $lowPrice24h
+<<<<<<<< HEAD:src/Derivatives/MarketData/TickerInfo/Response/TickerInfoResponse.php
      * @return TickerInfoResponse
+========
+     * @return TickerInfoAbstractResponse
+>>>>>>>> 4cd7e07 (Version v.3.0.0):src/Derivatives/MarketData/TickerInfo/Response/TickerInfoAbstractResponse.php
      */
     private function setLowPrice24h(float $lowPrice24h): self
     {
@@ -331,7 +368,11 @@ class TickerInfoResponse extends ResponseEntity
 
     /**
      * @param float $prevPrice1h
+<<<<<<<< HEAD:src/Derivatives/MarketData/TickerInfo/Response/TickerInfoResponse.php
      * @return TickerInfoResponse
+========
+     * @return TickerInfoAbstractResponse
+>>>>>>>> 4cd7e07 (Version v.3.0.0):src/Derivatives/MarketData/TickerInfo/Response/TickerInfoAbstractResponse.php
      */
     private function setPrevPrice1h(float $prevPrice1h): self
     {
@@ -349,7 +390,11 @@ class TickerInfoResponse extends ResponseEntity
 
     /**
      * @param float $markPrice
+<<<<<<<< HEAD:src/Derivatives/MarketData/TickerInfo/Response/TickerInfoResponse.php
      * @return TickerInfoResponse
+========
+     * @return TickerInfoAbstractResponse
+>>>>>>>> 4cd7e07 (Version v.3.0.0):src/Derivatives/MarketData/TickerInfo/Response/TickerInfoAbstractResponse.php
      */
     private function setMarkPrice(float $markPrice): self
     {
@@ -367,7 +412,11 @@ class TickerInfoResponse extends ResponseEntity
 
     /**
      * @param float $indexPrice
+<<<<<<<< HEAD:src/Derivatives/MarketData/TickerInfo/Response/TickerInfoResponse.php
      * @return TickerInfoResponse
+========
+     * @return TickerInfoAbstractResponse
+>>>>>>>> 4cd7e07 (Version v.3.0.0):src/Derivatives/MarketData/TickerInfo/Response/TickerInfoAbstractResponse.php
      */
     private function setIndexPrice(float $indexPrice): self
     {
@@ -385,7 +434,11 @@ class TickerInfoResponse extends ResponseEntity
 
     /**
      * @param float $openInterests
+<<<<<<<< HEAD:src/Derivatives/MarketData/TickerInfo/Response/TickerInfoResponse.php
      * @return TickerInfoResponse
+========
+     * @return TickerInfoAbstractResponse
+>>>>>>>> 4cd7e07 (Version v.3.0.0):src/Derivatives/MarketData/TickerInfo/Response/TickerInfoAbstractResponse.php
      */
     private function setOpenInterests(?float $openInterests): self
     {
@@ -403,7 +456,11 @@ class TickerInfoResponse extends ResponseEntity
 
     /**
      * @param float $turnover24h
+<<<<<<<< HEAD:src/Derivatives/MarketData/TickerInfo/Response/TickerInfoResponse.php
      * @return TickerInfoResponse
+========
+     * @return TickerInfoAbstractResponse
+>>>>>>>> 4cd7e07 (Version v.3.0.0):src/Derivatives/MarketData/TickerInfo/Response/TickerInfoAbstractResponse.php
      */
     private function setTurnover24h(float $turnover24h): self
     {
@@ -421,7 +478,11 @@ class TickerInfoResponse extends ResponseEntity
 
     /**
      * @param float $volume24h
+<<<<<<<< HEAD:src/Derivatives/MarketData/TickerInfo/Response/TickerInfoResponse.php
      * @return TickerInfoResponse
+========
+     * @return TickerInfoAbstractResponse
+>>>>>>>> 4cd7e07 (Version v.3.0.0):src/Derivatives/MarketData/TickerInfo/Response/TickerInfoAbstractResponse.php
      */
     private function setVolume24h(float $volume24h): self
     {
@@ -439,7 +500,11 @@ class TickerInfoResponse extends ResponseEntity
 
     /**
      * @param float $fundingRate
+<<<<<<<< HEAD:src/Derivatives/MarketData/TickerInfo/Response/TickerInfoResponse.php
      * @return TickerInfoResponse
+========
+     * @return TickerInfoAbstractResponse
+>>>>>>>> 4cd7e07 (Version v.3.0.0):src/Derivatives/MarketData/TickerInfo/Response/TickerInfoAbstractResponse.php
      */
     private function setFundingRate(float $fundingRate): self
     {
@@ -457,7 +522,11 @@ class TickerInfoResponse extends ResponseEntity
 
     /**
      * @param int $nextFundingTime
+<<<<<<<< HEAD:src/Derivatives/MarketData/TickerInfo/Response/TickerInfoResponse.php
      * @return TickerInfoResponse
+========
+     * @return TickerInfoAbstractResponse
+>>>>>>>> 4cd7e07 (Version v.3.0.0):src/Derivatives/MarketData/TickerInfo/Response/TickerInfoAbstractResponse.php
      */
     private function setNextFundingTime(int $nextFundingTime): self
     {
@@ -475,7 +544,11 @@ class TickerInfoResponse extends ResponseEntity
 
     /**
      * @param float $predictedDeliveryPrice
+<<<<<<<< HEAD:src/Derivatives/MarketData/TickerInfo/Response/TickerInfoResponse.php
      * @return TickerInfoResponse
+========
+     * @return TickerInfoAbstractResponse
+>>>>>>>> 4cd7e07 (Version v.3.0.0):src/Derivatives/MarketData/TickerInfo/Response/TickerInfoAbstractResponse.php
      */
     private function setPredictedDeliveryPrice(?float $predictedDeliveryPrice): self
     {
@@ -493,7 +566,11 @@ class TickerInfoResponse extends ResponseEntity
 
     /**
      * @param float $basisRate
+<<<<<<<< HEAD:src/Derivatives/MarketData/TickerInfo/Response/TickerInfoResponse.php
      * @return TickerInfoResponse
+========
+     * @return TickerInfoAbstractResponse
+>>>>>>>> 4cd7e07 (Version v.3.0.0):src/Derivatives/MarketData/TickerInfo/Response/TickerInfoAbstractResponse.php
      */
     private function setBasisRate(float $basisRate): self
     {
@@ -511,7 +588,11 @@ class TickerInfoResponse extends ResponseEntity
 
     /**
      * @param float $deliveryFeeRate
+<<<<<<<< HEAD:src/Derivatives/MarketData/TickerInfo/Response/TickerInfoResponse.php
      * @return TickerInfoResponse
+========
+     * @return TickerInfoAbstractResponse
+>>>>>>>> 4cd7e07 (Version v.3.0.0):src/Derivatives/MarketData/TickerInfo/Response/TickerInfoAbstractResponse.php
      */
     private function setDeliveryFeeRate(float $deliveryFeeRate): self
     {
@@ -529,7 +610,11 @@ class TickerInfoResponse extends ResponseEntity
 
     /**
      * @param int $deliveryTime
+<<<<<<<< HEAD:src/Derivatives/MarketData/TickerInfo/Response/TickerInfoResponse.php
      * @return TickerInfoResponse
+========
+     * @return TickerInfoAbstractResponse
+>>>>>>>> 4cd7e07 (Version v.3.0.0):src/Derivatives/MarketData/TickerInfo/Response/TickerInfoAbstractResponse.php
      */
     private function setDeliveryTime(int $deliveryTime): self
     {
@@ -547,7 +632,11 @@ class TickerInfoResponse extends ResponseEntity
 
     /**
      * @param float $openInterestValue
+<<<<<<<< HEAD:src/Derivatives/MarketData/TickerInfo/Response/TickerInfoResponse.php
      * @return TickerInfoResponse
+========
+     * @return TickerInfoAbstractResponse
+>>>>>>>> 4cd7e07 (Version v.3.0.0):src/Derivatives/MarketData/TickerInfo/Response/TickerInfoAbstractResponse.php
      */
     private function setOpenInterestValue(float $openInterestValue): self
     {

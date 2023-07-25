@@ -1,10 +1,10 @@
 <?php
 namespace Carpenstar\ByBitAPI\Derivatives\MarketData\InstrumentInfo\Response;
 
-use Carpenstar\ByBitAPI\Core\Objects\ResponseEntity;
+use Carpenstar\ByBitAPI\Core\Objects\AbstractResponse;
 use Carpenstar\ByBitAPI\Derivatives\MarketData\InstrumentInfo\Interfaces\ILotSizeFilterItem;
 
-class LotSizeFilterItemResponse extends ResponseEntity implements ILotSizeFilterItem
+class LotSizeFilterItemResponse extends AbstractResponse implements ILotSizeFilterItem
 {
     private float $maxOrderQty;
 
@@ -22,7 +22,11 @@ class LotSizeFilterItemResponse extends ResponseEntity implements ILotSizeFilter
 
     /**
      * @param float $maxOrderQty
+<<<<<<<< HEAD:src/Derivatives/MarketData/InstrumentInfo/Response/LotSizeFilterItemResponse.php
      * @return LotSizeFilterItemResponse
+========
+     * @return LotSizeFilterItemAbstractResponse
+>>>>>>>> 4cd7e07 (Version v.3.0.0):src/Derivatives/MarketData/InstrumentInfo/Response/LotSizeFilterItemAbstractResponse.php
      */
     private function setMaxOrderQty(float $maxOrderQty): self
     {
@@ -40,7 +44,11 @@ class LotSizeFilterItemResponse extends ResponseEntity implements ILotSizeFilter
 
     /**
      * @param float $minOrderQty
+<<<<<<<< HEAD:src/Derivatives/MarketData/InstrumentInfo/Response/LotSizeFilterItemResponse.php
      * @return LotSizeFilterItemResponse
+========
+     * @return LotSizeFilterItemAbstractResponse
+>>>>>>>> 4cd7e07 (Version v.3.0.0):src/Derivatives/MarketData/InstrumentInfo/Response/LotSizeFilterItemAbstractResponse.php
      */
     private function setMinOrderQty(float $minOrderQty): self
     {
@@ -66,7 +74,11 @@ class LotSizeFilterItemResponse extends ResponseEntity implements ILotSizeFilter
 
     /**
      * @param float $qtyStep
+<<<<<<<< HEAD:src/Derivatives/MarketData/InstrumentInfo/Response/LotSizeFilterItemResponse.php
      * @return LotSizeFilterItemResponse
+========
+     * @return LotSizeFilterItemAbstractResponse
+>>>>>>>> 4cd7e07 (Version v.3.0.0):src/Derivatives/MarketData/InstrumentInfo/Response/LotSizeFilterItemAbstractResponse.php
      */
     private function setQtyStep(float $qtyStep): self
     {

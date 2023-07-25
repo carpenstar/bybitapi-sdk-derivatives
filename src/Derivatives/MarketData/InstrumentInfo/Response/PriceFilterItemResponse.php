@@ -1,10 +1,10 @@
 <?php
 namespace Carpenstar\ByBitAPI\Derivatives\MarketData\InstrumentInfo\Response;
 
-use Carpenstar\ByBitAPI\Core\Objects\ResponseEntity;
+use Carpenstar\ByBitAPI\Core\Objects\AbstractResponse;
 use Carpenstar\ByBitAPI\Derivatives\MarketData\InstrumentInfo\Interfaces\IPriceFilterItem;
 
-class PriceFilterItemResponse extends ResponseEntity implements IPriceFilterItem
+class PriceFilterItemResponse extends AbstractResponse implements IPriceFilterItem
 {
     /**
      * Min. order price
@@ -34,7 +34,11 @@ class PriceFilterItemResponse extends ResponseEntity implements IPriceFilterItem
 
     /**
      * @param float $minPrice
+<<<<<<<< HEAD:src/Derivatives/MarketData/InstrumentInfo/Response/PriceFilterItemResponse.php
      * @return PriceFilterItemResponse
+========
+     * @return PriceFilterItemAbstractResponse
+>>>>>>>> 4cd7e07 (Version v.3.0.0):src/Derivatives/MarketData/InstrumentInfo/Response/PriceFilterItemAbstractResponse.php
      */
     private function setMinPrice(float $minPrice): self
     {
@@ -52,7 +56,11 @@ class PriceFilterItemResponse extends ResponseEntity implements IPriceFilterItem
 
     /**
      * @param float $maxPrice
+<<<<<<<< HEAD:src/Derivatives/MarketData/InstrumentInfo/Response/PriceFilterItemResponse.php
      * @return PriceFilterItemResponse
+========
+     * @return PriceFilterItemAbstractResponse
+>>>>>>>> 4cd7e07 (Version v.3.0.0):src/Derivatives/MarketData/InstrumentInfo/Response/PriceFilterItemAbstractResponse.php
      */
     private function setMaxPrice(float $maxPrice): self
     {
@@ -70,7 +78,11 @@ class PriceFilterItemResponse extends ResponseEntity implements IPriceFilterItem
 
     /**
      * @param float $tickSize
+<<<<<<<< HEAD:src/Derivatives/MarketData/InstrumentInfo/Response/PriceFilterItemResponse.php
      * @return PriceFilterItemResponse
+========
+     * @return PriceFilterItemAbstractResponse
+>>>>>>>> 4cd7e07 (Version v.3.0.0):src/Derivatives/MarketData/InstrumentInfo/Response/PriceFilterItemAbstractResponse.php
      */
     private function setTickSize(float $tickSize): self
     {

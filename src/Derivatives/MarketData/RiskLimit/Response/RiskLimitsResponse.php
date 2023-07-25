@@ -1,10 +1,10 @@
 <?php
 namespace Carpenstar\ByBitAPI\Derivatives\MarketData\RiskLimit\Response;
 
-use Carpenstar\ByBitAPI\Core\Objects\ResponseEntity;
+use Carpenstar\ByBitAPI\Core\Objects\AbstractResponse;
 use Carpenstar\ByBitAPI\Derivatives\MarketData\RiskLimit\Interfaces\IRiskLimitsResponse;
 
-class RiskLimitsResponse extends ResponseEntity implements IRiskLimitsResponse
+class RiskLimitsResponse extends AbstractResponse implements IRiskLimitsResponse
 {
     /**
      * Risk id
@@ -65,7 +65,11 @@ class RiskLimitsResponse extends ResponseEntity implements IRiskLimitsResponse
 
     /**
      * @param string $id
+<<<<<<<< HEAD:src/Derivatives/MarketData/RiskLimit/Response/RiskLimitsResponse.php
      * @return RiskLimitsResponse
+========
+     * @return RiskLimitsAbstractResponse
+>>>>>>>> 4cd7e07 (Version v.3.0.0):src/Derivatives/MarketData/RiskLimit/Response/RiskLimitsAbstractResponse.php
      */
     private function setId(string $id): self
     {
@@ -83,7 +87,11 @@ class RiskLimitsResponse extends ResponseEntity implements IRiskLimitsResponse
 
     /**
      * @param string $symbol
+<<<<<<<< HEAD:src/Derivatives/MarketData/RiskLimit/Response/RiskLimitsResponse.php
      * @return RiskLimitsResponse
+========
+     * @return RiskLimitsAbstractResponse
+>>>>>>>> 4cd7e07 (Version v.3.0.0):src/Derivatives/MarketData/RiskLimit/Response/RiskLimitsAbstractResponse.php
      */
     private function setSymbol(string $symbol): self
     {
@@ -101,7 +109,11 @@ class RiskLimitsResponse extends ResponseEntity implements IRiskLimitsResponse
 
     /**
      * @param int $limit
+<<<<<<<< HEAD:src/Derivatives/MarketData/RiskLimit/Response/RiskLimitsResponse.php
      * @return RiskLimitsResponse
+========
+     * @return RiskLimitsAbstractResponse
+>>>>>>>> 4cd7e07 (Version v.3.0.0):src/Derivatives/MarketData/RiskLimit/Response/RiskLimitsAbstractResponse.php
      */
     private function setLimit(int $limit): self
     {
@@ -119,7 +131,11 @@ class RiskLimitsResponse extends ResponseEntity implements IRiskLimitsResponse
 
     /**
      * @param float $maintainMargin
+<<<<<<<< HEAD:src/Derivatives/MarketData/RiskLimit/Response/RiskLimitsResponse.php
      * @return RiskLimitsResponse
+========
+     * @return RiskLimitsAbstractResponse
+>>>>>>>> 4cd7e07 (Version v.3.0.0):src/Derivatives/MarketData/RiskLimit/Response/RiskLimitsAbstractResponse.php
      */
     private function setMaintainMargin(float $maintainMargin): self
     {
@@ -137,7 +153,11 @@ class RiskLimitsResponse extends ResponseEntity implements IRiskLimitsResponse
 
     /**
      * @param float $initialMargin
+<<<<<<<< HEAD:src/Derivatives/MarketData/RiskLimit/Response/RiskLimitsResponse.php
      * @return RiskLimitsResponse
+========
+     * @return RiskLimitsAbstractResponse
+>>>>>>>> 4cd7e07 (Version v.3.0.0):src/Derivatives/MarketData/RiskLimit/Response/RiskLimitsAbstractResponse.php
      */
     private function setInitialMargin(float $initialMargin): self
     {
@@ -155,7 +175,11 @@ class RiskLimitsResponse extends ResponseEntity implements IRiskLimitsResponse
 
     /**
      * @param null|int $isLowerRisk
+<<<<<<<< HEAD:src/Derivatives/MarketData/RiskLimit/Response/RiskLimitsResponse.php
      * @return RiskLimitsResponse
+========
+     * @return RiskLimitsAbstractResponse
+>>>>>>>> 4cd7e07 (Version v.3.0.0):src/Derivatives/MarketData/RiskLimit/Response/RiskLimitsAbstractResponse.php
      */
     private function setIsLowerRisk(int $isLowerRisk): self
     {
@@ -173,7 +197,11 @@ class RiskLimitsResponse extends ResponseEntity implements IRiskLimitsResponse
 
     /**
      * @param float $maxLeverage
+<<<<<<<< HEAD:src/Derivatives/MarketData/RiskLimit/Response/RiskLimitsResponse.php
      * @return RiskLimitsResponse
+========
+     * @return RiskLimitsAbstractResponse
+>>>>>>>> 4cd7e07 (Version v.3.0.0):src/Derivatives/MarketData/RiskLimit/Response/RiskLimitsAbstractResponse.php
      */
     public function setMaxLeverage(float $maxLeverage): self
     {

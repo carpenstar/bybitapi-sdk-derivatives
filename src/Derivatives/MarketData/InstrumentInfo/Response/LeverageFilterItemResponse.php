@@ -1,10 +1,10 @@
 <?php
 namespace Carpenstar\ByBitAPI\Derivatives\MarketData\InstrumentInfo\Response;
 
-use Carpenstar\ByBitAPI\Core\Objects\ResponseEntity;
+use Carpenstar\ByBitAPI\Core\Objects\AbstractResponse;
 use Carpenstar\ByBitAPI\Derivatives\MarketData\InstrumentInfo\Interfaces\ILeverageFilterItem;
 
-class LeverageFilterItemResponse extends ResponseEntity implements  ILeverageFilterItem
+class LeverageFilterItemResponse extends AbstractResponse implements  ILeverageFilterItem
 {
     /**
      * Min. leverage
@@ -53,7 +53,11 @@ class LeverageFilterItemResponse extends ResponseEntity implements  ILeverageFil
 
     /**
      * @param float $maxLeverage
+<<<<<<<< HEAD:src/Derivatives/MarketData/InstrumentInfo/Response/LeverageFilterItemResponse.php
      * @return LeverageFilterItemResponse
+========
+     * @return LeverageFilterItemAbstractResponse
+>>>>>>>> 4cd7e07 (Version v.3.0.0):src/Derivatives/MarketData/InstrumentInfo/Response/LeverageFilterItemAbstractResponse.php
      */
     private function setMaxLeverage(float $maxLeverage): self
     {
@@ -71,7 +75,11 @@ class LeverageFilterItemResponse extends ResponseEntity implements  ILeverageFil
 
     /**
      * @param float $leverageStep
+<<<<<<<< HEAD:src/Derivatives/MarketData/InstrumentInfo/Response/LeverageFilterItemResponse.php
      * @return LeverageFilterItemResponse
+========
+     * @return LeverageFilterItemAbstractResponse
+>>>>>>>> 4cd7e07 (Version v.3.0.0):src/Derivatives/MarketData/InstrumentInfo/Response/LeverageFilterItemAbstractResponse.php
      */
     private function setLeverageStep(float $leverageStep): self
     {

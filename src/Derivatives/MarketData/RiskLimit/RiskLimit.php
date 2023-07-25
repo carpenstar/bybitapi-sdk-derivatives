@@ -3,8 +3,9 @@ namespace Carpenstar\ByBitAPI\Derivatives\MarketData\RiskLimit;
 
 use Carpenstar\ByBitAPI\Core\Endpoints\PublicEndpoint;
 use Carpenstar\ByBitAPI\Core\Interfaces\IGetEndpointInterface;
-use Carpenstar\ByBitAPI\Derivatives\MarketData\RiskLimit\Response\RiskLimitsResponse;
+use Carpenstar\ByBitAPI\Derivatives\MarketData\RiskLimit\Response\RiskLimitsAbstractResponse;
 use Carpenstar\ByBitAPI\Derivatives\MarketData\RiskLimit\Request\RiskLimitsRequestOptions;
+use Carpenstar\ByBitAPI\Derivatives\MarketData\RiskLimit\Response\RiskLimitsResponse;
 
 class RiskLimit extends PublicEndpoint implements IGetEndpointInterface
 {
@@ -13,7 +14,7 @@ class RiskLimit extends PublicEndpoint implements IGetEndpointInterface
         return "/derivatives/v3/public/risk-limit/list";
     }
 
-    public function getOptionsClassname(): string
+    public function getRequestClassname(): string
     {
         return RiskLimitsRequestOptions::class;
     }

@@ -2,10 +2,10 @@
 namespace Carpenstar\ByBitAPI\Derivatives\MarketData\FundingRateHistory\Response;
 
 use Carpenstar\ByBitAPI\Core\Helpers\DateTimeHelper;
-use Carpenstar\ByBitAPI\Core\Objects\ResponseEntity;
+use Carpenstar\ByBitAPI\Core\Objects\AbstractResponse;
 use Carpenstar\ByBitAPI\Derivatives\MarketData\FundingRateHistory\Interfaces\IFundingRateHistoryResponse;
 
-class FundingRateHistoryResponse extends ResponseEntity implements IFundingRateHistoryResponse
+class FundingRateHistoryResponse extends AbstractResponse implements IFundingRateHistoryResponse
 {
     /**
      * Symbol name
@@ -35,7 +35,11 @@ class FundingRateHistoryResponse extends ResponseEntity implements IFundingRateH
 
     /**
      * @param string $symbol
+<<<<<<<< HEAD:src/Derivatives/MarketData/FundingRateHistory/Response/FundingRateHistoryResponse.php
      * @return FundingRateHistoryResponse
+========
+     * @return FundingRateHistoryAbstractResponse
+>>>>>>>> 4cd7e07 (Version v.3.0.0):src/Derivatives/MarketData/FundingRateHistory/Response/FundingRateHistoryAbstractResponse.php
      */
     private function setSymbol(string $symbol): self
     {
@@ -53,7 +57,11 @@ class FundingRateHistoryResponse extends ResponseEntity implements IFundingRateH
 
     /**
      * @param float $fundingRate
+<<<<<<<< HEAD:src/Derivatives/MarketData/FundingRateHistory/Response/FundingRateHistoryResponse.php
      * @return FundingRateHistoryResponse
+========
+     * @return FundingRateHistoryAbstractResponse
+>>>>>>>> 4cd7e07 (Version v.3.0.0):src/Derivatives/MarketData/FundingRateHistory/Response/FundingRateHistoryAbstractResponse.php
      */
     private function setFundingRate(float $fundingRate): self
     {
@@ -71,7 +79,11 @@ class FundingRateHistoryResponse extends ResponseEntity implements IFundingRateH
 
     /**
      * @param int $fundingRateTimestamp
+<<<<<<<< HEAD:src/Derivatives/MarketData/FundingRateHistory/Response/FundingRateHistoryResponse.php
      * @return FundingRateHistoryResponse
+========
+     * @return FundingRateHistoryAbstractResponse
+>>>>>>>> 4cd7e07 (Version v.3.0.0):src/Derivatives/MarketData/FundingRateHistory/Response/FundingRateHistoryAbstractResponse.php
      */
     private function setFundingRateTimestamp(int $fundingRateTimestamp): self
     {

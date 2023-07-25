@@ -6,9 +6,9 @@ use Carpenstar\ByBitAPI\Core\Enums\EnumDerivativesCategory;
 use Carpenstar\ByBitAPI\Core\Enums\EnumIntervals;
 use Carpenstar\ByBitAPI\Core\Enums\IntervalEnum;
 use Carpenstar\ByBitAPI\Core\Helpers\DateTimeHelper;
-use Carpenstar\ByBitAPI\Core\Objects\OptionsEntity;
+use Carpenstar\ByBitAPI\Core\Objects\AbstractParameters;
 
-class IndexPriceKlineRequestOptions extends OptionsEntity
+class IndexPriceKlineRequestOptions extends AbstractParameters
 {
     /**
      * Product type. linear,inverse. Default: linear, but in the response category shows

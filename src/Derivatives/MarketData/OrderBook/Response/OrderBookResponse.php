@@ -5,9 +5,9 @@ use Carpenstar\ByBitAPI\Core\Builders\ResponseBuilder;
 use Carpenstar\ByBitAPI\Core\Helpers\DateTimeHelper;
 use Carpenstar\ByBitAPI\Core\Interfaces\ICollectionInterface;
 use Carpenstar\ByBitAPI\Core\Objects\Collection\EntityCollection;
-use Carpenstar\ByBitAPI\Core\Objects\ResponseEntity;
+use Carpenstar\ByBitAPI\Core\Objects\AbstractResponse;
 
-class OrderBookResponse extends ResponseEntity
+class OrderBookResponse extends AbstractResponse
 {
     private string $symbol;
 

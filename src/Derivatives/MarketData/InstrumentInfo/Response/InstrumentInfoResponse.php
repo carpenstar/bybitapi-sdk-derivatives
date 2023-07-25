@@ -4,11 +4,11 @@ namespace Carpenstar\ByBitAPI\Derivatives\MarketData\InstrumentInfo\Response;
 use Carpenstar\ByBitAPI\Core\Builders\ResponseBuilder;
 use Carpenstar\ByBitAPI\Core\Helpers\DateTimeHelper;
 use Carpenstar\ByBitAPI\Core\Objects\Collection\EntityCollection;
-use Carpenstar\ByBitAPI\Core\Objects\ResponseEntity;
+use Carpenstar\ByBitAPI\Core\Objects\AbstractResponse;
 use Carpenstar\ByBitAPI\Derivatives\MarketData\InstrumentInfo\Interfaces\IInstrumentInfoResponse;
 use DateTime;
 
-class InstrumentInfoResponse extends ResponseEntity implements IInstrumentInfoResponse
+class InstrumentInfoResponse extends AbstractResponse implements IInstrumentInfoResponse
 {
     /**
      * Derivatives products category. Keeps empty string `""` when `category` is not passed
@@ -149,7 +149,11 @@ class InstrumentInfoResponse extends ResponseEntity implements IInstrumentInfoRe
 
     /**
      * @param EntityCollection $lotSizeFilter
+<<<<<<<< HEAD:src/Derivatives/MarketData/InstrumentInfo/Response/InstrumentInfoResponse.php
      * @return InstrumentInfoResponse
+========
+     * @return InstrumentInfoAbstractResponse
+>>>>>>>> 4cd7e07 (Version v.3.0.0):src/Derivatives/MarketData/InstrumentInfo/Response/InstrumentInfoAbstractResponse.php
      */
     private function setLotSizeFilter(EntityCollection $lotSizeFilter): self
     {
@@ -167,7 +171,11 @@ class InstrumentInfoResponse extends ResponseEntity implements IInstrumentInfoRe
 
     /**
      * @param EntityCollection $priceFilter
+<<<<<<<< HEAD:src/Derivatives/MarketData/InstrumentInfo/Response/InstrumentInfoResponse.php
      * @return InstrumentInfoResponse
+========
+     * @return InstrumentInfoAbstractResponse
+>>>>>>>> 4cd7e07 (Version v.3.0.0):src/Derivatives/MarketData/InstrumentInfo/Response/InstrumentInfoAbstractResponse.php
      */
     private function setPriceFilter(EntityCollection $priceFilter): self
     {
@@ -177,7 +185,11 @@ class InstrumentInfoResponse extends ResponseEntity implements IInstrumentInfoRe
 
     /**
      * @param EntityCollection $leverageFilter
+<<<<<<<< HEAD:src/Derivatives/MarketData/InstrumentInfo/Response/InstrumentInfoResponse.php
      * @return InstrumentInfoResponse
+========
+     * @return InstrumentInfoAbstractResponse
+>>>>>>>> 4cd7e07 (Version v.3.0.0):src/Derivatives/MarketData/InstrumentInfo/Response/InstrumentInfoAbstractResponse.php
      */
     private function setLeverageFilter(EntityCollection $leverageFilter): self
     {
@@ -195,7 +207,11 @@ class InstrumentInfoResponse extends ResponseEntity implements IInstrumentInfoRe
 
     /**
      * @param string|null $settleCoin
+<<<<<<<< HEAD:src/Derivatives/MarketData/InstrumentInfo/Response/InstrumentInfoResponse.php
      * @return InstrumentInfoResponse
+========
+     * @return InstrumentInfoAbstractResponse
+>>>>>>>> 4cd7e07 (Version v.3.0.0):src/Derivatives/MarketData/InstrumentInfo/Response/InstrumentInfoAbstractResponse.php
      */
     private function setSettleCoin(?string $settleCoin): self
     {
@@ -213,7 +229,11 @@ class InstrumentInfoResponse extends ResponseEntity implements IInstrumentInfoRe
 
     /**
      * @param int $fundingInterval
+<<<<<<<< HEAD:src/Derivatives/MarketData/InstrumentInfo/Response/InstrumentInfoResponse.php
      * @return InstrumentInfoResponse
+========
+     * @return InstrumentInfoAbstractResponse
+>>>>>>>> 4cd7e07 (Version v.3.0.0):src/Derivatives/MarketData/InstrumentInfo/Response/InstrumentInfoAbstractResponse.php
      */
     private function setFundingInterval(int $fundingInterval): self
     {
@@ -239,7 +259,11 @@ class InstrumentInfoResponse extends ResponseEntity implements IInstrumentInfoRe
 
     /**
      * @param bool $unifiedMarginTrade
+<<<<<<<< HEAD:src/Derivatives/MarketData/InstrumentInfo/Response/InstrumentInfoResponse.php
      * @return InstrumentInfoResponse
+========
+     * @return InstrumentInfoAbstractResponse
+>>>>>>>> 4cd7e07 (Version v.3.0.0):src/Derivatives/MarketData/InstrumentInfo/Response/InstrumentInfoAbstractResponse.php
      */
     private function setUnifiedMarginTrade(?bool $unifiedMarginTrade): self
     {
@@ -257,7 +281,11 @@ class InstrumentInfoResponse extends ResponseEntity implements IInstrumentInfoRe
 
     /**
      * @param float $priceScale
+<<<<<<<< HEAD:src/Derivatives/MarketData/InstrumentInfo/Response/InstrumentInfoResponse.php
      * @return InstrumentInfoResponse
+========
+     * @return InstrumentInfoAbstractResponse
+>>>>>>>> 4cd7e07 (Version v.3.0.0):src/Derivatives/MarketData/InstrumentInfo/Response/InstrumentInfoAbstractResponse.php
      */
     private function setPriceScale(?float $priceScale): self
     {
@@ -275,7 +303,11 @@ class InstrumentInfoResponse extends ResponseEntity implements IInstrumentInfoRe
 
     /**
      * @param float $deliveryFeeRate
+<<<<<<<< HEAD:src/Derivatives/MarketData/InstrumentInfo/Response/InstrumentInfoResponse.php
      * @return InstrumentInfoResponse
+========
+     * @return InstrumentInfoAbstractResponse
+>>>>>>>> 4cd7e07 (Version v.3.0.0):src/Derivatives/MarketData/InstrumentInfo/Response/InstrumentInfoAbstractResponse.php
      */
     private function setDeliveryFeeRate(float $deliveryFeeRate): self
     {
@@ -286,7 +318,11 @@ class InstrumentInfoResponse extends ResponseEntity implements IInstrumentInfoRe
     /**
      * The delivery timestamp (ms). "0" for perpetual
      * @param int $deliveryTime
+<<<<<<<< HEAD:src/Derivatives/MarketData/InstrumentInfo/Response/InstrumentInfoResponse.php
      * @return InstrumentInfoResponse
+========
+     * @return InstrumentInfoAbstractResponse
+>>>>>>>> 4cd7e07 (Version v.3.0.0):src/Derivatives/MarketData/InstrumentInfo/Response/InstrumentInfoAbstractResponse.php
      */
     private function setDeliveryTime(int $deliveryTime): self
     {
@@ -307,7 +343,11 @@ class InstrumentInfoResponse extends ResponseEntity implements IInstrumentInfoRe
 
     /**
      * @param int $launchTime
+<<<<<<<< HEAD:src/Derivatives/MarketData/InstrumentInfo/Response/InstrumentInfoResponse.php
      * @return InstrumentInfoResponse
+========
+     * @return InstrumentInfoAbstractResponse
+>>>>>>>> 4cd7e07 (Version v.3.0.0):src/Derivatives/MarketData/InstrumentInfo/Response/InstrumentInfoAbstractResponse.php
      */
     private function setLaunchTime(int $launchTime): self
     {
@@ -333,7 +373,11 @@ class InstrumentInfoResponse extends ResponseEntity implements IInstrumentInfoRe
 
     /**
      * @param string|null $quoteCoin
+<<<<<<<< HEAD:src/Derivatives/MarketData/InstrumentInfo/Response/InstrumentInfoResponse.php
      * @return InstrumentInfoResponse
+========
+     * @return InstrumentInfoAbstractResponse
+>>>>>>>> 4cd7e07 (Version v.3.0.0):src/Derivatives/MarketData/InstrumentInfo/Response/InstrumentInfoAbstractResponse.php
      */
     private function setQuoteCoin(?string $quoteCoin): self
     {
@@ -351,7 +395,11 @@ class InstrumentInfoResponse extends ResponseEntity implements IInstrumentInfoRe
 
     /**
      * @param string|null $baseCoin
+<<<<<<<< HEAD:src/Derivatives/MarketData/InstrumentInfo/Response/InstrumentInfoResponse.php
      * @return InstrumentInfoResponse
+========
+     * @return InstrumentInfoAbstractResponse
+>>>>>>>> 4cd7e07 (Version v.3.0.0):src/Derivatives/MarketData/InstrumentInfo/Response/InstrumentInfoAbstractResponse.php
      */
     private function setBaseCoin(?string $baseCoin): self
     {
@@ -361,7 +409,11 @@ class InstrumentInfoResponse extends ResponseEntity implements IInstrumentInfoRe
 
     /**
      * @param string|null $symbol
+<<<<<<<< HEAD:src/Derivatives/MarketData/InstrumentInfo/Response/InstrumentInfoResponse.php
      * @return InstrumentInfoResponse
+========
+     * @return InstrumentInfoAbstractResponse
+>>>>>>>> 4cd7e07 (Version v.3.0.0):src/Derivatives/MarketData/InstrumentInfo/Response/InstrumentInfoAbstractResponse.php
      */
     private function setSymbol(?string $symbol): self
     {
@@ -380,7 +432,11 @@ class InstrumentInfoResponse extends ResponseEntity implements IInstrumentInfoRe
     /**
      * Contract type. `LinearPerpetual`, `InversePerpetual`, `InverseFutures`
      * @param string|null $contractType
+<<<<<<<< HEAD:src/Derivatives/MarketData/InstrumentInfo/Response/InstrumentInfoResponse.php
      * @return InstrumentInfoResponse
+========
+     * @return InstrumentInfoAbstractResponse
+>>>>>>>> 4cd7e07 (Version v.3.0.0):src/Derivatives/MarketData/InstrumentInfo/Response/InstrumentInfoAbstractResponse.php
      */
     private function setContractType(?string $contractType): self
     {
@@ -398,7 +454,11 @@ class InstrumentInfoResponse extends ResponseEntity implements IInstrumentInfoRe
 
     /**
      * @param string|null $status
+<<<<<<<< HEAD:src/Derivatives/MarketData/InstrumentInfo/Response/InstrumentInfoResponse.php
      * @return InstrumentInfoResponse
+========
+     * @return InstrumentInfoAbstractResponse
+>>>>>>>> 4cd7e07 (Version v.3.0.0):src/Derivatives/MarketData/InstrumentInfo/Response/InstrumentInfoAbstractResponse.php
      */
     private function setStatus(?string $status): self
     {

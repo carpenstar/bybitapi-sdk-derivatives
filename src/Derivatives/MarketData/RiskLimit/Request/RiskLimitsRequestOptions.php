@@ -1,9 +1,9 @@
 <?php
 namespace Carpenstar\ByBitAPI\Derivatives\MarketData\RiskLimit\Request;
 
-use Carpenstar\ByBitAPI\Core\Objects\OptionsEntity;
+use Carpenstar\ByBitAPI\Core\Objects\AbstractParameters;
 
-class RiskLimitsRequestOptions extends OptionsEntity
+class RiskLimitsRequestOptions extends AbstractParameters
 {
     /**
      * Product type. linear

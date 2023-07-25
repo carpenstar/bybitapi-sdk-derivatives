@@ -2,9 +2,9 @@
 namespace Carpenstar\ByBitAPI\Derivatives\MarketData\OpenInterest\Response;
 
 use Carpenstar\ByBitAPI\Core\Helpers\DateTimeHelper;
-use Carpenstar\ByBitAPI\Core\Objects\ResponseEntity;
+use Carpenstar\ByBitAPI\Core\Objects\AbstractResponse;
 
-class OpenInterestResponse extends ResponseEntity
+class OpenInterestResponse extends AbstractResponse
 {
     /**
      * Open interest
@@ -27,7 +27,11 @@ class OpenInterestResponse extends ResponseEntity
 
     /**
      * @param string $openInterest
+<<<<<<<< HEAD:src/Derivatives/MarketData/OpenInterest/Response/OpenInterestResponse.php
      * @return OpenInterestResponse
+========
+     * @return OpenInterestAbstractResponse
+>>>>>>>> 4cd7e07 (Version v.3.0.0):src/Derivatives/MarketData/OpenInterest/Response/OpenInterestAbstractResponse.php
      */
     public function setOpenInterest(string $openInterest): self
     {
@@ -45,7 +49,11 @@ class OpenInterestResponse extends ResponseEntity
 
     /**
      * @param int $timestamp
+<<<<<<<< HEAD:src/Derivatives/MarketData/OpenInterest/Response/OpenInterestResponse.php
      * @return OpenInterestResponse
+========
+     * @return OpenInterestAbstractResponse
+>>>>>>>> 4cd7e07 (Version v.3.0.0):src/Derivatives/MarketData/OpenInterest/Response/OpenInterestAbstractResponse.php
      */
     private function setTimestamp(int $timestamp): self
     {

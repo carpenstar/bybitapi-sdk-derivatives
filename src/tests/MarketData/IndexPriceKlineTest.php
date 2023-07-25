@@ -21,7 +21,7 @@ class IndexPriceKlineTest extends TestCase
 
         $this->assertNotEmpty($indexPriceKlineData->getBody()->count());
 
-        /** @var IndexPriceKlineResponse $klineItem */
+        /** @var IndexPriceKlineAbstractResponse $klineItem */
         while(!empty($klineItem = $indexPriceKlineData->getBody()->fetch())) {
             $this->assertInstanceOf(IndexPriceKlineResponse::class, $klineItem);
             $this->assertInstanceOf(\DateTime::class, $klineItem->getStart());

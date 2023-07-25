@@ -2,10 +2,10 @@
 namespace Carpenstar\ByBitAPI\Derivatives\MarketData\PublicTradingHistory\Response;
 
 use Carpenstar\ByBitAPI\Core\Helpers\DateTimeHelper;
-use Carpenstar\ByBitAPI\Core\Objects\ResponseEntity;
+use Carpenstar\ByBitAPI\Core\Objects\AbstractResponse;
 use Carpenstar\ByBitAPI\Derivatives\MarketData\PublicTradingHistory\Interfaces\IPublicTradingHistoryResponse;
 
-class PublicTradingHistoryResponse extends ResponseEntity implements IPublicTradingHistoryResponse
+class PublicTradingHistoryResponse extends AbstractResponse implements IPublicTradingHistoryResponse
 {
     /**
      * Execution id
@@ -63,7 +63,11 @@ class PublicTradingHistoryResponse extends ResponseEntity implements IPublicTrad
 
     /**
      * @param string $execId
+<<<<<<<< HEAD:src/Derivatives/MarketData/PublicTradingHistory/Response/PublicTradingHistoryResponse.php
      * @return PublicTradingHistoryResponse
+========
+     * @return PublicTradingHistoryAbstractResponse
+>>>>>>>> 4cd7e07 (Version v.3.0.0):src/Derivatives/MarketData/PublicTradingHistory/Response/PublicTradingHistoryAbstractResponse.php
      */
     private function setExecId(string $execId): self
     {
@@ -81,7 +85,11 @@ class PublicTradingHistoryResponse extends ResponseEntity implements IPublicTrad
 
     /**
      * @param string $symbol
+<<<<<<<< HEAD:src/Derivatives/MarketData/PublicTradingHistory/Response/PublicTradingHistoryResponse.php
      * @return PublicTradingHistoryResponse
+========
+     * @return PublicTradingHistoryAbstractResponse
+>>>>>>>> 4cd7e07 (Version v.3.0.0):src/Derivatives/MarketData/PublicTradingHistory/Response/PublicTradingHistoryAbstractResponse.php
      */
     public function setSymbol(string $symbol): self
     {
@@ -99,7 +107,11 @@ class PublicTradingHistoryResponse extends ResponseEntity implements IPublicTrad
 
     /**
      * @param float $price
+<<<<<<<< HEAD:src/Derivatives/MarketData/PublicTradingHistory/Response/PublicTradingHistoryResponse.php
      * @return PublicTradingHistoryResponse
+========
+     * @return PublicTradingHistoryAbstractResponse
+>>>>>>>> 4cd7e07 (Version v.3.0.0):src/Derivatives/MarketData/PublicTradingHistory/Response/PublicTradingHistoryAbstractResponse.php
      */
     public function setPrice(float $price): self
     {
@@ -117,7 +129,11 @@ class PublicTradingHistoryResponse extends ResponseEntity implements IPublicTrad
 
     /**
      * @param float $size
+<<<<<<<< HEAD:src/Derivatives/MarketData/PublicTradingHistory/Response/PublicTradingHistoryResponse.php
      * @return PublicTradingHistoryResponse
+========
+     * @return PublicTradingHistoryAbstractResponse
+>>>>>>>> 4cd7e07 (Version v.3.0.0):src/Derivatives/MarketData/PublicTradingHistory/Response/PublicTradingHistoryAbstractResponse.php
      */
     private function setSize(float $size): self
     {
@@ -135,7 +151,11 @@ class PublicTradingHistoryResponse extends ResponseEntity implements IPublicTrad
 
     /**
      * @param string $side
+<<<<<<<< HEAD:src/Derivatives/MarketData/PublicTradingHistory/Response/PublicTradingHistoryResponse.php
      * @return PublicTradingHistoryResponse
+========
+     * @return PublicTradingHistoryAbstractResponse
+>>>>>>>> 4cd7e07 (Version v.3.0.0):src/Derivatives/MarketData/PublicTradingHistory/Response/PublicTradingHistoryAbstractResponse.php
      */
     private function setSide(string $side): self
     {
@@ -153,7 +173,11 @@ class PublicTradingHistoryResponse extends ResponseEntity implements IPublicTrad
 
     /**
      * @param int $timestamp
+<<<<<<<< HEAD:src/Derivatives/MarketData/PublicTradingHistory/Response/PublicTradingHistoryResponse.php
      * @return PublicTradingHistoryResponse
+========
+     * @return PublicTradingHistoryAbstractResponse
+>>>>>>>> 4cd7e07 (Version v.3.0.0):src/Derivatives/MarketData/PublicTradingHistory/Response/PublicTradingHistoryAbstractResponse.php
      */
     private function setTime(int $timestamp): self
     {
@@ -171,7 +195,11 @@ class PublicTradingHistoryResponse extends ResponseEntity implements IPublicTrad
 
     /**
      * @param bool $isBlockTrade
+<<<<<<<< HEAD:src/Derivatives/MarketData/PublicTradingHistory/Response/PublicTradingHistoryResponse.php
      * @return PublicTradingHistoryResponse
+========
+     * @return PublicTradingHistoryAbstractResponse
+>>>>>>>> 4cd7e07 (Version v.3.0.0):src/Derivatives/MarketData/PublicTradingHistory/Response/PublicTradingHistoryAbstractResponse.php
      */
     private function setIsBlockTrade(bool $isBlockTrade): self
     {

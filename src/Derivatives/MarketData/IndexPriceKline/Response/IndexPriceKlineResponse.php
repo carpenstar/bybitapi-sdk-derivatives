@@ -2,10 +2,10 @@
 namespace Carpenstar\ByBitAPI\Derivatives\MarketData\IndexPriceKline\Response;
 
 use Carpenstar\ByBitAPI\Core\Helpers\DateTimeHelper;
-use Carpenstar\ByBitAPI\Core\Objects\ResponseEntity;
+use Carpenstar\ByBitAPI\Core\Objects\AbstractResponse;
 use Carpenstar\ByBitAPI\Derivatives\MarketData\IndexPriceKline\Interfaces\IIndexPriceKlineResponse;
 
-class IndexPriceKlineResponse extends ResponseEntity implements IIndexPriceKlineResponse
+class IndexPriceKlineResponse extends AbstractResponse implements IIndexPriceKlineResponse
 {
     /**
      * @var \DateTime $start
@@ -44,7 +44,11 @@ class IndexPriceKlineResponse extends ResponseEntity implements IIndexPriceKline
 
     /**
      * @param int $start
+<<<<<<<< HEAD:src/Derivatives/MarketData/IndexPriceKline/Response/IndexPriceKlineResponse.php
      * @return IndexPriceKlineResponse
+========
+     * @return IndexPriceKlineAbstractResponse
+>>>>>>>> 4cd7e07 (Version v.3.0.0):src/Derivatives/MarketData/IndexPriceKline/Response/IndexPriceKlineAbstractResponse.php
      */
     public function setStart(int $start): self
     {

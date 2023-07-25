@@ -1,9 +1,9 @@
 <?php
 namespace Carpenstar\ByBitAPI\Derivatives\MarketData\PublicTradingHistory\Request;
 
-use Carpenstar\ByBitAPI\Core\Objects\OptionsEntity;
+use Carpenstar\ByBitAPI\Core\Objects\AbstractParameters;
 
-class PublicTradingHistoryRequestOptions extends OptionsEntity
+class PublicTradingHistoryRequestOptions extends AbstractParameters
 {
     /**
      * Product type.linear
