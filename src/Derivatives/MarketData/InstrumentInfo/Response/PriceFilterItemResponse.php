@@ -4,11 +4,7 @@ namespace Carpenstar\ByBitAPI\Derivatives\MarketData\InstrumentInfo\Response;
 use Carpenstar\ByBitAPI\Core\Objects\AbstractResponse;
 use Carpenstar\ByBitAPI\Derivatives\MarketData\InstrumentInfo\Interfaces\IPriceFilterItem;
 
-<<<<<<<< HEAD:src/Derivatives/MarketData/InstrumentInfo/Response/PriceFilterItemResponse.php
-class PriceFilterItemResponse extends ResponseEntity implements IPriceFilterItem
-========
-class PriceFilterItemAbstractResponse extends AbstractResponse implements IPriceFilterItem
->>>>>>>> 4cd7e07 (Version v.3.0.0):src/Derivatives/MarketData/InstrumentInfo/Response/PriceFilterItemAbstractResponse.php
+class PriceFilterItemResponse extends AbstractResponse implements IPriceFilterItem
 {
     /**
      * Min. order price

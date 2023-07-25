@@ -4,7 +4,7 @@ namespace Carpenstar\ByBitAPI\Tests\Derivatives\MarketData;
 use Carpenstar\ByBitAPI\Core\Enums\EnumOutputMode;
 use Carpenstar\ByBitAPI\Core\Objects\Collection\EntityCollection;
 use Carpenstar\ByBitAPI\Core\Response\CurlResponse;
-use Carpenstar\ByBitAPI\Derivatives\MarketData\IndexPriceKline\Response\IndexPriceKlineAbstractResponse;
+use Carpenstar\ByBitAPI\Derivatives\MarketData\IndexPriceKline\Response\IndexPriceKlineResponse;
 use PHPUnit\Framework\TestCase;
 
 class IndexPriceKlineTest extends TestCase
@@ -14,7 +14,7 @@ class IndexPriceKlineTest extends TestCase
     public function testIndexPriceKlineResponse()
     {
         $indexPriceKlineData = (new CurlResponse(self::$indexPriceKlineApiResponse))
-            ->bindEntity(IndexPriceKlineAbstractResponse::class)
+            ->bindEntity(IndexPriceKlineResponse::class)
             ->handle(EnumOutputMode::MODE_ENTITY);
 
         $this->assertInstanceOf(EntityCollection::class, $indexPriceKlineData->getBody());
@@ -23,7 +23,7 @@ class IndexPriceKlineTest extends TestCase
 
         /** @var IndexPriceKlineAbstractResponse $klineItem */
         while(!empty($klineItem = $indexPriceKlineData->getBody()->fetch())) {
-            $this->assertInstanceOf(IndexPriceKlineAbstractResponse::class, $klineItem);
+            $this->assertInstanceOf(IndexPriceKlineResponse::class, $klineItem);
             $this->assertInstanceOf(\DateTime::class, $klineItem->getStart());
             $this->assertIsFloat($klineItem->getOpen());
             $this->assertIsFloat($klineItem->getHigh());

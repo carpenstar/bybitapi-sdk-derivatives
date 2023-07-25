@@ -1,16 +1,11 @@
 <?php
-namespace Carpenstar\ByBitAPI\Derivatives\MarketData\Kline\Response;
+namespace Carpenstar\ByBitAPI\Derivatives\MarketData\IndexPriceKline\Response;
 
 use Carpenstar\ByBitAPI\Core\Helpers\DateTimeHelper;
 use Carpenstar\ByBitAPI\Core\Objects\AbstractResponse;
-use Carpenstar\ByBitAPI\Derivatives\MarketData\Kline\Interfaces\IKlineDto;
+use Carpenstar\ByBitAPI\Derivatives\MarketData\IndexPriceKline\Interfaces\IIndexPriceKlineResponse;
 
-
-<<<<<<<< HEAD:src/Derivatives/MarketData/Kline/Response/KlineResponse.php
-class KlineResponse extends ResponseEntity implements IKlineDto
-========
-class KlineAbstractResponse extends AbstractResponse implements IKlineDto
->>>>>>>> 4cd7e07 (Version v.3.0.0):src/Derivatives/MarketData/Kline/Response/KlineAbstractResponse.php
+class IndexPriceKlineResponse extends AbstractResponse implements IIndexPriceKlineResponse
 {
     /**
      * @var \DateTime $start
@@ -37,16 +32,6 @@ class KlineAbstractResponse extends AbstractResponse implements IKlineDto
      */
     private float $close;
 
-    /**
-     * @var float $volume
-     */
-    private float $volume;
-
-    /**
-     * @var float $turnover
-     */
-    private float $turnover;
-
     public function __construct(array $data)
     {
         $this
@@ -54,18 +39,16 @@ class KlineAbstractResponse extends AbstractResponse implements IKlineDto
             ->setOpen($data[1])
             ->setHigh($data[2])
             ->setLow($data[3])
-            ->setClose($data[4])
-            ->setVolume($data[5])
-            ->setTurnover($data[6]);
+            ->setClose($data[4]);
     }
 
     /**
      * @param int $start
-<<<<<<<< HEAD:src/Derivatives/MarketData/Kline/Response/KlineResponse.php
-     * @return KlineResponse
+<<<<<<<< HEAD:src/Derivatives/MarketData/IndexPriceKline/Response/IndexPriceKlineResponse.php
+     * @return IndexPriceKlineResponse
 ========
-     * @return KlineAbstractResponse
->>>>>>>> 4cd7e07 (Version v.3.0.0):src/Derivatives/MarketData/Kline/Response/KlineAbstractResponse.php
+     * @return IndexPriceKlineAbstractResponse
+>>>>>>>> 4cd7e07 (Version v.3.0.0):src/Derivatives/MarketData/IndexPriceKline/Response/IndexPriceKlineAbstractResponse.php
      */
     public function setStart(int $start): self
     {
@@ -151,49 +134,5 @@ class KlineAbstractResponse extends AbstractResponse implements IKlineDto
     public function getClose(): float
     {
         return $this->close;
-    }
-
-    /**
-     * @param float $volume
-<<<<<<<< HEAD:src/Derivatives/MarketData/Kline/Response/KlineResponse.php
-     * @return KlineResponse
-========
-     * @return KlineAbstractResponse
->>>>>>>> 4cd7e07 (Version v.3.0.0):src/Derivatives/MarketData/Kline/Response/KlineAbstractResponse.php
-     */
-    private function setVolume(float $volume): self
-    {
-        $this->volume = $volume;
-        return $this;
-    }
-
-    /**
-     * @return float
-     */
-    public function getVolume(): float
-    {
-        return $this->volume;
-    }
-
-    /**
-     * @param float $turnover
-<<<<<<<< HEAD:src/Derivatives/MarketData/Kline/Response/KlineResponse.php
-     * @return KlineResponse
-========
-     * @return KlineAbstractResponse
->>>>>>>> 4cd7e07 (Version v.3.0.0):src/Derivatives/MarketData/Kline/Response/KlineAbstractResponse.php
-     */
-    public function setTurnover(float $turnover): self
-    {
-        $this->turnover = $turnover;
-        return $this;
-    }
-
-    /**
-     * @return float
-     */
-    public function getTurnover(): float
-    {
-        return $this->turnover;
     }
 }

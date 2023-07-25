@@ -8,11 +8,7 @@ use Carpenstar\ByBitAPI\Core\Objects\AbstractResponse;
 use Carpenstar\ByBitAPI\Derivatives\MarketData\InstrumentInfo\Interfaces\IInstrumentInfoResponse;
 use DateTime;
 
-<<<<<<<< HEAD:src/Derivatives/MarketData/InstrumentInfo/Response/InstrumentInfoResponse.php
-class InstrumentInfoResponse extends ResponseEntity implements IInstrumentInfoResponse
-========
-class InstrumentInfoAbstractResponse extends AbstractResponse implements IInstrumentInfoResponse
->>>>>>>> 4cd7e07 (Version v.3.0.0):src/Derivatives/MarketData/InstrumentInfo/Response/InstrumentInfoAbstractResponse.php
+class InstrumentInfoResponse extends AbstractResponse implements IInstrumentInfoResponse
 {
     /**
      * Derivatives products category. Keeps empty string `""` when `category` is not passed
@@ -109,31 +105,19 @@ class InstrumentInfoAbstractResponse extends AbstractResponse implements IInstru
 
         if (!empty($data['priceFilter'])) {
             array_map(function ($priceFilter) use ($priceFilterCollection) {
-<<<<<<<< HEAD:src/Derivatives/MarketData/InstrumentInfo/Response/InstrumentInfoResponse.php
                 $priceFilterCollection->push(ResponseBuilder::make(PriceFilterItemResponse::class, $priceFilter));
-========
-                $priceFilterCollection->push(ResponseBuilder::make(PriceFilterItemAbstractResponse::class, $priceFilter));
->>>>>>>> 4cd7e07 (Version v.3.0.0):src/Derivatives/MarketData/InstrumentInfo/Response/InstrumentInfoAbstractResponse.php
             }, [$data['priceFilter']]);
         }
 
         if (!empty($data['leverageFilter'])) {
             array_map(function ($leverageFilterItem) use ($leverageFilterCollection) {
-<<<<<<<< HEAD:src/Derivatives/MarketData/InstrumentInfo/Response/InstrumentInfoResponse.php
                 $leverageFilterCollection->push(ResponseBuilder::make(LeverageFilterItemResponse::class, $leverageFilterItem));
-========
-                $leverageFilterCollection->push(ResponseBuilder::make(LeverageFilterItemAbstractResponse::class, $leverageFilterItem));
->>>>>>>> 4cd7e07 (Version v.3.0.0):src/Derivatives/MarketData/InstrumentInfo/Response/InstrumentInfoAbstractResponse.php
             }, [$data['leverageFilter']]);
         }
 
         if (!empty($data['lotSizeFilter'])) {
             array_map(function ($lotSizeFilterItem) use ($lotSizeFilterCollection) {
-<<<<<<<< HEAD:src/Derivatives/MarketData/InstrumentInfo/Response/InstrumentInfoResponse.php
                 $lotSizeFilterCollection->push(ResponseBuilder::make(LotSizeFilterItemResponse::class, $lotSizeFilterItem));
-========
-                $lotSizeFilterCollection->push(ResponseBuilder::make(LotSizeFilterItemAbstractResponse::class, $lotSizeFilterItem));
->>>>>>>> 4cd7e07 (Version v.3.0.0):src/Derivatives/MarketData/InstrumentInfo/Response/InstrumentInfoAbstractResponse.php
             }, [$data['lotSizeFilter']]);
         }
 

@@ -3,8 +3,8 @@ namespace Carpenstar\ByBitAPI\Derivatives\MarketData\InstrumentInfo;
 
 use Carpenstar\ByBitAPI\Core\Endpoints\PublicEndpoint;
 use Carpenstar\ByBitAPI\Core\Interfaces\IGetEndpointInterface;
-use Carpenstar\ByBitAPI\Derivatives\MarketData\InstrumentInfo\Response\InstrumentInfoAbstractResponse;
 use Carpenstar\ByBitAPI\Derivatives\MarketData\InstrumentInfo\Request\InstrumentInfoRequestOptions;
+use Carpenstar\ByBitAPI\Derivatives\MarketData\InstrumentInfo\Response\InstrumentInfoResponse;
 
 /**
  * Get launched instruments information.
@@ -27,6 +27,6 @@ class InstrumentInfo extends PublicEndpoint implements IGetEndpointInterface
      */
     protected function getResponseClassname(): string
     {
-        return InstrumentInfoAbstractResponse::class;
+        return InstrumentInfoResponse::class;
     }
 }

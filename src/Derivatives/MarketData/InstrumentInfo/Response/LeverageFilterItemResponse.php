@@ -4,11 +4,7 @@ namespace Carpenstar\ByBitAPI\Derivatives\MarketData\InstrumentInfo\Response;
 use Carpenstar\ByBitAPI\Core\Objects\AbstractResponse;
 use Carpenstar\ByBitAPI\Derivatives\MarketData\InstrumentInfo\Interfaces\ILeverageFilterItem;
 
-<<<<<<<< HEAD:src/Derivatives/MarketData/InstrumentInfo/Response/LeverageFilterItemResponse.php
-class LeverageFilterItemResponse extends ResponseEntity implements  ILeverageFilterItem
-========
-class LeverageFilterItemAbstractResponse extends AbstractResponse implements  ILeverageFilterItem
->>>>>>>> 4cd7e07 (Version v.3.0.0):src/Derivatives/MarketData/InstrumentInfo/Response/LeverageFilterItemAbstractResponse.php
+class LeverageFilterItemResponse extends AbstractResponse implements  ILeverageFilterItem
 {
     /**
      * Min. leverage

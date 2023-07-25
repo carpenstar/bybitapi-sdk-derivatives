@@ -5,11 +5,7 @@ use Carpenstar\ByBitAPI\Core\Helpers\DateTimeHelper;
 use Carpenstar\ByBitAPI\Core\Objects\AbstractResponse;
 use Carpenstar\ByBitAPI\Derivatives\MarketData\PublicTradingHistory\Interfaces\IPublicTradingHistoryResponse;
 
-<<<<<<<< HEAD:src/Derivatives/MarketData/PublicTradingHistory/Response/PublicTradingHistoryResponse.php
-class PublicTradingHistoryResponse extends ResponseEntity implements IPublicTradingHistoryResponse
-========
-class PublicTradingHistoryAbstractResponse extends AbstractResponse implements IPublicTradingHistoryResponse
->>>>>>>> 4cd7e07 (Version v.3.0.0):src/Derivatives/MarketData/PublicTradingHistory/Response/PublicTradingHistoryAbstractResponse.php
+class PublicTradingHistoryResponse extends AbstractResponse implements IPublicTradingHistoryResponse
 {
     /**
      * Execution id

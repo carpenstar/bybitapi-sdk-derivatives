@@ -4,11 +4,7 @@ namespace Carpenstar\ByBitAPI\Derivatives\MarketData\RiskLimit\Response;
 use Carpenstar\ByBitAPI\Core\Objects\AbstractResponse;
 use Carpenstar\ByBitAPI\Derivatives\MarketData\RiskLimit\Interfaces\IRiskLimitsResponse;
 
-<<<<<<<< HEAD:src/Derivatives/MarketData/RiskLimit/Response/RiskLimitsResponse.php
-class RiskLimitsResponse extends ResponseEntity implements IRiskLimitsResponse
-========
-class RiskLimitsAbstractResponse extends AbstractResponse implements IRiskLimitsResponse
->>>>>>>> 4cd7e07 (Version v.3.0.0):src/Derivatives/MarketData/RiskLimit/Response/RiskLimitsAbstractResponse.php
+class RiskLimitsResponse extends AbstractResponse implements IRiskLimitsResponse
 {
     /**
      * Risk id

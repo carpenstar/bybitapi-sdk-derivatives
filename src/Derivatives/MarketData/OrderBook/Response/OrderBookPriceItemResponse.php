@@ -3,11 +3,7 @@ namespace Carpenstar\ByBitAPI\Derivatives\MarketData\OrderBook\Response;
 
 use Carpenstar\ByBitAPI\Core\Objects\AbstractResponse;
 
-<<<<<<<< HEAD:src/Derivatives/MarketData/OrderBook/Response/OrderBookPriceItemResponse.php
-class OrderBookPriceItemResponse extends ResponseEntity
-========
-class OrderBookPriceItemAbstractResponse extends AbstractResponse
->>>>>>>> 4cd7e07 (Version v.3.0.0):src/Derivatives/MarketData/OrderBook/Response/OrderBookPriceItemAbstractResponse.php
+class OrderBookPriceItemResponse extends AbstractResponse
 {
     /**
      * @var float $price

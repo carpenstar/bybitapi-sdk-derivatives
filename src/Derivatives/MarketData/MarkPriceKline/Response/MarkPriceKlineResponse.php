@@ -5,11 +5,7 @@ use Carpenstar\ByBitAPI\Core\Helpers\DateTimeHelper;
 use Carpenstar\ByBitAPI\Core\Objects\AbstractResponse;
 use Carpenstar\ByBitAPI\Derivatives\MarketData\MarkPriceKline\Interfaces\IMarkPriceKline;
 
-<<<<<<<< HEAD:src/Derivatives/MarketData/MarkPriceKline/Response/MarkPriceKlineResponse.php
-class MarkPriceKlineResponse extends ResponseEntity implements IMarkPriceKline
-========
-class MarkPriceKlineAbstractResponse extends AbstractResponse implements IMarkPriceKline
->>>>>>>> 4cd7e07 (Version v.3.0.0):src/Derivatives/MarketData/MarkPriceKline/Response/MarkPriceKlineAbstractResponse.php
+class MarkPriceKlineResponse extends AbstractResponse implements IMarkPriceKline
 {
     /**
      * @var \DateTime $start

@@ -5,11 +5,8 @@ namespace Carpenstar\ByBitAPI\Derivatives\MarketData\TickerInfo\Response;
 use Carpenstar\ByBitAPI\Core\Helpers\DateTimeHelper;
 use Carpenstar\ByBitAPI\Core\Objects\AbstractResponse;
 
-<<<<<<<< HEAD:src/Derivatives/MarketData/TickerInfo/Response/TickerInfoResponse.php
-class TickerInfoResponse extends ResponseEntity
-========
-class TickerInfoAbstractResponse extends AbstractResponse
->>>>>>>> 4cd7e07 (Version v.3.0.0):src/Derivatives/MarketData/TickerInfo/Response/TickerInfoAbstractResponse.php
+
+class TickerInfoResponse extends AbstractResponse
 {
     /**
      * Symbol name

@@ -5,11 +5,7 @@ use Carpenstar\ByBitAPI\Core\Helpers\DateTimeHelper;
 use Carpenstar\ByBitAPI\Core\Objects\AbstractResponse;
 use Carpenstar\ByBitAPI\Derivatives\MarketData\FundingRateHistory\Interfaces\IFundingRateHistoryResponse;
 
-<<<<<<<< HEAD:src/Derivatives/MarketData/FundingRateHistory/Response/FundingRateHistoryResponse.php
-class FundingRateHistoryResponse extends ResponseEntity implements IFundingRateHistoryResponse
-========
-class FundingRateHistoryAbstractResponse extends AbstractResponse implements IFundingRateHistoryResponse
->>>>>>>> 4cd7e07 (Version v.3.0.0):src/Derivatives/MarketData/FundingRateHistory/Response/FundingRateHistoryAbstractResponse.php
+class FundingRateHistoryResponse extends AbstractResponse implements IFundingRateHistoryResponse
 {
     /**
      * Symbol name

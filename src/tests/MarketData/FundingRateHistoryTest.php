@@ -4,8 +4,8 @@ namespace Carpenstar\ByBitAPI\Tests\Derivatives\MarketData;
 use Carpenstar\ByBitAPI\Core\Enums\EnumOutputMode;
 use Carpenstar\ByBitAPI\Core\Objects\Collection\EntityCollection;
 use Carpenstar\ByBitAPI\Core\Response\CurlResponse;
+use Carpenstar\ByBitAPI\Derivatives\MarketData\FundingRateHistory\Response\FundingRateHistoryResponse;
 use PHPUnit\Framework\TestCase;
-use Carpenstar\ByBitAPI\Derivatives\MarketData\FundingRateHistory\Response\FundingRateHistoryAbstractResponse;
 
 class FundingRateHistoryTest extends TestCase
 {
@@ -14,7 +14,7 @@ class FundingRateHistoryTest extends TestCase
     public function testFundingRateHistoryResponse()
     {
         $fundingRateHistoryData = (new CurlResponse(self::$fundingRateHistory))
-            ->bindEntity(FundingRateHistoryAbstractResponse::class)
+            ->bindEntity(FundingRateHistoryResponse::class)
             ->handle(EnumOutputMode::MODE_ENTITY);
 
         $this->assertInstanceOf(EntityCollection::class, $fundingRateHistoryData->getBody());
@@ -23,7 +23,7 @@ class FundingRateHistoryTest extends TestCase
 
         /** @var FundingRateHistoryAbstractResponse $historyItem */
         while(!empty($historyItem = $fundingRateHistoryData->getBody()->fetch())) {
-            $this->assertInstanceOf(FundingRateHistoryAbstractResponse::class, $historyItem);
+            $this->assertInstanceOf(FundingRateHistoryResponse::class, $historyItem);
             $this->assertIsString($historyItem->getSymbol());
             $this->assertIsFloat($historyItem->getFundingRate());
             $this->assertInstanceOf(\DateTime::class, $historyItem->getFundingRateTimestamp());
