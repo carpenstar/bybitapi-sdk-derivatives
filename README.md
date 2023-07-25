@@ -10,6 +10,29 @@
 
 **Разработка интеграции еще не закончена, поэтому работоспособность (как полностью, так и отдельных компонентов) не гарантируется.**
 
+## Эндпоинты:
+* MARKET DATA
+  - [Funding Rate History](https://github.com/carpenstar/bybitapi-sdk-derivatives#market-data---funding-rate-history)
+  - [Index Price Kline](https://github.com/carpenstar/bybitapi-sdk-derivatives#market-data---index-price-kline)
+  - [Instrument Info](https://github.com/carpenstar/bybitapi-sdk-derivatives#market-data---instrument-info)
+  - [Kline](https://github.com/carpenstar/bybitapi-sdk-derivatives#market-data---kline)
+  - [Mark Price Kline](https://github.com/carpenstar/bybitapi-sdk-derivatives#market-data---mark-price-kline)
+  - [Open Interest](https://github.com/carpenstar/bybitapi-sdk-derivatives#market-data---open-interest)
+  - [Order Book](https://github.com/carpenstar/bybitapi-sdk-derivatives#market-data---order-book)
+  - [Public Trading History](https://github.com/carpenstar/bybitapi-sdk-derivatives#market-data---public-trading-history)
+  - [Risk Limit](https://github.com/carpenstar/bybitapi-sdk-derivatives#market-data---risk-limit)
+  - [Ticker Info](https://github.com/carpenstar/bybitapi-sdk-derivatives#market-data---ticker-info)
+* CONTRACT
+  * ACCOUNT
+    - [Get Trading Fee Rate](https://github.com/carpenstar/bybitapi-sdk-derivatives#contract---account---get-trading-fee-rate)
+    - [Wallet Balance](https://github.com/carpenstar/bybitapi-sdk-derivatives#contract---account---wallet-balance)
+  * ORDER
+    - [Place Order](https://github.com/carpenstar/bybitapi-sdk-derivatives#contract---account---order---place-order)
+
+## Требования
+
+- PHP >= 7.4
+
 ## Установка
 
 ```sh 
