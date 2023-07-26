@@ -1,20 +1,16 @@
 <?php
-namespace Carpenstar\ByBitAPI\Derivatives\MarketData\IndexPriceKline\Request;
+namespace Carpenstar\ByBitAPI\Derivatives\MarketData\OpenInterest\Request;
 
-use Carpenstar\ByBitAPI\Core\Enums\DerivativesCategoryEnum;
-use Carpenstar\ByBitAPI\Core\Enums\EnumDerivativesCategory;
-use Carpenstar\ByBitAPI\Core\Enums\EnumIntervals;
-use Carpenstar\ByBitAPI\Core\Enums\IntervalEnum;
 use Carpenstar\ByBitAPI\Core\Helpers\DateTimeHelper;
 use Carpenstar\ByBitAPI\Core\Objects\AbstractParameters;
 
-class IndexPriceKlineRequestOptions extends AbstractParameters
+class OpenInterestRequest extends AbstractParameters
 {
     /**
-     * Product type. linear,inverse. Default: linear, but in the response category shows
+     *
      * @var string $category
      */
-    protected string $category = EnumDerivativesCategory::CATEGORY_PRODUCT_LINEAR;
+    protected string $category = "linear";
 
     /**
      * Symbol name
@@ -23,41 +19,45 @@ class IndexPriceKlineRequestOptions extends AbstractParameters
     protected string $symbol;
 
     /**
-     * Kline interval. 1 3 5 15 30 60 120 240 360 720 D M W
+     * Interval. 5min 15min 30min 1h 4h 1d
      * @var string $interval
      */
-    protected string $interval = EnumIntervals::MINUTE1;
+    protected string $interval;
 
     /**
-     * The start timestamp (ms)
-     * @var string $start
+     * The start timestamp
+     * @var \DateTime $startTime
      */
-    protected string $start;
+    protected \DateTime $startTime;
 
     /**
-     * The end timestamp (ms)
-     * @var string $end
+     * The end timestamp
+     * @var \DateTime $endTime
      */
-    protected string $end;
+    protected \DateTime $endTime;
 
     /**
-     * Limit for data size per page. [1, 200]. Default: 200
+     * Limit for data size per page. [1, 200]. Default: 50
      * @var int $limit
      */
-    protected int $limit = 200;
+    protected int $limit = 50;
+
+    /**
+     * Cursor. Used for pagination
+     * @var string $cursor
+     */
+    protected string $cursor;
 
     public function __construct()
     {
         $this
             ->setRequiredField('symbol')
-            ->setRequiredField('interval')
-            ->setRequiredField('start')
-            ->setRequiredField('end');
+            ->setRequiredField('interval');
     }
 
     /**
      * @param string $category
-     * @return $this
+     * @return OpenInterestRequest
      */
     public function setCategory(string $category): self
     {
@@ -75,7 +75,7 @@ class IndexPriceKlineRequestOptions extends AbstractParameters
 
     /**
      * @param string $symbol
-     * @return IndexPriceKlineRequestOptions
+     * @return OpenInterestRequest
      */
     public function setSymbol(string $symbol): self
     {
@@ -93,7 +93,7 @@ class IndexPriceKlineRequestOptions extends AbstractParameters
 
     /**
      * @param string $interval
-     * @return IndexPriceKlineRequestOptions
+     * @return OpenInterestRequest
      */
     public function setInterval(string $interval): self
     {
@@ -110,44 +110,44 @@ class IndexPriceKlineRequestOptions extends AbstractParameters
     }
 
     /**
-     * @param string $start
-     * @return IndexPriceKlineRequestOptions
+     * @param int $startTime
+     * @return OpenInterestRequest
      */
-    public function setStart(string $start): self
+    public function setStartTime(int $startTime): self
     {
-        $this->start = DateTimeHelper::makeTimestampFromDateString($start);
+        $this->startTime = DateTimeHelper::makeFromTimestamp($startTime);
         return $this;
     }
 
     /**
-     * @return string
+     * @return \DateTime
      */
-    public function getStart(): string
+    public function getStartTime(): \DateTime
     {
-        return $this->start;
+        return $this->startTime;
     }
 
     /**
-     * @param string $end
-     * @return IndexPriceKlineRequestOptions
+     * @param int $endTime
+     * @return OpenInterestRequest
      */
-    public function setEnd(string $end): self
+    public function setEndTime(int $endTime): self
     {
-        $this->end = DateTimeHelper::makeTimestampFromDateString($end);
+        $this->endTime = DateTimeHelper::makeFromTimestamp($endTime);
         return $this;
     }
 
     /**
-     * @return string
+     * @return \DateTime
      */
-    public function getEnd(): string
+    public function getEndTime(): \DateTime
     {
-        return $this->end;
+        return $this->endTime;
     }
 
     /**
      * @param int $limit
-     * @return IndexPriceKlineRequestOptions
+     * @return OpenInterestRequest
      */
     public function setLimit(int $limit): self
     {
@@ -161,5 +161,23 @@ class IndexPriceKlineRequestOptions extends AbstractParameters
     public function getLimit(): int
     {
         return $this->limit;
+    }
+
+    /**
+     * @param string $cursor
+     * @return OpenInterestRequest
+     */
+    public function setCursor(string $cursor): self
+    {
+        $this->cursor = $cursor;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getCursor(): string
+    {
+        return $this->cursor;
     }
 }

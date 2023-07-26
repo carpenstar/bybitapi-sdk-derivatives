@@ -3,7 +3,7 @@ namespace Carpenstar\ByBitAPI\Derivatives\MarketData\TickerInfo\Request;
 
 use Carpenstar\ByBitAPI\Core\Objects\AbstractParameters;
 
-class TickerInfoRequestOptions extends AbstractParameters
+class TickerInfoRequest extends AbstractParameters
 {
     /**
      * Only linear category support at now
@@ -25,7 +25,7 @@ class TickerInfoRequestOptions extends AbstractParameters
 
     /**
      * @param string $symbol
-     * @return TickerInfoRequestOptions
+     * @return TickerInfoRequest
      */
     public function setSymbol(string $symbol): self
     {

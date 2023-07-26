@@ -1,9 +1,9 @@
 <?php
 namespace Carpenstar\ByBitAPI\Derivatives\Contract\Account\GetTradingFeeRate\Response;
 
-use Carpenstar\ByBitAPI\Core\Objects\ResponseEntity;
+use Carpenstar\ByBitAPI\Core\Objects\AbstractResponse;
 
-class GetTradingFeeRateResponse extends ResponseEntity
+class GetTradingFeeRateResponse extends AbstractResponse
 {
     /**
      * Symbol name

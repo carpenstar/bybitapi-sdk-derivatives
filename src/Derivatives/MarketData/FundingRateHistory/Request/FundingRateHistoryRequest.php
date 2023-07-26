@@ -4,7 +4,7 @@ namespace Carpenstar\ByBitAPI\Derivatives\MarketData\FundingRateHistory\Request;
 use Carpenstar\ByBitAPI\Core\Helpers\DateTimeHelper;
 use Carpenstar\ByBitAPI\Core\Objects\AbstractParameters;
 
-class FundingRateHistoryRequestOptions extends AbstractParameters
+class FundingRateHistoryRequest extends AbstractParameters
 {
     /**
      * Product type. linear
@@ -43,7 +43,7 @@ class FundingRateHistoryRequestOptions extends AbstractParameters
 
     /**
      * @param string $category
-     * @return FundingRateHistoryRequestOptions
+     * @return FundingRateHistoryRequest
      */
     public function setCategory(string $category): self
     {
@@ -61,7 +61,7 @@ class FundingRateHistoryRequestOptions extends AbstractParameters
 
     /**
      * @param string $symbol
-     * @return FundingRateHistoryRequestOptions
+     * @return FundingRateHistoryRequest
      */
     public function setSymbol(string $symbol): self
     {
@@ -79,7 +79,7 @@ class FundingRateHistoryRequestOptions extends AbstractParameters
 
     /**
      * @param int $start
-     * @return FundingRateHistoryRequestOptions
+     * @return FundingRateHistoryRequest
      */
     public function setStart(int $start): self
     {
@@ -97,7 +97,7 @@ class FundingRateHistoryRequestOptions extends AbstractParameters
 
     /**
      * @param int $end
-     * @return FundingRateHistoryRequestOptions
+     * @return FundingRateHistoryRequest
      */
     public function setEnd(int $end): self
     {
@@ -115,7 +115,7 @@ class FundingRateHistoryRequestOptions extends AbstractParameters
 
     /**
      * @param int $limit
-     * @return FundingRateHistoryRequestOptions
+     * @return FundingRateHistoryRequest
      */
     public function setLimit(int $limit): self
     {

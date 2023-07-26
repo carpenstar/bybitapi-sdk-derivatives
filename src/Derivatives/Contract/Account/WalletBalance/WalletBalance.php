@@ -3,8 +3,8 @@ namespace Carpenstar\ByBitAPI\Derivatives\Contract\Account\WalletBalance;
 
 use Carpenstar\ByBitAPI\Core\Endpoints\PrivateEndpoint;
 use Carpenstar\ByBitAPI\Core\Interfaces\IGetEndpointInterface;
-use Carpenstar\ByBitAPI\Derivatives\Contract\Account\WalletBalance\Response\WalletBalanceAbstractResponse;
-use Carpenstar\ByBitAPI\Derivatives\Contract\Account\WalletBalance\Request\WalletBalanceRequestOptions;
+use Carpenstar\ByBitAPI\Derivatives\Contract\Account\WalletBalance\Response\WalletBalanceResponse;
+use Carpenstar\ByBitAPI\Derivatives\Contract\Account\WalletBalance\Request\WalletBalanceRequest;
 
 class WalletBalance extends PrivateEndpoint implements IGetEndpointInterface
 {
@@ -15,11 +15,11 @@ class WalletBalance extends PrivateEndpoint implements IGetEndpointInterface
 
     protected function getRequestClassname(): string
     {
-        return WalletBalanceRequestOptions::class;
+        return WalletBalanceRequest::class;
     }
 
     protected function getResponseClassname(): string
     {
-        return WalletBalanceAbstractResponse::class;
+        return WalletBalanceResponse::class;
     }
 }

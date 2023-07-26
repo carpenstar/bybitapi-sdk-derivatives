@@ -3,7 +3,7 @@ namespace Carpenstar\ByBitAPI\Derivatives\MarketData\RiskLimit\Request;
 
 use Carpenstar\ByBitAPI\Core\Objects\AbstractParameters;
 
-class RiskLimitsRequestOptions extends AbstractParameters
+class RiskLimitsRequest extends AbstractParameters
 {
     /**
      * Product type. linear

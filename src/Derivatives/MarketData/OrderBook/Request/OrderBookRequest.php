@@ -3,7 +3,7 @@ namespace Carpenstar\ByBitAPI\Derivatives\MarketData\OrderBook\Request;
 
 use Carpenstar\ByBitAPI\Core\Objects\AbstractParameters;
 
-class OrderBookRequestOptions extends AbstractParameters
+class OrderBookRequest extends AbstractParameters
 {
     /**
      * @var string $category
@@ -27,7 +27,7 @@ class OrderBookRequestOptions extends AbstractParameters
 
     /**
      * @param string $category
-     * @return OrderBookRequestOptions
+     * @return OrderBookRequest
      */
     public function setCategory(string $category): self
     {
@@ -45,7 +45,7 @@ class OrderBookRequestOptions extends AbstractParameters
 
     /**
      * @param string $symbol
-     * @return OrderBookRequestOptions
+     * @return OrderBookRequest
      */
     public function setSymbol(string $symbol): self
     {
@@ -63,7 +63,7 @@ class OrderBookRequestOptions extends AbstractParameters
 
     /**
      * @param int $limit
-     * @return OrderBookRequestOptions
+     * @return OrderBookRequest
      */
     public function setLimit(int $limit): self
     {
