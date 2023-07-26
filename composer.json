@@ -10,13 +10,11 @@
   ],
   "require": {
     "php": ">=7.4",
-    "carpenstar/bybitapi-sdk-core": "dev-master"
+    "carpenstar/bybitapi-sdk-core": "3.0.0"
   },
   "require-dev": {
     "phpunit/phpunit": "^9.5"
   },
-  "minimum-stability": "dev",
-  "prefer-stable": true,
   "autoload": {
     "psr-4": {
       "Carpenstar\\ByBitAPI\\Derivatives\\": "src/Derivatives",
