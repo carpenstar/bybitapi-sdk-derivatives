@@ -3,7 +3,7 @@ namespace Carpenstar\ByBitAPI\Derivatives\Contract\Account\WalletBalance\Request
 
 use Carpenstar\ByBitAPI\Core\Objects\AbstractParameters;
 
-class WalletBalanceRequestOptions extends AbstractParameters
+class WalletBalanceRequest extends AbstractParameters
 {
     protected string $coin;
 

@@ -5,7 +5,7 @@
 
 # ByBitAPI - derivatives-trading package
 
-**Дисклэймер: это неофициальный SDK для подключения бирже ByBit.   
+**Дисклэймер: это неофициальный SDK для интеграции с биржей ByBit.   
 Поддержка функционала осуществляется только в пределах зоны отвественности кода и при возможности со стороны разработчика**
 
 **Разработка интеграции еще не закончена, поэтому работоспособность (как полностью, так и отдельных компонентов) не гарантируется.**
@@ -49,9 +49,9 @@ composer require carpenstar/bybitapi-sdk-derivatives
 
 
 ```php
-    new \Carpenstar\ByBitAPI\Derivatives\MarketData\FundingRateHistory\Options\FundingRateHistoryOptions();
+    new \Carpenstar\ByBitAPI\Derivatives\MarketData\FundingRateHistory\Request\FundingRateHistoryRequest();
     
-    $options = (new FundingRateHistoryOptions())
+    $options = (new FundingRateHistoryRequest())
         ->setSymbol("BTCUSDT") // Обязательный параметр. Строка с тикером торговой пары.
         ->setStart("2023-05-10 10:00:00") // Необязательный параметр. Строка даты/времени ОТ которого берется срез данных 
         ->setEnd("2023-05-10 11:00:00"); // Необязательный параметр. Строка даты/времени ДО которого берется срез данных
@@ -71,7 +71,7 @@ composer require carpenstar/bybitapi-sdk-derivatives
 ```php
     \Carpenstar\ByBitAPI\Derivatives\MarketData\FundingRateHistory\Interfaces\IFundingRateHistoryResponse::class
 
-    interface FundingRateHistoryDto 
+    interface FundingRateHistoryResponse 
     {
         public function getSymbol(): string; // Символ торговой пары
         public function getFundingRate(): float; // Ставка финансирования
@@ -83,14 +83,14 @@ composer require carpenstar/bybitapi-sdk-derivatives
 ```php
 use Carpenstar\ByBitAPI\BybitAPI;
 use Carpenstar\ByBitAPI\Derivatives\MarketData\FundingRateHistory\FundingRateHistory;
-use Carpenstar\ByBitAPI\Derivatives\MarketData\FundingRateHistory\Dto\FundingRateHistoryDto;
-use Carpenstar\ByBitAPI\Derivatives\MarketData\FundingRateHistory\Options\FundingRateHistoryOptions;
+use Carpenstar\ByBitAPI\Derivatives\MarketData\FundingRateHistory\Response\FundingRateHistoryResponse;
+use Carpenstar\ByBitAPI\Derivatives\MarketData\FundingRateHistory\Request\FundingRateHistoryRequest;
 
 $bybit = new BybitAPI("https://api-testnet.bybit.com", "apiKey", "secret");
 
-$options = (new FundingRateHistoryOptions())->setSymbol("BTCUSDT")->setLimit(3);
+$options = (new FundingRateHistoryRequest())->setSymbol("BTCUSDT")->setLimit(3);
 
-/** @var FundingRateHistoryDto[] $result */
+/** @var FundingRateHistoryResponse[] $result */
 $result = $bybit->rest(FundingRateHistory::class, $options)->getBody()->all();
 
 foreach ($result as $rateItem) {
@@ -128,9 +128,9 @@ foreach ($result as $rateItem) {
 <details><summary><b>Параметры запроса:</b></summary>
 
 ```php
-    \Carpenstar\ByBitAPI\Derivatives\MarketData\IndexPriceKline\Options\IndexPriceKlineOptions::class
+    \Carpenstar\ByBitAPI\Derivatives\MarketData\IndexPriceKline\Request\IndexPriceKlineRequest::class
     
-    $options = (new IndexPriceKlineOptions())
+    $options = (new IndexPriceKlineRequest())
         ->setSymbol("BTCUSDT") // Обязательный параметр. Строка с тикером торговой пары.
         ->setInterval(1) // Обязательный параметр. Размер тика. Возможные значения: 1 3 5 15 30 60 120 240 360 720 D M W
         ->setStart("2023-05-10 10:00:00") // Обязательный параметр. Строка даты/времени ОТ которого берется срез данных 
@@ -158,19 +158,19 @@ foreach ($result as $rateItem) {
 ```php
 use Carpenstar\ByBitAPI\BybitAPI;
 use Carpenstar\ByBitAPI\Derivatives\MarketData\IndexPriceKline\IndexPriceKline;
-use Carpenstar\ByBitAPI\Derivatives\MarketData\IndexPriceKline\Dto\IndexPriceKlineDto;
-use Carpenstar\ByBitAPI\Derivatives\MarketData\IndexPriceKline\Options\IndexPriceKlineOptions;
+use Carpenstar\ByBitAPI\Derivatives\MarketData\IndexPriceKline\Response\IndexPriceKlineResponse;
+use Carpenstar\ByBitAPI\Derivatives\MarketData\IndexPriceKline\Request\IndexPriceKlineRequest;
 
 $bybit = new BybitAPI("https://api-testnet.bybit.com", "apiKey", "secret");
 
-$options = (new IndexPriceKlineOptions())
+$options = (new IndexPriceKlineRequest())
     ->setSymbol("ETHUSDT")
     ->setInterval(1)
     ->setStart('2023-05-01 10:00:00')
     ->setEnd('2023-05-08 10:00:05')
     ->setLimit(5);
 
-/** @var IndexPriceKlineDto[] $result */
+/** @var IndexPriceKlineResponse[] $result */
 $result = $bybit->rest(IndexPriceKline::class, $options)->getBody()->all();
 
 foreach ($result as $indexPriceKlineItem) {
@@ -227,9 +227,9 @@ foreach ($result as $indexPriceKlineItem) {
 <details><summary><b>Параметры запроса:</b></summary>
 
 ```php
-    \Carpenstar\ByBitAPI\Derivatives\MarketData\InstrumentInfo\Options\InstrumentInfoOptions::class
+    \Carpenstar\ByBitAPI\Derivatives\MarketData\InstrumentInfo\Request\InstrumentInfoRequest::class
     
-    $options = (new InstrumentInfoOptions())
+    $options = (new InstrumentInfoRequest())
     ->setSymbol('BTCUSDT'); // Обязательный параметр. Строка с тикером торговой пары.
 ```
 </details>
@@ -237,7 +237,7 @@ foreach ($result as $indexPriceKlineItem) {
 <details><summary><b>Структура ответа:</b></summary>
 
 ```php
-\Carpenstar\ByBitAPI\Derivatives\MarketData\InstrumentInfo\InstrumentInfoDto::class
+\Carpenstar\ByBitAPI\Derivatives\MarketData\InstrumentInfo\InstrumentInfoResponse::class
     
 interface IInstrumentInfoResponse
 {
@@ -293,17 +293,17 @@ interface IPriceFilterItem
 ```php
 use Carpenstar\ByBitAPI\BybitAPI;
 use Carpenstar\ByBitAPI\Derivatives\MarketData\InstrumentInfo\InstrumentInfo;
-use Carpenstar\ByBitAPI\Derivatives\MarketData\InstrumentInfo\Dto\InstrumentInfoDto;
-use Carpenstar\ByBitAPI\Derivatives\MarketData\InstrumentInfo\Options\InstrumentInfoOptions;
-use Carpenstar\ByBitAPI\Derivatives\MarketData\InstrumentInfo\Dto\LeverageFilterItemDto;
-use Carpenstar\ByBitAPI\Derivatives\MarketData\InstrumentInfo\Dto\PriceFilterItemDto;
-use Carpenstar\ByBitAPI\Derivatives\MarketData\InstrumentInfo\Dto\LotSizeFilterItemDto;
+use Carpenstar\ByBitAPI\Derivatives\MarketData\InstrumentInfo\Response\InstrumentInfoResponse;
+use Carpenstar\ByBitAPI\Derivatives\MarketData\InstrumentInfo\Request\InstrumentInfoRequest;
+use Carpenstar\ByBitAPI\Derivatives\MarketData\InstrumentInfo\Response\LeverageFilterItemResponse;
+use Carpenstar\ByBitAPI\Derivatives\MarketData\InstrumentInfo\Response\PriceFilterItemResponse;
+use Carpenstar\ByBitAPI\Derivatives\MarketData\InstrumentInfo\Response\LotSizeFilterItemResponse;
 
 $bybit = new BybitAPI("https://api-testnet.bybit.com", "apiKey", "secret");
 
-$options = (new InstrumentInfoOptions())->setSymbol('BTCUSDT');
+$options = (new InstrumentInfoRequest())->setSymbol('BTCUSDT');
 
-/** @var InstrumentInfoDto $instrumentInfo */
+/** @var InstrumentInfoResponse $instrumentInfo */
 $instrumentInfo = $bybit->rest(InstrumentInfo::class, $options)->getBody()->fetch();
 
 echo "Symbol: {$instrumentInfo->getSymbol()}" . PHP_EOL;
@@ -319,7 +319,7 @@ echo "Unified Margin Trade: {$instrumentInfo->getUnifiedMarginTrade()}" . PHP_EO
 echo "Funding Interval: {$instrumentInfo->getFundingInterval()}" . PHP_EOL;
 echo "Settle Coin: {$instrumentInfo->getSettleCoin()}" . PHP_EOL;
 echo "Leverage Filter Options:" . PHP_EOL;
-/** @var LeverageFilterItemDto $filterItem */
+/** @var LeverageFilterItemResponse $filterItem */
 foreach ($instrumentInfo->getLeverageFilter()->all() as $filterItem)
 {
     echo " - Minimal Leverage: {$filterItem->getMinLeverage()}" . PHP_EOL;
@@ -327,7 +327,7 @@ foreach ($instrumentInfo->getLeverageFilter()->all() as $filterItem)
     echo " - Leverage Step: {$filterItem->getLeverageStep()}" . PHP_EOL;
 }
 echo "Price Filter Options:" . PHP_EOL;
-/** @var PriceFilterItemDto $filterItem */
+/** @var PriceFilterItemResponse $filterItem */
 foreach ($instrumentInfo->getPriceFilter()->all() as $filterItem)
 {
     echo " - Minimal Price: {$filterItem->getMinPrice()}" . PHP_EOL;
@@ -335,7 +335,7 @@ foreach ($instrumentInfo->getPriceFilter()->all() as $filterItem)
     echo " - Tick Size: {$filterItem->getTickSize()}" . PHP_EOL;
 }
 echo "Lot Size Filter Options:" . PHP_EOL;
-/** @var LotSizeFilterItemDto $filterItem */
+/** @var LotSizeFilterItemResponse $filterItem */
 foreach ($instrumentInfo->getLotSizeFilter()->all() as $filterItem)
 {
     echo " - Minimal Order Qty: {$filterItem->getMinOrderQty()}" . PHP_EOL;
@@ -383,9 +383,9 @@ foreach ($instrumentInfo->getLotSizeFilter()->all() as $filterItem)
 <details><summary><b>Параметры запроса:</b></summary>
 
 ```php
-\Carpenstar\ByBitAPI\Derivatives\MarketData\IndexPriceKline\Options\KlineOptions::class
+\Carpenstar\ByBitAPI\Derivatives\MarketData\IndexPriceKline\Request\KlineRequest::class
 
-$options = (new KlineOptions())
+$options = (new KlineRequest())
     ->setSymbol("BTCUSDT") // Обязательный параметр. Строка с тикером торговой пары.
     ->setInterval(1) // Обязательный параметр. Размер тика. Возможные значения: 1 3 5 15 30 60 120 240 360 720 D M W
     ->setStart("2023-05-10 10:00:00") // Обязательный параметр. Строка даты/времени ОТ которого берется срез данных 
@@ -398,7 +398,7 @@ $options = (new KlineOptions())
 <details><summary><b>Структура ответа:</b></summary>
 
 ```php
-interface IKlineDto
+interface IKlineResponse
 {
     public function getStart(): \DateTime;
     public function getOpen(): float;
@@ -414,13 +414,13 @@ interface IKlineDto
 
 ```php
 use Carpenstar\ByBitAPI\BybitAPI;
-use Carpenstar\ByBitAPI\Derivatives\MarketData\Kline\Options\KlineOptions;
-use Carpenstar\ByBitAPI\Derivatives\MarketData\Kline\Dto\KlineDto;
+use Carpenstar\ByBitAPI\Derivatives\MarketData\Kline\Request\KlineRequest;
+use Carpenstar\ByBitAPI\Derivatives\MarketData\Kline\Response\KlineResponse;
 use Carpenstar\ByBitAPI\Derivatives\MarketData\Kline\Kline;
 
 $bybit = new BybitAPI("https://api-testnet.bybit.com", "apiKey", "secret");
 
-$options = (new KlineOptions())
+$options = (new KlineRequest())
     ->setSymbol("BTCUSDT")
     ->setInterval(5)
     ->setStart("2023-05-01 00:00:00")
@@ -429,7 +429,7 @@ $options = (new KlineOptions())
 
 $klineData = $bybit->rest(Kline::class, $options)->getBody()->all();
 
-/** @var KlineDto $klineItem */
+/** @var KlineResponse $klineItem */
 foreach ($klineData as $klineItem) {
     echo "Start: {$klineItem->getStart()->format('Y-m-d H:i:s')}" . PHP_EOL;
     echo "Open: {$klineItem->getOpen()}" . PHP_EOL;
@@ -485,9 +485,9 @@ foreach ($klineData as $klineItem) {
 <details><summary> <b>Параметры запроса:</b></summary>
 
 ```php
-\Carpenstar\ByBitAPI\Derivatives\MarketData\MarkPriceKline\MarkPriceKlineOptions::class
+\Carpenstar\ByBitAPI\Derivatives\MarketData\MarkPriceKline\MarkPriceKlineRequest::class
 
-$options = (new MarkPriceKlineOptions())
+$options = (new MarkPriceKlineRequest())
     ->setSymbol("BTCUSDT") // Обязательный параметр. Строка с тикером торговой пары.
     ->setInterval(1) // Обязательный параметр. Размер тика. Возможные значения: 1 3 5 15 30 60 120 240 360 720 D M W
     ->setStart("2023-05-10 10:00:00") // Обязательный параметр. Строка даты/времени ОТ которого берется срез данных 
@@ -516,12 +516,12 @@ interface IMarkPriceKline
 ```php
 use Carpenstar\ByBitAPI\BybitAPI;
 use Carpenstar\ByBitAPI\Derivatives\MarketData\MarkPriceKline\MarkPriceKline;
-use Carpenstar\ByBitAPI\Derivatives\MarketData\MarkPriceKline\Options\MarkPriceKlineOptions;
-use Carpenstar\ByBitAPI\Derivatives\MarketData\MarkPriceKline\Dto\MarkPriceKlineDto;
+use Carpenstar\ByBitAPI\Derivatives\MarketData\MarkPriceKline\Request\MarkPriceKlineRequest;
+use Carpenstar\ByBitAPI\Derivatives\MarketData\MarkPriceKline\Response\MarkPriceKlineResponse;
 
 $bybit = new BybitAPI("https://api-testnet.bybit.com", "apiKey", "secret");
 
-$options = (new MarkPriceKlineOptions())
+$options = (new MarkPriceKlineRequest())
     ->setSymbol("APTUSDT")
     ->setInterval('1') // Kline interval. 1 3 5 15 30 60 120 240 360 720 D M W 
     ->setStart('2023-05-08 10:00:00')
@@ -531,7 +531,7 @@ $options = (new MarkPriceKlineOptions())
 $result = $bybit->rest(MarkPriceKline::class, $options)->getBody();
 
 /**
- * @var MarkPriceKlineDto $markPrice
+ * @var MarkPriceKlineResponse $markPrice
  */
 foreach ($result->all() as $markPrice) {
     echo "Start: {$markPrice->getStart()->format("Y-m-d H:i:s")}" . PHP_EOL;
@@ -577,9 +577,9 @@ foreach ($result->all() as $markPrice) {
 <details><summary> <b>Параметры запроса:</b></summary>
 
 ```php
-\Carpenstar\ByBitAPI\Derivatives\MarketData\OpenInterest\Options\OpenInterestOptions::class   
+\Carpenstar\ByBitAPI\Derivatives\MarketData\OpenInterest\Request\OpenInterestRequest::class   
 
-$options = (new OpenInterestOptions())
+$options = (new OpenInterestRequest())
     ->setSymbol("ETHUSDT")
     ->setInterval("1h") 
     ->setLimit(5);
@@ -609,14 +609,14 @@ interface IMarkPriceKline
 ```php
 use Carpenstar\ByBitAPI\BybitAPI;
 use Carpenstar\ByBitAPI\Derivatives\MarketData\OpenInterest\OpenInterest;
-use Carpenstar\ByBitAPI\Derivatives\MarketData\OpenInterest\Dto\OpenInterestDto;
-use Carpenstar\ByBitAPI\Derivatives\MarketData\OpenInterest\Options\OpenInterestOptions;
+use Carpenstar\ByBitAPI\Derivatives\MarketData\OpenInterest\Response\OpenInterestResponse;
+use Carpenstar\ByBitAPI\Derivatives\MarketData\OpenInterest\Request\OpenInterestRequest;
 
 $bybit = new BybitAPI("https://api-testnet.bybit.com", "apiKey", "secret");
 
-$options = (new OpenInterestOptions())->setSymbol("ETHUSDT")->setInterval("1h")->setLimit(5);
+$options = (new OpenInterestRequest())->setSymbol("ETHUSDT")->setInterval("1h")->setLimit(5);
 
-/** @var OpenInterestDto[] $result */
+/** @var OpenInterestResponse[] $result */
 $result = $bybit->rest(OpenInterest::class, $options)->getBody()->all();
 
 foreach ($result as $interestItem) {
@@ -656,9 +656,9 @@ foreach ($result as $interestItem) {
 <details><summary> <b>Параметры запроса:</b></summary>
 
 ```php
-\Carpenstar\ByBitAPI\Derivatives\MarketData\OrderBook\Options\OrderBookOptions::class
+\Carpenstar\ByBitAPI\Derivatives\MarketData\OrderBook\Request\OrderBookRequest::class
 
-$options = (new OrderBookOptions())
+$options = (new OrderBookRequest())
     ->setSymbol("ETHUSDT")
     ->setLimit(25);
 ```
@@ -694,27 +694,27 @@ interface IOrderBookPriceResponse
 ```php
 use Carpenstar\ByBitAPI\BybitAPI;
 use Carpenstar\ByBitAPI\Derivatives\MarketData\OrderBook\OrderBook;
-use Carpenstar\ByBitAPI\Derivatives\MarketData\OrderBook\Options\OrderBookOptions;
-use Carpenstar\ByBitAPI\Derivatives\MarketData\OrderBook\Dto\OrderBookDto;
-use Carpenstar\ByBitAPI\Derivatives\MarketData\OrderBook\Dto\OrderBookPriceDto;
+use Carpenstar\ByBitAPI\Derivatives\MarketData\OrderBook\Request\OrderBookRequest;
+use Carpenstar\ByBitAPI\Derivatives\MarketData\OrderBook\Response\OrderBookResponse;
+use Carpenstar\ByBitAPI\Derivatives\MarketData\OrderBook\Response\OrderBookPriceResponse;
 
 $bybit = new BybitAPI("https://api-testnet.bybit.com", "apiKey", "secret");
 
-$options = (new OrderBookOptions())->setSymbol('APTUSDT')->setLimit(5);
+$options = (new OrderBookRequest())->setSymbol('APTUSDT')->setLimit(5);
 
-/** @var OrderBookDto $result */
+/** @var OrderBookResponse $result */
 $result = $bybit->rest(OrderBook::class, $options)->getBody()->fetch();
 
 echo "Update ID: " . $result->getUpdateId() . PHP_EOL;
 echo "Symbol: " . $result->getSymbol() . PHP_EOL;
 echo "Timestamp: " . $result->getTimestamp()->format("Y-m-d H:i:s") . PHP_EOL;
 echo "BIDs:" . PHP_EOL;
-/** @var OrderBookPriceDto $bid */
+/** @var OrderBookPriceResponse $bid */
 foreach ($result->getBid()->all() as $bid) {
     echo " - Price: {$bid->getPrice()} Quantity: {$bid->getQuantity()}" . PHP_EOL;
 }
 echo "ASKs:" . PHP_EOL;
-/** @var OrderBookPriceDto $ask */
+/** @var OrderBookPriceResponse $ask */
 foreach ($result->getAsk()->all() as $ask) {
     echo " - Price: {$ask->getPrice()} Quantity: {$ask->getQuantity()}" . PHP_EOL;
 }
@@ -750,9 +750,9 @@ foreach ($result->getAsk()->all() as $ask) {
 <details><summary> <b>Параметры запроса:</b></summary>
 
 ```php
-\Carpenstar\ByBitAPI\Derivatives\MarketData\PublicTradingHistory\Options\PublicTradingHistoryOptions::class
+\Carpenstar\ByBitAPI\Derivatives\MarketData\PublicTradingHistory\Request\PublicTradingHistoryRequest::class
 
-$options = (new PublicTradingHistoryOptions())
+$options = (new PublicTradingHistoryRequest())
     ->setSymbol("ETHUSDT")
     ->setLimit(25);
 ```
@@ -780,14 +780,14 @@ interface IPublicTradingHistoryResponse
 ```php
 use Carpenstar\ByBitAPI\BybitAPI;
 use Carpenstar\ByBitAPI\Derivatives\MarketData\PublicTradingHistory\PublicTradingHistory;
-use Carpenstar\ByBitAPI\Derivatives\MarketData\PublicTradingHistory\Dto\PublicTradingHistoryDto;
-use Carpenstar\ByBitAPI\Derivatives\MarketData\PublicTradingHistory\Options\PublicTradingHistoryOptions;
+use Carpenstar\ByBitAPI\Derivatives\MarketData\PublicTradingHistory\Response\PublicTradingHistoryResponse;
+use Carpenstar\ByBitAPI\Derivatives\MarketData\PublicTradingHistory\Request\PublicTradingHistoryRequest;
 
 $bybit = new BybitAPI("https://api-testnet.bybit.com", "apiKey", "secret");
 
-$options = (new PublicTradingHistoryOptions())->setSymbol("BTCUSDT")->setLimit(3);
+$options = (new PublicTradingHistoryRequest())->setSymbol("BTCUSDT")->setLimit(3);
 
-/** @var PublicTradingHistoryDto[] $result */
+/** @var PublicTradingHistoryResponse[] $result */
 $result = $bybit->rest(PublicTradingHistory::class, $options)->getBody()->all();
 
 foreach ($result as $historyItem) {
@@ -841,9 +841,9 @@ foreach ($result as $historyItem) {
 <details><summary> <b>Параметры запроса:</b></summary>
 
 ```php
-\Carpenstar\ByBitAPI\Derivatives\MarketData\RiskLimit\Options\RiskLimitsOptions::class
+\Carpenstar\ByBitAPI\Derivatives\MarketData\RiskLimit\Request\RiskLimitsRequest::class
 
-$options = (new RiskLimitsOptions())
+$options = (new RiskLimitsRequest())
     ->setSymbol("BTCUSDT");
 ```
 </details>
@@ -870,14 +870,14 @@ interface IRiskLimitsResponse
 ```php
 use Carpenstar\ByBitAPI\BybitAPI;
 use Carpenstar\ByBitAPI\Derivatives\MarketData\RiskLimit\RiskLimit;
-use Carpenstar\ByBitAPI\Derivatives\MarketData\RiskLimit\Options\RiskLimitsOptions;
-use Carpenstar\ByBitAPI\Derivatives\MarketData\RiskLimit\Dto\RiskLimitsDto;
+use Carpenstar\ByBitAPI\Derivatives\MarketData\RiskLimit\Request\RiskLimitsRequest;
+use Carpenstar\ByBitAPI\Derivatives\MarketData\RiskLimit\Response\RiskLimitsResponse;
 
 $bybit = new BybitAPI("https://api-testnet.bybit.com", "apiKey", "secret");
 
-$options = (new RiskLimitsOptions())->setSymbol("BTCUSDT");
+$options = (new RiskLimitsRequest())->setSymbol("BTCUSDT");
 
-/** @var RiskLimitsDto[] $result */
+/** @var RiskLimitsResponse[] $result */
 $result = $bybit->rest(RiskLimit::class, $options)->getBody()->all();
 
 foreach ($result as $riskItem) {
@@ -925,16 +925,16 @@ foreach ($result as $riskItem) {
 ---
 
 ### Market Data - Ticker Info
-`Carpenstar\ByBitAPI\Derivatives\MarketData\TickerInfo\Options\TickerInfo::class`  
+`Carpenstar\ByBitAPI\Derivatives\MarketData\TickerInfo\Request\TickerInfo::class`  
 
 <b>[Официальная страница документации](https://bybit-exchange.github.io/docs/derivatives/public/ticker)</b>
 
 <details><summary> <b>Параметры запроса:</b></summary>
 
 ```php
-\Carpenstar\ByBitAPI\Derivatives\MarketData\TickerInfo\Options\TickerInfoOptions::class
+\Carpenstar\ByBitAPI\Derivatives\MarketData\TickerInfo\Request\TickerInfoRequest::class
 
-$options = (new TickerInfoOptions())
+$options = (new TickerInfoRequest())
     ->setSymbol("APTUSDT");
 ```
 </details>
@@ -975,18 +975,18 @@ interface ITickerInfoResponse
 
 ```php
 use Carpenstar\ByBitAPI\BybitAPI;
-use Carpenstar\ByBitAPI\Derivatives\MarketData\TickerInfo\Options\TickerInfoOptions;
-use Carpenstar\ByBitAPI\Derivatives\MarketData\TickerInfo\Dto\TickerInfoDto;
+use Carpenstar\ByBitAPI\Derivatives\MarketData\TickerInfo\Request\TickerInfoRequest;
+use Carpenstar\ByBitAPI\Derivatives\MarketData\TickerInfo\Response\TickerInfoResponse;
 use Carpenstar\ByBitAPI\Derivatives\MarketData\TickerInfo\TickerInfo;
 
 $bybit = new BybitAPI("https://api-testnet.bybit.com", "apiKey", "secret");
 
-$options = (new TickerInfoOptions())
+$options = (new TickerInfoRequest())
     ->setSymbol("APTUSDT");
 
 $tickerInfo = $bybit->rest(TickerInfo::class, $options)->getBody()->fetch();
 
-/** @var TickerInfoDto $tickerInfo */
+/** @var TickerInfoResponse $tickerInfo */
 echo "Symbol: {$tickerInfo->getSymbol()}" . PHP_EOL;
 echo "Bid Price: {$tickerInfo->getBidPrice()}" . PHP_EOL;
 echo "Ask Price: {$tickerInfo->getAskPrice()}" . PHP_EOL;
@@ -1044,12 +1044,12 @@ echo "Delivery Time: {$tickerInfo->getDeliveryTime()->format("Y-m-d H:i:s")}" . 
 ```php
 use Carpenstar\ByBitAPI\BybitAPI;
 use Carpenstar\ByBitAPI\Derivatives\Contract\Account\GetTradingFeeRate\GetTradingFeeRate;
-use Carpenstar\ByBitAPI\Derivatives\Contract\Account\GetTradingFeeRate\Options\GetTradingFeeRateOptions;
-use Carpenstar\ByBitAPI\Derivatives\Contract\Account\GetTradingFeeRate\Dto\GetTradingFeeRateResponse;
+use Carpenstar\ByBitAPI\Derivatives\Contract\Account\GetTradingFeeRate\Request\GetTradingFeeRateRequest;
+use Carpenstar\ByBitAPI\Derivatives\Contract\Account\GetTradingFeeRate\Response\GetTradingFeeRateResponse;
 
 $bybit = new BybitAPI('https://api-testnet.bybit.com',"apiKey", "secret");
 
-$feeRateData = $bybit->rest(GetTradingFeeRate::class, (new GetTradingFeeRateOptions()))->getBody()->all();
+$feeRateData = $bybit->rest(GetTradingFeeRate::class, (new GetTradingFeeRateRequest()))->getBody()->all();
 $feeRateData = array_slice($feeRateData, 0, 3);
 
 /** @var GetTradingFeeRateResponse $feeRate */
@@ -1085,12 +1085,12 @@ foreach ($feeRateData as $feeRate) {
 ```php
 use Carpenstar\ByBitAPI\BybitAPI;
 use Carpenstar\ByBitAPI\Derivatives\Contract\Account\WalletBalance\WalletBalance;
-use Carpenstar\ByBitAPI\Derivatives\Contract\Account\WalletBalance\Options\WalletBalanceOptions;
-use Carpenstar\ByBitAPI\Derivatives\Contract\Account\WalletBalance\Dto\WalletBalanceResponse;
+use Carpenstar\ByBitAPI\Derivatives\Contract\Account\WalletBalance\Request\WalletBalanceRequest;
+use Carpenstar\ByBitAPI\Derivatives\Contract\Account\WalletBalance\Response\WalletBalanceResponse;
 
 $bybit = new BybitAPI('https://api-testnet.bybit.com',"apiKey", "secret");
 
-$walletBalance = $bybit->rest(WalletBalance::class, (new WalletBalanceOptions()))->getBody()->all();
+$walletBalance = $bybit->rest(WalletBalance::class, (new WalletBalanceRequest()))->getBody()->all();
 $walletBalance = array_slice($walletBalance, 0, 2);
 
 /** @var WalletBalanceResponse $feeRate */
@@ -1155,13 +1155,13 @@ foreach ($walletBalance as $feeRate) {
 ```php
 use Carpenstar\ByBitAPI\BybitAPI;
 use Carpenstar\ByBitAPI\Derivatives\Contract\Order\PlaceOrder\PlaceOrder;
-use Carpenstar\ByBitAPI\Derivatives\Contract\Order\PlaceOrder\Request\PlaceOrderRequestOptions;
+use Carpenstar\ByBitAPI\Derivatives\Contract\Order\PlaceOrder\Request\PlaceOrderRequestRequest;
 use Carpenstar\ByBitAPI\Derivatives\Contract\Order\PlaceOrder\Response\PlaceOrderResponse;
 
 $bybit = new BybitAPI('https://api-testnet.bybit.com',"apiKey", "apiSecret");
 
 $order = $bybit->rest(PlaceOrder::class,
-    (new PlaceOrderRequestOptions())
+    (new PlaceOrderRequestRequest())
         ->setSymbol("LTCUSDT")
         ->setSide("Buy")
         ->setOrderType("Market")

@@ -3,7 +3,7 @@ namespace Carpenstar\ByBitAPI\Derivatives\MarketData\InstrumentInfo\Request;
 
 use Carpenstar\ByBitAPI\Core\Objects\AbstractParameters;
 
-class InstrumentInfoRequestOptions extends AbstractParameters
+class InstrumentInfoRequest extends AbstractParameters
 {
     /**
      * Product type. linear only supports at now
@@ -44,7 +44,7 @@ class InstrumentInfoRequestOptions extends AbstractParameters
 
     /**
      * @param string $symbol
-     * @return InstrumentInfoRequestOptions
+     * @return InstrumentInfoRequest
      */
     public function setSymbol(string $symbol): self
     {
@@ -62,7 +62,7 @@ class InstrumentInfoRequestOptions extends AbstractParameters
 
     /**
      * @param string $category
-     * @return InstrumentInfoRequestOptions
+     * @return InstrumentInfoRequest
      */
     public function setCategory(string $category): self
     {
@@ -80,7 +80,7 @@ class InstrumentInfoRequestOptions extends AbstractParameters
 
     /**
      * @param int $limit
-     * @return InstrumentInfoRequestOptions
+     * @return InstrumentInfoRequest
      */
     public function setLimit(int $limit): self
     {
@@ -98,7 +98,7 @@ class InstrumentInfoRequestOptions extends AbstractParameters
 
     /**
      * @param string $cursor
-     * @return InstrumentInfoRequestOptions
+     * @return InstrumentInfoRequest
      */
     public function setCursor(string $cursor): self
     {

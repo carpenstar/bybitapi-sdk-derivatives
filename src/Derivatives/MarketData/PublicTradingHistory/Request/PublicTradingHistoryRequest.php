@@ -3,7 +3,7 @@ namespace Carpenstar\ByBitAPI\Derivatives\MarketData\PublicTradingHistory\Reques
 
 use Carpenstar\ByBitAPI\Core\Objects\AbstractParameters;
 
-class PublicTradingHistoryRequestOptions extends AbstractParameters
+class PublicTradingHistoryRequest extends AbstractParameters
 {
     /**
      * Product type.linear
@@ -38,7 +38,7 @@ class PublicTradingHistoryRequestOptions extends AbstractParameters
 
     /**
      * @param string $symbol
-     * @return PublicTradingHistoryRequestOptions
+     * @return PublicTradingHistoryRequest
      */
     public function setSymbol(string $symbol): self
     {
@@ -56,7 +56,7 @@ class PublicTradingHistoryRequestOptions extends AbstractParameters
 
     /**
      * @param int $limit
-     * @return PublicTradingHistoryRequestOptions
+     * @return PublicTradingHistoryRequest
      */
     public function setLimit(int $limit): self
     {

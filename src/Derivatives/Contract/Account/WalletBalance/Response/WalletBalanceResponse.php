@@ -1,9 +1,9 @@
 <?php
 namespace Carpenstar\ByBitAPI\Derivatives\Contract\Account\WalletBalance\Response;
 
-use Carpenstar\ByBitAPI\Core\Objects\ResponseEntity;
+use Carpenstar\ByBitAPI\Core\Objects\AbstractResponse;
 
-class WalletBalanceResponse extends ResponseEntity
+class WalletBalanceResponse extends AbstractResponse
 {
     private string $coin;
     private float $equity;

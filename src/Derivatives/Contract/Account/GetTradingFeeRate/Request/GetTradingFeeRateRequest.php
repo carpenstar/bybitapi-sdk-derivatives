@@ -3,7 +3,7 @@ namespace Carpenstar\ByBitAPI\Derivatives\Contract\Account\GetTradingFeeRate\Req
 
 use Carpenstar\ByBitAPI\Core\Objects\AbstractParameters;
 
-class GetTradingFeeRateRequestOptions extends AbstractParameters
+class GetTradingFeeRateRequest extends AbstractParameters
 {
     /**
      * Symbol name
@@ -21,7 +21,7 @@ class GetTradingFeeRateRequestOptions extends AbstractParameters
 
     /**
      * @param string $symbol
-     * @return GetTradingFeeRateRequestOptions
+     * @return GetTradingFeeRateRequest
      */
     public function setSymbol(string $symbol): self
     {

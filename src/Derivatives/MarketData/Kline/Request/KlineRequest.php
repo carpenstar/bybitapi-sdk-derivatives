@@ -1,16 +1,16 @@
 <?php
-namespace Carpenstar\ByBitAPI\Derivatives\MarketData\MarkPriceKline\Request;
+namespace Carpenstar\ByBitAPI\Derivatives\MarketData\Kline\Request;
 
 use Carpenstar\ByBitAPI\Core\Helpers\DateTimeHelper;
 use Carpenstar\ByBitAPI\Core\Objects\AbstractParameters;
 
-class MarkPriceKlineRequestOptions extends AbstractParameters
+class KlineRequest extends AbstractParameters
 {
     /**
-     * Product type. linear
+     * Product type. linear only at now
      * @var string $category
      */
-    protected string $category;
+    protected string $category = "linear";
 
     /**
      * Symbol name
@@ -26,15 +26,15 @@ class MarkPriceKlineRequestOptions extends AbstractParameters
 
     /**
      * The start timestamp (ms)
-     * @var int $start
+     * @var string $start
      */
-    protected int $start;
+    protected string $start;
 
     /**
      * The end timestamp (ms)
-     * @var int $end
+     * @var string $end
      */
-    protected int $end;
+    protected string $end;
 
     /**
      * Limit for data size per page. [1, 200]. Default: 200
@@ -52,16 +52,6 @@ class MarkPriceKlineRequestOptions extends AbstractParameters
     }
 
     /**
-     * @param string $category
-     * @return MarkPriceKlineRequestOptions
-     */
-    public function setCategory(string $category): self
-    {
-        $this->category = "linear"; // supports only linear category
-        return $this;
-    }
-
-    /**
      * @return string
      */
     public function getCategory(): string
@@ -71,7 +61,7 @@ class MarkPriceKlineRequestOptions extends AbstractParameters
 
     /**
      * @param string $symbol
-     * @return MarkPriceKlineRequestOptions
+     * @return KlineRequest
      */
     public function setSymbol(string $symbol): self
     {
@@ -89,7 +79,7 @@ class MarkPriceKlineRequestOptions extends AbstractParameters
 
     /**
      * @param string $interval
-     * @return MarkPriceKlineRequestOptions
+     * @return KlineRequest
      */
     public function setInterval(string $interval): self
     {
@@ -107,7 +97,7 @@ class MarkPriceKlineRequestOptions extends AbstractParameters
 
     /**
      * @param string $start
-     * @return MarkPriceKlineRequestOptions
+     * @return KlineRequest
      */
     public function setStart(string $start): self
     {
@@ -116,16 +106,16 @@ class MarkPriceKlineRequestOptions extends AbstractParameters
     }
 
     /**
-     * @return int
+     * @return string
      */
-    public function getStart(): int
+    public function getStart(): string
     {
         return $this->start;
     }
 
     /**
      * @param string $end
-     * @return MarkPriceKlineRequestOptions
+     * @return KlineRequest
      */
     public function setEnd(string $end): self
     {
@@ -134,16 +124,16 @@ class MarkPriceKlineRequestOptions extends AbstractParameters
     }
 
     /**
-     * @return int
+     * @return string
      */
-    public function getEnd(): int
+    public function getEnd(): string
     {
         return $this->end;
     }
 
     /**
      * @param int $limit
-     * @return MarkPriceKlineRequestOptions
+     * @return KlineRequest
      */
     public function setLimit(int $limit): self
     {

@@ -1,16 +1,20 @@
 <?php
-namespace Carpenstar\ByBitAPI\Derivatives\MarketData\Kline\Request;
+namespace Carpenstar\ByBitAPI\Derivatives\MarketData\IndexPriceKline\Request;
 
+use Carpenstar\ByBitAPI\Core\Enums\DerivativesCategoryEnum;
+use Carpenstar\ByBitAPI\Core\Enums\EnumDerivativesCategory;
+use Carpenstar\ByBitAPI\Core\Enums\EnumIntervals;
+use Carpenstar\ByBitAPI\Core\Enums\IntervalEnum;
 use Carpenstar\ByBitAPI\Core\Helpers\DateTimeHelper;
 use Carpenstar\ByBitAPI\Core\Objects\AbstractParameters;
 
-class KlineRequestOptions extends AbstractParameters
+class IndexPriceKlineRequest extends AbstractParameters
 {
     /**
-     * Product type. linear only at now
+     * Product type. linear,inverse. Default: linear, but in the response category shows
      * @var string $category
      */
-    protected string $category = "linear";
+    protected string $category = EnumDerivativesCategory::CATEGORY_PRODUCT_LINEAR;
 
     /**
      * Symbol name
@@ -22,7 +26,7 @@ class KlineRequestOptions extends AbstractParameters
      * Kline interval. 1 3 5 15 30 60 120 240 360 720 D M W
      * @var string $interval
      */
-    protected string $interval;
+    protected string $interval = EnumIntervals::MINUTE1;
 
     /**
      * The start timestamp (ms)
@@ -52,6 +56,16 @@ class KlineRequestOptions extends AbstractParameters
     }
 
     /**
+     * @param string $category
+     * @return $this
+     */
+    public function setCategory(string $category): self
+    {
+        $this->category = $category;
+        return $this;
+    }
+
+    /**
      * @return string
      */
     public function getCategory(): string
@@ -61,7 +75,7 @@ class KlineRequestOptions extends AbstractParameters
 
     /**
      * @param string $symbol
-     * @return KlineRequestOptions
+     * @return IndexPriceKlineRequest
      */
     public function setSymbol(string $symbol): self
     {
@@ -79,7 +93,7 @@ class KlineRequestOptions extends AbstractParameters
 
     /**
      * @param string $interval
-     * @return KlineRequestOptions
+     * @return IndexPriceKlineRequest
      */
     public function setInterval(string $interval): self
     {
@@ -97,7 +111,7 @@ class KlineRequestOptions extends AbstractParameters
 
     /**
      * @param string $start
-     * @return KlineRequestOptions
+     * @return IndexPriceKlineRequest
      */
     public function setStart(string $start): self
     {
@@ -115,7 +129,7 @@ class KlineRequestOptions extends AbstractParameters
 
     /**
      * @param string $end
-     * @return KlineRequestOptions
+     * @return IndexPriceKlineRequest
      */
     public function setEnd(string $end): self
     {
@@ -133,7 +147,7 @@ class KlineRequestOptions extends AbstractParameters
 
     /**
      * @param int $limit
-     * @return KlineRequestOptions
+     * @return IndexPriceKlineRequest
      */
     public function setLimit(int $limit): self
     {
