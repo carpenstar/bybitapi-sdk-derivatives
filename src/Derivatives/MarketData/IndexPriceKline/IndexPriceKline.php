@@ -19,11 +19,11 @@ class IndexPriceKline extends PublicEndpoint implements IGetEndpointInterface
 
     protected function getRequestClassname(): string
     {
-        return IndexPriceKlineResponse::class;
+        return IndexPriceKlineRequest::class;
     }
 
     public function getResponseClassname(): string
     {
-        return IndexPriceKlineRequest::class;
+        return IndexPriceKlineResponse::class;
     }
 }

@@ -1,7 +1,7 @@
 <?php
 namespace Carpenstar\ByBitAPI\Derivatives\MarketData\OrderBook\Response;
 
-use Carpenstar\ByBitAPI\Core\Builders\ResponseBuilder;
+use Carpenstar\ByBitAPI\Core\Builders\ResponseDtoBuilder;
 use Carpenstar\ByBitAPI\Core\Helpers\DateTimeHelper;
 use Carpenstar\ByBitAPI\Core\Interfaces\ICollectionInterface;
 use Carpenstar\ByBitAPI\Core\Objects\Collection\EntityCollection;
@@ -92,7 +92,7 @@ class OrderBookResponse extends AbstractResponse
 
         if (!empty($bids)) {
             array_map(function ($bid) use ($bidList) {
-                $bidList->push(ResponseBuilder::make(OrderBookPriceItemResponse::class, $bid));
+                $bidList->push(ResponseDtoBuilder::make(OrderBookPriceItemResponse::class, $bid));
             }, $bids);
         }
 
@@ -113,7 +113,7 @@ class OrderBookResponse extends AbstractResponse
 
         if (!empty($asks)) {
             array_map(function ($ask) use ($askList) {
-                $askList->push(ResponseBuilder::make(OrderBookPriceItemResponse::class, $ask));
+                $askList->push(ResponseDtoBuilder::make(OrderBookPriceItemResponse::class, $ask));
             }, $asks);
         }
 
