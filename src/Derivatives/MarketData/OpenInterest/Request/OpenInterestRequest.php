@@ -2,6 +2,7 @@
 namespace Carpenstar\ByBitAPI\Derivatives\MarketData\OpenInterest\Request;
 
 use Carpenstar\ByBitAPI\Core\Helpers\DateTimeHelper;
+use Carpenstar\ByBitAPI\Core\Helpers\StringHelper;
 use Carpenstar\ByBitAPI\Core\Objects\AbstractParameters;
 
 class OpenInterestRequest extends AbstractParameters
@@ -97,7 +98,7 @@ class OpenInterestRequest extends AbstractParameters
      */
     public function setInterval(string $interval): self
     {
-        $this->interval = $interval;
+        $this->interval = StringHelper::clearInterval($interval) . "min";
         return $this;
     }
 

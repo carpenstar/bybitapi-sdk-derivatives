@@ -1,7 +1,7 @@
 <?php
 namespace Carpenstar\ByBitAPI\Derivatives\MarketData\InstrumentInfo\Response;
 
-use Carpenstar\ByBitAPI\Core\Builders\ResponseBuilder;
+use Carpenstar\ByBitAPI\Core\Builders\ResponseDtoBuilder;
 use Carpenstar\ByBitAPI\Core\Helpers\DateTimeHelper;
 use Carpenstar\ByBitAPI\Core\Objects\Collection\EntityCollection;
 use Carpenstar\ByBitAPI\Core\Objects\AbstractResponse;
@@ -105,19 +105,19 @@ class InstrumentInfoResponse extends AbstractResponse implements IInstrumentInfo
 
         if (!empty($data['priceFilter'])) {
             array_map(function ($priceFilter) use ($priceFilterCollection) {
-                $priceFilterCollection->push(ResponseBuilder::make(PriceFilterItemResponse::class, $priceFilter));
+                $priceFilterCollection->push(ResponseDtoBuilder::make(PriceFilterItemResponse::class, $priceFilter));
             }, [$data['priceFilter']]);
         }
 
         if (!empty($data['leverageFilter'])) {
             array_map(function ($leverageFilterItem) use ($leverageFilterCollection) {
-                $leverageFilterCollection->push(ResponseBuilder::make(LeverageFilterItemResponse::class, $leverageFilterItem));
+                $leverageFilterCollection->push(ResponseDtoBuilder::make(LeverageFilterItemResponse::class, $leverageFilterItem));
             }, [$data['leverageFilter']]);
         }
 
         if (!empty($data['lotSizeFilter'])) {
             array_map(function ($lotSizeFilterItem) use ($lotSizeFilterCollection) {
-                $lotSizeFilterCollection->push(ResponseBuilder::make(LotSizeFilterItemResponse::class, $lotSizeFilterItem));
+                $lotSizeFilterCollection->push(ResponseDtoBuilder::make(LotSizeFilterItemResponse::class, $lotSizeFilterItem));
             }, [$data['lotSizeFilter']]);
         }
 

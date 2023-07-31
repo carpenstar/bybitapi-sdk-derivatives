@@ -1,9 +1,10 @@
 <?php
 namespace Carpenstar\ByBitAPI\Tests\Derivatives\MarketData;
 
+use Carpenstar\ByBitAPI\Core\Builders\ResponseHandlerBuilder;
 use Carpenstar\ByBitAPI\Core\Enums\EnumOutputMode;
 use Carpenstar\ByBitAPI\Core\Objects\Collection\EntityCollection;
-use Carpenstar\ByBitAPI\Core\Response\CurlResponse;
+use Carpenstar\ByBitAPI\Core\Response\CurlResponseHandler;
 use Carpenstar\ByBitAPI\Derivatives\MarketData\FundingRateHistory\Response\FundingRateHistoryResponse;
 use PHPUnit\Framework\TestCase;
 
@@ -13,9 +14,8 @@ class FundingRateHistoryTest extends TestCase
 
     public function testFundingRateHistoryResponse()
     {
-        $fundingRateHistoryData = (new CurlResponse(self::$fundingRateHistory))
-            ->bindEntity(FundingRateHistoryResponse::class)
-            ->handle(EnumOutputMode::MODE_ENTITY);
+        $fundingRateHistoryData = ResponseHandlerBuilder::make(self::$fundingRateHistory,
+            CurlResponseHandler::class, FundingRateHistoryResponse::class, EnumOutputMode::MODE_ENTITY);
 
         $this->assertInstanceOf(EntityCollection::class, $fundingRateHistoryData->getBody());
 

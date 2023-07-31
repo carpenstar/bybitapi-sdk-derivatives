@@ -1,9 +1,10 @@
 <?php
 namespace Carpenstar\ByBitAPI\Tests\Derivatives\MarketData;
 
+use Carpenstar\ByBitAPI\Core\Builders\ResponseHandlerBuilder;
 use Carpenstar\ByBitAPI\Core\Enums\EnumOutputMode;
 use Carpenstar\ByBitAPI\Core\Objects\Collection\EntityCollection;
-use Carpenstar\ByBitAPI\Core\Response\CurlResponse;
+use Carpenstar\ByBitAPI\Core\Response\CurlResponseHandler;
 use Carpenstar\ByBitAPI\Derivatives\MarketData\IndexPriceKline\Response\IndexPriceKlineResponse;
 use PHPUnit\Framework\TestCase;
 
@@ -13,9 +14,8 @@ class IndexPriceKlineTest extends TestCase
 
     public function testIndexPriceKlineResponse()
     {
-        $indexPriceKlineData = (new CurlResponse(self::$indexPriceKlineApiResponse))
-            ->bindEntity(IndexPriceKlineResponse::class)
-            ->handle(EnumOutputMode::MODE_ENTITY);
+        $indexPriceKlineData = ResponseHandlerBuilder::make(self::$indexPriceKlineApiResponse,
+            CurlResponseHandler::class, IndexPriceKlineResponse::class, EnumOutputMode::MODE_ENTITY);
 
         $this->assertInstanceOf(EntityCollection::class, $indexPriceKlineData->getBody());
 
