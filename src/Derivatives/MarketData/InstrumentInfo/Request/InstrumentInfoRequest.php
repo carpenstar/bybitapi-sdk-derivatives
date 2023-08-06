@@ -2,8 +2,9 @@
 namespace Carpenstar\ByBitAPI\Derivatives\MarketData\InstrumentInfo\Request;
 
 use Carpenstar\ByBitAPI\Core\Objects\AbstractParameters;
+use Carpenstar\ByBitAPI\Derivatives\MarketData\InstrumentInfo\Interfaces\IInstrumentInfoRequest;
 
-class InstrumentInfoRequest extends AbstractParameters
+class InstrumentInfoRequest extends AbstractParameters implements IInstrumentInfoRequest
 {
     /**
      * Product type. linear only supports at now

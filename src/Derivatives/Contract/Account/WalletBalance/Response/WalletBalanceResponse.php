@@ -2,8 +2,9 @@
 namespace Carpenstar\ByBitAPI\Derivatives\Contract\Account\WalletBalance\Response;
 
 use Carpenstar\ByBitAPI\Core\Objects\AbstractResponse;
+use Carpenstar\ByBitAPI\Derivatives\Contract\Account\WalletBalance\Interfaces\IWalletBalanceResponseInterface;
 
-class WalletBalanceResponse extends AbstractResponse
+class WalletBalanceResponse extends AbstractResponse implements IWalletBalanceResponseInterface
 {
     private string $coin;
     private float $equity;

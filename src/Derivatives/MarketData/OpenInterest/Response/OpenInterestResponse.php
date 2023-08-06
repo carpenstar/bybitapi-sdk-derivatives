@@ -8,9 +8,9 @@ class OpenInterestResponse extends AbstractResponse
 {
     /**
      * Open interest
-     * @var string $openInterest
+     * @var float $openInterest
      */
-    private string $openInterest;
+    private float $openInterest;
 
     /**
      * The timestamp
@@ -26,23 +26,19 @@ class OpenInterestResponse extends AbstractResponse
     }
 
     /**
-     * @param string $openInterest
-<<<<<<<< HEAD:src/Derivatives/MarketData/OpenInterest/Response/OpenInterestResponse.php
+     * @param float $openInterest
      * @return OpenInterestResponse
-========
-     * @return OpenInterestAbstractResponse
->>>>>>>> 4cd7e07 (Version v.3.0.0):src/Derivatives/MarketData/OpenInterest/Response/OpenInterestAbstractResponse.php
      */
-    public function setOpenInterest(string $openInterest): self
+    public function setOpenInterest(float $openInterest): self
     {
         $this->openInterest = $openInterest;
         return $this;
     }
 
     /**
-     * @return string
+     * @return float
      */
-    public function getOpenInterest(): string
+    public function getOpenInterest(): float
     {
         return $this->openInterest;
     }

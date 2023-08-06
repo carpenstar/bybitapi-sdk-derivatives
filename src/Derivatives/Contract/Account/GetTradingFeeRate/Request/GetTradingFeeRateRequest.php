@@ -2,8 +2,9 @@
 namespace Carpenstar\ByBitAPI\Derivatives\Contract\Account\GetTradingFeeRate\Request;
 
 use Carpenstar\ByBitAPI\Core\Objects\AbstractParameters;
+use Carpenstar\ByBitAPI\Derivatives\Contract\Account\GetTradingFeeRate\Interfaces\IGetTradingFeeRateRequestInterface;
 
-class GetTradingFeeRateRequest extends AbstractParameters
+class GetTradingFeeRateRequest extends AbstractParameters implements IGetTradingFeeRateRequestInterface
 {
     /**
      * Symbol name

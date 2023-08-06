@@ -2,8 +2,9 @@
 namespace Carpenstar\ByBitAPI\Derivatives\Contract\Account\GetTradingFeeRate\Response;
 
 use Carpenstar\ByBitAPI\Core\Objects\AbstractResponse;
+use Carpenstar\ByBitAPI\Derivatives\Contract\Account\GetTradingFeeRate\Interfaces\IGetTradingFeeRateResponseInterface;
 
-class GetTradingFeeRateResponse extends AbstractResponse
+class GetTradingFeeRateResponse extends AbstractResponse implements IGetTradingFeeRateResponseInterface
 {
     /**
      * Symbol name

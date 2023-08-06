@@ -20,15 +20,15 @@ class FundingRateHistoryRequest extends AbstractParameters
 
     /**
      * The start timestamp
-     * @var \DateTime $start
+     * @var \DateTime $startTime
      */
-    protected \DateTime $start;
+    protected \DateTime $startTime;
 
     /**
      * The end timestamp
-     * @var \DateTime $end
+     * @var \DateTime $endTime
      */
-    protected \DateTime $end;
+    protected \DateTime $endTime;
 
     /**
      * Limit for data size per page. [1, 200]. Default: 200
@@ -78,39 +78,39 @@ class FundingRateHistoryRequest extends AbstractParameters
     }
 
     /**
-     * @param int $start
+     * @param int $startTime
      * @return FundingRateHistoryRequest
      */
-    public function setStart(int $start): self
+    public function setStart(int $startTime): self
     {
-        $this->start = DateTimeHelper::makeFromTimestamp($start);
+        $this->startTime = DateTimeHelper::makeFromTimestamp($startTime);
         return $this;
     }
 
     /**
      * @return \DateTime
      */
-    public function getStart(): \DateTime
+    public function getStartTime(): \DateTime
     {
-        return $this->start;
+        return $this->startTime;
     }
 
     /**
      * @param int $end
      * @return FundingRateHistoryRequest
      */
-    public function setEnd(int $end): self
+    public function setEndTime(int $endTime): self
     {
-        $this->end = DateTimeHelper::makeFromTimestamp($end);
+        $this->endTime = DateTimeHelper::makeFromTimestamp($endTime);
         return $this;
     }
 
     /**
      * @return \DateTime
      */
-    public function getEnd(): \DateTime
+    public function getEndTime(): \DateTime
     {
-        return $this->end;
+        return $this->endTime;
     }
 
     /**
