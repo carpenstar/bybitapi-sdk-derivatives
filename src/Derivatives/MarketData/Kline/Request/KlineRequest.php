@@ -4,8 +4,9 @@ namespace Carpenstar\ByBitAPI\Derivatives\MarketData\Kline\Request;
 use Carpenstar\ByBitAPI\Core\Helpers\DateTimeHelper;
 use Carpenstar\ByBitAPI\Core\Helpers\StringHelper;
 use Carpenstar\ByBitAPI\Core\Objects\AbstractParameters;
+use Carpenstar\ByBitAPI\Derivatives\MarketData\Kline\Interfaces\IKlineRequestInterface;
 
-class KlineRequest extends AbstractParameters
+class KlineRequest extends AbstractParameters implements IKlineRequestInterface
 {
     /**
      * Product type. linear only at now
@@ -27,15 +28,15 @@ class KlineRequest extends AbstractParameters
 
     /**
      * The start timestamp (ms)
-     * @var string $start
+     * @var \DateTime $startTime
      */
-    protected string $start;
+    protected \DateTime $startTime;
 
     /**
      * The end timestamp (ms)
-     * @var string $end
+     * @var \DateTime $endTime
      */
-    protected string $end;
+    protected \DateTime $endTime;
 
     /**
      * Limit for data size per page. [1, 200]. Default: 200
@@ -48,8 +49,8 @@ class KlineRequest extends AbstractParameters
         $this
             ->setRequiredField('symbol')
             ->setRequiredField('interval')
-            ->setRequiredField('start')
-            ->setRequiredField('end');
+            ->setRequiredField('startTime')
+            ->setRequiredField('endTime');
     }
 
     /**
@@ -97,39 +98,39 @@ class KlineRequest extends AbstractParameters
     }
 
     /**
-     * @param string $start
+     * @param int $startTime
      * @return KlineRequest
      */
-    public function setStart(string $start): self
+    public function setStartTime(int $startTime): self
     {
-        $this->start = DateTimeHelper::makeTimestampFromDateString($start);
+        $this->startTime = DateTimeHelper::makeFromTimestamp($startTime);
         return $this;
     }
 
     /**
-     * @return string
+     * @return \DateTime
      */
-    public function getStart(): string
+    public function getStartTime(): \DateTime
     {
-        return $this->start;
+        return $this->startTime;
     }
 
     /**
-     * @param string $end
+     * @param int $endTime
      * @return KlineRequest
      */
-    public function setEnd(string $end): self
+    public function setEndTime(int $endTime): self
     {
-        $this->end = DateTimeHelper::makeTimestampFromDateString($end);
+        $this->endTime = DateTimeHelper::makeFromTimestamp($endTime);
         return $this;
     }
 
     /**
-     * @return string
+     * @return \DateTime
      */
-    public function getEnd(): string
+    public function getEndTime(): \DateTime
     {
-        return $this->end;
+        return $this->endTime;
     }
 
     /**

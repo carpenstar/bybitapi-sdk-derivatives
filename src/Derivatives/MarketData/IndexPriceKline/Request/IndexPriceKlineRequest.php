@@ -8,8 +8,9 @@ use Carpenstar\ByBitAPI\Core\Enums\IntervalEnum;
 use Carpenstar\ByBitAPI\Core\Helpers\DateTimeHelper;
 use Carpenstar\ByBitAPI\Core\Helpers\StringHelper;
 use Carpenstar\ByBitAPI\Core\Objects\AbstractParameters;
+use Carpenstar\ByBitAPI\Derivatives\MarketData\IndexPriceKline\Interfaces\IIndexPriceKlineRequest;
 
-class IndexPriceKlineRequest extends AbstractParameters
+class IndexPriceKlineRequest extends AbstractParameters implements IIndexPriceKlineRequest
 {
     /**
      * Product type. linear,inverse. Default: linear, but in the response category shows

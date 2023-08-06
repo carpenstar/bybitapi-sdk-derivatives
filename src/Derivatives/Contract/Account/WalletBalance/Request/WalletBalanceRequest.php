@@ -2,8 +2,9 @@
 namespace Carpenstar\ByBitAPI\Derivatives\Contract\Account\WalletBalance\Request;
 
 use Carpenstar\ByBitAPI\Core\Objects\AbstractParameters;
+use Carpenstar\ByBitAPI\Derivatives\Contract\Account\WalletBalance\Interfaces\IWalletBalanceRequestInterface;
 
-class WalletBalanceRequest extends AbstractParameters
+class WalletBalanceRequest extends AbstractParameters implements IWalletBalanceRequestInterface
 {
     protected string $coin;
 
