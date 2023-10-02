@@ -38,80 +38,80 @@ composer require carpenstar/bybitapi-sdk-derivatives
       <a href="https://github.com/carpenstar/bybitapi-sdk-derivatives#market-data---funding-rate-history">Funding Rate History</a>
     </td>
     <td>Публичный</td>
-    <td style="text-align: center"><a href="">перейти</a></td>
-    <td style="text-align: center"><a href="" target="_blank">перейти</a></td>
+    <td style="text-align: center"><a href="https://github.com/carpenstar/bybitapi-sdk-derivatives/tree/master/src/Derivatives/MarketData/FundingRateHistory">перейти</a></td>
+    <td style="text-align: center"><a href="https://bybit-exchange.github.io/docs/derivatives/public/funding-rate" target="_blank">перейти</a></td>
   </tr>
   <tr>
     <td>
       <a href="https://github.com/carpenstar/bybitapi-sdk-derivatives#market-data---index-price-kline">Index Price Kline</a>
     </td>
     <td>Публичный</td>
-    <td style="text-align: center"><a href="">перейти</a></td>
-    <td style="text-align: center"><a href="" target="_blank">перейти</a></td>
+    <td style="text-align: center"><a href="https://github.com/carpenstar/bybitapi-sdk-derivatives/tree/master/src/Derivatives/MarketData/IndexPriceKline">перейти</a></td>
+    <td style="text-align: center"><a href="https://bybit-exchange.github.io/docs/derivatives/public/index-kline" target="_blank">перейти</a></td>
   </tr>
   <tr>
     <td>
       <a href="https://github.com/carpenstar/bybitapi-sdk-derivatives#market-data---instrument-info">Instrument Info</a>
     </td>
     <td>Публичный</td>
-    <td style="text-align: center"><a href="">перейти</a></td>
-    <td style="text-align: center"><a href="" target="_blank">перейти</a></td>
+    <td style="text-align: center"><a href="https://github.com/carpenstar/bybitapi-sdk-derivatives/tree/master/src/Derivatives/MarketData/InstrumentInfo">перейти</a></td>
+    <td style="text-align: center"><a href="https://bybit-exchange.github.io/docs/derivatives/public/instrument-info" target="_blank">перейти</a></td>
   </tr>
   <tr>
     <td>
       <a href="https://github.com/carpenstar/bybitapi-sdk-derivatives#market-data---kline">Kline</a>
     </td>
     <td>Публичный</td>
-    <td style="text-align: center"><a href="">перейти</a></td>
-    <td style="text-align: center"><a href="" target="_blank">перейти</a></td>
+    <td style="text-align: center"><a href="https://github.com/carpenstar/bybitapi-sdk-derivatives/tree/master/src/Derivatives/MarketData/Kline">перейти</a></td>
+    <td style="text-align: center"><a href="https://bybit-exchange.github.io/docs/derivatives/public/kline" target="_blank">перейти</a></td>
   </tr>
   <tr>
     <td>
       <a href="https://github.com/carpenstar/bybitapi-sdk-derivatives#market-data---mark-price-kline">Mark Price Kline</a>
     </td>
     <td>Публичный</td>
-    <td style="text-align: center"><a href="">перейти</a></td>
-    <td style="text-align: center"><a href="" target="_blank">перейти</a></td>
+    <td style="text-align: center"><a href="https://github.com/carpenstar/bybitapi-sdk-derivatives/tree/master/src/Derivatives/MarketData/MarkPriceKline">перейти</a></td>
+    <td style="text-align: center"><a href="https://bybit-exchange.github.io/docs/derivatives/public/mark-kline" target="_blank">перейти</a></td>
   </tr>
   <tr>
     <td>
       <a href="https://github.com/carpenstar/bybitapi-sdk-derivatives#market-data---open-interest">Open Interest</a>
     </td>
     <td>Публичный</td>
-    <td style="text-align: center"><a href="">перейти</a></td>
-    <td style="text-align: center"><a href="" target="_blank">перейти</a></td>
+    <td style="text-align: center"><a href="https://github.com/carpenstar/bybitapi-sdk-derivatives/tree/master/src/Derivatives/MarketData/OpenInterest">перейти</a></td>
+    <td style="text-align: center"><a href="https://bybit-exchange.github.io/docs/derivatives/public/open-interest" target="_blank">перейти</a></td>
   </tr>
   <tr>
     <td>
       <a href="https://github.com/carpenstar/bybitapi-sdk-derivatives#market-data---order-book">Order Book</a>
     </td>
     <td>Публичный</td>
-    <td style="text-align: center"><a href="">перейти</a></td>
-    <td style="text-align: center"><a href="" target="_blank">перейти</a></td>
+    <td style="text-align: center"><a href="https://bybit-exchange.github.io/docs/derivatives/public/orderbook">перейти</a></td>
+    <td style="text-align: center"><a href="https://github.com/carpenstar/bybitapi-sdk-derivatives/tree/master/src/Derivatives/MarketData/OrderBook" target="_blank">перейти</a></td>
   </tr>
   <tr>
     <td>
       <a href="https://github.com/carpenstar/bybitapi-sdk-derivatives#market-data---public-trading-history">Public Trading History</a>
     </td>
     <td>Публичный</td>
-    <td style="text-align: center"><a href="">перейти</a></td>
-    <td style="text-align: center"><a href="" target="_blank">перейти</a></td>
+    <td style="text-align: center"><a href="https://github.com/carpenstar/bybitapi-sdk-derivatives/tree/master/src/Derivatives/MarketData/PublicTradingHistory">перейти</a></td>
+    <td style="text-align: center"><a href="https://bybit-exchange.github.io/docs/derivatives/public/trade" target="_blank">перейти</a></td>
   </tr>
   <tr>
     <td>
       <a href="https://github.com/carpenstar/bybitapi-sdk-derivatives#market-data---risk-limit">Risk Limit</a>
     </td>
     <td>Публичный</td>
-    <td style="text-align: center"><a href="">перейти</a></td>
-    <td style="text-align: center"><a href="" target="_blank">перейти</a></td>
+    <td style="text-align: center"><a href="https://github.com/carpenstar/bybitapi-sdk-derivatives/tree/master/src/Derivatives/MarketData/RiskLimit">перейти</a></td>
+    <td style="text-align: center"><a href="https://bybit-exchange.github.io/docs/derivatives/public/risk-limit" target="_blank">перейти</a></td>
   </tr>
   <tr>
     <td>
       <a href="https://github.com/carpenstar/bybitapi-sdk-derivatives#market-data---ticker-info">Ticker Info</a>
     </td>
     <td>Публичный</td>
-    <td style="text-align: center"><a href="">перейти</a></td>
-    <td style="text-align: center"><a href="" target="_blank">перейти</a></td>
+    <td style="text-align: center"><a href="https://github.com/carpenstar/bybitapi-sdk-derivatives/tree/master/src/Derivatives/MarketData/TickerInfo">перейти</a></td>
+    <td style="text-align: center"><a href="https://bybit-exchange.github.io/docs/derivatives/public/ticker" target="_blank">перейти</a></td>
   </tr>
   <tr>
     <th colspan="4" style="text-align: left; font-weight: bold">CONTRACT - ACCOUNT</th>
@@ -127,16 +127,16 @@ composer require carpenstar/bybitapi-sdk-derivatives
       <a href="https://github.com/carpenstar/bybitapi-sdk-derivatives#contract---account---get-trading-fee-rate">Get Trading Fee Rate</a>
     </td>
     <td>Приватный</td>
-    <td style="text-align: center"><a href="">перейти</a></td>
-    <td style="text-align: center"><a href="" target="_blank">перейти</a></td>
+    <td style="text-align: center"><a href="https://github.com/carpenstar/bybitapi-sdk-derivatives/tree/master/src/Derivatives/Contract/Account/GetTradingFeeRate">перейти</a></td>
+    <td style="text-align: center"><a href="https://bybit-exchange.github.io/docs/derivatives/contract/fee-rate" target="_blank">перейти</a></td>
   </tr>
   <tr>
     <td>
       <a href="https://github.com/carpenstar/bybitapi-sdk-derivatives#contract---account---wallet-balance">Wallet Balance</a>
     </td>
     <td>Приватный</td>
-    <td style="text-align: center"><a href="">перейти</a></td>
-    <td style="text-align: center"><a href="" target="_blank">перейти</a></td>
+    <td style="text-align: center"><a href="https://github.com/carpenstar/bybitapi-sdk-derivatives/tree/master/src/Derivatives/Contract/Account/WalletBalance">перейти</a></td>
+    <td style="text-align: center"><a href="https://bybit-exchange.github.io/docs/derivatives/contract/wallet" target="_blank">перейти</a></td>
   </tr>
   <tr>
     <th colspan="4" style="text-align: left; font-weight: bold">CONTRACT - ORDER</th>
@@ -152,48 +152,48 @@ composer require carpenstar/bybitapi-sdk-derivatives
       <a href="">Cancel All Order</a>
     </td>
     <td>Приватный</td>
-    <td style="text-align: center"><a href="">перейти</a></td>
-    <td style="text-align: center"><a href="" target="_blank">перейти</a></td>
+    <td style="text-align: center"><a href="https://github.com/carpenstar/bybitapi-sdk-derivatives/tree/master/src/Derivatives/Contract/Order/CancelAllOrder">перейти</a></td>
+    <td style="text-align: center"><a href="https://bybit-exchange.github.io/docs/derivatives/contract/cancel-all" target="_blank">перейти</a></td>
   </tr>
   <tr>
     <td>
       <a href="">Cancel Order</a>
     </td>
     <td>Приватный</td>
-    <td style="text-align: center"><a href="">перейти</a></td>
-    <td style="text-align: center"><a href="" target="_blank">перейти</a></td>
+    <td style="text-align: center"><a href="https://github.com/carpenstar/bybitapi-sdk-derivatives/tree/master/src/Derivatives/Contract/Order/CancelOrder">перейти</a></td>
+    <td style="text-align: center"><a href="https://bybit-exchange.github.io/docs/derivatives/contract/cancel" target="_blank">перейти</a></td>
   </tr>
   <tr>
     <td>
       <a href="">Get Open Orders</a>
     </td>
     <td>Приватный</td>
-    <td style="text-align: center"><a href="">перейти</a></td>
-    <td style="text-align: center"><a href="" target="_blank">перейти</a></td>
+    <td style="text-align: center"><a href="https://github.com/carpenstar/bybitapi-sdk-derivatives/tree/master/src/Derivatives/Contract/Order/GetOpenOrders">перейти</a></td>
+    <td style="text-align: center"><a href="https://bybit-exchange.github.io/docs/derivatives/contract/open-order" target="_blank">перейти</a></td>
   </tr>
   <tr>
     <td>
       <a href="">Get Order List</a>
     </td>
     <td>Приватный</td>
-    <td style="text-align: center"><a href="">перейти</a></td>
-    <td style="text-align: center"><a href="" target="_blank">перейти</a></td>
+    <td style="text-align: center"><a href="https://github.com/carpenstar/bybitapi-sdk-derivatives/tree/master/src/Derivatives/Contract/Order/GetOrderList">перейти</a></td>
+    <td style="text-align: center"><a href="https://bybit-exchange.github.io/docs/derivatives/contract/order-list" target="_blank">перейти</a></td>
   </tr>
   <tr>
     <td>
       <a href="https://github.com/carpenstar/bybitapi-sdk-derivatives#contract---account---order---place-order">Place Order</a>
     </td>
     <td>Приватный</td>
-    <td style="text-align: center"><a href="">перейти</a></td>
-    <td style="text-align: center"><a href="" target="_blank">перейти</a></td>
+    <td style="text-align: center"><a href="https://github.com/carpenstar/bybitapi-sdk-derivatives/tree/master/src/Derivatives/Contract/Order/PlaceOrder">перейти</a></td>
+    <td style="text-align: center"><a href="https://bybit-exchange.github.io/docs/derivatives/contract/place-order" target="_blank">перейти</a></td>
   </tr>
   <tr>
     <td>
       <a href="">Replace Order</a>
     </td>
     <td>Приватный</td>
-    <td style="text-align: center"><a href="">перейти</a></td>
-    <td style="text-align: center"><a href="" target="_blank">перейти</a></td>
+    <td style="text-align: center"><a href="https://github.com/carpenstar/bybitapi-sdk-derivatives/tree/master/src/Derivatives/Contract/Order/ReplaceOrder">перейти</a></td>
+    <td style="text-align: center"><a href="https://bybit-exchange.github.io/docs/derivatives/contract/replace-order" target="_blank">перейти</a></td>
   </tr>
   <tr>
     <th colspan="4" style="text-align: left; font-weight: bold">CONTRACT - POSITION</th>
@@ -209,80 +209,80 @@ composer require carpenstar/bybitapi-sdk-derivatives
       <a href="">Get Closed PnL</a>
     </td>
     <td>Приватный</td>
-    <td style="text-align: center"><a href="">перейти</a></td>
-    <td style="text-align: center"><a href="" target="_blank">перейти</a></td>
+    <td style="text-align: center"><a href="https://github.com/carpenstar/bybitapi-sdk-derivatives/tree/master/src/Derivatives/Contract/Position/GetClosedPnL">перейти</a></td>
+    <td style="text-align: center"><a href="https://bybit-exchange.github.io/docs/derivatives/contract/closepnl" target="_blank">перейти</a></td>
   </tr>
   <tr>
     <td>
       <a href="">Get Execution List</a>
     </td>
     <td>Приватный</td>
-    <td style="text-align: center"><a href="">перейти</a></td>
-    <td style="text-align: center"><a href="" target="_blank">перейти</a></td>
+    <td style="text-align: center"><a href="https://github.com/carpenstar/bybitapi-sdk-derivatives/tree/master/src/Derivatives/Contract/Position/GetExecutionList">перейти</a></td>
+    <td style="text-align: center"><a href="https://bybit-exchange.github.io/docs/derivatives/contract/execution-list" target="_blank">перейти</a></td>
   </tr>
   <tr>
     <td>
       <a href="">My Position</a>
     </td>
     <td>Приватный</td>
-    <td style="text-align: center"><a href="">перейти</a></td>
-    <td style="text-align: center"><a href="" target="_blank">перейти</a></td>
+    <td style="text-align: center"><a href="https://github.com/carpenstar/bybitapi-sdk-derivatives/tree/master/src/Derivatives/Contract/Position/MyPosition">перейти</a></td>
+    <td style="text-align: center"><a href="https://bybit-exchange.github.io/docs/derivatives/contract/position-list" target="_blank">перейти</a></td>
   </tr>
   <tr>
     <td>
       <a href="">Set Auto Add Margin</a>
     </td>
     <td>Приватный</td>
-    <td style="text-align: center"><a href="">перейти</a></td>
-    <td style="text-align: center"><a href="" target="_blank">перейти</a></td>
+    <td style="text-align: center"><a href="https://github.com/carpenstar/bybitapi-sdk-derivatives/tree/master/src/Derivatives/Contract/Position/SetAutoAddMargin">перейти</a></td>
+    <td style="text-align: center"><a href="https://bybit-exchange.github.io/docs/derivatives/contract/auto-margin" target="_blank">перейти</a></td>
   </tr>
   <tr>
     <td>
       <a href="">Set Leverage</a>
     </td>
     <td>Приватный</td>
-    <td style="text-align: center"><a href="">перейти</a></td>
-    <td style="text-align: center"><a href="" target="_blank">перейти</a></td>
+    <td style="text-align: center"><a href="https://github.com/carpenstar/bybitapi-sdk-derivatives/tree/master/src/Derivatives/Contract/Position/SetLeverage">перейти</a></td>
+    <td style="text-align: center"><a href="https://bybit-exchange.github.io/docs/derivatives/contract/leverage" target="_blank">перейти</a></td>
   </tr>
   <tr>
     <td>
       <a href="">Set Risk Limit</a>
     </td>
     <td>Приватный</td>
-    <td style="text-align: center"><a href="">перейти</a></td>
-    <td style="text-align: center"><a href="" target="_blank">перейти</a></td>
+    <td style="text-align: center"><a href="https://github.com/carpenstar/bybitapi-sdk-derivatives/tree/master/src/Derivatives/Contract/Position/SetRiskLimit">перейти</a></td>
+    <td style="text-align: center"><a href="https://bybit-exchange.github.io/docs/derivatives/contract/set-risk-limit" target="_blank">перейти</a></td>
   </tr>
   <tr>
     <td>
       <a href="">Set Trading Stop</a>
     </td>
     <td>Приватный</td>
-    <td style="text-align: center"><a href="">перейти</a></td>
-    <td style="text-align: center"><a href="" target="_blank">перейти</a></td>
+    <td style="text-align: center"><a href="https://github.com/carpenstar/bybitapi-sdk-derivatives/tree/master/src/Derivatives/Contract/Position/SetTradingStop">перейти</a></td>
+    <td style="text-align: center"><a href="https://bybit-exchange.github.io/docs/derivatives/contract/trading-stop" target="_blank">перейти</a></td>
   </tr>
   <tr>
     <td>
       <a href="">Switch Cross Isolated Margin</a>
     </td>
     <td>Приватный</td>
-    <td style="text-align: center"><a href="">перейти</a></td>
-    <td style="text-align: center"><a href="" target="_blank">перейти</a></td>
+    <td style="text-align: center"><a href="https://github.com/carpenstar/bybitapi-sdk-derivatives/tree/master/src/Derivatives/Contract/Position/SwitchCrossIsolatedMargin">перейти</a></td>
+    <td style="text-align: center"><a href="https://bybit-exchange.github.io/docs/derivatives/contract/cross-isolated" target="_blank">перейти</a></td>
   </tr>
   <tr>
     <td>
       <a href="">Switch Position Mode</a>
     </td>
     <td>Приватный</td>
-    <td style="text-align: center"><a href="">перейти</a></td>
-    <td style="text-align: center"><a href="" target="_blank">перейти</a></td>
+    <td style="text-align: center"><a href="https://github.com/carpenstar/bybitapi-sdk-derivatives/tree/master/src/Derivatives/Contract/Position/SwitchPositionMode">перейти</a></td>
+    <td style="text-align: center"><a href="https://bybit-exchange.github.io/docs/derivatives/contract/position-mode" target="_blank">перейти</a></td>
   </tr>
   <tr>
     <td>
       <a href="">Switch TpSl Mode</a>
     </td>
     <td>Приватный</td>
-    <td style="text-align: center"><a href="">перейти</a></td>
-    <td style="text-align: center"><a href="" target="_blank">перейти</a></td>
+    <td style="text-align: center"><a href="https://github.com/carpenstar/bybitapi-sdk-derivatives/tree/master/src/Derivatives/Contract/Position/SwitchTpSlMode">перейти</a></td>
+    <td style="text-align: center"><a href="https://bybit-exchange.github.io/docs/derivatives/contract/tpsl-mode" target="_blank">перейти</a></td>
   </tr>
 </table>
 
