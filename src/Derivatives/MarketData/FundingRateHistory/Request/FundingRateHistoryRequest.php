@@ -81,7 +81,7 @@ class FundingRateHistoryRequest extends AbstractParameters
      * @param int $startTime
      * @return FundingRateHistoryRequest
      */
-    public function setStart(int $startTime): self
+    public function setStartTime(int $startTime): self
     {
         $this->startTime = DateTimeHelper::makeFromTimestamp($startTime);
         return $this;

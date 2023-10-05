@@ -8,10 +8,10 @@ interface IIndexPriceKlineRequest
     public function getSymbol(): string;
     public function setInterval(string $interval): self;
     public function getInterval(): string;
-    public function setStart(string $start): self;
-    public function getStart(): string;
-    public function setEnd(string $end): self;
-    public function getEnd(): string;
+    public function setStartTime(int $startTime): self;
+    public function getStartTime(): \DateTime;
+    public function setEndTime(int $endTime): self;
+    public function getEndTime(): \DateTime;
     public function setLimit(int $limit): self;
     public function getLimit(): int;
 }

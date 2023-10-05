@@ -12,8 +12,8 @@ interface IGetExecutionListRequestInterface
     public function setCursor(string $cursor): self;
     public function getSymbol(): string;
     public function getOrderId(): string;
-    public function getStartTime(): int;
-    public function getEndTime(): int;
+    public function getStartTime(): \DateTime;
+    public function getEndTime(): \DateTime;
     public function getExecType(): string;
     public function getLimit(): int;
     public function getCursor(): string;
