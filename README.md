@@ -304,7 +304,10 @@ use Carpenstar\ByBitAPI\Derivatives\MarketData\FundingRateHistory\Request\Fundin
 
 $bybit = new BybitAPI("https://api-testnet.bybit.com", "apiKey", "secret");
 
-$options = (new FundingRateHistoryRequest())->setSymbol("BTCUSDT")->setLimit(3);
+$options = (new FundingRateHistoryRequest())
+    ->setStartTime((new DateTime("2023-05-08 15:00:00"))->getTimestamp())
+    ->setEndTime((new DateTime("2023-05-09 10:00:00"))->getTimestamp())
+    ->setSymbol("BTCUSDT")->setLimit(3);
 
 /** @var FundingRateHistoryResponse[] $result */
 $result = $bybit->rest(FundingRateHistory::class, $options)->getBody()->all();
@@ -345,8 +348,8 @@ new \Carpenstar\ByBitAPI\Derivatives\MarketData\FundingRateHistory\Request\Fundi
     
 $options = (new FundingRateHistoryRequest())
     ->setSymbol("BTCUSDT")
-    ->setStart("2023-05-10 10:00:00")
-    ->setEnd("2023-05-10 11:00:00")
+    ->setStartTime((new DateTime("2023-05-08 15:00:00"))->getTimestamp())
+    ->setEndTime((new DateTime("2023-05-09 10:00:00"))->getTimestamp())
     ->setLimit(200)
 ```
 
@@ -367,14 +370,14 @@ $options = (new FundingRateHistoryRequest())
     <td>Строка с тикером торговой пары</td>
   </tr>
   <tr>
-    <td>:: setStart(string $dateTime): self</td>
+    <td>:: setStartTime(int $timestamp): self</td>
     <td style="text-align: center"><b>НЕТ<sup>*</sup></b></td>
-    <td>Строка даты/времени ОТ которого берется срез данных</td>
+    <td>Таймштамп ОТ которого берется срез данных</td>
   </tr>
   <tr>
-    <td>:: setEnd(string $dateTime): self</td>
+    <td>:: setEndTime(int $timestamp): self</td>
     <td style="text-align: center"><b>НЕТ<sup>*</sup></b></td>
-    <td>Строка даты/времени ДО которого берется срез данных</td>
+    <td>Таймштамп ДО которого берется срез данных</td>
   </tr>
   <tr>
     <td>:: setLimit(int $limit): self</td>
@@ -448,8 +451,8 @@ $bybit = new BybitAPI("https://api-testnet.bybit.com", "apiKey", "secret");
 $options = (new IndexPriceKlineRequest())
     ->setSymbol("ETHUSDT")
     ->setInterval(1)
-    ->setStart('2023-05-01 10:00:00')
-    ->setEnd('2023-05-08 10:00:05')
+    ->setStartTime((new DateTime("2023-05-01 10:00:00"))->getTimestamp())
+    ->setEndTime((new DateTime("2023-05-01 11:00:00"))->getTimestamp())
     ->setLimit(5);
 
 /** @var IndexPriceKlineResponse[] $result */
@@ -514,8 +517,8 @@ use Carpenstar\ByBitAPI\Derivatives\MarketData\IndexPriceKline\Request\IndexPric
 $options = (new IndexPriceKlineRequest())
     ->setSymbol("BTCUSDT") 
     ->setInterval(1) 
-    ->setStart("2023-05-10 10:00:00") 
-    ->setEnd("2023-05-10 11:00:00") 
+    ->setStartTime((new DateTime("2023-05-08 15:00:00"))->getTimestamp()) 
+    ->setEndTime((new DateTime("2023-05-08 15:00:00"))->getTimestamp()) 
     ->setLimit(200) 
 ```
 <table style="width: 100%">
@@ -540,14 +543,14 @@ $options = (new IndexPriceKlineRequest())
     <td>Размер тика. Возможные значения: 1 3 5 15 30 60 120 240 360 720 D M W</td>
   </tr>
   <tr>
-    <td>:: setStart(string $dateTime): self</td>
+    <td>:: setStartTime(int $timestamp): self</td>
     <td><b>ДА</b></td>
-    <td>Строка даты/времени ОТ которого берется срез данных</td>
+    <td>Таймштамп ОТ которого берется срез данных</td>
   </tr>
   <tr>
-    <td>:: setEnd(string $dateTime): self</td>
+    <td>:: setEndTime(int $timestamp): self</td>
     <td><b>ДА</b></td>
-    <td>Строка даты/времени ДО которого берется срез данных</td>
+    <td>Таймштамп ДО которого берется срез данных</td>
   </tr>
   <tr>
     <td>:: setLimit(int $limit): self</td>
@@ -994,8 +997,8 @@ $bybit = new BybitAPI("https://api-testnet.bybit.com", "apiKey", "secret");
 $options = (new KlineRequest())
     ->setSymbol("BTCUSDT")
     ->setInterval(5)
-    ->setStart("2023-05-01 00:00:00")
-    ->setEnd("2023-05-05 00:00:00")
+    ->setStartTime((new DateTime("2023-05-01 00:00:00"))->getTimestamp())
+    ->setEndTime((new DateTime("2023-05-05 00:00:00"))->getTimestamp())
     ->setLimit(5);
 
 $klineData = $bybit->rest(Kline::class, $options)->getBody()->all();
@@ -1056,8 +1059,8 @@ foreach ($klineData as $klineItem) {
 $options = (new KlineRequest())
     ->setSymbol("BTCUSDT") // Обязательный параметр. Строка с тикером торговой пары.
     ->setInterval(1) // Обязательный параметр. Размер тика. Возможные значения: 1 3 5 15 30 60 120 240 360 720 D M W
-    ->setStart("2023-05-10 10:00:00") // Обязательный параметр. Строка даты/времени ОТ которого берется срез данных 
-    ->setEnd("2023-05-10 11:00:00") // Обязательный параметр. Строка даты/времени ДО которого берется срез данных
+    ->setStartTime((new DateTime("2023-05-08 15:00:00"))->getTimestamp()) // Обязательный параметр. Строка даты/времени ОТ которого берется срез данных 
+    ->setEndTime((new DateTime("2023-05-09 15:00:00"))->getTimestamp()) // Обязательный параметр. Строка даты/времени ДО которого берется срез данных
     ->setLimit(200) // Необязательный параметр. Ограничение возвращаемых записей на запрос. По умолчанию 200
 ```  
 <table style="width: 100%">
@@ -1082,12 +1085,12 @@ $options = (new KlineRequest())
     <td>Размер тика. Возможные значения: 1 3 5 15 30 60 120 240 360 720 D M W</td>
   </tr>
   <tr>
-    <td>:: setStart(string $start): self</td>
+    <td>:: setStartTime(int $timestamp): self</td>
     <td><b>ДА</b></td>
     <td>Строка даты/времени ОТ которого берется срез данных </td>
   </tr>
   <tr>
-    <td>:: setEnd(string $end): self</td>
+    <td>:: setEndTime(int $timestamp): self</td>
     <td><b>ДА</b></td>
     <td>Строка даты/времени ДО которого берется срез данных</td>
   </tr>
@@ -1186,8 +1189,8 @@ $bybit = new BybitAPI("https://api-testnet.bybit.com", "apiKey", "secret");
 $options = (new MarkPriceKlineRequest())
     ->setSymbol("APTUSDT")
     ->setInterval('1') // Kline interval. 1 3 5 15 30 60 120 240 360 720 D M W 
-    ->setStart('2023-05-08 10:00:00')
-    ->setEnd('2023-05-08 15:00:00')
+    ->setStartTime((new DateTime("2023-05-08 10:00:00"))->getTimestamp())
+    ->setEndTime((new DateTime("2023-05-08 15:00:00"))->getTimestamp())
     ->setLimit(5);
 
 $result = $bybit->rest(MarkPriceKline::class, $options)->getBody();
@@ -1238,8 +1241,8 @@ foreach ($result->all() as $markPrice) {
 $options = (new MarkPriceKlineRequest())
     ->setSymbol("BTCUSDT") // Обязательный параметр. Строка с тикером торговой пары.
     ->setInterval(1) // Обязательный параметр. Размер тика. Возможные значения: 1 3 5 15 30 60 120 240 360 720 D M W
-    ->setStart("2023-05-10 10:00:00") // Обязательный параметр. Строка даты/времени ОТ которого берется срез данных 
-    ->setEnd("2023-05-10 11:00:00"); // Обязательный параметр. Строка даты/времени ДО которого берется срез данных
+    ->setStartTime((new DateTime("2023-05-08 15:00:00"))->getTimestamp()) // Обязательный параметр. Строка даты/времени ОТ которого берется срез данных 
+    ->setEndTime((new DateTime("2023-05-09 15:00:00"))->getTimestamp()); // Обязательный параметр. Строка даты/времени ДО которого берется срез данных
     ->setLimit(200) // Необязательный параметр. Ограничение возвращаемых записей на запрос. По умолчанию 200
 ```  
 <table style="width: 100%">
@@ -1367,7 +1370,12 @@ use Carpenstar\ByBitAPI\Derivatives\MarketData\OpenInterest\Request\OpenInterest
 
 $bybit = new BybitAPI("https://api-testnet.bybit.com", "apiKey", "secret");
 
-$options = (new OpenInterestRequest())->setSymbol("ETHUSDT")->setInterval("1h")->setLimit(5);
+$options = (new OpenInterestRequest())
+    ->setStartTime((new DateTime("2023-05-08 00:00:00"))->getTimestamp())
+    ->setEndTime((new DateTime("2023-05-09 15:00:00"))->getTimestamp())
+    ->setSymbol("ETHUSDT")
+    ->setInterval("1h")
+    ->setLimit(5);
 
 /** @var OpenInterestResponse[] $result */
 $result = $bybit->rest(OpenInterest::class, $options)->getBody()->all();
@@ -1410,8 +1418,8 @@ $options = (new OpenInterestRequest())
     ->setSymbol("ETHUSDT")
     ->setInterval("1h") 
     ->setLimit(5);
-    ->setStartTime('2023-05-01 10:00:00')
-    ->setEndTime('2023-05-01 20:00:00'); 
+    ->setStartTime((new DateTime("2023-05-08 15:00:00"))->getTimestamp())
+    ->setEndTime((new DateTime("2023-05-09 15:00:00"))->getTimestamp()); 
 ```  
 <table style="width: 100%">
   <tr>
@@ -1438,14 +1446,14 @@ $options = (new OpenInterestRequest())
     </td>
   </tr>
   <tr>
-    <td>:: setStartTime(string $start): self</td>
+    <td>:: setStartTime(int $timestamp): self</td>
     <td><b>ДА</b></td>
-    <td>Строка даты/времени ОТ которого берется срез данных </td>
+    <td>Таймштамп ОТ которого берется срез данных </td>
   </tr>
   <tr>
-    <td>:: setEndTime(string $end): self</td>
+    <td>:: setEndTime(int $timestamp): self</td>
     <td><b>ДА</b></td>
-    <td>Строка даты/времени ДО которого берется срез данных</td>
+    <td>Таймштамп ДО которого берется срез данных</td>
   </tr>
   <tr>
     <td>:: setLimit(int $limit): self</td>
@@ -1687,11 +1695,12 @@ use Carpenstar\ByBitAPI\Derivatives\MarketData\PublicTradingHistory\Request\Publ
 
 $bybit = new BybitAPI("https://api-testnet.bybit.com", "apiKey", "secret");
 
-$options = (new PublicTradingHistoryRequest())->setSymbol("BTCUSDT")->setLimit(3);
+$options = (new PublicTradingHistoryRequest())
+    ->setSymbol("BTCUSDT")
+    ->setLimit(3);
 
 /** @var PublicTradingHistoryResponse[] $result */
 $result = $bybit->rest(PublicTradingHistory::class, $options)->getBody()->all();
-
 
 
 foreach ($result as $historyItem) {
@@ -1866,7 +1875,8 @@ use Carpenstar\ByBitAPI\Derivatives\MarketData\RiskLimit\Response\RiskLimitsResp
 
 $bybit = new BybitAPI("https://api-testnet.bybit.com", "apiKey", "secret");
 
-$options = (new RiskLimitsRequest())->setSymbol("BTCUSDT");
+$options = (new RiskLimitsRequest())
+    ->setSymbol("BTCUSDT");
 
 /** @var RiskLimitsResponse[] $result */
 $result = $bybit->rest(RiskLimit::class, $options)->getBody()->all();
@@ -3914,8 +3924,8 @@ namespace Carpenstar\ByBitAPI\Derivatives\Contract\Position\GetClosedPnL\Interfa
 interface IGetClosedPnLRequestInterface
 {
     public function setSymbol(string $symbol): self;
-    public function setStartTime(int $startTime): self;
-    public function setEndTime(int $endTime): self;
+    public function setStartTime(int $timestamp): self;
+    public function setEndTime(int $timestamp): self;
     public function setLimit(int $limit): self;
     public function setCursor(string $cursor): self;
     
@@ -3940,12 +3950,12 @@ interface IGetClosedPnLRequestInterface
     <td>Торговый инструмент</td>
   </tr>
   <tr>
-    <td>:: setStartTime(int $startTime)</td>
+    <td>:: setStartTime(int $timestamp)</td>
     <td>НЕТ</td>
     <td>Нижняя граница даты от которой брать записи</td>
   </tr>
   <tr>
-    <td>:: setEndTime(int $endTime)</td>
+    <td>:: setEndTime(int $timestamp)</td>
     <td>НЕТ</td>
     <td>Верхняя граница даты от которой брать записи</td>
   </tr>
@@ -4090,8 +4100,8 @@ namespace Carpenstar\ByBitAPI\Derivatives\Contract\Position\GetExecutionList\Int
 interface IGetExecutionListRequestInterface
 {
     public function setSymbol(string $symbol): self;
-    public function setStartTime(int $startTime): self;
-    public function setEndTime(int $endTime): self;
+    public function setStartTime(int $timestamp): self;
+    public function setEndTime(int $timestamp): self;
     public function setLimit(int $limit): self;
     public function setCursor(string $cursor): self;
     
@@ -4116,12 +4126,12 @@ interface IGetExecutionListRequestInterface
     <td>Торговый инструмент</td>
   </tr>
   <tr>
-    <td>:: setStartTime(int $startTime)</td>
+    <td>:: setStartTime(int $timestamp)</td>
     <td>НЕТ</td>
     <td>Нижняя граница даты от которой брать записи</td>
   </tr>
   <tr>
-    <td>:: setEndTime(int $endTime)</td>
+    <td>:: setEndTime(int $timestamp)</td>
     <td>НЕТ</td>
     <td>Верхняя граница даты от которой брать записи</td>
   </tr>

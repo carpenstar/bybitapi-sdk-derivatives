@@ -9,8 +9,8 @@ interface IGetClosedPnLRequestInterface
     public function setLimit(int $limit): self;
     public function setCursor(string $cursor): self;
     public function getSymbol(): string;
-    public function getStartTime(): int;
-    public function getEndTime(): int;
+    public function getStartTime(): \DateTime;
+    public function getEndTime(): \DateTime;
     public function getLimit(): int;
     public function getCursor(): string;
 }

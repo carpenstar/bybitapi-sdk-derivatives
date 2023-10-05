@@ -1,6 +1,7 @@
 <?php
 namespace Carpenstar\ByBitAPI\Derivatives\Contract\Position\GetExecutionList\Request;
 
+use Carpenstar\ByBitAPI\Core\Helpers\DateTimeHelper;
 use Carpenstar\ByBitAPI\Core\Objects\AbstractParameters;
 use Carpenstar\ByBitAPI\Derivatives\Contract\Position\GetExecutionList\Interfaces\IGetExecutionListRequestInterface;
 
@@ -20,15 +21,15 @@ class GetExecutionListRequest extends AbstractParameters implements IGetExecutio
 
     /**
      * The start timestamp (ms)
-     * @var int $startTime
+     * @var \DateTime $startTime
      */
-    protected int $startTime;
+    protected \DateTime $startTime;
 
     /**
      * The end timestamp (ms)
-     * @var int $endTime
+     * @var \DateTime $endTime
      */
-    protected int $endTime;
+    protected \DateTime $endTime;
 
     /**
      * Execution type
@@ -90,9 +91,9 @@ class GetExecutionListRequest extends AbstractParameters implements IGetExecutio
     }
 
     /**
-     * @return int
+     * @return \DateTime
      */
-    public function getStartTime(): int
+    public function getStartTime(): \DateTime
     {
         return $this->startTime;
     }
@@ -103,14 +104,14 @@ class GetExecutionListRequest extends AbstractParameters implements IGetExecutio
      */
     public function setStartTime(int $startTime): self
     {
-        $this->startTime = $startTime;
+        $this->startTime = DateTimeHelper::makeFromTimestamp($startTime);
         return $this;
     }
 
     /**
-     * @return int
+     * @return \DateTime
      */
-    public function getEndTime(): int
+    public function getEndTime(): \DateTime
     {
         return $this->endTime;
     }
@@ -121,7 +122,7 @@ class GetExecutionListRequest extends AbstractParameters implements IGetExecutio
      */
     public function setEndTime(int $endTime): self
     {
-        $this->endTime = $endTime;
+        $this->endTime = DateTimeHelper::makeFromTimestamp($endTime);
         return $this;
     }
 

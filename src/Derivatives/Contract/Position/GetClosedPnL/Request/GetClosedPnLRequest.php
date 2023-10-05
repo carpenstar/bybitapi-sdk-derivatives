@@ -1,6 +1,7 @@
 <?php
 namespace Carpenstar\ByBitAPI\Derivatives\Contract\Position\GetClosedPnL\Request;
 
+use Carpenstar\ByBitAPI\Core\Helpers\DateTimeHelper;
 use Carpenstar\ByBitAPI\Core\Objects\AbstractParameters;
 use Carpenstar\ByBitAPI\Derivatives\Contract\Position\GetClosedPnL\Interfaces\IGetClosedPnLRequestInterface;
 
@@ -14,15 +15,15 @@ class GetClosedPnLRequest extends AbstractParameters implements IGetClosedPnLReq
 
     /**
      * The start timestamp (ms)
-     * @var int $startTime
+     * @var \DateTime $startTime
      */
-    protected int $startTime;
+    protected \DateTime $startTime;
 
     /**
      * The end timestamp (ms)
-     * @var int $endTime
+     * @var \DateTime $endTime
      */
-    protected int $endTime;
+    protected \DateTime $endTime;
 
     /**
      * Limit for data size per page. [1, 200]. Default: 50
@@ -60,9 +61,9 @@ class GetClosedPnLRequest extends AbstractParameters implements IGetClosedPnLReq
     }
 
     /**
-     * @return int
+     * @return \DateTime
      */
-    public function getStartTime(): int
+    public function getStartTime(): \DateTime
     {
         return $this->startTime;
     }
@@ -73,14 +74,14 @@ class GetClosedPnLRequest extends AbstractParameters implements IGetClosedPnLReq
      */
     public function setStartTime(int $startTime): self
     {
-        $this->startTime = $startTime;
+        $this->startTime = DateTimeHelper::makeFromTimestamp($startTime);
         return $this;
     }
 
     /**
-     * @return int
+     * @return \DateTime
      */
-    public function getEndTime(): int
+    public function getEndTime(): \DateTime
     {
         return $this->endTime;
     }
@@ -91,7 +92,7 @@ class GetClosedPnLRequest extends AbstractParameters implements IGetClosedPnLReq
      */
     public function setEndTime(int $endTime): self
     {
-        $this->endTime = $endTime;
+        $this->endTime = DateTimeHelper::makeFromTimestamp($endTime);
         return $this;
     }
 

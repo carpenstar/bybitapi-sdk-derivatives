@@ -27,15 +27,15 @@ class MarkPriceKlineRequest extends AbstractParameters
 
     /**
      * The start timestamp (ms)
-     * @var int $start
+     * @var \DateTime $startTime
      */
-    protected int $start;
+    protected \DateTime $startTime;
 
     /**
      * The end timestamp (ms)
-     * @var int $end
+     * @var \DateTime $endTime
      */
-    protected int $end;
+    protected \DateTime $endTime;
 
     /**
      * Limit for data size per page. [1, 200]. Default: 200
@@ -48,8 +48,8 @@ class MarkPriceKlineRequest extends AbstractParameters
         $this
             ->setRequiredField('symbol')
             ->setRequiredField('interval')
-            ->setRequiredField('start')
-            ->setRequiredField('end');
+            ->setRequiredField('startTime')
+            ->setRequiredField('endTime');
     }
 
     /**
@@ -107,39 +107,39 @@ class MarkPriceKlineRequest extends AbstractParameters
     }
 
     /**
-     * @param string $start
+     * @param int $startTime
      * @return MarkPriceKlineRequest
      */
-    public function setStart(string $start): self
+    public function setStartTime(int $startTime): self
     {
-        $this->start = DateTimeHelper::makeTimestampFromDateString($start);
+        $this->startTime = DateTimeHelper::makeFromTimestamp($startTime);
         return $this;
     }
 
     /**
-     * @return int
+     * @return \DateTime
      */
-    public function getStart(): int
+    public function getStartTime(): \DateTime
     {
-        return $this->start;
+        return $this->startTime;
     }
 
     /**
-     * @param string $end
+     * @param int $endTime
      * @return MarkPriceKlineRequest
      */
-    public function setEnd(string $end): self
+    public function setEndTime(int $endTime): self
     {
-        $this->end = DateTimeHelper::makeTimestampFromDateString($end);
+        $this->endTime = DateTimeHelper::makeFromTimestamp($endTime);
         return $this;
     }
 
     /**
-     * @return int
+     * @return \DateTime
      */
-    public function getEnd(): int
+    public function getEndTime(): \DateTime
     {
-        return $this->end;
+        return $this->endTime;
     }
 
     /**
