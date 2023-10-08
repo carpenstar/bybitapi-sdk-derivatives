@@ -1,8 +1,8 @@
 ### Contract - Contract - Order - Cancel All Order
-<b>[Официальная страница документации](https://bybit-exchange.github.io/docs/derivatives/contract/cancel-all)</b>
-<p>Этот эндпоинт позволяет отменить все открытые ордера.</p>
+<b>[Official documentation](https://bybit-exchange.github.io/docs/derivatives/contract/cancel-all)</b>
+<p>This endpoint allows you to cancel all open orders.</p>
 
-<p><b>Параметры запроса:</b></p>
+<p><b>Request parameters:</b></p>
 
 ```php
 namespace Carpenstar\ByBitAPI\Derivatives\Contract\Order\CancelAllOrder\Interfaces;
@@ -24,30 +24,30 @@ interface ICancelAllOrderRequestInterface
     </td>
   </tr>
   <tr>
-    <th style="width: 45%; text-align: center">Метод</th>
-    <th style="width: 5%; text-align: center">Обязательно</th>
-    <th style="width: 50%; text-align: center">Описание</th>
+    <th style="width: 45%; text-align: center">Method</th>
+    <th style="width: 5%; text-align: center">Required</th>
+    <th style="width: 50%; text-align: center">Description</th>
   </tr>
   <tr>
     <td>:: setSymbol(string $symbol)</td>
-    <td>НЕТ</td>
-    <td>Название торгового инструмента</td>
+    <td>NO</td>
+    <td>Trading pair</td>
   </tr>
   <tr>
     <td>:: setBaseCoin(string $baseCoin)</td>
-    <td>НЕТ</td>
-    <td>Отменить все открытые ордера по базовой монете</td>
+    <td>NO</td>
+    <td>Cancel all open orders for the base coin</td>
   </tr>
   <tr>
     <td>:: setSettleCoin(string $settleCoin)</td>
-    <td>НЕТ</td>
-    <td>Отменить все открытые ордера расчетной монетой</td>
+    <td>NO</td>
+    <td>Cancel all open orders with settlement coin</td>
   </tr>
 </table>
 
-<p><b>Структура ответа:</b></p>
+<p><b>Response structure:</b></p>
 
-> Результат представляет из себя нумерованный массив обьектов реализующих интерфейс ICancelAllOrderResponseInterface
+> The result is a numbered array of objects that implement the ICancelAllOrder ResponseInterface interface
 
 ```php
 namespace Carpenstar\ByBitAPI\Derivatives\Contract\Order\CancelAllOrder\Interfaces;
@@ -65,9 +65,9 @@ interface ICancelAllOrderResponseInterface
     </td>
   </tr>
   <tr>
-    <th style="width: 20%; text-align: center">Метод</th>
-    <th style="width: 20%; text-align: center">Тип</th>
-    <th style="width: 60%; text-align: center">Описание</th>
+    <th style="width: 20%; text-align: center">Method</th>
+    <th style="width: 20%; text-align: center">Type</th>
+    <th style="width: 60%; text-align: center">Description</th>
   </tr>
   <tr>
     <td>:: getOrderId()</td>
@@ -77,6 +77,6 @@ interface ICancelAllOrderResponseInterface
   <tr>
     <td>:: getOrderLinkId()</td>
     <td>string</td>
-    <td>Пользовательский Order ID</td>
+    <td>Custom Order ID</td>
   </tr>
 </table>

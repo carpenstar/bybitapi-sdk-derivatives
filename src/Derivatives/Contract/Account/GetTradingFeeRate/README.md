@@ -1,10 +1,9 @@
 ### Contract - Account - Get Trading Fee Rate
-<b>[Официальная страница документации](https://bybit-exchange.github.io/docs/derivatives/contract/fee-rate)</b>
-<p>Эндпоинт возвращает данные по ставке торговой комиссии для ВСЕХ символов</p>
+<b>[Official documentation](https://bybit-exchange.github.io/docs/derivatives/contract/fee-rate)</b>
+<p>Endpoint returns data on the trading commission rate for ALL symbols</p>
 
 ```php
-// Класс эндпоинта:
-Carpenstar\ByBitAPI\Derivatives\Contract\Account\GetTradingFeeRate\GetTradingFeeRate::class
+Carpenstar\ByBitAPI\Derivatives\Contract\Account\GetTradingFeeRate\GetTradingFeeRate::class // Endpoint classname
 ```
 ```php
 use Carpenstar\ByBitAPI\BybitAPI;
@@ -44,7 +43,7 @@ foreach ($feeRateData as $feeRate) {
  * ---
  */
 ```
-<p><b>Параметры запроса:</b></p>
+<p><b>Request parameters:</b></p>
 
 ```php
 namespace Carpenstar\ByBitAPI\Derivatives\Contract\Account\GetTradingFeeRate\Interfaces\IGetTradingFeeRateRequestInterface;
@@ -62,18 +61,18 @@ interface IGetTradingFeeRateRequestInterface
     </td>
   </tr>
   <tr>
-    <th style="width: 40%; text-align: center">Метод</th>
-    <th style="width: 10%; text-align: center">Обязательно</th>
-    <th style="width: 50%; text-align: center">Описание</th>
+    <th style="width: 40%; text-align: center">Method</th>
+    <th style="width: 10%; text-align: center">Required</th>
+    <th style="width: 50%; text-align: center">Description</th>
   </tr>
   <tr>
     <td>:: setSymbol(string $symbol): self</td>
-    <td>НЕТ</td>
-    <td>Торговый инструмент</td>
+    <td>NO</td>
+    <td>Trading pair</td>
   </tr>
 </table>
 
-<p><b>Структура ответа:</b></p>
+<p><b>Response structure:</b></p>
 
 ```php
 namespace Carpenstar\ByBitAPI\Derivatives\Contract\Account\GetTradingFeeRate\Interfaces\IGetTradingFeeRateResponseInterface;
@@ -92,29 +91,29 @@ interface IGetTradingFeeRateResponseInterface
     </td>
   </tr>
   <tr>
-    <th style="width: 20%; text-align: center">Метод</th>
-    <th style="width: 20%; text-align: center">Тип</th>
-    <th style="width: 60%; text-align: center">Описание</th>
+    <th style="width: 20%; text-align: center">Method</th>
+    <th style="width: 20%; text-align: center">Type</th>
+    <th style="width: 60%; text-align: center">Description</th>
   </tr>
   <tr>
     <td>:: getSymbol()</td>
     <td>string</td>
     <td>
-      Торговый инструмент
+      Trading pair
     </td>
   </tr>
   <tr>
     <td>:: getTakerFeeRate()</td>
     <td>float</td>
     <td>
-      Комиссия тэйкера (покупателя)
+      Taker (buyer) commission
     </td>
   </tr>
   <tr>
     <td>:: getMakerFeeRate()</td>
     <td>float</td>
     <td>
-      Комиссия мэйкера (продавца)
+      Maker (seller) commission
     </td>
   </tr>
 </table>

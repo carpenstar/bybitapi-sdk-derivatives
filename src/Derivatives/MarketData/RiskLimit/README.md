@@ -1,11 +1,10 @@
 ### Market Data - Risk Limit
-<b>[Официальная страница документации](https://bybit-exchange.github.io/docs/derivatives/public/risk-limit)</b>
-<p>Эндпоинт возвращает данные по лимиту рисков для указанного символа. <br />
-Лимит риска — это мера управления рисками, позволяющая ограничить подверженность трейдеров риску.</p>
+<b>[Official documentation](https://bybit-exchange.github.io/docs/derivatives/public/risk-limit)</b>
+<p>Endpoint returns data on the risk limit for the specified symbol. </p>
+<p>Risk limit is a risk management measure to limit traders' exposure to risk.</p>
 
 ```php
-// Класс эндпоинта
-\Carpenstar\ByBitAPI\Derivatives\MarketData\RiskLimit\RiskLimit::class
+\Carpenstar\ByBitAPI\Derivatives\MarketData\RiskLimit\RiskLimit::class // Endpoint classname
 ```
 ```php
 use Carpenstar\ByBitAPI\BybitAPI;
@@ -64,7 +63,7 @@ foreach ($result as $riskItem) {
  */
 ```  
 
-<p><b>Параметры запроса:</b></p>
+<p><b>Request parameters:</b></p>
 
 ```php
 \Carpenstar\ByBitAPI\Derivatives\MarketData\RiskLimit\Request\RiskLimitsRequest::class
@@ -79,18 +78,18 @@ $options = (new RiskLimitsRequest())
     </td>
   </tr>
   <tr>
-    <th style="width: 40%; text-align: center">Метод</th>
-    <th style="width: 10%; text-align: center">Обязательно</th>
-    <th style="width: 50%; text-align: center">Описание</th>
+    <th style="width: 40%; text-align: center">Method</th>
+    <th style="width: 10%; text-align: center">Required</th>
+    <th style="width: 50%; text-align: center">Description</th>
   </tr>
   <tr>
     <td>:: setSymbol(string $symbol): self</td>
-    <td><b>ДА</b></td>
-    <td>Торговый инструмент</td>
+    <td><b>YES</b></td>
+    <td>Trading pair</td>
   </tr>
 </table>
 
-<p><b>Структура ответа:</b></p>
+<p><b>Response structure:</b></p>
 
 ```php
 \Carpenstar\ByBitAPI\Derivatives\MarketData\RiskLimit\Interfaces\IRiskLimitsResponse::class;
@@ -113,57 +112,57 @@ interface IRiskLimitsResponse
     </td>
   </tr>
   <tr>
-    <th style="width: 20%; text-align: center">Метод</th>
-    <th style="width: 20%; text-align: center">Тип</th>
-    <th style="width: 60%; text-align: center">Описание</th>
+    <th style="width: 20%; text-align: center">Method</th>
+    <th style="width: 20%; text-align: center">Type</th>
+    <th style="width: 60%; text-align: center">Description</th>
   </tr>
   <tr>
     <td>:: getId()</td>
     <td>string</td>
     <td>
-      ID риска
+      Risk ID
     </td>
   </tr>
   <tr>
     <td>:: getSymbol()</td>
     <td>string</td>
     <td>
-      Торговый инструмент
+      Trading pair
     </td>
   </tr>
   <tr>
     <td>:: getLimit()</td>
     <td>int</td>
     <td>
-      Ограничение по позиции
+      Position limit
     </td>
   </tr>
   <tr>
     <td>:: getMaintainMargin()</td>
     <td>float</td>
     <td>
-      Поддержка маржи
+      Margin maintenance
     </td>
   </tr>
   <tr>
     <td>:: getInitialMargin()</td>
     <td>float</td>
     <td>
-      Начальная маржа
+      Initial margin
     </td>
   </tr>
   <tr>
     <td>:: getIsLowerRisk()</td>
     <td>int</td>
     <td>
-      Торговый инструмент имеет низкий риск
+      Is the trading instrument low risk?
     </td>
   </tr>
   <tr>
     <td>:: getMaxLeverage()</td>
     <td>float</td>
     <td>
-      Максимальное кредитное плечо
+      Maximum leverage
     </td>
   </tr>
 </table>

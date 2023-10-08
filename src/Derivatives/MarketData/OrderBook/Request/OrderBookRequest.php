@@ -26,16 +26,6 @@ class OrderBookRequest extends AbstractParameters
     }
 
     /**
-     * @param string $category
-     * @return OrderBookRequest
-     */
-    public function setCategory(string $category): self
-    {
-        $this->category = "linear"; // only linear support, now
-        return $this;
-    }
-
-    /**
      * @return string
      */
     public function getCategory(): string

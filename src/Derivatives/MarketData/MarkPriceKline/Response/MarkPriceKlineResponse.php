@@ -10,7 +10,7 @@ class MarkPriceKlineResponse extends AbstractResponse implements IMarkPriceKline
     /**
      * @var \DateTime $start
      */
-    private \DateTime $start;
+    private \DateTime $startTime;
 
     /**
      * @var float $open
@@ -35,7 +35,7 @@ class MarkPriceKlineResponse extends AbstractResponse implements IMarkPriceKline
     public function __construct(array $data)
     {
         $this
-            ->setStart($data[0])
+            ->setStartTime($data[0])
             ->setOpen($data[1])
             ->setHigh($data[2])
             ->setLow($data[3])
@@ -43,34 +43,26 @@ class MarkPriceKlineResponse extends AbstractResponse implements IMarkPriceKline
     }
 
     /**
-     * @param int $start
-<<<<<<<< HEAD:src/Derivatives/MarketData/MarkPriceKline/Response/MarkPriceKlineResponse.php
+     * @param int $startTime
      * @return MarkPriceKlineResponse
-========
-     * @return MarkPriceKlineAbstractResponse
->>>>>>>> 4cd7e07 (Version v.3.0.0):src/Derivatives/MarketData/MarkPriceKline/Response/MarkPriceKlineAbstractResponse.php
      */
-    public function setStart(int $start): self
+    public function setStartTime(int $startTime): self
     {
-        $this->start = DateTimeHelper::makeFromTimestamp($start);
+        $this->startTime = DateTimeHelper::makeFromTimestamp($startTime);
         return $this;
     }
 
     /**
      * @return \DateTime
      */
-    public function getStart(): \DateTime
+    public function getStartTime(): \DateTime
     {
-        return $this->start;
+        return $this->startTime;
     }
 
     /**
      * @param float $open
-<<<<<<<< HEAD:src/Derivatives/MarketData/MarkPriceKline/Response/MarkPriceKlineResponse.php
      * @return MarkPriceKlineResponse
-========
-     * @return MarkPriceKlineAbstractResponse
->>>>>>>> 4cd7e07 (Version v.3.0.0):src/Derivatives/MarketData/MarkPriceKline/Response/MarkPriceKlineAbstractResponse.php
      */
     public function setOpen(float $open): self
     {
@@ -88,11 +80,7 @@ class MarkPriceKlineResponse extends AbstractResponse implements IMarkPriceKline
 
     /**
      * @param float $high
-<<<<<<<< HEAD:src/Derivatives/MarketData/MarkPriceKline/Response/MarkPriceKlineResponse.php
-     * @return MarkPriceKlineResponse
-========
-     * @return MarkPriceKlineAbstractResponse
->>>>>>>> 4cd7e07 (Version v.3.0.0):src/Derivatives/MarketData/MarkPriceKline/Response/MarkPriceKlineAbstractResponse.php
+     * @return $this
      */
     public function setHigh(float $high): self
     {
@@ -110,11 +98,7 @@ class MarkPriceKlineResponse extends AbstractResponse implements IMarkPriceKline
 
     /**
      * @param float $low
-<<<<<<<< HEAD:src/Derivatives/MarketData/MarkPriceKline/Response/MarkPriceKlineResponse.php
-     * @return MarkPriceKlineResponse
-========
-     * @return MarkPriceKlineAbstractResponse
->>>>>>>> 4cd7e07 (Version v.3.0.0):src/Derivatives/MarketData/MarkPriceKline/Response/MarkPriceKlineAbstractResponse.php
+     * @return $this
      */
     public function setLow(float $low): self
     {
@@ -132,11 +116,7 @@ class MarkPriceKlineResponse extends AbstractResponse implements IMarkPriceKline
 
     /**
      * @param float $close
-<<<<<<<< HEAD:src/Derivatives/MarketData/MarkPriceKline/Response/MarkPriceKlineResponse.php
-     * @return MarkPriceKlineResponse
-========
-     * @return MarkPriceKlineAbstractResponse
->>>>>>>> 4cd7e07 (Version v.3.0.0):src/Derivatives/MarketData/MarkPriceKline/Response/MarkPriceKlineAbstractResponse.php
+     * @return $this
      */
     public function setClose(float $close): self
     {
