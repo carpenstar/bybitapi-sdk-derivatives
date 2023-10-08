@@ -1,8 +1,7 @@
 ### Contract - Account - Order - Place Order
-<b>[Официальная страница документации](https://bybit-exchange.github.io/docs/derivatives/contract/place-order)</b>
+<b>[Official documentation](https://bybit-exchange.github.io/docs/derivatives/contract/place-order)</b>
 ```php
-// Класс эндпоинта:
-Carpenstar\ByBitAPI\Derivatives\Contract\Order\PlaceOrder\PlaceOrder::class
+Carpenstar\ByBitAPI\Derivatives\Contract\Order\PlaceOrder\PlaceOrder::class // Endpoint classname
 ```
 ```php
 use Carpenstar\ByBitAPI\BybitAPI;
@@ -36,7 +35,7 @@ echo "Order Link ID: " . $order->getOrderLinkId() . PHP_EOL;
  * Order Link ID: 64728f00c100d
  */
 ```
-<p><b>Параметры запроса:</b></p>
+<p><b>Request parameters:</b></p>
 
 ```php
 namespace Carpenstar\ByBitAPI\Derivatives\Contract\Order\PlaceOrder\Interfaces\IPlaceOrderRequestInterface;
@@ -78,65 +77,65 @@ interface IPlaceOrderRequestInterface
     </td>
   </tr>
   <tr>
-    <th style="width: 45%; text-align: center">Метод</th>
-    <th style="width: 5%; text-align: center">Обязательно</th>
-    <th style="width: 50%; text-align: center">Описание</th>
+    <th style="width: 45%; text-align: center">Method</th>
+    <th style="width: 5%; text-align: center">Required</th>
+    <th style="width: 50%; text-align: center">Description</th>
   </tr>
   <tr>
     <td>:: setSymbol(string $symbol)</td>
-    <td><b>ДА</b></td>
-    <td>Название торгового инструмента</td>
+    <td><b>YES</b></td>
+    <td>Trading pair</td>
   </tr>
   <tr>
     <td>:: setSide(string $side)</td>
-    <td><b>ДА</b></td>
+    <td><b>YES</b></td>
     <td>Enum: 'Buy' or 'Sell'</td>
   </tr>
   <tr>
     <td>:: setOrderType(string $orderType)</td>
-    <td><b>ДА</b></td>
+    <td><b>YES</b></td>
     <td>Enum: 'Market' or 'Limit'</td>
   </tr>
   <tr>
     <td>:: setQty(float $quantity)</td>
-    <td><b>ДА</b></td>
-    <td>Обьем ордера</td>
+    <td><b>YES</b></td>
+    <td>Quantity</td>
   </tr>
   <tr>
     <td>:: setTimeInForce(string $timeInForce)</td>
-    <td><b>ДА</b></td>
-    <td> Режим исполнения ордера. Возможные значения смотри в <a href="https://www.bybit.com/en-US/help-center/s/article/What-Are-Time-In-Force-TIF-GTC-IOC-FOK" target="_blank">официальной документации</a></td>
+    <td><b>YES</b></td>
+    <td> Order execution mode. For possible values see <a href="https://www.bybit.com/en-US/help-center/s/article/What-Are-Time-In-Force-TIF-GTC-IOC-FOK" target="_blank">official documentation</a></td>
   </tr>
   <tr>
     <td>:: setPrice(float $price)</td>
-    <td>НЕТ</td>
-    <td>Цена лимитного ордера. Оставить пустым если orderType = Market</td>
+    <td>NO</td>
+    <td>Limit order price. Leave empty if orderType = Market</td>
   </tr>
   <tr>
     <td>:: setTriggerDirection(int $triggerDirection)</td>
-    <td>НЕТ</td>
+    <td>NO</td>
     <td>
-      Параметр условного заказа. Используется для определения ожидаемого направления условного ордера. <br />
-      1: Срабатывает, когда рыночная цена поднимается до триггерной цены. <br />
-      2: Срабатывает, когда рыночная цена падает до триггерной цены <br />
+      Conditional order parameter. Used to determine the expected direction of a conditional order. <br />
+      1: Triggered when the market price rises to the trigger price. <br />
+      2: Triggered when the market price falls to the trigger price <br />
     </td>
   </tr>
   <tr>
     <td>:: setTriggerPrice(string $triggerPrice)</td>
-    <td>НЕТ</td>
+    <td>NO</td>
     <td>
-      Параметр условного заказа. <br /> 
-      Если вы ожидаете, что цена вырастет и сработает ваш условный ордер, убедитесь, что: <br />
+      Conditional order parameter. <br /> 
+      If you expect the price to rise and trigger your conditional order, make sure that: <br />
       triggerPrice > markPrice <br />
-      В противном случае, triggerPrice < markPrice
+      Otherwise, triggerPrice < markPrice
     </td>
   </tr>
   <tr>
     <td>:: setTriggerBy(string $triggerBy)</td>
-    <td>НЕТ</td>
+    <td>NO</td>
     <td>
-      Тип триггерной цены. По умолчанию: LastPrice. <br />
-      Возможные значения: <br />
+      Trigger price type. Default: LastPrice. <br />
+      Possible values: <br />
       - LastPrice <br />
       - MarkPrice <br />
       - IndexPrice <br />
@@ -146,38 +145,38 @@ interface IPlaceOrderRequestInterface
     <td>:: setPositionIdx(int $positionIdx)</td>
     <td>НЕТ</td>
     <td>
-      Индекс позиции. Обязательно если включен режим хеджирования. <br />
-      Возможные значения: <br />
-      - 0: Однонаправленный режим (по умолчанию) <br />
-      - 1: Лонг <br />
-      - 2: Шорт <br />
+      Position index. Required if hedging mode is enabled. <br />
+      Possible values: <br />
+      - 0: Unidirectional mode (default) <br />
+      - 1: Long <br />
+      - 2: Short <br />
     </td>
   </tr>
   <tr>
     <td>:: setOrderLinkId(string $orderLinkId)</td>
-    <td>НЕТ</td>
+    <td>NO</td>
     <td>
-      Пользовательский идентификатор заказа. Максимум 36 символов. <br />
-      Поддерживаются комбинации цифр, букв (заглавных и строчных), тире и подчеркиваний. <br />
-      OrderLinkId можно использовать повторно после того, как исходный заказ будет исполнен или отменен.
+      Custom order ID. Maximum 36 characters. <br />
+      Combinations of numbers, letters (uppercase and lowercase), dashes and underscores are supported. <br />
+      The OrderLinkId can be reused after the original order is filled or cancelled.
     </td>
   </tr>
   <tr>
     <td>:: setTakeProfit(float $takeProfit)</td>
-    <td>НЕТ</td>
-    <td>Цена тейк-профита</td>
+    <td>NO</td>
+    <td>Take profit price</td>
   </tr>
   <tr>
     <td>:: setStopLoss(float $stopLoss)</td>
-    <td>НЕТ</td>
-    <td>Цена стоп-лоса</td>
+    <td>NO</td>
+    <td>Stop loss price</td>
   </tr>
   <tr>
     <td>:: setTpTriggerBy(string $tpTriggerBy)</td>
-    <td>НЕТ</td>
+    <td>NO</td>
     <td>
-      Тип цены, по которой активируется тейк-профит. По умолчанию: LastPrice <br />
-      Возможные значения: <br />
+      The type of price at which the take profit is activated. Default: LastPrice <br />
+      Possible values: <br />
       - LastPrice <br />
       - MarkPrice <br />
       - IndexPrice <br />
@@ -185,10 +184,10 @@ interface IPlaceOrderRequestInterface
   </tr>
   <tr>
     <td>:: setSlTriggerBy(string $slTriggerBy)</td>
-    <td>НЕТ</td>
+    <td>NO</td>
     <td>
-      Тип цены, по которой активируется стоп-лос. По умолчанию: LastPrice <br />
-      Возможные значения: <br />
+      The type of price at which the stop loss is activated. Default: LastPrice <br />
+      Possible values: <br />
       - LastPrice <br />
       - MarkPrice <br />
       - IndexPrice <br />
@@ -196,80 +195,80 @@ interface IPlaceOrderRequestInterface
   </tr>
   <tr>
     <td>:: setReduceOnly(bool $reduceOnly)</td>
-    <td>НЕТ</td>
+    <td>NO</td>
     <td>
-      <a href="https://www.bybit.com/en-US/help-center/s/article/What-is-a-Reduce-Only-Order" target="_blank">Описание параметра в оф.документации</a> <br />
-      true означает, что ваша позиция может уменьшиться в размере только в случае срабатывания этого ордера. <br />
-      Если значение «reduce_only» равно true, то невозможно установить тейк-профит/стоп-лосс.
+      <a href="https://www.bybit.com/en-US/help-center/s/article/What-is-a-Reduce-Only-Order" target="_blank">Description of the parameter in the official documentation</a> <br />
+      true means that your position can only decrease in size if this order is triggered. <br />
+      If "reduce_only" is true, then take profit/stop loss cannot be set.
     </td>
   </tr>
   <tr>
     <td>:: setSmpType(string $smpType)</td>
-    <td>НЕТ</td>
+    <td>NO</td>
     <td>
-      <a href="https://bybit-exchange.github.io/docs/v3/smp" target="_blank">Описание параметра в оф.документации</a> <br />
-      Тип исполнения SMP.
+      <a href="https://bybit-exchange.github.io/docs/v3/smp" target="_blank">Description of the parameter in the official documentation</a> <br />
+      Execution type SMP.
     </td>
   </tr>
   <tr>
     <td>:: setCloseOnTrigger(bool $closeOnTrigger)</td>
-    <td>НЕТ</td>
+    <td>NO</td>
     <td>
-      <a href="https://www.bybit.com/en-US/help-center/bybitHC_Article?language=en_US&id=000001050" target="_blank">Что такое закрытие по триггерному ордеру?</a> <br />
-      Параметр для закрытия заказа. Это может только уменьшить ваше положение, но не увеличить его. <br />
-      Если на счету недостаточно доступного баланса при срабатывании ордера на закрытие, <br />
-      то другие активные ордера аналогичных контрактов будут отменены или уменьшены. <br />
-      Его можно использовать, чтобы гарантировать, что ваш стоп-лосс уменьшает вашу позицию независимо от текущей доступной маржи.
+        <a href="https://www.bybit.com/en-US/help-center/bybitHC_Article?language=en_US&id=000001050" target="_blank">What is closing with a trigger order?</a> <br />
+        Parameter for closing an order. This can only reduce your position, but not increase it. <br />
+        If there is not enough available balance in the account when the close order is triggered, <br />
+        then other active orders of similar contracts will be canceled or reduced. <br />
+        It can be used to ensure that your stop loss reduces your position regardless of your current available margin.
     </td>
   </tr>
   <tr>
     <td>:: setTpslMode(string $tpslMode)</td>
-    <td>НЕТ</td>
+    <td>NO</td>
     <td>
-      TP/SL режим <br />
-        - Full: вся позиция по TP/SL. Тогда tpOrderType или slOrderType должен быть Market. <br />
-        - Partial: частичное исполнение tp/sl. Поддерживаются лимитные ордера TP/SL. Примечание: при создании ограничения tp/sl требуется параметр tpslMode.
+      TP/SL mode <br />
+        - Full: entire position by TP/SL. Then tpOrderType or slOrderType should be Market. <br />
+        - Partial: partial execution of tp/sl. TP/SL limit orders are supported. Note: When creating a tp/sl constraint, the tpslMode parameter is required.
     </td>
   </tr>
   <tr>
     <td>:: setTpLimitPrice(string $tpLimitPrice)</td>
-    <td>НЕТ</td>
+    <td>NO</td>
     <td>
-      Цена лимитного ордера при срабатывании цены тейк-профита. <br />
-      Работает только тогда, когда <b>tpslMode=Partial</b> или <b>tpOrderType=Limit</b>.
+        The limit order price when the take profit price is triggered. <br />
+        Only works when <b>tpslMode=Partial</b> or <b>tpOrderType=Limit</b>.
     </td>
   </tr>
   <tr>
     <td>:: setSlLimitPrice(string $slLimitPrice)</td>
-    <td>НЕТ</td>
+    <td>NO</td>
     <td>
-      Цена лимитного ордера при срабатывании стоп-лосса. <br />
-      Работает только тогда, когда <b>tpslMode=Partial</b> и <b>slOrderType=Limit</b>.
+        Limit order price when stop loss is triggered. <br />
+        Only works when <b>tpslMode=Partial</b> and <b>slOrderType=Limit</b>.
     </td>
   </tr>
   <tr>
     <td>:: setTpOrderType(string $tpOrderType)</td>
-    <td>НЕТ</td>
+    <td>NO</td>
     <td>
-      Тип ордера, при котором срабатывает тейк-профит. <br />
-      Возможные значения: Market (- по умолчанию) или Limit. <br />
-      Для <b>tpslMode=Full</b> поддерживается только <b>tpOrderType=Market</b>.
+        The type of order that triggers the take profit. <br />
+        Possible values: Market (- default) or Limit. <br />
+        For <b>tpslMode=Full</b> only <b>tpOrderType=Market</b> is supported.
     </td>
   </tr>
   <tr>
     <td>:: setSlOrderType(string $slOrderType)</td>
-    <td>НЕТ</td>
+    <td>NO</td>
     <td>
-      Тип ордера, при котором срабатывает стоп-лосс. <br />
-      Возможные значения: Market (- по умолчанию) или Limit. <br />
-      Для <b>tpslMode=Full</b> поддерживается только <b>tpOrderType=Market</b>.
+        The type of order that triggers the stop loss. <br />
+        Possible values: Market (- default) or Limit. <br />
+        For <b>tpslMode=Full</b> only <b>tpOrderType=Market</b> is supported.
     </td>
   </tr>
 </table>
 
 
 
-<p><b>Структура ответа:</b></p>
+<p><b>Response structure:</b></p>
 
 ```php
 namespace Carpenstar\ByBitAPI\Derivatives\Contract\Order\PlaceOrder\Interfaces\IPlaceOrderResponseInterface;
@@ -287,9 +286,9 @@ interface IPlaceOrderResponseInterface
     </td>
   </tr>
   <tr>
-    <th style="width: 20%; text-align: center">Метод</th>
-    <th style="width: 20%; text-align: center">Тип</th>
-    <th style="width: 60%; text-align: center">Описание</th>
+    <th style="width: 20%; text-align: center">Method</th>
+    <th style="width: 20%; text-align: center">Type</th>
+    <th style="width: 60%; text-align: center">Description</th>
   </tr>
   <tr>
     <td>:: getOrderId()</td>
@@ -299,6 +298,6 @@ interface IPlaceOrderResponseInterface
   <tr>
     <td>:: getOrderLinkId()</td>
     <td>string</td>
-    <td>Пользовательский Order ID</td>
+    <td>Custom Order ID</td>
   </tr>
 </table>

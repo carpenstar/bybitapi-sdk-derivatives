@@ -45,11 +45,7 @@ class OpenInterestResponse extends AbstractResponse
 
     /**
      * @param int $timestamp
-<<<<<<<< HEAD:src/Derivatives/MarketData/OpenInterest/Response/OpenInterestResponse.php
-     * @return OpenInterestResponse
-========
-     * @return OpenInterestAbstractResponse
->>>>>>>> 4cd7e07 (Version v.3.0.0):src/Derivatives/MarketData/OpenInterest/Response/OpenInterestAbstractResponse.php
+     * @return self
      */
     private function setTimestamp(int $timestamp): self
     {

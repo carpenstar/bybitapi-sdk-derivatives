@@ -57,16 +57,6 @@ class OpenInterestRequest extends AbstractParameters
     }
 
     /**
-     * @param string $category
-     * @return OpenInterestRequest
-     */
-    public function setCategory(string $category): self
-    {
-        $this->category = $category;
-        return $this;
-    }
-
-    /**
      * @return string
      */
     public function getCategory(): string

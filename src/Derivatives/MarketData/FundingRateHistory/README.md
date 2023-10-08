@@ -1,11 +1,7 @@
 ### Market Data - Funding Rate History
-<b>[Официальная страница документации](https://bybit-exchange.github.io/docs/derivatives/public/funding-rate)</b>
-<p>История фандинга по указаному символу за определенный период</p>
+<b>[Official documentation](https://bybit-exchange.github.io/docs/derivatives/public/funding-rate)</b>
+<p>Funding history for a specified symbol for a certain period</p>
 
-```php
-// Класс эндпоинта:
-\Carpenstar\ByBitAPI\Derivatives\MarketData\FundingRateHistory\FundingRateHistory::class
-```
 ```php
 use Carpenstar\ByBitAPI\BybitAPI;
 use Carpenstar\ByBitAPI\Derivatives\MarketData\FundingRateHistory\FundingRateHistory;
@@ -45,18 +41,15 @@ foreach ($result as $rateItem) {
  * -----
  */
 ```
-<p><b>Параметры запроса:</b></p>
+<p><b>Request parameters:</b></p>
 
-```php
-Carpenstar\ByBitAPI\Derivatives\MarketData\FundingRateHistory\Interfaces\IFundingRateHistoryRequest::class
-```
 ```php
 new \Carpenstar\ByBitAPI\Derivatives\MarketData\FundingRateHistory\Request\FundingRateHistoryRequest();
     
 $options = (new FundingRateHistoryRequest())
     ->setSymbol("BTCUSDT")
-    ->setStart("2023-05-10 10:00:00")
-    ->setEnd("2023-05-10 11:00:00")
+    ->setStart((new DateTime("2023-05-09 10:00:00"))->getTimestamp())
+    ->setEnd((new DateTime("2023-05-09 10:00:00"))->getTimestamp())
     ->setLimit(200)
 ```
 
@@ -67,45 +60,41 @@ $options = (new FundingRateHistoryRequest())
     </td>
   </tr>
   <tr>
-    <th style="width: 40%; text-align: center">Метод</th>
-    <th style="width: 10%; text-align: center">Обязательно</th>
-    <th style="width: 50%; text-align: center">Описание</th>
+    <th style="width: 40%; text-align: center">Method</th>
+    <th style="width: 10%; text-align: center">Required</th>
+    <th style="width: 50%; text-align: center">Description</th>
   </tr>
   <tr>
     <td>:: setSymbol(string $symbol): self</td>
-    <td style="text-align: center">НЕТ</td>
-    <td>Строка с тикером торговой пары</td>
+    <td style="text-align: center">NO</td>
+    <td>Trading pair symbol</td>
   </tr>
   <tr>
-    <td>:: setStart(string $dateTime): self</td>
-    <td style="text-align: center"><b>НЕТ<sup>*</sup></b></td>
-    <td>Строка даты/времени ОТ которого берется срез данных</td>
+    <td>:: setStartTime(int $timestamp): self</td>
+    <td style="text-align: center"><b>NO<sup>*</sup></b></td>
+    <td>Timestamp FROM which the data slice is taken</td>
   </tr>
   <tr>
-    <td>:: setEnd(string $dateTime): self</td>
-    <td style="text-align: center"><b>НЕТ<sup>*</sup></b></td>
-    <td>Строка даты/времени ДО которого берется срез данных</td>
+    <td>:: setEndTime(int $timestamp): self</td>
+    <td style="text-align: center"><b>NO<sup>*</sup></b></td>
+    <td>Timestamp BEFORE which the data slice is taken</td>
   </tr>
   <tr>
     <td>:: setLimit(int $limit): self</td>
-    <td style="text-align: center">НЕТ</td>
-    <td>Ограничение возвращаемых записей на запрос</td>
+    <td style="text-align: center">NO</td>
+    <td>Limiting the records returned per query</td>
   </tr>
 </table>
 
 > <sup>*</sup>**Warning:**
-> При установке временных ограничений на выборку, обязательно следует указывать верхнюю и нижнюю границу при помощи `setStart(string $start)` и `setEnd(string $end)`.
-> Иначе будет возвращена ошибка
+> When setting time limits on sampling, be sure to specify the upper and lower bounds using `setStartTime(int $timestamp)` and `setEndTime(int $timestamp)`.
+> Otherwise an error will be returned
 
 > **Warning:**
-> По умолчанию, запрос на эндпоинт `FundingRateHistory::class` возвращает 200 последних записей до текущего момента по определенному символу
+> By default, a request to the `FundingRateHistory::class` endpoint returns the last 200 records up to the current moment for a specific symbol
 
-<p><b>Структура ответа:</b></p>
+<p><b>Response Structure:</b></p>
 
-```php
-// Интерфейс:
-\Carpenstar\ByBitAPI\Derivatives\MarketData\FundingRateHistory\Interfaces\IFundingRateHistoryResponse::class 
-```
 <table style="width: 100%">
   <tr>
     <td colspan="3">
@@ -113,23 +102,23 @@ $options = (new FundingRateHistoryRequest())
     </td>
   </tr>
   <tr>
-    <th style="width: 30%; text-align: center">Метод</th>
-    <th style="width: 20%; text-align: center">Тип</th>
-    <th style="width: 50%; text-align: center">Описание</th>
+    <th style="width: 30%; text-align: center">Method</th>
+    <th style="width: 20%; text-align: center">Type</th>
+    <th style="width: 50%; text-align: center">Description</th>
   </tr>
   <tr>
     <td>:: getSymbol()</td>
     <td style="text-align: center">string</td>
-    <td>Символ торговой пары</td>
+    <td>Trading pair symbol</td>
   </tr>
   <tr>
     <td>:: getFundingRate()</td>
     <td style="text-align: center">float</td>
-    <td>Ставка финансирования</td>
+    <td>Financing rate</td>
   </tr>
   <tr>
     <td>:: getFundingRateTimestamp()</td>
     <td style="text-align: center">DateTime</td>
-    <td>Время удержания ставки финансирования</td>
+    <td>Financing rate holding time</td>
   </tr>
 </table>

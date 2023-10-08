@@ -1,10 +1,9 @@
 ### Market Data - Kline
-<b>[Официальная страница документации](https://bybit-exchange.github.io/docs/derivatives/public/kline)</b>
-<p>Эндпоинт возвращает исторические данные для построения графиков. Свечи возвращаются группами в зависимости от запрошенного интервала.</p>
+<b>[Official documentation](https://bybit-exchange.github.io/docs/derivatives/public/kline)</b>
+<p>Endpoint returns historical data for plotting. Candles are returned in groups depending on the requested interval.</p>
 
 ```php
-// Класс эндпоинта:
-\Carpenstar\ByBitAPI\Derivatives\MarketData\Kline\Kline::class
+\Carpenstar\ByBitAPI\Derivatives\MarketData\Kline\Kline::class // Endpoint classname
 ```
 ```php
 use Carpenstar\ByBitAPI\BybitAPI;
@@ -17,8 +16,8 @@ $bybit = new BybitAPI("https://api-testnet.bybit.com", "apiKey", "secret");
 $options = (new KlineRequest())
     ->setSymbol("BTCUSDT")
     ->setInterval(5)
-    ->setStart("2023-05-01 00:00:00")
-    ->setEnd("2023-05-05 00:00:00")
+    ->setStartTime((new DateTime("2023-05-01 00:00:00"))->getTimestamp())
+    ->setEndTime((new DateTime("2023-05-05 00:00:00"))->getTimestamp())
     ->setLimit(5);
 
 $klineData = $bybit->rest(Kline::class, $options)->getBody()->all();
@@ -27,7 +26,7 @@ $klineData = $bybit->rest(Kline::class, $options)->getBody()->all();
 
 /** @var KlineResponse $klineItem */
 foreach ($klineData as $klineItem) {
-    echo "Start: {$klineItem->getStart()->format('Y-m-d H:i:s')}" . PHP_EOL;
+    echo "Start: {$klineItem->getStartTime()->format('Y-m-d H:i:s')}" . PHP_EOL;
     echo "Open: {$klineItem->getOpen()}" . PHP_EOL;
     echo "High: {$klineItem->getHigh()}" . PHP_EOL;
     echo "Low: {$klineItem->getLow()}" . PHP_EOL;
@@ -71,17 +70,17 @@ foreach ($klineData as $klineItem) {
  */
 ```  
 
-<p><b>Параметры запроса:</b></p>
+<p><b>Request parameters:</b></p>
 
 ```php
 \Carpenstar\ByBitAPI\Derivatives\MarketData\Kline\Interfaces\IKlineRequestInterface::class
 
 $options = (new KlineRequest())
-    ->setSymbol("BTCUSDT") // Обязательный параметр. Строка с тикером торговой пары.
-    ->setInterval(1) // Обязательный параметр. Размер тика. Возможные значения: 1 3 5 15 30 60 120 240 360 720 D M W
-    ->setStart("2023-05-10 10:00:00") // Обязательный параметр. Строка даты/времени ОТ которого берется срез данных 
-    ->setEnd("2023-05-10 11:00:00") // Обязательный параметр. Строка даты/времени ДО которого берется срез данных
-    ->setLimit(200) // Необязательный параметр. Ограничение возвращаемых записей на запрос. По умолчанию 200
+    ->setSymbol("BTCUSDT") // Required parameter. Line with the ticker of the trading pair.
+    ->setInterval(1) // Required parameter. Teak size. Possible values: 1 3 5 15 30 60 120 240 360 720 D M W
+    ->setStartTime((new DateTime("2023-05-10 10:00:00"))->getTimestamp()) // Required parameter. Timestamp from which the data slice is taken
+    ->setEndTime((new DateTime("2023-05-10 11:00:00"))->getTimestamp()) // Required parameter. Timestamp BEFORE which the data slice is taken
+    ->setLimit(200) // Optional parameter. Limit the records returned per query. Default 200
 ```  
 <table style="width: 100%">
   <tr>
@@ -90,45 +89,45 @@ $options = (new KlineRequest())
     </td>
   </tr>
   <tr>
-    <th style="width: 40%; text-align: center">Метод</th>
-    <th style="width: 10%; text-align: center">Обязательно</th>
-    <th style="width: 50%; text-align: center">Описание</th>
+    <th style="width: 40%; text-align: center">Method</th>
+    <th style="width: 10%; text-align: center">Required</th>
+    <th style="width: 50%; text-align: center">Description</th>
   </tr>
   <tr>
     <td>:: setSymbol(string $symbol): self</td>
-    <td><b>ДА</b></td>
-    <td>Строка с тикером торговой пары</td>
+    <td><b>YES</b></td>
+    <td>Trading pair</td>
   </tr>
   <tr>
     <td>:: setInterval(int $interval): self</td>
-    <td><b>ДА</b></td>
-    <td>Размер тика. Возможные значения: 1 3 5 15 30 60 120 240 360 720 D M W</td>
+    <td><b>YES</b></td>
+    <td>Teak size. Possible values: 1 3 5 15 30 60 120 240 360 720 D M W</td>
   </tr>
   <tr>
-    <td>:: setStart(string $start): self</td>
-    <td><b>ДА</b></td>
-    <td>Строка даты/времени ОТ которого берется срез данных </td>
+    <td>:: setStartTime(string $startTime): self</td>
+    <td><b>YES</b></td>
+    <td>Timestamp FROM which the data slice is taken </td>
   </tr>
   <tr>
-    <td>:: setEnd(string $end): self</td>
-    <td><b>ДА</b></td>
-    <td>Строка даты/времени ДО которого берется срез данных</td>
+    <td>:: setEndTime(int $endTime): self</td>
+    <td><b>YES</b></td>
+    <td>Timestamp BEFORE which the data slice is taken</td>
   </tr>
   <tr>
     <td>:: setLimit(int $limit): self</td>
-    <td>НЕТ</td>
-    <td>Ограничение возвращаемых записей на запрос. По умолчанию 200</td>
+    <td>NO</td>
+    <td>Limit the records returned per query. Default 200</td>
   </tr>
 </table>
 
-<p><b>Структура ответа:</b></p>
+<p><b>Response structures:</b></p>
 
 ```php
 namespace Carpenstar\ByBitAPI\Derivatives\MarketData\Kline\Interfaces;
 
 interface IKlineResponseInterface
 {
-    public function getStart(): \DateTime;
+    public function getStartTime(): \DateTime;
     public function getOpen(): float;
     public function getHigh(): float;
     public function getLow(): float;
@@ -139,9 +138,9 @@ interface IKlineResponseInterface
 ```
 <table style="width: 100%">
   <tr>
-    <th style="width: 20%; text-align: center">Метод</th>
-    <th style="width: 20%; text-align: center">Тип</th>
-    <th style="width: 60%; text-align: center">Описание</th>
+    <th style="width: 20%; text-align: center">Method</th>
+    <th style="width: 20%; text-align: center">Type</th>
+    <th style="width: 60%; text-align: center">Description</th>
   </tr>
   <tr>
     <td colspan="3">
@@ -149,38 +148,38 @@ interface IKlineResponseInterface
     </td>
   </tr>
   <tr>
-    <td>:: getStart()</td>
+    <td>:: getStartTime()</td>
     <td>DateTime</td>
-    <td>Время начала тика</td>
+    <td>Tick start time</td>
   </tr>
   <tr>
     <td>:: getOpen()</td>
     <td>float</td>
-    <td>Цена открытия</td>
+    <td>Opening price</td>
   </tr>
   <tr>
     <td>:: getHigh()</td>
     <td>float</td>
-    <td>Наибольшая цена</td>
+    <td>Highest price</td>
   </tr>
   <tr>
     <td>:: getLow()</td>
     <td>float</td>
-    <td>Наименьшая цена</td>
+    <td>Lowest price</td>
   </tr>
   <tr>
     <td>:: getClose()</td>
     <td>float</td>
-    <td>Цена закрытия</td>
+    <td>Closing price</td>
   </tr>
   <tr>
     <td>:: getVolume()</td>
     <td>float</td>
-    <td>Обьем</td>
+    <td>Volume</td>
   </tr>
   <tr>
     <td>:: getTurnover()</td>
     <td>float</td>
-    <td>Оборот</td>
+    <td>Turnover</td>
   </tr>
 </table>

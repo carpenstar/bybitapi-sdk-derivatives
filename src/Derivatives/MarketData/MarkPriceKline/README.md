@@ -1,13 +1,9 @@
 ### Market Data - Mark Price Kline
-<b>[Официальная страница документации](https://bybit-exchange.github.io/docs/derivatives/public/mark-kline)</b>
-<p>Эндпоинт возвращает исторические данные по <b>цене МАРКИРОВКИ</b>. <br />
-Данные возвращаются группами в зависимости от запрошенного интервала. <br />
-Можно использовать для формирования свечных графиков.</p>
+<b>[Official documentation](https://bybit-exchange.github.io/docs/derivatives/public/mark-kline)</b>
+<p>Endpoint returns historical data at <b>MARKING price</b>.</p>
+<p>Data is returned in groups depending on the requested interval. </p>
+<p>Can be used to generate candlestick charts.</p>
 
-```php
-// Класс эндпоинта:
-\Carpenstar\ByBitAPI\Derivatives\MarketData\MarkPriceKline\MarkPriceKline::class
-```
 ```php
 use Carpenstar\ByBitAPI\BybitAPI;
 use Carpenstar\ByBitAPI\Derivatives\MarketData\MarkPriceKline\MarkPriceKline;
@@ -31,7 +27,7 @@ $result = $bybit->rest(MarkPriceKline::class, $options)->getBody();
  * @var MarkPriceKlineResponse $markPrice
  */
 foreach ($result->all() as $markPrice) {
-    echo "Start: {$markPrice->getStart()->format("Y-m-d H:i:s")}" . PHP_EOL;
+    echo "Start: {$markPrice->getStartTime()->format("Y-m-d H:i:s")}" . PHP_EOL;
     echo "Open: {$markPrice->getOpen()}" . PHP_EOL;
     echo "High: {$markPrice->getHigh()}" . PHP_EOL;
     echo "Low: {$markPrice->getLow()}" . PHP_EOL;
@@ -63,17 +59,17 @@ foreach ($result->all() as $markPrice) {
  */
 ```  
 
-<p><b>Параметры запроса:</b></p>
+<p><b>Request parameters:</b></p>
 
 ```php
 \Carpenstar\ByBitAPI\Derivatives\MarketData\MarkPriceKline\MarkPriceKlineRequest::class
 
 $options = (new MarkPriceKlineRequest())
-    ->setSymbol("BTCUSDT") // Обязательный параметр. Строка с тикером торговой пары.
-    ->setInterval(1) // Обязательный параметр. Размер тика. Возможные значения: 1 3 5 15 30 60 120 240 360 720 D M W
-    ->setStart("2023-05-10 10:00:00") // Обязательный параметр. Строка даты/времени ОТ которого берется срез данных 
-    ->setEnd("2023-05-10 11:00:00"); // Обязательный параметр. Строка даты/времени ДО которого берется срез данных
-    ->setLimit(200) // Необязательный параметр. Ограничение возвращаемых записей на запрос. По умолчанию 200
+    ->setSymbol("BTCUSDT") // Required parameter. Line with the ticker of the trading pair.
+    ->setInterval(1) // Required parameter. Teak size. Possible values: 1 3 5 15 30 60 120 240 360 720 D M W
+    ->setStartTime((new DateTime("2023-05-10 10:00:00"))->getTimestamp()) // Required parameter. Timestamp from which the data slice is taken 
+    ->setEndTime((new DateTime("2023-05-10 11:00:00"))->getTimestamp()); // Required parameter. Timestamp BEFORE which the data slice is taken
+    ->setLimit(200) // Optional parameter. Limit the records returned per query. Default 200
 ```  
 <table style="width: 100%">
   <tr>
@@ -82,55 +78,55 @@ $options = (new MarkPriceKlineRequest())
     </td>
   </tr>
   <tr>
-    <th style="width: 40%; text-align: center">Метод</th>
-    <th style="width: 10%; text-align: center">Обязательно</th>
-    <th style="width: 50%; text-align: center">Описание</th>
+    <th style="width: 40%; text-align: center">Method</th>
+    <th style="width: 10%; text-align: center">Required</th>
+    <th style="width: 50%; text-align: center">Description</th>
   </tr>
   <tr>
     <td>:: setSymbol(string $symbol): self</td>
-    <td><b>ДА</b></td>
-    <td>Строка с тикером торговой пары</td>
+    <td><b>YES</b></td>
+    <td>Trading pair</td>
   </tr>
   <tr>
     <td>:: setInterval(int $interval): self</td>
-    <td><b>ДА</b></td>
+    <td><b>YES</b></td>
     <td>
-      Размер тика. <br />
-      Возможные значения: 1 3 5 15 30 60 120 240 360 720 D M W
+      Tick size. <br />
+      Possible values: 1 3 5 15 30 60 120 240 360 720 D M W
     </td>
   </tr>
   <tr>
-    <td>:: setStart(string $start): self</td>
-    <td><b>ДА</b></td>
+    <td>:: setStartTime(int $timestamp): self</td>
+    <td><b>YES</b></td>
     <td>
-      Строка даты/времени ОТ которого берется срез данных
+      Timestamp string from which the data slice is taken
     </td>
   </tr>
   <tr>
-    <td>:: setEnd(string $end): self</td>
-    <td><b>ДА</b></td>
+    <td>:: setEndTime(int $timestamp): self</td>
+    <td><b>YES</b></td>
     <td>
-      Строка даты/времени ДО которого берется срез данных
+      Timestamp BEFORE which the data slice is taken
     </td>
   </tr>
   <tr>
     <td>:: setLimit(int $limit): self</td>
-    <td>НЕТ</td>
+    <td>NO</td>
     <td>
-      Ограничение возвращаемых записей на запрос. По умолчанию: 200
+      Limit the records returned per query. Default: 200
     </td>
   </tr>
 </table>
 
 
-<p><b>Структура ответа:</b></p>
+<p><b>Response structure:</b></p>
 
 ```php
 Carpenstar\ByBitAPI\Derivatives\MarketData\MarkPriceKline\Interfaces\IMarkPriceKline::class
 
 interface IMarkPriceKline
 {
-    public function getStart(): \DateTime;
+    public function getStartTime(): \DateTime;
     public function getOpen(): float;
     public function getHigh(): float;
     public function getLow(): float;
@@ -144,38 +140,38 @@ interface IMarkPriceKline
     </td>
   </tr>
   <tr>
-    <th style="width: 20%; text-align: center">Метод</th>
-    <th style="width: 20%; text-align: center">Тип</th>
-    <th style="width: 60%; text-align: center">Описание</th>
+    <th style="width: 20%; text-align: center">Method</th>
+    <th style="width: 20%; text-align: center">Type</th>
+    <th style="width: 60%; text-align: center">Description</th>
   </tr>
   <tr>
-    <td>:: getStart()</td>
+    <td>:: getStartTime()</td>
     <td>DateTime</td>
-    <td>Время старта тика</td>
+    <td>Tick start time</td>
   </tr>
   <tr>
     <td>:: getOpen()</td>
     <td>float</td>
-    <td>Цена открытия</td>
+    <td>Opening price</td>
   </tr>
   <tr>
     <td>:: getHigh()</td>
     <td>float</td>
-    <td>Наибольшая цена</td>
+    <td>Maximum price</td>
   </tr>
   <tr>
     <td>:: getLow()</td>
     <td>float</td>
-    <td>Наименьшая цена</td>
+    <td>Minimum price</td>
   </tr>
   <tr>
     <td>:: getClose()</td>
     <td>float</td>
-    <td>Цена закрытия</td>
+    <td>Close price</td>
   </tr>
   <tr>
     <td>:: getVolume()</td>
     <td>float</td>
-    <td>Обьем</td>
+    <td>Volume</td>
   </tr>
 </table>

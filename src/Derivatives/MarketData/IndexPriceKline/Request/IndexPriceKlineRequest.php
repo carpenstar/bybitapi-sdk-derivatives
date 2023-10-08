@@ -58,16 +58,6 @@ class IndexPriceKlineRequest extends AbstractParameters implements IIndexPriceKl
     }
 
     /**
-     * @param string $category
-     * @return $this
-     */
-    public function setCategory(string $category): self
-    {
-        $this->category = $category;
-        return $this;
-    }
-
-    /**
      * @return string
      */
     public function getCategory(): string

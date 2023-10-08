@@ -1,11 +1,10 @@
 ### Market Data - Open Interest
-<b>[Официальная страница документации](https://bybit-exchange.github.io/docs/derivatives/public/open-interest)</b>
-<p>Эндпоинт возвращает данные об открытом интересе по указанному символу. <br />
-<b>Открытый интерес — это общее количество позиций бессрочных контрактов, которые в настоящее время хранятся на платформе.</b></p>
+<b>[Official documentation](https://bybit-exchange.github.io/docs/derivatives/public/open-interest)</b>
+<p>Endpoint returns data about open interest for the specified symbol. <br />
+<b>Open Interest is the total number of perpetual contract positions currently held on the platform.</b></p>
 
 ```php
-// Класс эндпоинта:
-Carpenstar\ByBitAPI\Derivatives\MarketData\OpenInterest\OpenInterest::class
+Carpenstar\ByBitAPI\Derivatives\MarketData\OpenInterest\OpenInterest::class // Endpoint classname
 ```
 ```php
 use Carpenstar\ByBitAPI\BybitAPI;
@@ -49,7 +48,7 @@ foreach ($result as $interestItem) {
 */
 ```  
 
-<p><b>Параметры запроса:</b></p>
+<p><b>Request parameters:</b></p>
 
 ```php
 \Carpenstar\ByBitAPI\Derivatives\MarketData\OpenInterest\Request\OpenInterestRequest::class   
@@ -58,8 +57,8 @@ $options = (new OpenInterestRequest())
     ->setSymbol("ETHUSDT")
     ->setInterval("1h") 
     ->setLimit(5);
-    ->setStartTime('2023-05-01 10:00:00')
-    ->setEndTime('2023-05-01 20:00:00'); 
+    ->setStartTime((new DateTime('2023-05-01 10:00:00'))->getTimestamp())
+    ->setEndTime((new DateTime('2023-05-01 20:00:00'))->getTimestamp()); 
 ```  
 <table style="width: 100%">
   <tr>
@@ -68,41 +67,41 @@ $options = (new OpenInterestRequest())
     </td>
   </tr>
   <tr>
-    <th style="width: 40%; text-align: center">Метод</th>
-    <th style="width: 10%; text-align: center">Обязательно</th>
-    <th style="width: 50%; text-align: center">Описание</th>
+    <th style="width: 40%; text-align: center">Method</th>
+    <th style="width: 10%; text-align: center">Required</th>
+    <th style="width: 50%; text-align: center">Description</th>
   </tr>
   <tr>
     <td>:: setSymbol(string $symbol): self</td>
-    <td><b>ДА</b></td>
-    <td>Строка с тикером торговой пары</td>
+    <td><b>YES</b></td>
+    <td>Trding pair</td>
   </tr>
   <tr>
     <td>:: setInterval(int $interval): self</td>
-    <td><b>ДА</b></td>
+    <td><b>YES</b></td>
     <td>
-      Размер тика. <br />
-      Возможные значения: 1h 3h 5h 15h 30h 60h 120h 240h 360h 720h D M W
+      Tick size. <br />
+      Possible values: 1h 3h 5h 15h 30h 60h 120h 240h 360h 720h D M W
     </td>
   </tr>
   <tr>
-    <td>:: setStartTime(string $start): self</td>
-    <td><b>ДА</b></td>
-    <td>Строка даты/времени ОТ которого берется срез данных </td>
+    <td>:: setStartTime(int $startTime): self</td>
+    <td><b>Yes</b></td>
+    <td>Timestamp FROM which the data slice is taken </td>
   </tr>
   <tr>
     <td>:: setEndTime(string $end): self</td>
-    <td><b>ДА</b></td>
-    <td>Строка даты/времени ДО которого берется срез данных</td>
+    <td><b>YES</b></td>
+    <td>Timestamp BEFORE which the data slice is taken</td>
   </tr>
   <tr>
     <td>:: setLimit(int $limit): self</td>
-    <td>НЕТ</td>
-    <td>Ограничение возвращаемых записей на запрос. По умолчанию 200</td>
+    <td>NO</td>
+    <td>Limit the records returned per query. Default 200</td>
   </tr>
 </table>
 
-<p><b>Структура ответа:</b></p>
+<p><b>Response structure:</b></p>
 
 ```php
 \Carpenstar\ByBitAPI\Derivatives\MarketData\OpenInterest\Interfaces\IOpenInterestResponse::class
@@ -120,18 +119,18 @@ interface IOpenInterestResponse
     </td>
   </tr>
   <tr>
-    <th style="width: 20%; text-align: center">Метод</th>
-    <th style="width: 20%; text-align: center">Тип</th>
-    <th style="width: 60%; text-align: center">Описание</th>
+    <th style="width: 20%; text-align: center">Method</th>
+    <th style="width: 20%; text-align: center">Type</th>
+    <th style="width: 60%; text-align: center">Description</th>
   </tr>
   <tr>
     <td>:: getTimestamp()</td>
     <td>DateTime</td>
-    <td>Время исполнения запроса</td>
+    <td>Request execution time</td>
   </tr>
   <tr>
     <td>:: getOpenInterest()</td>
     <td>float</td>
-    <td>Обьем интереса</td>
+    <td>Volume of interest</td>
   </tr>
 </table>

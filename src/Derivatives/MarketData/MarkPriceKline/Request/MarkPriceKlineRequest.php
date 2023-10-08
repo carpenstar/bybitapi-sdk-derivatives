@@ -53,16 +53,6 @@ class MarkPriceKlineRequest extends AbstractParameters
     }
 
     /**
-     * @param string $category
-     * @return MarkPriceKlineRequest
-     */
-    public function setCategory(string $category): self
-    {
-        $this->category = "linear"; // supports only linear category
-        return $this;
-    }
-
-    /**
      * @return string
      */
     public function getCategory(): string

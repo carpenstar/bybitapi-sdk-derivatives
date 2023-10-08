@@ -1,10 +1,9 @@
 ### Market Data - Ticker Info
-<b>[Официальная страница документации](https://bybit-exchange.github.io/docs/derivatives/public/ticker)</b>
-<p>Эндпоинт возвращает данные по символу (последний снимок цены, лучшую цену покупки/продажи и объем торгов) за последние 24 часа.</p>
+<b>[Official documentation](https://bybit-exchange.github.io/docs/derivatives/public/ticker)</b>
+<p>Endpoint returns symbol data (last price snapshot, best bid/ask price and trading volume) for the last 24 hours.</p>
 
 ```php
-// Класс эндпоинта:
-Carpenstar\ByBitAPI\Derivatives\MarketData\TickerInfo\Request\TickerInfo::class
+Carpenstar\ByBitAPI\Derivatives\MarketData\TickerInfo\Request\TickerInfo::class // Endpoint classname
 ```
 ```php
 use Carpenstar\ByBitAPI\BybitAPI;
@@ -73,7 +72,7 @@ echo "Delivery Time: {$tickerInfo->getDeliveryTime()->format("Y-m-d H:i:s")}" . 
  */
 ```  
 
-<p><b>Параметры запроса:</b></p>
+<p><b>Request parameters:</b></p>
 
 ```php
 \Carpenstar\ByBitAPI\Derivatives\MarketData\TickerInfo\Request\TickerInfoRequest::class
@@ -89,18 +88,18 @@ $options = (new TickerInfoRequest())
     </td>
   </tr>
   <tr>
-    <th style="width: 40%; text-align: center">Метод</th>
-    <th style="width: 10%; text-align: center">Обязательно</th>
-    <th style="width: 50%; text-align: center">Описание</th>
+    <th style="width: 40%; text-align: center">Method</th>
+    <th style="width: 10%; text-align: center">Required</th>
+    <th style="width: 50%; text-align: center">Description</th>
   </tr>
   <tr>
     <td>:: setSymbol(string $symbol): self</td>
-    <td><b>ДА</b></td>
-    <td>Строка с тикером торговой пары</td>
+    <td><b>YES</b></td>
+    <td>Trading pair</td>
   </tr>
 </table>
 
-<p><b>Структура ответа:</b></p>
+<p><b>Response structure:</b></p>
 
 ```php
 \Carpenstar\ByBitAPI\Derivatives\MarketData\TickerInfo\Interfaces\ITickerInfoResponse::class;
@@ -138,162 +137,127 @@ interface ITickerInfoResponse
     </td>
   </tr>
   <tr>
-    <th style="width: 20%; text-align: center">Метод</th>
-    <th style="width: 20%; text-align: center">Тип</th>
-    <th style="width: 60%; text-align: center">Описание</th>
+    <th style="width: 20%; text-align: center">Method</th>
+    <th style="width: 20%; text-align: center">Type</th>
+    <th style="width: 60%; text-align: center">Description</th>
   </tr>
   <tr>
     <td>:: getSymbol()</td>
     <td>string</td>
     <td>
-      Торговый инструмент
+      Trading pair
     </td>
   </tr>
   <tr>
     <td>:: getBidPrice()</td>
     <td>float</td>
     <td>
-      Лучшая цена продажи
+      Best selling price
     </td>
   </tr>
   <tr>
     <td>:: getAskPrice()</td>
     <td>float</td>
     <td>
-      Лучшая цена покупки
+      Best purchase price
     </td>
   </tr>
   <tr>
     <td>:: getLastPrice()</td>
     <td>float</td>
     <td>
-      Цена последней тразакции
+      Last transaction price
     </td>
   </tr>
   <tr>
     <td>:: getLastTickDirection()</td>
     <td>string</td>
     <td>
-      Направление последнего изменения цены
+      Direction of last price change
     </td>
   </tr>
   <tr>
     <td>:: getPrevPrice24h()</td>
     <td>float</td>
     <td>
-      Цена 24 часа назад
+      Price 24 hours ago
     </td>
   </tr>
   <tr>
     <td>:: getPrice24hPcnt()</td>
     <td>float</td>
     <td>
-      Изменение цены за последние 24 часа в процентах
+      Price change over the last 24 hours as a percentage
     </td>
   </tr>
   <tr>
     <td>:: getHighPrice24h()</td>
     <td>float</td>
     <td>
-      Максимальная цена за 24 часа
+      Maximum price for 24 hours
     </td>
   </tr>
   <tr>
     <td>:: getLowPrice24h()</td>
     <td>float</td>
     <td>
-      Минимальная цена за 24 часа
+      Minimum price for 24 hours
     </td>
   </tr>
   <tr>
     <td>:: getPrevPrice1h()</td>
     <td>float</td>
     <td>
-      Почасовая рыночная цена час назад
+      Hourly market price an hour ago
     </td>
   </tr>
   <tr>
     <td>:: getMarkPrice()</td>
     <td>float</td>
     <td>
-      Цена маркировки (ликвидация происходит по этому показателю)
+      Marking price (liquidation occurs according to this indicator)
     </td>
   </tr>
   <tr>
     <td>:: getIndexPrice()</td>
     <td>float</td>
     <td>
-      Цена индекса
+      Index price
     </td>
   </tr>
   <tr>
     <td>:: getOpenInterests()</td>
     <td>float</td>
     <td>
-      Обьем открытого интереса по торговому интсрументу
+      Open interest volume for a trading pair
     </td>
   </tr>
   <tr>
     <td>:: getTurnover24h()</td>
     <td>float</td>
     <td>
-      Оборот за 24 часа
+      Turnover in 24 hours
     </td>
   </tr>
   <tr>
     <td>:: getVolume24h()</td>
     <td>float</td>
     <td>
-      Совокупный обьем за 24 часа
+      Cumulative volume for 24 hours
     </td>
   </tr>
   <tr>
     <td>:: getFundingRate()</td>
     <td>float</td>
     <td>
-      Ставка финансирования
+      Funding rate
     </td>
   </tr>
   <tr>
     <td>:: getNextFundingTime()</td>
     <td>DateTime</td>
     <td>
-      Время следующего списания ставки финансирования
-    </td>
-  </tr>
-  <tr>
-    <td>:: getPredictedDeliveryPrice()</td>
-    <td>float</td>
-    <td> 
-      -
-    </td>
-  </tr>
-  <tr>
-    <td>:: getBasisRate()</td>
-    <td>float</td>
-    <td>
-      -
-    </td>
-  </tr>
-  <tr>
-    <td>:: getDeliveryFeeRate()</td>
-    <td>float</td>
-    <td>
-      -
-    </td>
-  </tr>
-  <tr>
-    <td>:: getDeliveryTime()</td>
-    <td>DateTime</td>
-    <td>
-      -
-    </td>
-  </tr>
-  <tr>
-    <td>:: getOpenInterestValue()</td>
-    <td>float</td>
-    <td>
-      -
+      Time of next funding rate debit
     </td>
   </tr>
 </table>

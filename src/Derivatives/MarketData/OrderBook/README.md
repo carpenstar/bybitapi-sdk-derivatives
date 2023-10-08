@@ -1,10 +1,9 @@
 ### Market Data - Order Book
-<b>[Официальная страница документации](https://bybit-exchange.github.io/docs/derivatives/public/orderbook)</b>
-<p>Эндпоинт возвращает электронный список ордеров на покупку и продажу бессрочных контрактов, организованный и отсортированный по уровню цен.</p>
+<b>[Official documentation](https://bybit-exchange.github.io/docs/derivatives/public/orderbook)</b>
+<p>Endpoint returns a list of orders to buy and sell perpetual contracts, organized and sorted by price level.</p>
 
 ```php
-// Класс эндпоинта:
-\Carpenstar\ByBitAPI\Derivatives\MarketData\OrderBook\OrderBook::class
+\Carpenstar\ByBitAPI\Derivatives\MarketData\OrderBook\OrderBook::class // Endpoint classname
 ```
 ```php
 use Carpenstar\ByBitAPI\BybitAPI;
@@ -57,7 +56,7 @@ foreach ($result->getAsk()->all() as $ask) {
 */
 ```  
 
-<p><b>Параметры запроса:</b></p>
+<p><b>Request parameters:</b></p>
 
 ```php
 \Carpenstar\ByBitAPI\Derivatives\MarketData\OrderBook\Request\OrderBookRequest::class
@@ -73,24 +72,24 @@ $options = (new OrderBookRequest())
     </td>
   </tr>
   <tr>
-    <th style="width: 40%; text-align: center">Метод</th>
-    <th style="width: 10%; text-align: center">Обязательно</th>
-    <th style="width: 50%; text-align: center">Описание</th>
+    <th style="width: 40%; text-align: center">Method</th>
+    <th style="width: 10%; text-align: center">Required</th>
+    <th style="width: 50%; text-align: center">Description</th>
   </tr>
   <tr>
     <td>:: setSymbol(string $symbol): self</td>
-    <td><b>ДА</b></td>
-    <td>Торговый инструмент</td>
+    <td><b>YES</b></td>
+    <td>Trading pair</td>
   </tr>
   <tr>
     <td>:: setLimit(int $limit): self</td>
-    <td>НЕТ</td>
-    <td>Ограничение на количество ордеров по одному направлению: limit = 50 (25 - bid + 25 - ask)</td>
+    <td>NO</td>
+    <td>Limit on the number of orders in one direction: limit = 50 (25 - bid + 25 - ask)</td>
   </tr>
 </table>
 
 
-<p><b>Структура ответа:</b></p>
+<p><b>Response structure:</b></p>
 
 ```php
 \Carpenstar\ByBitAPI\Derivatives\MarketData\OrderBook\Interfaces\IOrderBookResponse::class
@@ -111,34 +110,34 @@ interface IOrderBookResponse
     </td>
   </tr>
   <tr>
-    <th style="width: 20%; text-align: center">Метод</th>
-    <th style="width: 20%; text-align: center">Тип</th>
-    <th style="width: 60%; text-align: center">Описание</th>
+    <th style="width: 20%; text-align: center">Method</th>
+    <th style="width: 20%; text-align: center">Type</th>
+    <th style="width: 60%; text-align: center">Description</th>
   </tr>
   <tr>
     <td>:: getSymbol()</td>
     <td>float</td>
-    <td>Торговый инструмент</td>
+    <td>Trading pair</td>
   </tr>
   <tr>
     <td>:: getTimestamp()</td>
     <td>DateTime</td>
-    <td>Время исполнения запроса</td>
+    <td>Execution time</td>
   </tr>
   <tr>
     <td>:: getUpdateId()</td>
     <td>float</td>
-    <td>ID обновления</td>
+    <td>update ID</td>
   </tr>
   <tr>
     <td>:: getBid()</td>
     <td>IOrderBookPriceResponse[]</td>
-    <td>Список ордеров на продажу</td>
+    <td>List of sell orders</td>
   </tr>
   <tr>
     <td>:: getAsk()</td>
     <td>IOrderBookPriceResponse[]</td>
-    <td>Список ордеров на покупку</td>
+    <td>List of buy orders</td>
   </tr>
 </table>
 <p>&nbsp;</p>
@@ -159,18 +158,18 @@ interface IOrderBookPriceResponse
     </td>
   </tr>
   <tr>
-    <th style="width: 20%; text-align: center">Метод</th>
-    <th style="width: 20%; text-align: center">Тип</th>
-    <th style="width: 60%; text-align: center">Описание</th>
+    <th style="width: 20%; text-align: center">Method</th>
+    <th style="width: 20%; text-align: center">Type</th>
+    <th style="width: 60%; text-align: center">Description</th>
   </tr>
   <tr>
     <td>:: getPrice()</td>
     <td>float</td>
-    <td>Цена</td>
+    <td>Price</td>
   </tr>
   <tr>
     <td>:: getQuantity()</td>
     <td>float</td>
-    <td>Обьем</td>
+    <td>Volume</td>
   </tr>
 </table>

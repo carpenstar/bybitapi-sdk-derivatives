@@ -24,7 +24,7 @@ class indexPriceKlineTest extends TestCase
         /** @var IndexPriceKlineResponse $klineItem */
         while(!empty($klineItem = $indexPriceKlineData->getBody()->fetch())) {
             $this->assertInstanceOf(IndexPriceKlineResponse::class, $klineItem);
-            $this->assertInstanceOf(\DateTime::class, $klineItem->getStart());
+            $this->assertInstanceOf(\DateTime::class, $klineItem->getStartTime());
             $this->assertIsFloat($klineItem->getOpen());
             $this->assertIsFloat($klineItem->getHigh());
             $this->assertIsFloat($klineItem->getLow());

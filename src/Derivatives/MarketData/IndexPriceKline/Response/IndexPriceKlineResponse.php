@@ -10,7 +10,7 @@ class IndexPriceKlineResponse extends AbstractResponse implements IIndexPriceKli
     /**
      * @var \DateTime $start
      */
-    private \DateTime $start;
+    private \DateTime $startTime;
 
     /**
      * @var float $open
@@ -35,7 +35,7 @@ class IndexPriceKlineResponse extends AbstractResponse implements IIndexPriceKli
     public function __construct(array $data)
     {
         $this
-            ->setStart($data[0])
+            ->setStartTime($data[0])
             ->setOpen($data[1])
             ->setHigh($data[2])
             ->setLow($data[3])
@@ -43,25 +43,21 @@ class IndexPriceKlineResponse extends AbstractResponse implements IIndexPriceKli
     }
 
     /**
-     * @param int $start
-<<<<<<<< HEAD:src/Derivatives/MarketData/IndexPriceKline/Response/IndexPriceKlineResponse.php
+     * @param int $startTime
      * @return IndexPriceKlineResponse
-========
-     * @return IndexPriceKlineAbstractResponse
->>>>>>>> 4cd7e07 (Version v.3.0.0):src/Derivatives/MarketData/IndexPriceKline/Response/IndexPriceKlineAbstractResponse.php
      */
-    public function setStart(int $start): self
+    public function setStartTime(int $startTime): self
     {
-        $this->start = DateTimeHelper::makeFromTimestamp($start);
+        $this->startTime = DateTimeHelper::makeFromTimestamp($startTime);
         return $this;
     }
 
     /**
      * @return \DateTime
      */
-    public function getStart(): \DateTime
+    public function getStartTime(): \DateTime
     {
-        return $this->start;
+        return $this->startTime;
     }
 
     /**

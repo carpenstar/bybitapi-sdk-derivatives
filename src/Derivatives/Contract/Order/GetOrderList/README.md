@@ -1,10 +1,10 @@
-### Contract - Contract - Order - Get Order List
-<b>[Официальная страница документации](https://bybit-exchange.github.io/docs/derivatives/contract/order-list)</b>
-<p>Список ордеров</p>
+### Contract - Account - Order - Get Order List
+<b>[Official documentation](https://bybit-exchange.github.io/docs/derivatives/contract/order-list)</b>
+<p>List of orders</p>
 
-> Поскольку создание/отмена заказа является асинхронным, данные, возвращаемые из этого эндпоинта, могут задерживаться.
+> Since order creation/cancellation is asynchronous, the data returned from this endpoint may be delayed.
 
-<p><b>Параметры запроса:</b></p>
+<p><b>Request parameters:</b></p>
 
 ```php
 namespace Carpenstar\ByBitAPI\Derivatives\Contract\Order\GetOpenOrders\Interfaces;
@@ -30,43 +30,43 @@ interface IGetOpenOrdersRequestInterface
     </td>
   </tr>
   <tr>
-    <th style="width: 45%; text-align: center">Метод</th>
-    <th style="width: 5%; text-align: center">Обязательно</th>
-    <th style="width: 50%; text-align: center">Описание</th>
+    <th style="width: 45%; text-align: center">Method</th>
+    <th style="width: 5%; text-align: center">Required</th>
+    <th style="width: 50%; text-align: center">Description</th>
   </tr>
   <tr>
     <td>:: setBaseCoin(string $baseCoin)</td>
-    <td>НЕТ</td>
-    <td> Базовый токен </td>
+    <td>NO</td>
+    <td> Base coin </td>
   </tr>
   <tr>
     <td>:: setSettleCoin(string $settleCoin)</td>
-    <td>НЕТ</td>
-    <td>Расчетный токен</td>
+    <td>NO</td>
+    <td>Settle coin</td>
   </tr>
   <tr>
     <td>:: setOrderId(string $orderId)</td>
-    <td>НЕТ</td>
+    <td>NO</td>
     <td>order ID</td>
   </tr>
   <tr>
     <td>:: setOrderLinkId(string $orderLinkId)</td>
-    <td>НЕТ</td>
-    <td>Пользовательский order ID</td>
+    <td>NO</td>
+    <td>Custom order ID</td>
   </tr>
   <tr>
     <td>:: setOrderFilter(string $orderFilter)</td>
-    <td>НЕТ</td>
-    <td>Возможные значения: <b>Order</b>: активный ордер, <b>StopOrder</b>: условный ордер</td>
+    <td>NO</td>
+    <td>Possible values: <b>Order</b>: active order, <b>StopOrder</b>: conditional order</td>
   </tr>
   <tr>
     <td>:: setCursor(string $cursor)</td>
-    <td>НЕТ</td>
-    <td>Курсор следующей страницы</td>
+    <td>NO</td>
+    <td>Next page cursor</td>
   </tr>
 </table>
 
-<p><b>Структура ответа:</b></p>
+<p><b>Response cursor:</b></p>
 
 ```php
 namespace Carpenstar\ByBitAPI\Derivatives\Contract\Order\GetOpenOrders\Interfaces;
@@ -116,14 +116,14 @@ interface IGetOpenOrdersResponseInterface
     </td>
   </tr>
   <tr>
-    <th style="width: 20%; text-align: center">Метод</th>
-    <th style="width: 20%; text-align: center">Тип</th>
-    <th style="width: 60%; text-align: center">Описание</th>
+    <th style="width: 20%; text-align: center">Method</th>
+    <th style="width: 20%; text-align: center">Type</th>
+    <th style="width: 60%; text-align: center">Description</th>
   </tr>
   <tr>
     <td>:: getSymbol()</td>
     <td>string</td>
-    <td>Торговый инструмент</td>
+    <td>Trading pair</td>
   </tr>
   <tr>
     <td>:: getOrderId()</td>
@@ -133,195 +133,195 @@ interface IGetOpenOrdersResponseInterface
   <tr>
     <td>:: getOrderLinkId()</td>
     <td>string</td>
-    <td>Пользовательский Order ID</td>
+    <td>Custom Order ID</td>
   </tr>
   <tr>
     <td>:: getSide()</td>
     <td>string</td>
     <td>
--
+        Buy,Sell
     </td>
   </tr>
   <tr>
     <td>:: getOrderType()</td>
     <td>string</td>
     <td>
--
+        Order type. Market,Limit. For TP/SL order, it means the order type after triggered
     </td>
   </tr>
   <tr>
     <td>:: getPrice()</td>
     <td>float</td>
     <td>
--
+        Order price
     </td>
   </tr>
   <tr>
     <td>:: getQty()</td>
     <td>float</td>
     <td>
--
+        Order quantity
     </td>
   </tr>
   <tr>
     <td>:: getTimeInForce()</td>
     <td>string</td>
     <td>
--
+        Time in force
     </td>
   </tr>
   <tr>
     <td>:: getLastPriceOnCreated()</td>
     <td>string</td>
     <td>
--
+        Last price when place the order
     </td>
   </tr>
   <tr>
     <td>:: getCreatedTime()</td>
     <td>DateTime</td>
     <td>
--
+        Order created timestamp (ms)
     </td>
   </tr>
   <tr>
     <td>:: getUpdatedTime()</td>
     <td>DateTime</td>
     <td>
--
+        Order updated timestamp (ms)
     </td>
   </tr>
   <tr>
     <td>:: getCancelType()</td>
     <td>string</td>
     <td>
--
+        Cancel type
     </td>
   </tr>
   <tr>
     <td>:: getStopOrderType()</td>
     <td>string</td>
     <td>
--
+        Stop order type
     </td>
   </tr>
   <tr>
     <td>:: getTriggerDirection()</td>
     <td>int</td>
     <td>
--
+        Trigger direction. 1: rise, 2: fall
     </td>
   </tr>
   <tr>
     <td>:: getTriggerBy()</td>
     <td>string</td>
     <td>
--
+        The trigger type of trigger price
     </td>
   </tr>
   <tr>
     <td>:: getTriggerPrice()</td>
     <td>null|float</td>
     <td>
--
+        Trigger price
     </td>
   </tr>
   <tr>
     <td>:: getCumExecValue()</td>
     <td>float</td>
     <td>
--
+        Cumulative executed order value
     </td>
   </tr>
   <tr>
     <td>:: getCumExecFee()</td>
     <td>float</td>
     <td>
--
+        Cumulative executed trading fee
     </td>
   </tr>
   <tr>
     <td>:: getCumExecQty()</td>
     <td>float</td>
     <td>
--
+        Cumulative executed order qty
     </td>
   </tr>
   <tr>
     <td>:: getLeavesValue()</td>
     <td>float</td>
     <td>
--
+        The estimated value not executed
     </td>
   </tr>
   <tr>
     <td>:: getLeavesQty()</td>
     <td>float</td>
     <td>
--
+        The remaining qty not executed
     </td>
   </tr>
   <tr>
     <td>:: getTakeProfit()</td>
     <td>float</td>
     <td>
--
+        Take profit price
     </td>
   </tr>
   <tr>
     <td>:: getStopLoss()</td>
     <td>float</td>
     <td>
--
+        Stop loss price
     </td>
   </tr>
   <tr>
     <td>:: getTpslMode()</td>
     <td>string</td>
     <td>
--
+        TP/SL mode, Full: entire position for TP/SL. Partial: partial position tp/sl
     </td>
   </tr>
   <tr>
     <td>:: getSlTriggerBy()</td>
     <td>string</td>
     <td>
--
+        The price type to trigger stop loss
     </td>
   </tr>
   <tr>
     <td>:: isReduceOnly()</td>
     <td>bool</td>
     <td>
--
+        Reduce only. true means reduce position size
     </td>
   </tr>
   <tr>
     <td>:: isCloseOnTrigger()</td>
     <td>string</td>
     <td>
--
+        Close on trigger
     </td>
   </tr>
   <tr>
     <td>:: getSmpType()</td>
     <td>string</td>
     <td>
--
+        SMP execution type
     </td>
   </tr>
   <tr>
     <td>:: getSmpGroup()</td>
     <td>string</td>
     <td>
-    -
+        Smp group ID. If the uid has no group, it is 0 by default
     </td>
   </tr>
   <tr>
     <td>:: getSmpOrderId()</td>
     <td>string</td>
     <td>
--
+        The counterparty's orderID which triggers this SMP execution
     </td>
   </tr>
 </table>

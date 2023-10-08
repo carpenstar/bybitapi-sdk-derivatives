@@ -1,10 +1,9 @@
 ### Market Data - Public Trading History
-<b>[Официальная страница документации](https://bybit-exchange.github.io/docs/derivatives/public/trade)</b>
-<p>Эндпоинт возвращает данные об исполнении торговых ордеров</p>  
+<b>[Official documentation](https://bybit-exchange.github.io/docs/derivatives/public/trade)</b>
+<p>Endpoint returns data on the execution of trading orders</p>  
 
 ```php
-// Класс эндпоинта:
-Carpenstar\ByBitAPI\Derivatives\MarketData\PublicTradingHistory\PublicTradingHistory::class
+Carpenstar\ByBitAPI\Derivatives\MarketData\PublicTradingHistory\PublicTradingHistory::class // Endpoint classname
 ```
 ```php
 use Carpenstar\ByBitAPI\BybitAPI;
@@ -62,7 +61,7 @@ foreach ($result as $historyItem) {
  */
 ```  
 
-<p><b>Параметры запроса:</b></p>
+<p><b>Request parameters:</b></p>
 
 ```php
 \Carpenstar\ByBitAPI\Derivatives\MarketData\PublicTradingHistory\Request\PublicTradingHistoryRequest::class
@@ -78,23 +77,23 @@ $options = (new PublicTradingHistoryRequest())
     </td>
   </tr>
   <tr>
-    <th style="width: 40%; text-align: center">Метод</th>
-    <th style="width: 10%; text-align: center">Обязательно</th>
-    <th style="width: 50%; text-align: center">Описание</th>
+    <th style="width: 40%; text-align: center">Method</th>
+    <th style="width: 10%; text-align: center">Required</th>
+    <th style="width: 50%; text-align: center">Description</th>
   </tr>
   <tr>
     <td>:: setSymbol(string $symbol): self</td>
-    <td><b>ДА</b></td>
-    <td>Торговый инструмент</td>
+    <td><b>YES</b></td>
+    <td>Trading pair</td>
   </tr>
   <tr>
     <td>:: setLimit(int $limit): self</td>
-    <td>НЕТ</td>
-    <td>Ограничение количества на результирующий набор</td>
+    <td>NO</td>
+    <td>Quantity limit per result set</td>
   </tr>
 </table>
 
-<p><b>Структура ответа:</b></p>
+<p><b>Response structure:</b></p>
 
 ```php
 \Carpenstar\ByBitAPI\Derivatives\MarketData\PublicTradingHistory\Interfaces\IPublicTradingHistoryResponse::class;
@@ -117,50 +116,50 @@ interface IPublicTradingHistoryResponse
     </td>
   </tr>
   <tr>
-    <th style="width: 20%; text-align: center">Метод</th>
-    <th style="width: 20%; text-align: center">Тип</th>
-    <th style="width: 60%; text-align: center">Описание</th>
+    <th style="width: 20%; text-align: center">Method</th>
+    <th style="width: 20%; text-align: center">Тype</th>
+    <th style="width: 60%; text-align: center">Description</th>
   </tr>
   <tr>
     <td>:: getExecId()</td>
     <td>string</td>
     <td>
-      ID исполнения
+      Execution ID
     </td>
   </tr>
   <tr>
     <td>:: getSymbol()</td>
     <td>string</td>
     <td>
-      Торговый инструмент
+      Trading pair
     </td>
   </tr>
   <tr>
     <td>:: getPrice()</td>
     <td>float</td>
     <td>
-      Цена исполнения
+      Execution price
     </td>
   </tr>
   <tr>
     <td>:: getSize()</td>
     <td>float</td>
     <td>
-      Обьем исполнения
+      Execution volume
     </td>
   </tr>
   <tr>
     <td>:: getSide()</td>
     <td>string</td>
     <td>
-      Направление
+      Direction (buy, sell)
     </td>
   </tr>
   <tr>
     <td>:: getTime()</td>
     <td>DateTime</td>
     <td>
-      Время исполнения
+      Execution time
     </td>
   </tr>
   <tr>

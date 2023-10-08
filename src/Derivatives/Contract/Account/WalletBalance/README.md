@@ -1,11 +1,10 @@
 ### Contract - Account - Wallet Balance
 <b>[Официальная страница документации](https://bybit-exchange.github.io/docs/derivatives/contract/wallet)</b>
-<p>Эндпоинт возвращает баланс деривативного кошелька, информацию об активах в каждой валюте и информацию о уровне риска счета. <br />
-По умолчанию информация о валюте с активами или обязательствами, равными 0, не возвращается.</p>
+<p>Endpoint returns the derivatives wallet balance, information about assets in each currency, and information about the risk level of the account. <br />
+By default, currency information with assets or liabilities equal to 0 is not returned.</p>
 
 ```php
-// Класс эндпоинта:
-Carpenstar\ByBitAPI\Derivatives\Contract\Account\WalletBalance\WalletBalance::class
+Carpenstar\ByBitAPI\Derivatives\Contract\Account\WalletBalance\WalletBalance::class // Класс эндпоинта
 ```
 ```php
 use Carpenstar\ByBitAPI\BybitAPI;
@@ -74,7 +73,7 @@ foreach ($walletBalance as $feeRate) {
  * -----
  */
 ```
-<p><b>Структура ответа:</b></p>
+<p><b>Response structure:</b></p>
 
 ```php
 namespace Carpenstar\ByBitAPI\Derivatives\Contract\Account\WalletBalance\Interfaces\IWalletBalanceResponseInterface;
@@ -104,67 +103,67 @@ interface IWalletBalanceResponseInterface
     </td>
   </tr>
   <tr>
-    <th style="width: 20%; text-align: center">Метод</th>
-    <th style="width: 20%; text-align: center">Тип</th>
-    <th style="width: 60%; text-align: center">Описание</th>
+    <th style="width: 20%; text-align: center">Method</th>
+    <th style="width: 20%; text-align: center">Type</th>
+    <th style="width: 60%; text-align: center">Description</th>
   </tr>
   <tr>
     <td>:: getCoin()</td>
     <td>string</td>
-    <td>Токен</td>
+    <td>Coin</td>
   </tr>
   <tr>
     <td>:: getEquity()</td>
     <td>float</td>
-    <td>Общий капитал</td>
+    <td>Total capital</td>
   </tr>
   <tr>
     <td>:: getWalletBalance()</td>
     <td>float</td>
-    <td>Баланс кошелька</td>
+    <td>Wallet balance</td>
   </tr>
   <tr>
     <td>:: getPositionMargin()</td>
     <td>float</td>
-    <td>Маржа позиции</td>
+    <td>Position Margin</td>
   </tr>
   <tr>
     <td>:: getAvailableBalance()</td>
     <td>float</td>
-    <td>Доступный баланс</td>
+    <td>Available balance</td>
   </tr>
   <tr>
     <td>:: getOrderMargin()</td>
     <td>float</td>
-    <td>Предварительно занятая маржа</td>
+    <td>Pre-occupied margin</td>
   </tr>
   <tr>
     <td>:: getOccClosingFee()</td>
     <td>float</td>
     <td>
-      Занята плата за закрытие позиции. <br />
-      Формула: плата за открытие + ожидаемая максимальная плата за закрытие
+      The fee for closing a position has been charged. <br />
+      Formula: opening fee + expected maximum closing fee
     </td>
   </tr>
   <tr>
     <td>:: getOccFundingFee()</td>
     <td>float</td>
     <td>
-      Плата за предварительное финансирование
+      Pre-financing fee
     </td>
   </tr>
   <tr>
     <td>:: getUnrealisedPnl()</td>
     <td>float</td>
     <td>
-      Нереализованный PnL
+      Unrealized PnL
     </td>
   </tr>
   <tr>
     <td>:: getCumRealisedPnl()</td>
     <td>float</td>
     <td>
-      Совокупный реализованный PnL (за все время)
+      Cumulative realized PnL (all time)
     </td>
   </tr>
   <tr>
@@ -185,14 +184,14 @@ interface IWalletBalanceResponseInterface
     <td>:: getAccountIM()</td>
     <td>string</td>
     <td>
-      Начальная маржа счета USDC
+      USDC Account Initial Margin
     </td>
   </tr>
   <tr>
     <td>:: getAccountMM()</td>
     <td>string</td>
     <td>
-      Маржа обслуживания счета USDC
+      USDC Account Maintenance Margin
     </td>
   </tr>
 </table>

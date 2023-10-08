@@ -11,7 +11,7 @@ class KlineResponse extends AbstractResponse implements IKlineResponseInterface
     /**
      * @var \DateTime $start
      */
-    private \DateTime $start;
+    private \DateTime $startTime;
 
     /**
      * @var float $open
@@ -46,7 +46,7 @@ class KlineResponse extends AbstractResponse implements IKlineResponseInterface
     public function __construct(array $data)
     {
         $this
-            ->setStart($data[0])
+            ->setStartTime($data[0])
             ->setOpen($data[1])
             ->setHigh($data[2])
             ->setLow($data[3])
@@ -56,25 +56,21 @@ class KlineResponse extends AbstractResponse implements IKlineResponseInterface
     }
 
     /**
-     * @param int $start
-<<<<<<<< HEAD:src/Derivatives/MarketData/Kline/Response/KlineResponse.php
+     * @param int $startTime
      * @return KlineResponse
-========
-     * @return KlineAbstractResponse
->>>>>>>> 4cd7e07 (Version v.3.0.0):src/Derivatives/MarketData/Kline/Response/KlineAbstractResponse.php
      */
-    public function setStart(int $start): self
+    public function setStartTime(int $startTime): self
     {
-        $this->start = DateTimeHelper::makeFromTimestamp($start);
+        $this->startTime = DateTimeHelper::makeFromTimestamp($startTime);
         return $this;
     }
 
     /**
      * @return \DateTime
      */
-    public function getStart(): \DateTime
+    public function getStartTime(): \DateTime
     {
-        return $this->start;
+        return $this->startTime;
     }
 
     /**

@@ -1,11 +1,10 @@
 ## Market Data - Instrument Info
-<b>[Официальная страница документации](https://bybit-exchange.github.io/docs/derivatives/public/instrument-info)</b>
-<p>Эндпоинт предоставляет спецификации торгового инструмента.</p> 
+<b>[Official documentation](https://bybit-exchange.github.io/docs/derivatives/public/instrument-info)</b>
+<p>Endpoint provides the specifications of the trading instrument.</p> 
 
 ```php
-// Класс эндпоинта:
-\Carpenstar\ByBitAPI\Derivatives\MarketData\InstrumentInfo\InstrumentInfo::class
-````
+\Carpenstar\ByBitAPI\Derivatives\MarketData\InstrumentInfo\InstrumentInfo::class // Endpoint classname
+```
 ```php
 use Carpenstar\ByBitAPI\BybitAPI;
 use Carpenstar\ByBitAPI\Derivatives\MarketData\InstrumentInfo\InstrumentInfo;
@@ -92,16 +91,13 @@ foreach ($instrumentInfo->getLotSizeFilter()->all() as $filterItem)
  */
 ```  
 
-<p><b>Параметры запроса:</b></p>
+<p><b>Request parameters:</b></p>
 
-```php
-// Класс эндпоинта:
-\Carpenstar\ByBitAPI\Derivatives\MarketData\InstrumentInfo\Interfaces\IInstrumentInfoRequest::class
-```   
 ```php
 use \Carpenstar\ByBitAPI\Derivatives\MarketData\InstrumentInfo\Request\InstrumentInfoRequest;
     
-$options = (new InstrumentInfoRequest())->setSymbol('BTCUSDT');
+$options = (new InstrumentInfoRequest())
+    ->setSymbol('BTCUSDT');
 ```  
 
 <table style="width: 100%">
@@ -111,18 +107,18 @@ $options = (new InstrumentInfoRequest())->setSymbol('BTCUSDT');
     </td>
   </tr>
   <tr>
-    <th style="width: 40%; text-align: center">Метод</th>
-    <th style="width: 10%; text-align: center">Обязательно</th>
-    <th style="width: 50%; text-align: center">Описание</th>
+    <th style="width: 40%; text-align: center">Method</th>
+    <th style="width: 10%; text-align: center">Required</th>
+    <th style="width: 50%; text-align: center">Description</th>
   </tr>
   <tr>
     <td>:: setSymbol(string $symbol): self</td>
     <td><b>ДА</b></td>
-    <td>Строка с тикером торговой пары</td>
+    <td>Trading pair</td>
   </tr>
 </table>
 
-<p><b>Структура ответа:</b></p>
+<p><b>Response structure:</b></p>
 
 ```php
 \Carpenstar\ByBitAPI\Derivatives\MarketData\InstrumentInfo\Interfaces\IInstrumentInfoResponse::class
@@ -154,49 +150,49 @@ interface IInstrumentInfoResponse
     </td>
   </tr>
   <tr>
-    <th style="width: 20%; text-align: center">Метод</th>
-    <th style="width: 20%; text-align: center">Тип</th>
-    <th style="width: 60%; text-align: center">Описание</th>
+    <th style="width: 20%; text-align: center">Method</th>
+    <th style="width: 20%; text-align: center">Type</th>
+    <th style="width: 60%; text-align: center">Description</th>
   </tr>
   <tr>
     <td>:: getSymbol()</td>
     <td>string</td>
-    <td>Торговый инструмент</td>
+    <td>Trading pair</td>
   </tr>
   <tr>
     <td>:: getContractType()</td>
     <td>string</td>
-    <td>Тип контракта. <b>Примечание: на текущий момент поддержка только Linear</b></td>
+    <td>Contract type. <b>Note: currently only Linear is supported</b></td>
   </tr>
   <tr>
     <td>:: getBaseCoin()</td>
     <td>string</td>
-    <td>Базовый токен. Например: BTC</td>
+    <td>Base token. For example: BTC</td>
   </tr>
   <tr>
     <td>:: getQuoteCoin()</td>
     <td>string</td>
-    <td> Относительный токен. Например: USDT</td>
+    <td>Relative token. For example: USDT</td>
   </tr>
   <tr>
     <td>:: getSettleCoin()</td>
     <td>string</td>
-    <td>Расчетный токен. Например: USDT</td>
+    <td>Settlement token. For example: USDT</td>
   </tr>
   <tr>
     <td>:: getFundingInterval()</td>
     <td>int</td>
-    <td>Интервал списания ставки финансирования в милисекундах</td>
+    <td>Interval for debiting the funding rate in milliseconds</td>
   </tr>
   <tr>
     <td>:: getUnifiedMarginTrade()</td>
     <td>bool</td>
-    <td>Поддержка единого счета маржинальной торговли</td>
+    <td>Support for a unified margin trading account</td>
   </tr>
   <tr>
     <td>:: getPriceScale()</td>
     <td>float</td>
-    <td>Шкала цены</td>
+    <td>Price scale</td>
   </tr>
   <tr>
     <td>:: getDeliveryFeeRate()</td>
@@ -212,14 +208,14 @@ interface IInstrumentInfoResponse
     <td>:: getLaunchTime()</td>
     <td>DateTime</td>
     <td>
-      Время старта торгов по инструменту
+      Start time of trading on the instrument
     </td>
   </tr>
   <tr>
     <td>:: getStatus()</td>
     <td>string</td>
     <td>
-      Статус торговли по инструменты
+      Instrument trading status
     </td>
   </tr>
   <tr>
@@ -258,24 +254,24 @@ interface ILotSizeFilterItem
     </td>
   </tr>
   <tr>
-    <th style="width: 20%; text-align: center">Метод</th>
-    <th style="width: 20%; text-align: center">Тип</th>
-    <th style="width: 60%; text-align: center">Описание</th>
+    <th style="width: 20%; text-align: center">Method</th>
+    <th style="width: 20%; text-align: center">Type</th>
+    <th style="width: 60%; text-align: center">Description</th>
   </tr>
   <tr>
     <td>:: getMaxOrderQty()</td>
     <td>float</td>
-    <td>Максимальный размер ордера</td>
+    <td>Maximum order size</td>
   </tr>
   <tr>
     <td>:: getMinOrderQty()</td>
     <td>float</td>
-    <td>Минимальный размер ордера</td>
+    <td>Minimum order size</td>
   </tr>
   <tr>
     <td>:: getQtyStep()</td>
     <td>float</td>
-    <td>Шаг для изменения размера ордера</td>
+    <td>Step to change order size</td>
   </tr>
 </table>
 
@@ -298,24 +294,24 @@ interface ILeverageFilterItem
     </td>
   </tr>
   <tr>
-    <th style="width: 20%; text-align: center">Метод</th>
-    <th style="width: 20%; text-align: center">Тип</th>
-    <th style="width: 60%; text-align: center">Описание</th>
+    <th style="width: 20%; text-align: center">Method</th>
+    <th style="width: 20%; text-align: center">Type</th>
+    <th style="width: 60%; text-align: center">Description</th>
   </tr>
   <tr>
     <td>:: getMinLeverage()</td>
     <td>int</td>
-    <td>Минимальное кредитное плечо</td>
+    <td>Minimum leverage</td>
   </tr>
   <tr>
     <td>:: getMaxLeverage()</td>
     <td>float</td>
-    <td>Максимальное кредитное плечо</td>
+    <td>Maximum leverage</td>
   </tr>
   <tr>
     <td>:: getLeverageStep()</td>
     <td>float</td>
-    <td>Шаг кредитного плеча</td>
+    <td>Leverage step</td>
   </tr>
 </table>
 
@@ -338,23 +334,23 @@ interface IPriceFilterItem
     </td>
   </tr>
   <tr>
-    <th style="width: 20%; text-align: center">Метод</th>
-    <th style="width: 20%; text-align: center">Тип</th>
-    <th style="width: 60%; text-align: center">Описание</th>
+    <th style="width: 20%; text-align: center">Method</th>
+    <th style="width: 20%; text-align: center">Type</th>
+    <th style="width: 60%; text-align: center">Description</th>
   </tr>
   <tr>
     <td>:: getMinPrice()</td>
     <td>int</td>
-    <td>Минимальная цена</td>
+    <td>Minimum price</td>
   </tr>
   <tr>
     <td>:: getMaxPrice()</td>
     <td>float</td>
-    <td>Максимальная цена</td>
+    <td>Maximum price</td>
   </tr>
   <tr>
     <td>:: getTickSize()</td>
     <td>float</td>
-    <td>Размер тика</td>
+    <td>Tick size</td>
   </tr>
 </table>

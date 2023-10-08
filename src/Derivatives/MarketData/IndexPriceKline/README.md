@@ -1,13 +1,9 @@
 ### Market Data - Index Price Kline
-<b>[Официальная страница документации](https://bybit-exchange.github.io/docs/derivatives/public/index-kline)</b>
-<p>Запрос истории <b>ИНДЕКСНЫХ</b> цен. <br />
-Тики возвращаются группами в зависимости от запрошенного интервала. <br />
-Эти данные используются для построения свечных и других графиков.</p>
+<b>[Official documentation](https://bybit-exchange.github.io/docs/derivatives/public/index-kline)</b>
+<p>Request for the history of the <b>INDEX</b> price calculated based on the prices of the largest exchanges.</p>
+<p>Each element represents a group of prices depending on the requested interval.</p>
+<p>This data can be used to construct candlestick and other charts.</p>
 
-```php
-// Класс эндпоинта:
-\Carpenstar\ByBitAPI\Derivatives\MarketData\IndexPriceKline\IndexPriceKline::class
-```
 ```php
 use Carpenstar\ByBitAPI\BybitAPI;
 use Carpenstar\ByBitAPI\Derivatives\MarketData\IndexPriceKline\IndexPriceKline;
@@ -19,17 +15,16 @@ $bybit = new BybitAPI("https://api-testnet.bybit.com", "apiKey", "secret");
 $options = (new IndexPriceKlineRequest())
     ->setSymbol("ETHUSDT")
     ->setInterval(1)
-    ->setStart('2023-05-01 10:00:00')
-    ->setEnd('2023-05-08 10:00:05')
+    ->setStartTime((new DateTime("2023-05-01 10:00:00"))->getTimestamp())
+    ->setEndTime((new DateTime("2023-05-01 20:00:00"))->getTimestamp())
     ->setLimit(5);
 
 /** @var IndexPriceKlineResponse[] $result */
 $result = $bybit->rest(IndexPriceKline::class, $options)->getBody()->all();
 
 
-
 foreach ($result as $indexPriceKlineItem) {
-    echo "Start: {$indexPriceKlineItem->getStart()->format('Y-m-d H:i:s')}" . PHP_EOL;
+    echo "Start: {$indexPriceKlineItem->getStartTime()->format('Y-m-d H:i:s')}" . PHP_EOL;
     echo "Open: {$indexPriceKlineItem->getOpen()}" . PHP_EOL;
     echo "High: {$indexPriceKlineItem->getHigh()}" . PHP_EOL;
     echo "Low: {$indexPriceKlineItem->getLow()}" . PHP_EOL;
@@ -73,20 +68,16 @@ foreach ($result as $indexPriceKlineItem) {
  */
 ```
 <br />
-<p><b>Параметры запроса:</b></p>
+<p><b>Request parameters:</b></p>
 
-```php
-// Интерфейс: 
-\Carpenstar\ByBitAPI\Derivatives\MarketData\IndexPriceKline\Interfaces\IIndexPriceKlineRequest::class
-```
 ```php
 use Carpenstar\ByBitAPI\Derivatives\MarketData\IndexPriceKline\Request\IndexPriceKlineRequest;
     
 $options = (new IndexPriceKlineRequest())
     ->setSymbol("BTCUSDT") 
     ->setInterval(1) 
-    ->setStart("2023-05-10 10:00:00") 
-    ->setEnd("2023-05-10 11:00:00") 
+    ->setStartTime((new DateTime("2023-05-09 10:00:00"))->getTimestamp()) 
+    ->setEndTime((new DateTime("2023-05-09 11:00:00"))->getTimestamp()) 
     ->setLimit(200) 
 ```
 <table style="width: 100%">
@@ -96,49 +87,50 @@ $options = (new IndexPriceKlineRequest())
     </td>
   </tr>
   <tr>
-    <th style="width: 40%; text-align: center">Метод</th>
-    <th style="width: 10%; text-align: center">Обязательно</th>
-    <th style="width: 50%; text-align: center">Описание</th>
+    <th style="width: 40%; text-align: center">Method</th>
+    <th style="width: 10%; text-align: center">Required</th>
+    <th style="width: 50%; text-align: center">Description</th>
   </tr>
   <tr>
     <td>:: setSymbol(string $symbol): self</td>
-    <td><b>ДА</b></td>
-    <td>Строка с тикером торговой пары</td>
+    <td><b>YES</b></td>
+    <td>Trading pair</td>
   </tr>
   <tr>
     <td>:: setInterval(int $interval): self</td>
-    <td><b>ДА</b></td>
-    <td>Размер тика. Возможные значения: 1 3 5 15 30 60 120 240 360 720 D M W</td>
+    <td><b>YES</b></td>
+    <td>Teak size. Possible values: 1 3 5 15 30 60 120 240 360 720 D M W</td>
   </tr>
   <tr>
-    <td>:: setStart(string $dateTime): self</td>
-    <td><b>ДА</b></td>
-    <td>Строка даты/времени ОТ которого берется срез данных</td>
+    <td>:: setStartTime(int $timestamp): self</td>
+    <td><b>YES</b></td>
+    <td>Timestamp FROM which the data slice is taken</td>
   </tr>
   <tr>
-    <td>:: setEnd(string $dateTime): self</td>
-    <td><b>ДА</b></td>
-    <td>Строка даты/времени ДО которого берется срез данных</td>
+    <td>:: setEndTime(int $timestamp): self</td>
+    <td><b>YES</b></td>
+    <td>Timestamp BEFORE which the data slice is taken</td>
   </tr>
   <tr>
     <td>:: setLimit(int $limit): self</td>
-    <td>НЕТ</td>
-    <td>Ограничение возвращаемых записей на запрос. По умолчанию 200</td>
+    <td>NO</td>
+    <td>Limit the records returned per query. Default: 200</td>
   </tr>
 </table>
+<br />
 
-<p><b>Структура ответа:</b></p>
+<p><b>Response Structure:</b></p>
 
 ```php
 Carpenstar\ByBitAPI\Derivatives\MarketData\IndexPriceKline\Interfaces\IIndexPriceKlineResponse::class
 
 interface IIndexPriceKlineResponse
 {
-public function getStart(): \DateTime;
-public function getOpen(): float;
-public function getHigh(): float;
-public function getLow(): float;
-public function getClose(): float;
+    public function getStartTime(): \DateTime;
+    public function getOpen(): float;
+    public function getHigh(): float;
+    public function getLow(): float;
+    public function getClose(): float;
 }
 ```
 <table style="width: 100%">
@@ -153,28 +145,28 @@ public function getClose(): float;
     <th style="width: 60%; text-align: center">Описание</th>
   </tr>
   <tr>
-    <td>:: getStart()</td>
+    <td>:: getStartTime()</td>
     <td>DateTime</td>
-    <td>Время тика</td>
+    <td>Tick start time</td>
   </tr>
   <tr>
     <td>:: getOpen()</td>
     <td>float</td>
-    <td>Цена открытия тика</td>
+    <td>Tick opening price</td>
   </tr>
   <tr>
     <td>:: getHigh()</td>
     <td>float</td>
-    <td>Максимальная цена тика</td>
+    <td>Maximum tick price</td>
   </tr>
   <tr>
     <td>:: getLow()</td>
     <td>float</td>
-    <td>Минимальная цена тика</td>
+    <td>Minimum tick price</td>
   </tr>
   <tr>
     <td>:: getClose()</td>
     <td>float</td>
-    <td>Цена закрытия тика</td>
+    <td>Tick closing price</td>
   </tr>
 </table>
