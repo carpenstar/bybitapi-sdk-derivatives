@@ -19,8 +19,8 @@ $bybit = new BybitAPI("https://api-testnet.bybit.com", "apiKey", "secret");
 $options = (new MarkPriceKlineRequest())
     ->setSymbol("APTUSDT")
     ->setInterval('1') // Kline interval. 1 3 5 15 30 60 120 240 360 720 D M W 
-    ->setStart('2023-05-08 10:00:00')
-    ->setEnd('2023-05-08 15:00:00')
+    ->setStartTime('2023-05-08 10:00:00')
+    ->setEndTime('2023-05-08 15:00:00')
     ->setLimit(5);
 
 $result = $bybit->rest(MarkPriceKline::class, $options)->getBody();
@@ -71,8 +71,8 @@ foreach ($result->all() as $markPrice) {
 $options = (new MarkPriceKlineRequest())
     ->setSymbol("BTCUSDT") // Обязательный параметр. Строка с тикером торговой пары.
     ->setInterval(1) // Обязательный параметр. Размер тика. Возможные значения: 1 3 5 15 30 60 120 240 360 720 D M W
-    ->setStart("2023-05-10 10:00:00") // Обязательный параметр. Строка даты/времени ОТ которого берется срез данных 
-    ->setEnd("2023-05-10 11:00:00"); // Обязательный параметр. Строка даты/времени ДО которого берется срез данных
+    ->setStartTime("2023-05-10 10:00:00") // Обязательный параметр. Строка даты/времени ОТ которого берется срез данных 
+    ->setEndTime("2023-05-10 11:00:00"); // Обязательный параметр. Строка даты/времени ДО которого берется срез данных
     ->setLimit(200) // Необязательный параметр. Ограничение возвращаемых записей на запрос. По умолчанию 200
 ```  
 <table style="width: 100%">
@@ -100,17 +100,17 @@ $options = (new MarkPriceKlineRequest())
     </td>
   </tr>
   <tr>
-    <td>:: setStart(string $start): self</td>
+    <td>:: setStartTime(int $timestamp): self</td>
     <td><b>ДА</b></td>
     <td>
-      Строка даты/времени ОТ которого берется срез данных
+      Таймштамп ОТ которого берется срез данных
     </td>
   </tr>
   <tr>
-    <td>:: setEnd(string $end): self</td>
+    <td>:: setEndTime(int $timstamp): self</td>
     <td><b>ДА</b></td>
     <td>
-      Строка даты/времени ДО которого берется срез данных
+      Таймштамп ДО которого берется срез данных
     </td>
   </tr>
   <tr>

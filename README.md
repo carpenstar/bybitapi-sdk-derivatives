@@ -38,7 +38,7 @@ composer require carpenstar/bybitapi-sdk-derivatives
        <a href="https://github.com/carpenstar/bybitapi-sdk-derivatives#market-data---funding-rate-history">Funding Rate History</a>
      </td>
      <td>Public</td>
-     <td style="text-align: center"><a href="https://github.com/carpenstar/bybitapi-sdk-derivatives/tree/master/src/Derivatives/MarketData/FundingRateHistory">go</a </td>
+     <td style="text-align: center"><a href="https://github.com/carpenstar/bybitapi-sdk-derivatives/tree/master/src/Derivatives/MarketData/FundingRateHistory">view</a></td>
      <td style="text-align: center"><a href="https://bybit-exchange.github.io/docs/derivatives/public/funding-rate" target="_blank">view</a> </td>
    </tr>
    <tr>
@@ -709,7 +709,7 @@ $options = (new InstrumentInfoRequest())
   </tr>
   <tr>
     <td>:: setSymbol(string $symbol): self</td>
-    <td><b>ДА</b></td>
+    <td><b>YES</b></td>
     <td>Trading pair</td>
   </tr>
 </table>

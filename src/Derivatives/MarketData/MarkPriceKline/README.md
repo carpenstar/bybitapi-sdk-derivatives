@@ -15,8 +15,8 @@ $bybit = new BybitAPI("https://api-testnet.bybit.com", "apiKey", "secret");
 $options = (new MarkPriceKlineRequest())
     ->setSymbol("APTUSDT")
     ->setInterval('1') // Kline interval. 1 3 5 15 30 60 120 240 360 720 D M W 
-    ->setStart('2023-05-08 10:00:00')
-    ->setEnd('2023-05-08 15:00:00')
+    ->setStartTime('2023-05-08 10:00:00')
+    ->setEndTime('2023-05-08 15:00:00')
     ->setLimit(5);
 
 $result = $bybit->rest(MarkPriceKline::class, $options)->getBody();
