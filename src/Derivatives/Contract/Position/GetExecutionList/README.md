@@ -1,21 +1,27 @@
-### Contract - Position - Get Execution List
+# Contract - Position - Get Execution List
 <b>[Official documentation](https://bybit-exchange.github.io/docs/derivatives/contract/execution-list)</b>
 <p>List of executed user orders, sorted by execution time in descending order. Supports USDT perpetual currency pairs</p>
 
 > A user can have multiple executions in one order.
 
-<p><b>Request parameters:</b></p>
+<p align="center" width="100%"><b>EXAMPLE</b></p>
+
+<p align="center" width="100%"><b> --- </b></p>
+
+<p align="center" width="100%"><b>REQUEST PARAMETERS</b></p>
+
+---
 
 ```php
 namespace Carpenstar\ByBitAPI\Derivatives\Contract\Position\GetExecutionList\Interfaces;
 
 interface IGetExecutionListRequestInterface
 {
-     public function setSymbol(string $symbol): self;
-     public function setStartTime(int $startTime): self;
-     public function setEndTime(int $endTime): self;
-     public function setLimit(int $limit): self;
-     public function setCursor(string $cursor): self;
+     public function setSymbol(string $symbol): self; // Trading pair
+     public function setStartTime(int $startTime): self; // Lower limit of the date from which to take records
+     public function setEndTime(int $endTime): self; // Upper limit of the date from which to take records
+     public function setLimit(int $limit): self; // Record limit per request
+     public function setCursor(string $cursor): self; // Next page cursor
     
      // .. Getters
 }
@@ -24,7 +30,14 @@ interface IGetExecutionListRequestInterface
 <table style="width: 100%">
    <tr>
      <td colspan="3" style="text-align: left">
-       <b>\Carpenstar\ByBitAPI\Derivatives\Contract\Position\GetExecutionList\Interfaces\IGetExecutionListRequestInterface</b>
+        <sup><b>INTERFACE</b></sup> <br />
+        <b>\Carpenstar\ByBitAPI\Derivatives\Contract\Position\GetExecutionList\Interfaces\IGetExecutionListRequestInterface::class</b>
+     </td>
+   </tr>
+   <tr>
+     <td colspan="3" style="text-align: left">
+        <sup><b>DTO</b></sup> <br />
+        <b>\Carpenstar\ByBitAPI\Derivatives\Contract\Position\GetExecutionList\Request\GetExecutionListRequest::class</b>
      </td>
    </tr>
    <tr>
@@ -33,61 +46,70 @@ interface IGetExecutionListRequestInterface
      <th style="width: 50%; text-align: center">Description</th>
    </tr>
    <tr>
-     <td>:: setSymbol(string $symbol)</td>
+     <td>IGetExecutionListRequestInterface::setSymbol(string $symbol)</td>
      <td><b>YES</b></td>
      <td>Trading pair</td>
    </tr>
    <tr>
-     <td>::setStartTime(int $startTime)</td>
+     <td>IGetExecutionListRequestInterface::setStartTime(int $startTime)</td>
      <td>NO</td>
      <td>Lower limit of the date from which to take records</td>
    </tr>
    <tr>
-     <td>::setEndTime(int $endTime)</td>
+     <td>IGetExecutionListRequestInterface::setEndTime(int $endTime)</td>
      <td>NO</td>
      <td>Upper limit of the date from which to take records</td>
    </tr>
    <tr>
-     <td>::setLimit(int $limit)</td>
+     <td>IGetExecutionListRequestInterface::setLimit(int $limit)</td>
      <td>NO</td>
      <td>Record limit per request</td>
    </tr>
    <tr>
-     <td>::setCursor(string $cursor)</td>
+     <td>IGetExecutionListRequestInterface::setCursor(string $cursor)</td>
      <td>NO</td>
      <td>Next page cursor</td>
    </tr>
 </table>
 
-<p><b>Response structure:</b></p>
+<p align="center" width="100%"><b>RESPONSE STRUCTURE</b></p>
+
+---
 
 ```php
 namespace Carpenstar\ByBitAPI\Derivatives\Contract\Position\GetExecutionList\Interfaces;
 
 interface IGetExecutionListResponseInterface
 {
-     public function getSymbol(): string;
-     public function getOrderId(): string;
-     public function getSide(): string;
-     public function getQty(): float;
-     public function getLeverage(): float;
-     public function getOrderPrice(): float;
-     public function getOrderType(): string;
-     public function getExecType(): string;
-     public function getClosedSize(): float;
-     public function getCumEntryValue(): float;
-     public function getAvgEntryPrice(): float;
-     public function getCumExitValue(): float;
-     public function getAvgExitPrice(): float;
-     public function getClosedPnl(): float;
-     public function getFillCount(): int;
-     public function getCreatedAt(): \DateTime;
+     public function getSymbol(): string; // Trading pair
+     public function getOrderId(): string; // order ID
+     public function getSide(): string; // Order direction
+     public function getQty(): float; // Order volume
+     public function getLeverage(): float; // Leverage
+     public function getOrderPrice(): float; // Order price
+     public function getOrderType(): string; // Market,Limit
+     public function getExecType(): string; // Execution type
+     public function getClosedSize(): float; // Close size
+     public function getCumEntryValue(): float; //
+     public function getAvgEntryPrice(): float; //
+     public function getCumExitValue(): float; //
+     public function getAvgExitPrice(): float; //
+     public function getClosedPnl(): float; //
+     public function getFillCount(): int; //
+     public function getCreatedAt(): \DateTime; //
 }
 ```
 <table style="width: 100%">
    <tr>
      <td colspan="3">
-       <b>\Carpenstar\ByBitAPI\Derivatives\Contract\Position\GetExecutionList\Interfaces\IGetExecutionListResponseInterface</b>
+        <sup><b>INTERFACE</b></sup> <br />
+       <b>\Carpenstar\ByBitAPI\Derivatives\Contract\Position\GetExecutionList\Interfaces\IGetExecutionListResponseInterface::class</b>
+     </td>
+   </tr>
+   <tr>
+     <td colspan="3">
+        <sup><b>DTO</b></sup> <br />
+       <b>\Carpenstar\ByBitAPI\Derivatives\Contract\Position\GetExecutionList\Response\GetExecutionListResponse::class</b>
      </td>
    </tr>
    <tr>
@@ -96,77 +118,77 @@ interface IGetExecutionListResponseInterface
      <th style="width: 60%; text-align: center">Description</th>
    </tr>
    <tr>
-     <td>::getSymbol()</td>
+     <td>IGetExecutionListResponseInterface::getSymbol()</td>
      <td>string</td>
      <td>Trading pair</td>
    </tr>
    <tr>
-     <td>::getOrderId()</td>
+     <td>IGetExecutionListResponseInterface::getOrderId()</td>
      <td>string</td>
      <td>order ID</td>
    </tr>
    <tr>
-     <td>::getSide()</td>
+     <td>IGetExecutionListResponseInterface::getSide()</td>
      <td>string</td>
      <td>Order direction</td>
    </tr>
    <tr>
-     <td>::getQty()</td>
+     <td>IGetExecutionListResponseInterface::getQty()</td>
      <td>float</td>
      <td>Order volume</td>
    </tr>
    <tr>
-     <td>::getLeverage()</td>
+     <td>IGetExecutionListResponseInterface::getLeverage()</td>
      <td>float</td>
      <td>Leverage</td>
    </tr>
    <tr>
-     <td>::getOrderPrice()</td>
+     <td>IGetExecutionListResponseInterface::getOrderPrice()</td>
      <td>float</td>
      <td>Order price</td>
    </tr>
    <tr>
-     <td>::getExecType()</td>
+     <td>IGetExecutionListResponseInterface::getExecType()</td>
      <td>string</td>
      <td> Execution type </td>
    </tr>
    <tr>
-     <td>::getClosedSize()</td>
+     <td>IGetExecutionListResponseInterface::getClosedSize()</td>
      <td>float</td>
      <td> Close size </td>
    </tr>
    <tr>
-     <td>::getCumEntryValue()</td>
+     <td>IGetExecutionListResponseInterface::getCumEntryValue()</td>
      <td>float</td>
      <td> - </td>
    </tr>
    <tr>
-     <td>::getAvgEntryPrice()</td>
+     <td>IGetExecutionListResponseInterface::getAvgEntryPrice()</td>
      <td>float</td>
      <td> - </td>
    </tr>
    <tr>
-     <td>::getCumExitValue()</td>
+     <td>IGetExecutionListResponseInterface::getCumExitValue()</td>
      <td>float</td>
      <td> - </td>
    </tr>
    <tr>
-     <td>::getAvgExitPrice()</td>
+     <td>IGetExecutionListResponseInterface::getAvgExitPrice()</td>
      <td>float</td>
      <td> - </td>
    </tr>
    <tr>
-     <td>::getClosedPnl()</td>
+     <td>IGetExecutionListResponseInterface::getClosedPnl()</td>
      <td>float</td>
      <td> - </td>
    </tr>
    <tr>
-     <td>::getFillCount()</td>
+     <td>IGetExecutionListResponseInterface::getFillCount()</td>
      <td>float</td>
      <td> - </td>
    </tr>
    <tr>
-     <td>::getCreatedAt()</td>
+     <td>IGetExecutionListResponseInterface::getCreatedAt()</td>
      <td>DateTime</td>
      <td> - </td>
    </tr>

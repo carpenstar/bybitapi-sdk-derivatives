@@ -1,8 +1,17 @@
-### Market Data - Index Price Kline
+# Market Data - Index Price Kline
 <b>[Official documentation](https://bybit-exchange.github.io/docs/derivatives/public/index-kline)</b>
 <p>Request for the history of the <b>INDEX</b> price calculated based on the prices of the largest exchanges.</p>
 <p>Each element represents a group of prices depending on the requested interval.</p>
 <p>This data can be used to construct candlestick and other charts.</p>
+
+```php
+// Endpoint classname
+Carpenstar\ByBitAPI\Derivatives\MarketData\IndexPriceKline\IndexPriceKline::class 
+```
+
+<p align="center" width="100%"><b>EXAMPLE</b></p>
+
+---
 
 ```php
 use Carpenstar\ByBitAPI\BybitAPI;
@@ -66,24 +75,33 @@ foreach ($result as $indexPriceKlineItem) {
  * Close: 1847.63
  * -----
  */
-```
-<br />
-<p><b>Request parameters:</b></p>
+``` 
+
+<p align="center" width="100%"><b>REQUEST PARAMETERS:</b></p>
+    
+---
 
 ```php
 use Carpenstar\ByBitAPI\Derivatives\MarketData\IndexPriceKline\Request\IndexPriceKlineRequest;
     
 $options = (new IndexPriceKlineRequest())
-    ->setSymbol("BTCUSDT") 
-    ->setInterval(1) 
-    ->setStartTime((new DateTime("2023-05-09 10:00:00"))->getTimestamp()) 
-    ->setEndTime((new DateTime("2023-05-09 11:00:00"))->getTimestamp()) 
-    ->setLimit(200) 
+    ->setSymbol("BTCUSDT") // Trading pair
+    ->setInterval(1) // Kline interval. 1 3 5 15 30 60 120 240 360 720 D M W
+    ->setStartTime((new DateTime("2023-05-09 10:00:00"))->getTimestamp()) // The start timestamp
+    ->setEndTime((new DateTime("2023-05-09 11:00:00"))->getTimestamp()) // The end timestamp
+    ->setLimit(200) // Limit for data size per page. [1, 1000]. Default: 200
 ```
 <table style="width: 100%">
   <tr>
     <td colspan="3">
-      <b>\Carpenstar\ByBitAPI\Derivatives\MarketData\IndexPriceKline\Interfaces\IIndexPriceKlineRequest</b>
+        <sup>INTERFACE:</sup> <br />
+        <b>\Carpenstar\ByBitAPI\Derivatives\MarketData\IndexPriceKline\Interfaces\IIndexPriceKlineRequest::class</b>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="3">
+        <sup>DTO:</sup> <br />
+        <b>\Carpenstar\ByBitAPI\Derivatives\MarketData\IndexPriceKline\Request\IndexPriceKlineRequest::class</b>
     </td>
   </tr>
   <tr>
@@ -92,34 +110,36 @@ $options = (new IndexPriceKlineRequest())
     <th style="width: 50%; text-align: center">Description</th>
   </tr>
   <tr>
-    <td>:: setSymbol(string $symbol): self</td>
+    <td>IIndexPriceKlineRequest::setSymbol(string $symbol): self</td>
     <td><b>YES</b></td>
     <td>Trading pair</td>
   </tr>
   <tr>
-    <td>:: setInterval(int $interval): self</td>
+    <td>IIndexPriceKlineRequest::setInterval(int $interval): self</td>
     <td><b>YES</b></td>
     <td>Teak size. Possible values: 1 3 5 15 30 60 120 240 360 720 D M W</td>
   </tr>
   <tr>
-    <td>:: setStartTime(int $timestamp): self</td>
+    <td>IIndexPriceKlineRequest::setStartTime(int $timestamp): self</td>
     <td><b>YES</b></td>
     <td>Timestamp FROM which the data slice is taken</td>
   </tr>
   <tr>
-    <td>:: setEndTime(int $timestamp): self</td>
+    <td>IIndexPriceKlineRequest::setEndTime(int $timestamp): self</td>
     <td><b>YES</b></td>
     <td>Timestamp BEFORE which the data slice is taken</td>
   </tr>
   <tr>
-    <td>:: setLimit(int $limit): self</td>
+    <td>IIndexPriceKlineRequest::setLimit(int $limit): self</td>
     <td>NO</td>
     <td>Limit the records returned per query. Default: 200</td>
   </tr>
 </table>
 <br />
 
-<p><b>Response Structure:</b></p>
+<p align="center" width="100%"><b>RESPONSE STRUCTURE:</b></p>
+    
+---
 
 ```php
 Carpenstar\ByBitAPI\Derivatives\MarketData\IndexPriceKline\Interfaces\IIndexPriceKlineResponse::class
@@ -136,7 +156,14 @@ interface IIndexPriceKlineResponse
 <table style="width: 100%">
   <tr>
     <td colspan="3">
-      <b>\Carpenstar\ByBitAPI\Derivatives\MarketData\IndexPriceKline\Interfaces\IIndexPriceKlineResponse</b>
+        <sup>INTERFACE:</sup> <br />
+        <b>\Carpenstar\ByBitAPI\Derivatives\MarketData\IndexPriceKline\Interfaces\IIndexPriceKlineResponse::class </b>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="3">
+        <sup>DTO:</sup> <br />
+        <b>\Carpenstar\ByBitAPI\Derivatives\MarketData\IndexPriceKline\Response\IndexPriceKlineResponse::class</b>
     </td>
   </tr>
   <tr>
@@ -145,27 +172,27 @@ interface IIndexPriceKlineResponse
     <th style="width: 60%; text-align: center">Описание</th>
   </tr>
   <tr>
-    <td>:: getStartTime()</td>
+    <td>IIndexPriceKlineResponse::getStartTime()</td>
     <td>DateTime</td>
     <td>Tick start time</td>
   </tr>
   <tr>
-    <td>:: getOpen()</td>
+    <td>IIndexPriceKlineResponse::getOpen()</td>
     <td>float</td>
     <td>Tick opening price</td>
   </tr>
   <tr>
-    <td>:: getHigh()</td>
+    <td>IIndexPriceKlineResponse::getHigh()</td>
     <td>float</td>
     <td>Maximum tick price</td>
   </tr>
   <tr>
-    <td>:: getLow()</td>
+    <td>IIndexPriceKlineResponse::getLow()</td>
     <td>float</td>
     <td>Minimum tick price</td>
   </tr>
   <tr>
-    <td>:: getClose()</td>
+    <td>IIndexPriceKlineResponse::getClose()</td>
     <td>float</td>
     <td>Tick closing price</td>
   </tr>

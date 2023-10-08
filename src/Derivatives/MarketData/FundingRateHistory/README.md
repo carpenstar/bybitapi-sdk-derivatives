@@ -1,6 +1,15 @@
-### Market Data - Funding Rate History
+# Market Data - Funding Rate History
 <b>[Official documentation](https://bybit-exchange.github.io/docs/derivatives/public/funding-rate)</b>
 <p>Funding history for a specified symbol for a certain period</p>
+
+```php
+// Endpoint classname
+Carpenstar\ByBitAPI\Derivatives\MarketData\FundingRateHistory\FundingRateHistory::class 
+```
+
+<p align="center" width="100%"><b>EXAMPLE</b></p>
+
+---
 
 ```php
 use Carpenstar\ByBitAPI\BybitAPI;
@@ -14,7 +23,6 @@ $options = (new FundingRateHistoryRequest())->setSymbol("BTCUSDT")->setLimit(3);
 
 /** @var FundingRateHistoryResponse[] $result */
 $result = $bybit->rest(FundingRateHistory::class, $options)->getBody()->all();
-
 
 
 foreach ($result as $rateItem) {
@@ -41,22 +49,32 @@ foreach ($result as $rateItem) {
  * -----
  */
 ```
-<p><b>Request parameters:</b></p>
+
+<p align="center" width="100%"><b>REQUEST PARAMETERS</b></p>
+    
+---
 
 ```php
 new \Carpenstar\ByBitAPI\Derivatives\MarketData\FundingRateHistory\Request\FundingRateHistoryRequest();
     
 $options = (new FundingRateHistoryRequest())
-    ->setSymbol("BTCUSDT")
-    ->setStart((new DateTime("2023-05-09 10:00:00"))->getTimestamp())
-    ->setEnd((new DateTime("2023-05-09 10:00:00"))->getTimestamp())
-    ->setLimit(200)
+    ->setSymbol("BTCUSDT") // Trading pair
+    ->setStartTime((new DateTime("2023-05-09 10:00:00"))->getTimestamp()) // The start timestamp
+    ->setEndTime((new DateTime("2023-05-09 10:00:00"))->getTimestamp()) // The end timestamp
+    ->setLimit(200) // Limit for data size per page. [1, 200]. Default: 200
 ```
 
 <table style="width: 100%">
   <tr>
     <td colspan="3">
-      <b>\Carpenstar\ByBitAPI\Derivatives\MarketData\FundingRateHistory\Interfaces\IFundingRateHistoryRequest</b>
+        <sup><b>INTERFACE:</b></sup> <br />
+        <b>\Carpenstar\ByBitAPI\Derivatives\MarketData\FundingRateHistory\Interfaces\IFundingRateHistoryRequest::class</b>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="3">
+        <sup><b>DTO:</b></sup> <br />
+        <b>\Carpenstar\ByBitAPI\Derivatives\MarketData\FundingRateHistory\Request\FundingRateHistoryRequest::class</b>
     </td>
   </tr>
   <tr>
@@ -65,22 +83,22 @@ $options = (new FundingRateHistoryRequest())
     <th style="width: 50%; text-align: center">Description</th>
   </tr>
   <tr>
-    <td>:: setSymbol(string $symbol): self</td>
+    <td>IFundingRateHistoryRequest::setSymbol(string $symbol): self</td>
     <td style="text-align: center">NO</td>
     <td>Trading pair symbol</td>
   </tr>
   <tr>
-    <td>:: setStartTime(int $timestamp): self</td>
+    <td>IFundingRateHistoryRequest::setStartTime(int $timestamp): self</td>
     <td style="text-align: center"><b>NO<sup>*</sup></b></td>
     <td>Timestamp FROM which the data slice is taken</td>
   </tr>
   <tr>
-    <td>:: setEndTime(int $timestamp): self</td>
+    <td>IFundingRateHistoryRequest::setEndTime(int $timestamp): self</td>
     <td style="text-align: center"><b>NO<sup>*</sup></b></td>
     <td>Timestamp BEFORE which the data slice is taken</td>
   </tr>
   <tr>
-    <td>:: setLimit(int $limit): self</td>
+    <td>IFundingRateHistoryRequest::setLimit(int $limit): self</td>
     <td style="text-align: center">NO</td>
     <td>Limiting the records returned per query</td>
   </tr>
@@ -93,12 +111,22 @@ $options = (new FundingRateHistoryRequest())
 > **Warning:**
 > By default, a request to the `FundingRateHistory::class` endpoint returns the last 200 records up to the current moment for a specific symbol
 
-<p><b>Response Structure:</b></p>
+
+<p align="center" width="100%"><b>RESPONSE STRUCTURE</b></p>
+    
+---
 
 <table style="width: 100%">
   <tr>
     <td colspan="3">
-      <b>\Carpenstar\ByBitAPI\Derivatives\MarketData\FundingRateHistory\Interfaces\IFundingRateHistoryResponse</b>
+        <sup><b>INTERFACE:</b></sup> <br />
+        <b>\Carpenstar\ByBitAPI\Derivatives\MarketData\FundingRateHistory\Interfaces\IFundingRateHistoryResponse::class</b>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="3">
+        <sup><b>DTO:</b></sup> <br /> 
+        <b>\Carpenstar\ByBitAPI\Derivatives\MarketData\FundingRateHistory\Response\FundingRateHistoryResponse::class</b>
     </td>
   </tr>
   <tr>
@@ -107,17 +135,17 @@ $options = (new FundingRateHistoryRequest())
     <th style="width: 50%; text-align: center">Description</th>
   </tr>
   <tr>
-    <td>:: getSymbol()</td>
+    <td>IFundingRateHistoryResponse::getSymbol()</td>
     <td style="text-align: center">string</td>
     <td>Trading pair symbol</td>
   </tr>
   <tr>
-    <td>:: getFundingRate()</td>
+    <td>IFundingRateHistoryResponse::getFundingRate()</td>
     <td style="text-align: center">float</td>
     <td>Financing rate</td>
   </tr>
   <tr>
-    <td>:: getFundingRateTimestamp()</td>
+    <td>IFundingRateHistoryResponse::getFundingRateTimestamp()</td>
     <td style="text-align: center">DateTime</td>
     <td>Financing rate holding time</td>
   </tr>

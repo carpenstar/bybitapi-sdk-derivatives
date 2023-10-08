@@ -1,4 +1,4 @@
-### Contract - Position - Set Trading Stop
+# Contract - Position - Set Trading Stop
 <b>[Official documentation](https://bybit-exchange.github.io/docs/derivatives/contract/trading-stop)</b>
 
 <p>The request sets the value of take profit, stop loss or trailing</p>
@@ -9,28 +9,35 @@
 
 > Supports USDT and USDC Perpetual. Note: USDC Perpetual does not support partial TP/SL mode.
 
-<p><b>Request parameters</b></p>
+<p align="center" width="100%"><b>EXAMPLE</b></p>
+
+<p align="center" width="100%"><b> --- </b></p>
+
+
+<p align="center" width="100%"><b>REQUEST PARAMETERS</b></p>
+
+---
 
 ```php
 namespace Carpenstar\ByBitAPI\Derivatives\Contract\Position\SetTradingStop\Interfaces;
 
 interface ISetTradingStopRequestInterface
 {
-     public function setSymbol(string $symbol): self;
-     public function setTakeProfit(float $takeProfit): self;
-     public function setStopLoss(float $stopLoss): self;
-     public function setTpslMode(string $tpslMode): self;
-     public function setTpSize(float $tpSize): self;
-     public function setSlSize(float $slSize): self;
-     public function setTpTriggerBy(string $tpTriggerBy): self;
-     public function setSlTriggerBy(string $slTriggerBy): self;
-     public function setTrailingStop(float $trailingStop): self;
-     public function setActivePrice(float $activePrice): self;
-     public function setTpLimitPrice(float $tpLimitPrice): self;
-     public function setSlLimitPrice(float $slLimitPrice): self;
-     public function setTpOrderType(string $tpOrderType): self;
-     public function setSlOrderType(string $slOrderType): self;
-     public function setPositionIdx(int $positionIdx): self;
+     public function setSymbol(string $symbol): self; // Trading pair
+     public function setTakeProfit(float $takeProfit): self; // Cannot be less than 0, 0 means cancel TP. Partial TP/SL cannot be cancelled by set it 0
+     public function setStopLoss(float $stopLoss): self; // Cannot be less than 0, 0 means cancel SL. Partial TP/SL cannot be cancelled by set it 0
+     public function setTpslMode(string $tpslMode): self; // TP/SL mode
+     public function setTpSize(float $tpSize): self; // Take profit size. Valid in TP/SL partial mode only. Note: the value of tpSize and slSize must equal
+     public function setSlSize(float $slSize): self; // Stop loss size. Valid in TP/SL partial mode only. Note: the value of tpSize and slSize must equal
+     public function setTpTriggerBy(string $tpTriggerBy): self; // Take profit trigger price type. default: LastPrice
+     public function setSlTriggerBy(string $slTriggerBy): self; // Stop loss trigger price type. default: LastPrice
+     public function setTrailingStop(float $trailingStop): self; // Cannot be less than 0, 0 means cancel TS
+     public function setActivePrice(float $activePrice): self; // Trailing stop trigger price. Trailing stop will be triggered when this price is reached only 
+     public function setTpLimitPrice(float $tpLimitPrice): self; // The limit order price when take profit price is triggered. Only works when tpslMode=Partial and tpOrderType=Limit
+     public function setSlLimitPrice(float $slLimitPrice): self; // The limit order price when stop loss price is triggered. Only works when tpslMode=Partial and slOrderType=Limit
+     public function setTpOrderType(string $tpOrderType): self; // The order type when take profit is triggered. Market(default), Limit. For tpslMode=Full, it only supports tpOrderType=Market
+     public function setSlOrderType(string $slOrderType): self; // The order type when take profit is triggered
+     public function setPositionIdx(int $positionIdx): self; // Used to identify positions in different position modes. For hedge-mode, this param is required
 
      // .. Getters
 }
@@ -39,7 +46,14 @@ interface ISetTradingStopRequestInterface
 <table style="width: 100%">
    <tr>
      <td colspan="3" style="text-align: left">
-       <b>\Carpenstar\ByBitAPI\Derivatives\Contract\Position\SetTradingStop\Interfaces\ISetTradingStopRequestInterface</b>
+        <sup><b>INTERFACE</b></sup> <br />
+       <b>\Carpenstar\ByBitAPI\Derivatives\Contract\Position\SetTradingStop\Interfaces\ISetTradingStopRequestInterface::class</b>
+     </td>
+   </tr>
+   <tr>
+     <td colspan="3" style="text-align: left">
+        <sup><b>DTO</b></sup> <br />
+       <b>\Carpenstar\ByBitAPI\Derivatives\Contract\Position\SetTradingStop\Request\SetTradingStopRequest::class</b>
      </td>
    </tr>
    <tr>
@@ -129,6 +143,8 @@ interface ISetTradingStopRequestInterface
    </tr>
 </table>
 
-<p><b>Response structure:</b></p>
+<p align="center" width="100%"><b>RESPONSE STRUCTURE</b></p>
+
+---
 
 > Endpoint returns an empty array as a successful response

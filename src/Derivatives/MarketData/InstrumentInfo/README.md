@@ -1,10 +1,16 @@
-## Market Data - Instrument Info
+# Market Data - Instrument Info
 <b>[Official documentation](https://bybit-exchange.github.io/docs/derivatives/public/instrument-info)</b>
 <p>Endpoint provides the specifications of the trading instrument.</p> 
 
 ```php
-\Carpenstar\ByBitAPI\Derivatives\MarketData\InstrumentInfo\InstrumentInfo::class // Endpoint classname
+// Endpoint classname
+\Carpenstar\ByBitAPI\Derivatives\MarketData\InstrumentInfo\InstrumentInfo::class
 ```
+
+<p align="center" width="100%"><b>EXAMPLE</b></p>
+
+---
+
 ```php
 use Carpenstar\ByBitAPI\BybitAPI;
 use Carpenstar\ByBitAPI\Derivatives\MarketData\InstrumentInfo\InstrumentInfo;
@@ -91,19 +97,28 @@ foreach ($instrumentInfo->getLotSizeFilter()->all() as $filterItem)
  */
 ```  
 
-<p><b>Request parameters:</b></p>
+<p align="center" width="100%"><b>REQUEST PARAMETERS</b></p>
+
+---
 
 ```php
 use \Carpenstar\ByBitAPI\Derivatives\MarketData\InstrumentInfo\Request\InstrumentInfoRequest;
     
 $options = (new InstrumentInfoRequest())
-    ->setSymbol('BTCUSDT');
+    ->setSymbol('BTCUSDT'); // Trading pair
 ```  
 
 <table style="width: 100%">
   <tr>
     <td colspan="3">
-      <b>\Carpenstar\ByBitAPI\Derivatives\MarketData\InstrumentInfo\Interfaces\IInstrumentInfoRequest</b>
+        <sup><b>INTERFACE</b></sup> <br />
+        <b>\Carpenstar\ByBitAPI\Derivatives\MarketData\InstrumentInfo\Interfaces\IInstrumentInfoRequest::class</b>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="3">
+        <sup><b>DTO</b></sup> <br />
+        <b>\Carpenstar\ByBitAPI\Derivatives\MarketData\InstrumentInfo\Request\InstrumentInfoRequest::class</b>
     </td>
   </tr>
   <tr>
@@ -112,31 +127,30 @@ $options = (new InstrumentInfoRequest())
     <th style="width: 50%; text-align: center">Description</th>
   </tr>
   <tr>
-    <td>:: setSymbol(string $symbol): self</td>
-    <td><b>ДА</b></td>
+    <td>IInstrumentInfoRequest::setSymbol(string $symbol): self</td>
+    <td><b>YES</b></td>
     <td>Trading pair</td>
   </tr>
 </table>
 
-<p><b>Response structure:</b></p>
+<p align="center" width="100%"><b>RESPONSE STRUCTURE</b></p>
+
+---
 
 ```php
 \Carpenstar\ByBitAPI\Derivatives\MarketData\InstrumentInfo\Interfaces\IInstrumentInfoResponse::class
     
 interface IInstrumentInfoResponse
 {
-     public function getSymbol(): ?string;
-     public function getContractType(): ?string;
-     public function getBaseCoin(): ?string;
-     public function getQuoteCoin(): ?string;
-     public function getSettleCoin(): ?string;
-     public function getFundingInterval(): int;
-     public function getUnifiedMarginTrade(): bool;
-     public function getPriceScale(): float;
-     public function getDeliveryFeeRate(): float;
-     public function getDeliveryTime(): ?\DateTime;
-     public function getLaunchTime(): ?\DateTime;
-     public function getStatus(): ?string;
+     public function getSymbol(): ?string; // Trading pair
+     public function getContractType(): ?string; // Contract type
+     public function getBaseCoin(): ?string; // Base token. For example: BTC
+     public function getQuoteCoin(): ?string; // Relative token. For example: USDT
+     public function getSettleCoin(): ?string; // Settlement token. For example: USDT
+     public function getFundingInterval(): int; // Interval for debiting the funding rate in milliseconds
+     public function getUnifiedMarginTrade(): bool; // Support for a unified margin trading account
+     public function getPriceScale(): float; // Price scale
+     public function getStatus(): ?string; // Instrument trading status
      public function getLotSizeFilter(): EntityCollection; // ILotSizeFilterItem[]
      public function getPriceFilter(): EntityCollection; // IPriceFilterItem[]
      public function getLeverageFilter(): EntityCollection // ILeverageFilterItem[]; 
@@ -146,7 +160,14 @@ interface IInstrumentInfoResponse
 <table style="width: 100%">
   <tr>
     <td colspan="3">
-      <b>\Carpenstar\ByBitAPI\Derivatives\MarketData\InstrumentInfo\Interfaces\IInstrumentInfoResponse</b>
+        <sup><b>INTERFACE</b></sup> <br />
+        <b>\Carpenstar\ByBitAPI\Derivatives\MarketData\InstrumentInfo\Interfaces\IInstrumentInfoResponse::class</b>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="3">
+        <sup><b>DTO</b></sup> <br />
+        <b>\Carpenstar\ByBitAPI\Derivatives\MarketData\InstrumentInfo\Response\InstrumentInfoResponse::class</b>
     </td>
   </tr>
   <tr>
@@ -155,81 +176,71 @@ interface IInstrumentInfoResponse
     <th style="width: 60%; text-align: center">Description</th>
   </tr>
   <tr>
-    <td>:: getSymbol()</td>
+    <td>IInstrumentInfoResponse::getSymbol()</td>
     <td>string</td>
     <td>Trading pair</td>
   </tr>
   <tr>
-    <td>:: getContractType()</td>
+    <td>IInstrumentInfoResponse::getContractType()</td>
     <td>string</td>
     <td>Contract type. <b>Note: currently only Linear is supported</b></td>
   </tr>
   <tr>
-    <td>:: getBaseCoin()</td>
+    <td>IInstrumentInfoResponse::getBaseCoin()</td>
     <td>string</td>
     <td>Base token. For example: BTC</td>
   </tr>
   <tr>
-    <td>:: getQuoteCoin()</td>
+    <td>IInstrumentInfoResponse::getQuoteCoin()</td>
     <td>string</td>
     <td>Relative token. For example: USDT</td>
   </tr>
   <tr>
-    <td>:: getSettleCoin()</td>
+    <td>IInstrumentInfoResponse::getSettleCoin()</td>
     <td>string</td>
     <td>Settlement token. For example: USDT</td>
   </tr>
   <tr>
-    <td>:: getFundingInterval()</td>
+    <td>IInstrumentInfoResponse::getFundingInterval()</td>
     <td>int</td>
     <td>Interval for debiting the funding rate in milliseconds</td>
   </tr>
   <tr>
-    <td>:: getUnifiedMarginTrade()</td>
+    <td>IInstrumentInfoResponse::getUnifiedMarginTrade()</td>
     <td>bool</td>
     <td>Support for a unified margin trading account</td>
   </tr>
   <tr>
-    <td>:: getPriceScale()</td>
+    <td>IInstrumentInfoResponse::getPriceScale()</td>
     <td>float</td>
     <td>Price scale</td>
   </tr>
   <tr>
-    <td>:: getDeliveryFeeRate()</td>
-    <td>float</td>
-    <td> - </td>
-  </tr>
-  <tr>
-    <td>:: getDeliveryTime()</td>
-    <td>DateTime</td>
-    <td> - </td>
-  </tr>
-  <tr>
-    <td>:: getLaunchTime()</td>
+    <td>IInstrumentInfoResponse::getLaunchTime()</td>
     <td>DateTime</td>
     <td>
       Start time of trading on the instrument
     </td>
   </tr>
   <tr>
-    <td>:: getStatus()</td>
+    <td>IInstrumentInfoResponse::getStatus()</td>
     <td>string</td>
     <td>
       Instrument trading status
     </td>
   </tr>
   <tr>
-    <td>:: getLotSizeFilter()</td>
+    <td>IInstrumentInfoResponse::getLotSizeFilter()</td>
     <td>ILotSizeFilterItem[]</td>
     <td></td>
   </tr>
   <tr>
-    <td>:: getPriceFilter()</td>
+    <td>IInstrumentInfoResponse::getPriceFilter()</td>
     <td>IPriceFilterItem[]</td>
     <td></td>
   </tr>
   <tr>
-    <td>:: getLeverageFilter()</td>
+    <td>IInstrumentInfoResponse::getLeverageFilter()</td>
     <td>ILeverageFilterItem[]</td>
     <td></td>
   </tr>
@@ -250,7 +261,14 @@ interface ILotSizeFilterItem
 <table style="width: 100%">
   <tr>
     <td colspan="3">
-      <b>\Carpenstar\ByBitAPI\Derivatives\MarketData\InstrumentInfo\Interfaces\ILotSizeFilterItem</b>
+        <sup><b>INTERFACE</b></sup> <br />
+        <b>\Carpenstar\ByBitAPI\Derivatives\MarketData\InstrumentInfo\Interfaces\ILotSizeFilterItem:class</b>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="3">
+        <sup><b>DTO</b></sup> <br />
+        <b>\Carpenstar\ByBitAPI\Derivatives\MarketData\InstrumentInfo\Response\LotSizeFilterItemResponse::class</b>
     </td>
   </tr>
   <tr>
@@ -259,17 +277,17 @@ interface ILotSizeFilterItem
     <th style="width: 60%; text-align: center">Description</th>
   </tr>
   <tr>
-    <td>:: getMaxOrderQty()</td>
+    <td>ILotSizeFilterItem::getMaxOrderQty()</td>
     <td>float</td>
     <td>Maximum order size</td>
   </tr>
   <tr>
-    <td>:: getMinOrderQty()</td>
+    <td>ILotSizeFilterItem::getMinOrderQty()</td>
     <td>float</td>
     <td>Minimum order size</td>
   </tr>
   <tr>
-    <td>:: getQtyStep()</td>
+    <td>ILotSizeFilterItem::getQtyStep()</td>
     <td>float</td>
     <td>Step to change order size</td>
   </tr>
@@ -290,7 +308,14 @@ interface ILeverageFilterItem
 <table style="width: 100%">
   <tr>
     <td colspan="3">
-      <b>\Carpenstar\ByBitAPI\Derivatives\MarketData\InstrumentInfo\Interfaces\ILeverageFilterItem</b>
+        <sup><b>INTERFACE</b></sup> <br />
+        <b>\Carpenstar\ByBitAPI\Derivatives\MarketData\InstrumentInfo\Interfaces\ILeverageFilterItem::class</b>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="3">
+        <sup><b>DTO</b></sup> <br />
+        <b>\Carpenstar\ByBitAPI\Derivatives\MarketData\InstrumentInfo\Response\LeverageFilterItemResponse::class</b>
     </td>
   </tr>
   <tr>
@@ -299,17 +324,17 @@ interface ILeverageFilterItem
     <th style="width: 60%; text-align: center">Description</th>
   </tr>
   <tr>
-    <td>:: getMinLeverage()</td>
+    <td>ILeverageFilterItem::getMinLeverage()</td>
     <td>int</td>
     <td>Minimum leverage</td>
   </tr>
   <tr>
-    <td>:: getMaxLeverage()</td>
+    <td>ILeverageFilterItem::getMaxLeverage()</td>
     <td>float</td>
     <td>Maximum leverage</td>
   </tr>
   <tr>
-    <td>:: getLeverageStep()</td>
+    <td>ILeverageFilterItem::getLeverageStep()</td>
     <td>float</td>
     <td>Leverage step</td>
   </tr>
@@ -330,26 +355,33 @@ interface IPriceFilterItem
 <table style="width: 100%">
   <tr>
     <td colspan="3">
-      <b>\Carpenstar\ByBitAPI\Derivatives\MarketData\InstrumentInfo\Interfaces\IPriceFilterItem</b>
+        <sup><b>INTERFACE</b></sup> <br />
+        <b>\Carpenstar\ByBitAPI\Derivatives\MarketData\InstrumentInfo\Interfaces\IPriceFilterItem::class</b>
     </td>
   </tr>
+    <tr>
+    <td colspan="3">
+        <sup><b>DTO</b></sup> <br />
+        <b>\Carpenstar\ByBitAPI\Derivatives\MarketData\InstrumentInfo\Response\PriceFilterItemResponse::class</b>
+    </td>
+    </tr>
   <tr>
     <th style="width: 20%; text-align: center">Method</th>
     <th style="width: 20%; text-align: center">Type</th>
     <th style="width: 60%; text-align: center">Description</th>
   </tr>
   <tr>
-    <td>:: getMinPrice()</td>
+    <td>IPriceFilterItem::getMinPrice()</td>
     <td>int</td>
     <td>Minimum price</td>
   </tr>
   <tr>
-    <td>:: getMaxPrice()</td>
+    <td>IPriceFilterItem::getMaxPrice()</td>
     <td>float</td>
     <td>Maximum price</td>
   </tr>
   <tr>
-    <td>:: getTickSize()</td>
+    <td>IPriceFilterItem::getTickSize()</td>
     <td>float</td>
     <td>Tick size</td>
   </tr>

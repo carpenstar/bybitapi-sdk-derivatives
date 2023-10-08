@@ -1,17 +1,23 @@
-### Contract - Position - Set Leverage
+# Contract - Position - Set Leverage
 <b>[Official documentation](https://bybit-exchange.github.io/docs/derivatives/contract/leverage)</b>
 <p>Set position leverage</p>
 
-<p><b>Request parameters</b></p>
+<p align="center" width="100%"><b>EXAMPLE</b></p>
+
+<p align="center" width="100%"><b> --- </b></p>
+
+<p align="center" width="100%"><b>REQUEST PARAMETERS</b></p>
+
+---
 
 ```php
 namespace Carpenstar\ByBitAPI\Derivatives\Contract\Position\SetLeverage\Interfaces;
 
 interface ISetLeverageRequestInterface
 {
-     public function setSymbol(string $symbol): self;
-     public function setBuyLeverage(float $buyLeverage): self;
-     public function setSellLeverage(float $sellLeverage): self;
+     public function setSymbol(string $symbol): self; // Trading pair
+     public function setBuyLeverage(float $buyLeverage): self; // (0, max leverage of corresponding risk limit]. For one-way mode, make sure buyLeverage=sellLeverage
+     public function setSellLeverage(float $sellLeverage): self; // (0, max leverage of corresponding risk limit]. For one-way mode, make sure buyLeverage=sellLeverage 
     
      // .. Getters
 }
@@ -20,7 +26,14 @@ interface ISetLeverageRequestInterface
 <table style="width: 100%">
    <tr>
      <td colspan="3" style="text-align: left">
-       <b>\Carpenstar\ByBitAPI\Derivatives\Contract\Position\SetLeverage\Interfaces\ISetLeverageRequestInterface</b>
+        <sup><b>INTERFACE</b></sup> <br />
+       <b>\Carpenstar\ByBitAPI\Derivatives\Contract\Position\SetLeverage\Interfaces\ISetLeverageRequestInterface::class</b>
+     </td>
+   </tr>
+   <tr>
+     <td colspan="3" style="text-align: left">
+        <sup><b>DTO</b></sup> <br />
+       <b>\Carpenstar\ByBitAPI\Derivatives\Contract\Position\SetLeverage\Request\SetLeverageRequest::class</b>
      </td>
    </tr>
    <tr>
@@ -29,22 +42,24 @@ interface ISetLeverageRequestInterface
      <th style="width: 50%; text-align: center">Description</th>
    </tr>
    <tr>
-     <td>:: setSymbol(string $symbol)</td>
+     <td>ISetLeverageRequestInterface::setSymbol(string $symbol)</td>
      <td><b>YES</b></td>
      <td>Trading pair</td>
    </tr>
    <tr>
-     <td>:: setBuyLeverage(float $buyLeverage)</td>
+     <td>ISetLeverageRequestInterface::setBuyLeverage(float $buyLeverage)</td>
      <td><b>YES</b></td>
      <td> (0, max leverage of corresponding risk limit]. For one-way mode, make sure buyLeverage=sellLeverage </td>
    </tr>
    <tr>
-     <td>:: setSellLeverage(float $sellLeverage)</td>
+     <td>ISetLeverageRequestInterface::setSellLeverage(float $sellLeverage)</td>
      <td><b>YES</b></td>
      <td> (0, max leverage of corresponding risk limit]. For one-way mode, make sure buyLeverage=sellLeverage </td>
    </tr>
 </table>
 
-<p><b>Response structure:</b></p>
+<p align="center" width="100%"><b>RESPONSE STRUCTURE</b></p>
+
+---
 
 > Endpoint returns an empty array as a successful response

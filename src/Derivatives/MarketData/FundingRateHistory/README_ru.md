@@ -48,8 +48,8 @@ new \Carpenstar\ByBitAPI\Derivatives\MarketData\FundingRateHistory\Request\Fundi
     
 $options = (new FundingRateHistoryRequest())
     ->setSymbol("BTCUSDT")
-    ->setStart((new DateTime("2023-05-09 10:00:00"))->getTimestamp())
-    ->setEnd((new DateTime("2023-05-09 10:00:00"))->getTimestamp())
+    ->setStartTime((new DateTime("2023-05-09 10:00:00"))->getTimestamp())
+    ->setEndTime((new DateTime("2023-05-09 10:00:00"))->getTimestamp())
     ->setLimit(200)
 ```
 

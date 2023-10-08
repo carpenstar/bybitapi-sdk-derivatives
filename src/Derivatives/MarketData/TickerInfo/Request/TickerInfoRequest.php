@@ -2,8 +2,9 @@
 namespace Carpenstar\ByBitAPI\Derivatives\MarketData\TickerInfo\Request;
 
 use Carpenstar\ByBitAPI\Core\Objects\AbstractParameters;
+use Carpenstar\ByBitAPI\Derivatives\MarketData\TickerInfo\Interfaces\ITickerInfoRequestInterface;
 
-class TickerInfoRequest extends AbstractParameters
+class TickerInfoRequest extends AbstractParameters implements ITickerInfoRequestInterface
 {
     /**
      * Only linear category support at now

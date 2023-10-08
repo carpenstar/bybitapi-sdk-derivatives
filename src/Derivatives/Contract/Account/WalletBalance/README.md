@@ -1,11 +1,17 @@
-### Contract - Account - Wallet Balance
+# Contract - Account - Wallet Balance
 <b>[Официальная страница документации](https://bybit-exchange.github.io/docs/derivatives/contract/wallet)</b>
 <p>Endpoint returns the derivatives wallet balance, information about assets in each currency, and information about the risk level of the account. <br />
 By default, currency information with assets or liabilities equal to 0 is not returned.</p>
 
 ```php
-Carpenstar\ByBitAPI\Derivatives\Contract\Account\WalletBalance\WalletBalance::class // Класс эндпоинта
+// Endpoint classname
+\Carpenstar\ByBitAPI\Derivatives\Contract\Account\WalletBalance\WalletBalance::class 
 ```
+
+<p align="center" width="100%"><b>EXAMPLE</b></p>
+
+---
+
 ```php
 use Carpenstar\ByBitAPI\BybitAPI;
 use Carpenstar\ByBitAPI\Derivatives\Contract\Account\WalletBalance\WalletBalance;
@@ -73,33 +79,42 @@ foreach ($walletBalance as $feeRate) {
  * -----
  */
 ```
-<p><b>Response structure:</b></p>
+<p align="center" width="100%"><b>RESPONSE STRUCTURE</b></p>
+
+---
 
 ```php
 namespace Carpenstar\ByBitAPI\Derivatives\Contract\Account\WalletBalance\Interfaces\IWalletBalanceResponseInterface;
 
 interface IWalletBalanceResponseInterface
 {
-    public function getCoin(): string;
-    public function getEquity(): float;
-    public function getWalletBalance(): float;
-    public function getPositionMargin(): float;
-    public function getAvailableBalance(): float;
-    public function getOrderMargin(): float;
-    public function getOccClosingFee(): float;
-    public function getOccFundingFee(): float;
-    public function getUnrealisedPnl(): float;
-    public function getCumRealisedPnl(): float;
+    public function getCoin(): string; // Coin
+    public function getEquity(): float; // Total capital
+    public function getWalletBalance(): float; // Wallet balance
+    public function getPositionMargin(): float; // Position Margin
+    public function getAvailableBalance(): float; // Available balance
+    public function getOrderMargin(): float; // Pre-occupied margin
+    public function getOccClosingFee(): float; // The fee for closing a position has been charged.
+    public function getOccFundingFee(): float; // Pre-financing fee
+    public function getUnrealisedPnl(): float; // Unrealized PnL
+    public function getCumRealisedPnl(): float; // Cumulative realized PnL (all time)
     public function getGivenCash(): float;
     public function getServiceCash(): float;
-    public function getAccountIM(): string;
-    public function getAccountMM(): string;
+    public function getAccountIM(): string; // USDC Account Initial Margin
+    public function getAccountMM(): string; // USDC Account Maintenance Margin
 }
 ```
 <table style="width: 100%">
   <tr>
     <td colspan="3">
-      <b>\Carpenstar\ByBitAPI\Derivatives\Contract\Account\WalletBalance\Interfaces\IWalletBalanceResponseInterface</b>
+        <sup><b>INTERFACE</b></sup> <br />
+        <b>\Carpenstar\ByBitAPI\Derivatives\Contract\Account\WalletBalance\Interfaces\IWalletBalanceResponseInterface::class</b>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="3">
+        <sup><b>DTO</b></sup> <br />
+        <b>\Carpenstar\ByBitAPI\Derivatives\Contract\Account\WalletBalance\Response\WalletBalanceResponse::class</b>
     </td>
   </tr>
   <tr>
@@ -108,37 +123,37 @@ interface IWalletBalanceResponseInterface
     <th style="width: 60%; text-align: center">Description</th>
   </tr>
   <tr>
-    <td>:: getCoin()</td>
+    <td>IWalletBalanceResponseInterface::getCoin()</td>
     <td>string</td>
     <td>Coin</td>
   </tr>
   <tr>
-    <td>:: getEquity()</td>
+    <td>IWalletBalanceResponseInterface::getEquity()</td>
     <td>float</td>
     <td>Total capital</td>
   </tr>
   <tr>
-    <td>:: getWalletBalance()</td>
+    <td>IWalletBalanceResponseInterface::getWalletBalance()</td>
     <td>float</td>
     <td>Wallet balance</td>
   </tr>
   <tr>
-    <td>:: getPositionMargin()</td>
+    <td>IWalletBalanceResponseInterface::getPositionMargin()</td>
     <td>float</td>
     <td>Position Margin</td>
   </tr>
   <tr>
-    <td>:: getAvailableBalance()</td>
+    <td>IWalletBalanceResponseInterface::getAvailableBalance()</td>
     <td>float</td>
     <td>Available balance</td>
   </tr>
   <tr>
-    <td>:: getOrderMargin()</td>
+    <td>IWalletBalanceResponseInterface::getOrderMargin()</td>
     <td>float</td>
     <td>Pre-occupied margin</td>
   </tr>
   <tr>
-    <td>:: getOccClosingFee()</td>
+    <td>IWalletBalanceResponseInterface::getOccClosingFee()</td>
     <td>float</td>
     <td>
       The fee for closing a position has been charged. <br />
@@ -146,49 +161,49 @@ interface IWalletBalanceResponseInterface
     </td>
   </tr>
   <tr>
-    <td>:: getOccFundingFee()</td>
+    <td>IWalletBalanceResponseInterface::getOccFundingFee()</td>
     <td>float</td>
     <td>
       Pre-financing fee
     </td>
   </tr>
   <tr>
-    <td>:: getUnrealisedPnl()</td>
+    <td>IWalletBalanceResponseInterface::getUnrealisedPnl()</td>
     <td>float</td>
     <td>
       Unrealized PnL
     </td>
   </tr>
   <tr>
-    <td>:: getCumRealisedPnl()</td>
+    <td>IWalletBalanceResponseInterface::getCumRealisedPnl()</td>
     <td>float</td>
     <td>
       Cumulative realized PnL (all time)
     </td>
   </tr>
   <tr>
-    <td>:: getGivenCash()</td>
+    <td>IWalletBalanceResponseInterface::getGivenCash()</td>
     <td>float</td>
     <td>
       -
     </td>
   </tr>
   <tr>
-    <td>:: getServiceCash()</td>
+    <td>IWalletBalanceResponseInterface::getServiceCash()</td>
     <td>float</td>
     <td>
       -
     </td>
   </tr>
   <tr>
-    <td>:: getAccountIM()</td>
+    <td>IWalletBalanceResponseInterface::getAccountIM()</td>
     <td>string</td>
     <td>
       USDC Account Initial Margin
     </td>
   </tr>
   <tr>
-    <td>:: getAccountMM()</td>
+    <td>IWalletBalanceResponseInterface::getAccountMM()</td>
     <td>string</td>
     <td>
       USDC Account Maintenance Margin
