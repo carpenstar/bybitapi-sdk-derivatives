@@ -70,3 +70,5 @@ interface ISetAutoAddMarginRequestInterface
 ---
 
 > Endpoint returns an empty array as a successful response
+
+---

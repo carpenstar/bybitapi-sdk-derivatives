@@ -1,10 +1,16 @@
-### Contract - Account - Get Trading Fee Rate
+# Contract - Account - Get Trading Fee Rate
 <b>[Официальная страница документации](https://bybit-exchange.github.io/docs/derivatives/contract/fee-rate)</b>
 <p>Эндпоинт возвращает данные по ставке торговой комиссии для ВСЕХ символов</p>
 
 ```php
-Carpenstar\ByBitAPI\Derivatives\Contract\Account\GetTradingFeeRate\GetTradingFeeRate::class // Класс эндпоинта:
+// Endpoint classname
+Carpenstar\ByBitAPI\Derivatives\Contract\Account\GetTradingFeeRate\GetTradingFeeRate::class
 ```
+
+<p align="center" width="100%"><b>ПРИМЕР</b></p>
+
+---
+
 ```php
 use Carpenstar\ByBitAPI\BybitAPI;
 use Carpenstar\ByBitAPI\Derivatives\Contract\Account\GetTradingFeeRate\GetTradingFeeRate;
@@ -43,21 +49,31 @@ foreach ($feeRateData as $feeRate) {
  * ---
  */
 ```
-<p><b>Параметры запроса:</b></p>
+
+<p align="center" width="100%"><b>ПАРАМЕТРЫ ЗАПРОСА</b></p>
+
+---
 
 ```php
 namespace Carpenstar\ByBitAPI\Derivatives\Contract\Account\GetTradingFeeRate\Interfaces\IGetTradingFeeRateRequestInterface;
 
 interface IGetTradingFeeRateRequestInterface
 {
-    public function setSymbol(string $symbol): self;
+    public function setSymbol(string $symbol): self; // Торговая пара
 }
 ```
 
 <table style="width: 100%">
   <tr>
     <td colspan="3">
-      <b>\Carpenstar\ByBitAPI\Derivatives\Contract\Account\GetTradingFeeRate\Interfaces\IGetTradingFeeRateRequestInterface</b>
+        <sup><b>INTERFACE</b></sup> <br />
+        <b>\Carpenstar\ByBitAPI\Derivatives\Contract\Account\GetTradingFeeRate\Interfaces\IGetTradingFeeRateRequestInterface::class</b>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="3">
+        <sup><b>DTO</b></sup> <br />
+        <b>\Carpenstar\ByBitAPI\Derivatives\Contract\Account\GetTradingFeeRate\Request\GetTradingFeeRateRequest::class</b>
     </td>
   </tr>
   <tr>
@@ -66,28 +82,37 @@ interface IGetTradingFeeRateRequestInterface
     <th style="width: 50%; text-align: center">Описание</th>
   </tr>
   <tr>
-    <td>:: setSymbol(string $symbol): self</td>
+    <td>IGetTradingFeeRateRequestInterface::setSymbol(string $symbol): self</td>
     <td>НЕТ</td>
-    <td>Торговый инструмент</td>
+    <td>Торговая пара</td>
   </tr>
 </table>
 
-<p><b>Структура ответа:</b></p>
+<p align="center" width="100%"><b>СТРУКТУРА ОТВЕТА</b></p>
+
+---
 
 ```php
 namespace Carpenstar\ByBitAPI\Derivatives\Contract\Account\GetTradingFeeRate\Interfaces\IGetTradingFeeRateResponseInterface;
 
 interface IGetTradingFeeRateResponseInterface
 {
-    public function getSymbol(): string;
-    public function getTakerFeeRate(): float;
-    public function getMakerFeeRate(): float;
+    public function getSymbol(): string; // Торговая пара
+    public function getTakerFeeRate(): float; // Комиссия тэйкера (покупателя)
+    public function getMakerFeeRate(): float; // Комиссия мэйкера (продавца)
 }
 ```
 <table style="width: 100%">
   <tr>
     <td colspan="3">
-      <b>\Carpenstar\ByBitAPI\Derivatives\Contract\Account\GetTradingFeeRate\Interfaces\IGetTradingFeeRateResponseInterface</b>
+        <sup><b>INTERFACE</b></sup> <br />
+        <b>\Carpenstar\ByBitAPI\Derivatives\Contract\Account\GetTradingFeeRate\Interfaces\IGetTradingFeeRateResponseInterface::class</b>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="3">
+        <sup><b>DTO</b></sup> <br />
+        <b>\Carpenstar\ByBitAPI\Derivatives\Contract\Account\GetTradingFeeRate\Response\GetTradingFeeRateResponse::class</b>
     </td>
   </tr>
   <tr>
@@ -96,21 +121,21 @@ interface IGetTradingFeeRateResponseInterface
     <th style="width: 60%; text-align: center">Описание</th>
   </tr>
   <tr>
-    <td>:: getSymbol()</td>
+    <td>IGetTradingFeeRateResponseInterface::getSymbol()</td>
     <td>string</td>
     <td>
-      Торговый инструмент
+      Торговая пара
     </td>
   </tr>
   <tr>
-    <td>:: getTakerFeeRate()</td>
+    <td>IGetTradingFeeRateResponseInterface::getTakerFeeRate()</td>
     <td>float</td>
     <td>
       Комиссия тэйкера (покупателя)
     </td>
   </tr>
   <tr>
-    <td>:: getMakerFeeRate()</td>
+    <td>IGetTradingFeeRateResponseInterface::getMakerFeeRate()</td>
     <td>float</td>
     <td>
       Комиссия мэйкера (продавца)

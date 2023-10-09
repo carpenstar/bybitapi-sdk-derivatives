@@ -1,6 +1,15 @@
-### Market Data - Funding Rate History
-<b>[Официальная страница документации](https://bybit-exchange.github.io/docs/derivatives/public/funding-rate)</b>
-<p>История фандинга по указаному символу за определенный период</p>
+# Market Data - Funding Rate History
+<b>[Official documentation](https://bybit-exchange.github.io/docs/derivatives/public/funding-rate)</b>
+<p>История финансирования указанного символа за определенный период</p>
+
+```php
+// Endpoint classname
+Carpenstar\ByBitAPI\Derivatives\MarketData\FundingRateHistory\FundingRateHistory::class 
+```  
+
+<p align="center" width="100%"><b>ПРИМЕР</b></p>
+
+---
 
 ```php
 use Carpenstar\ByBitAPI\BybitAPI;
@@ -14,7 +23,6 @@ $options = (new FundingRateHistoryRequest())->setSymbol("BTCUSDT")->setLimit(3);
 
 /** @var FundingRateHistoryResponse[] $result */
 $result = $bybit->rest(FundingRateHistory::class, $options)->getBody()->all();
-
 
 
 foreach ($result as $rateItem) {
@@ -41,22 +49,33 @@ foreach ($result as $rateItem) {
  * -----
  */
 ```
-<p><b>Параметры запроса:</b></p>
+  
+
+<p align="center" width="100%"><b>ПАРАМЕТРЫ ЗАПРОСА</b></p>
+
+---
 
 ```php
 new \Carpenstar\ByBitAPI\Derivatives\MarketData\FundingRateHistory\Request\FundingRateHistoryRequest();
     
 $options = (new FundingRateHistoryRequest())
-    ->setSymbol("BTCUSDT")
-    ->setStartTime((new DateTime("2023-05-09 10:00:00"))->getTimestamp())
-    ->setEndTime((new DateTime("2023-05-09 10:00:00"))->getTimestamp())
-    ->setLimit(200)
+    ->setSymbol("BTCUSDT") // Trading pair
+    ->setStartTime((new DateTime("2023-05-09 10:00:00"))->getTimestamp()) // Временная метка, ОТ которой будет взят срез данных
+    ->setEndTime((new DateTime("2023-05-09 10:00:00"))->getTimestamp()) // Временная метка ДО того, как будет взят срез данных
+    ->setLimit(200) // Ограничение количества записей, возвращаемых по запросу
 ```
 
 <table style="width: 100%">
   <tr>
     <td colspan="3">
-      <b>\Carpenstar\ByBitAPI\Derivatives\MarketData\FundingRateHistory\Interfaces\IFundingRateHistoryRequest</b>
+        <sup><b>INTERFACE:</b></sup> <br />
+        <b>\Carpenstar\ByBitAPI\Derivatives\MarketData\FundingRateHistory\Interfaces\IFundingRateHistoryRequest::class</b>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="3">
+        <sup><b>DTO:</b></sup> <br />
+        <b>\Carpenstar\ByBitAPI\Derivatives\MarketData\FundingRateHistory\Request\FundingRateHistoryRequest::class</b>
     </td>
   </tr>
   <tr>
@@ -65,40 +84,51 @@ $options = (new FundingRateHistoryRequest())
     <th style="width: 50%; text-align: center">Описание</th>
   </tr>
   <tr>
-    <td>:: setSymbol(string $symbol): self</td>
+    <td>IFundingRateHistoryRequest::setSymbol(string $symbol): self</td>
     <td style="text-align: center">НЕТ</td>
-    <td>Строка с тикером торговой пары</td>
+    <td>Торговая пара</td>
   </tr>
   <tr>
-    <td>:: setStartTime(int $timestamp): self</td>
+    <td>IFundingRateHistoryRequest::setStartTime(int $timestamp): self</td>
     <td style="text-align: center"><b>НЕТ<sup>*</sup></b></td>
-    <td>Строка даты/времени ОТ которого берется срез данных</td>
+    <td>Временная метка, ОТ которой будет взят срез данных</td>
   </tr>
   <tr>
-    <td>:: setEndTime(int $timestamp): self</td>
+    <td>IFundingRateHistoryRequest::setEndTime(int $timestamp): self</td>
     <td style="text-align: center"><b>НЕТ<sup>*</sup></b></td>
-    <td>Строка даты/времени ДО которого берется срез данных</td>
+    <td>Временная метка ДО того, как будет взят срез данных</td>
   </tr>
   <tr>
-    <td>:: setLimit(int $limit): self</td>
+    <td>IFundingRateHistoryRequest::setLimit(int $limit): self</td>
     <td style="text-align: center">НЕТ</td>
-    <td>Ограничение возвращаемых записей на запрос</td>
+    <td>Ограничение количества записей, возвращаемых по запросу</td>
   </tr>
 </table>
 
 > <sup>*</sup>**Warning:**
-> При установке временных ограничений на выборку, обязательно следует указывать верхнюю и нижнюю границу при помощи `setStartTime(string $start)` и `setEndTime(string $end)`.
-> Иначе будет возвращена ошибка
+> При установке ограничений по времени выборки обязательно укажите верхнюю и нижнюю границы, используя `setStartTime(int $timestamp)` и `setEndTime(int $timestamp)`.
+> В противном случае будет возвращена ошибка
 
 > **Warning:**
-> По умолчанию, запрос на эндпоинт `FundingRateHistory::class` возвращает 200 последних записей до текущего момента по определенному символу
+> По умолчанию запрос к эндпоинту FundingRateHistory::class возвращает последние 200 записей до текущего момента для конкретного символа
 
-<p><b>Структура ответа:</b></p>
+  
+
+<p align="center" width="100%"><b>СТРУКТУРА ОТВЕТА</b></p>
+
+---
 
 <table style="width: 100%">
   <tr>
     <td colspan="3">
-      <b>\Carpenstar\ByBitAPI\Derivatives\MarketData\FundingRateHistory\Interfaces\IFundingRateHistoryResponse</b>
+        <sup><b>INTERFACE:</b></sup> <br />
+        <b>\Carpenstar\ByBitAPI\Derivatives\MarketData\FundingRateHistory\Interfaces\IFundingRateHistoryResponse::class</b>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="3">
+        <sup><b>DTO:</b></sup> <br /> 
+        <b>\Carpenstar\ByBitAPI\Derivatives\MarketData\FundingRateHistory\Response\FundingRateHistoryResponse::class</b>
     </td>
   </tr>
   <tr>
@@ -107,18 +137,18 @@ $options = (new FundingRateHistoryRequest())
     <th style="width: 50%; text-align: center">Описание</th>
   </tr>
   <tr>
-    <td>:: getSymbol()</td>
+    <td>IFundingRateHistoryResponse::getSymbol()</td>
     <td style="text-align: center">string</td>
-    <td>Символ торговой пары</td>
+    <td>Торговая пара</td>
   </tr>
   <tr>
-    <td>:: getFundingRate()</td>
+    <td>IFundingRateHistoryResponse::getFundingRate()</td>
     <td style="text-align: center">float</td>
     <td>Ставка финансирования</td>
   </tr>
   <tr>
-    <td>:: getFundingRateTimestamp()</td>
+    <td>IFundingRateHistoryResponse::getFundingRateTimestamp()</td>
     <td style="text-align: center">DateTime</td>
-    <td>Время удержания ставки финансирования</td>
+    <td>Время следующего списания ставки финансирования</td>
   </tr>
 </table>

@@ -5,6 +5,13 @@
 > If neither orderId nor orderLinkId is passed, no more than 500 open or partially filled orders will be returned.
 > Entries are sorted by creation time from newest to oldest.
 
+<p align="center" width="100%"><b>EXAMPLE</b></p>
+
+<p align="center" width="100%"><b> ... </b></p>
+
+---
+
+
 <p align="center" width="100%"><b>REQUEST PARAMETERS</b></p>
 
 ---
@@ -344,3 +351,5 @@ interface IGetOpenOrdersResponseInterface
     </td>
   </tr>
 </table>
+
+---

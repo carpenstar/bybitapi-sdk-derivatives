@@ -1,11 +1,16 @@
-### Market Data - Public Trading History
+# Market Data - Public Trading History
 <b>[Официальная страница документации](https://bybit-exchange.github.io/docs/derivatives/public/trade)</b>
-<p>Эндпоинт возвращает данные об исполнении торговых ордеров</p>  
+<p>Эндпоинт возвращает данные об исполнении торговых ордеров</p>   
 
 ```php
-// Класс эндпоинта:
+// Endpoint classname
 Carpenstar\ByBitAPI\Derivatives\MarketData\PublicTradingHistory\PublicTradingHistory::class
 ```
+
+<p align="center" width="100%"><b>ПРИМЕР</b></p>
+
+---
+
 ```php
 use Carpenstar\ByBitAPI\BybitAPI;
 use Carpenstar\ByBitAPI\Derivatives\MarketData\PublicTradingHistory\PublicTradingHistory;
@@ -62,19 +67,28 @@ foreach ($result as $historyItem) {
  */
 ```  
 
-<p><b>Параметры запроса:</b></p>
+<p align="center" width="100%"><b>ПАРАМЕТРЫ ЗАПРОСА</b></p>
+
+---
 
 ```php
 \Carpenstar\ByBitAPI\Derivatives\MarketData\PublicTradingHistory\Request\PublicTradingHistoryRequest::class
 
 $options = (new PublicTradingHistoryRequest())
-    ->setSymbol("ETHUSDT")
-    ->setLimit(25);
+    ->setSymbol("ETHUSDT") // Торговая пара
+    ->setLimit(25); // Ограничение возвращаемых строк на один запрос
 ```  
 <table style="width: 100%">
   <tr>
     <td colspan="3">
-      <b>\Carpenstar\ByBitAPI\Derivatives\MarketData\PublicTradingHistory\Request\PublicTradingHistoryRequest</b>
+        <sup><b>INTERFACE</b></sup> <br />
+        <b>\Carpenstar\ByBitAPI\Derivatives\MarketData\PublicTradingHistory\Interfaces\IPublicTradingHistoryRequestInterface::class</b>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="3">
+        <sup><b>DTO</b></sup> <br />
+        <b>\Carpenstar\ByBitAPI\Derivatives\MarketData\PublicTradingHistory\Request\PublicTradingHistoryRequest::class</b>
     </td>
   </tr>
   <tr>
@@ -83,37 +97,46 @@ $options = (new PublicTradingHistoryRequest())
     <th style="width: 50%; text-align: center">Описание</th>
   </tr>
   <tr>
-    <td>:: setSymbol(string $symbol): self</td>
+    <td>IPublicTradingHistoryRequestInterface::setSymbol(string $symbol): self</td>
     <td><b>ДА</b></td>
-    <td>Торговый инструмент</td>
+    <td>Торговая пара</td>
   </tr>
   <tr>
-    <td>:: setLimit(int $limit): self</td>
+    <td>IPublicTradingHistoryRequestInterface::setLimit(int $limit): self</td>
     <td>НЕТ</td>
-    <td>Ограничение количества на результирующий набор</td>
+    <td>Ограничение возвращаемых строк на один запрос</td>
   </tr>
 </table>
 
-<p><b>Структура ответа:</b></p>
+<p align="center" width="100%"><b>СТРУКТУРА ОТВЕТА</b></p>
+
+---
 
 ```php
 \Carpenstar\ByBitAPI\Derivatives\MarketData\PublicTradingHistory\Interfaces\IPublicTradingHistoryResponse::class;
 
 interface IPublicTradingHistoryResponse
 {
-    public function getExecId(): string;
-    public function getSymbol(): string;
-    public function getPrice(): float;
-    public function getSize(): float;
-    public function getSide(): string;
-    public function getTime(): \DateTime;
-    public function isBlockTrade(): bool;
+    public function getExecId(): string; // ID исполнения
+    public function getSymbol(): string; // Торговая пра
+    public function getPrice(): float; // Цена исполнения
+    public function getSize(): float; // Обьем исполнения
+    public function getSide(): string; // Направление ордера (buy, sell)
+    public function getTime(): \DateTime; // Время исполнения
+    public function isBlockTrade(): bool; // Является-ли сделка внебиржевой?
 }
 ```
 <table style="width: 100%">
   <tr>
     <td colspan="3">
-      <b>\Carpenstar\ByBitAPI\Derivatives\MarketData\PublicTradingHistory\Interfaces\IPublicTradingHistoryResponse</b>
+        <sup><b>INTERFACE</b></sup> <br />
+        <b>\Carpenstar\ByBitAPI\Derivatives\MarketData\PublicTradingHistory\Interfaces\IPublicTradingHistoryResponse::class</b>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="3">
+        <sup><b>DTO</b></sup> <br />
+        <b>\Carpenstar\ByBitAPI\Derivatives\MarketData\PublicTradingHistory\Response\PublicTradingHistoryResponse::class</b>
     </td>
   </tr>
   <tr>
@@ -122,52 +145,52 @@ interface IPublicTradingHistoryResponse
     <th style="width: 60%; text-align: center">Описание</th>
   </tr>
   <tr>
-    <td>:: getExecId()</td>
+    <td>IPublicTradingHistoryResponse::getExecId()</td>
     <td>string</td>
     <td>
       ID исполнения
     </td>
   </tr>
   <tr>
-    <td>:: getSymbol()</td>
+    <td>IPublicTradingHistoryResponse::getSymbol()</td>
     <td>string</td>
     <td>
-      Торговый инструмент
+      Торговая пара
     </td>
   </tr>
   <tr>
-    <td>:: getPrice()</td>
+    <td>IPublicTradingHistoryResponse::getPrice()</td>
     <td>float</td>
     <td>
       Цена исполнения
     </td>
   </tr>
   <tr>
-    <td>:: getSize()</td>
+    <td>IPublicTradingHistoryResponse::getSize()</td>
     <td>float</td>
     <td>
       Обьем исполнения
     </td>
   </tr>
   <tr>
-    <td>:: getSide()</td>
+    <td>IPublicTradingHistoryResponse::getSide()</td>
     <td>string</td>
     <td>
-      Направление
+      Направление ордера (buy, sell)
     </td>
   </tr>
   <tr>
-    <td>:: getTime()</td>
+    <td>IPublicTradingHistoryResponse::getTime()</td>
     <td>DateTime</td>
     <td>
       Время исполнения
     </td>
   </tr>
   <tr>
-    <td>:: isBlockTrade()</td>
+    <td>IPublicTradingHistoryResponse::isBlockTrade()</td>
     <td>bool</td>
     <td>
-      -
+      Является-ли сделка внебиржевой?
     </td>
   </tr>
 </table>

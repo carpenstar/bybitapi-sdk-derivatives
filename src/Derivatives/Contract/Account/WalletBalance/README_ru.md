@@ -1,11 +1,17 @@
-### Contract - Account - Wallet Balance
+# Contract - Account - Wallet Balance
 <b>[Официальная страница документации](https://bybit-exchange.github.io/docs/derivatives/contract/wallet)</b>
 <p>Эндпоинт возвращает баланс деривативного кошелька, информацию об активах в каждой валюте и информацию о уровне риска счета. <br />
 По умолчанию информация о валюте с активами или обязательствами, равными 0, не возвращается.</p>
 
 ```php
-Carpenstar\ByBitAPI\Derivatives\Contract\Account\WalletBalance\WalletBalance::class // Класс эндпоинта
+// Endpoint classname
+\Carpenstar\ByBitAPI\Derivatives\Contract\Account\WalletBalance\WalletBalance::class 
 ```
+
+<p align="center" width="100%"><b>ПРИМЕР</b></p>
+
+---
+
 ```php
 use Carpenstar\ByBitAPI\BybitAPI;
 use Carpenstar\ByBitAPI\Derivatives\Contract\Account\WalletBalance\WalletBalance;
@@ -73,33 +79,42 @@ foreach ($walletBalance as $feeRate) {
  * -----
  */
 ```
-<p><b>Структура ответа:</b></p>
+<p align="center" width="100%"><b>СТРУКТУРА ОТВЕТА</b></p>
+
+---
 
 ```php
 namespace Carpenstar\ByBitAPI\Derivatives\Contract\Account\WalletBalance\Interfaces\IWalletBalanceResponseInterface;
 
 interface IWalletBalanceResponseInterface
 {
-    public function getCoin(): string;
-    public function getEquity(): float;
-    public function getWalletBalance(): float;
-    public function getPositionMargin(): float;
-    public function getAvailableBalance(): float;
-    public function getOrderMargin(): float;
-    public function getOccClosingFee(): float;
-    public function getOccFundingFee(): float;
-    public function getUnrealisedPnl(): float;
-    public function getCumRealisedPnl(): float;
+    public function getCoin(): string; // Токен
+    public function getEquity(): float; // Общий капитал
+    public function getWalletBalance(): float; // Баланс кошелька
+    public function getPositionMargin(): float; // Маржа позиции
+    public function getAvailableBalance(): float; // Доступный баланс
+    public function getOrderMargin(): float; // Предварительно занятая маржа
+    public function getOccClosingFee(): float; // Комиссия за закрытие позиции.
+    public function getOccFundingFee(): float; // Комиссия за предварительное финансирование
+    public function getUnrealisedPnl(): float; // Нереализованный прибыль и убыток
+    public function getCumRealisedPnl(): float; // Совокупный реализованный PnL (за все время)
     public function getGivenCash(): float;
     public function getServiceCash(): float;
-    public function getAccountIM(): string;
-    public function getAccountMM(): string;
+    public function getAccountIM(): string; // USDC начальная маржа
+    public function getAccountMM(): string; // USDC поддерживающая маржа
 }
 ```
 <table style="width: 100%">
   <tr>
     <td colspan="3">
-      <b>\Carpenstar\ByBitAPI\Derivatives\Contract\Account\WalletBalance\Interfaces\IWalletBalanceResponseInterface</b>
+        <sup><b>INTERFACE</b></sup> <br />
+        <b>\Carpenstar\ByBitAPI\Derivatives\Contract\Account\WalletBalance\Interfaces\IWalletBalanceResponseInterface::class</b>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="3">
+        <sup><b>DTO</b></sup> <br />
+        <b>\Carpenstar\ByBitAPI\Derivatives\Contract\Account\WalletBalance\Response\WalletBalanceResponse::class</b>
     </td>
   </tr>
   <tr>
@@ -108,90 +123,92 @@ interface IWalletBalanceResponseInterface
     <th style="width: 60%; text-align: center">Описание</th>
   </tr>
   <tr>
-    <td>:: getCoin()</td>
+    <td>IWalletBalanceResponseInterface::getCoin()</td>
     <td>string</td>
     <td>Токен</td>
   </tr>
   <tr>
-    <td>:: getEquity()</td>
+    <td>IWalletBalanceResponseInterface::getEquity()</td>
     <td>float</td>
-    <td>Общий капитал</td>
+    <td> Общий капитал</td>
   </tr>
   <tr>
-    <td>:: getWalletBalance()</td>
+    <td>IWalletBalanceResponseInterface::getWalletBalance()</td>
     <td>float</td>
     <td>Баланс кошелька</td>
   </tr>
   <tr>
-    <td>:: getPositionMargin()</td>
+    <td>IWalletBalanceResponseInterface::getPositionMargin()</td>
     <td>float</td>
     <td>Маржа позиции</td>
   </tr>
   <tr>
-    <td>:: getAvailableBalance()</td>
+    <td>IWalletBalanceResponseInterface::getAvailableBalance()</td>
     <td>float</td>
     <td>Доступный баланс</td>
   </tr>
   <tr>
-    <td>:: getOrderMargin()</td>
+    <td>IWalletBalanceResponseInterface::getOrderMargin()</td>
     <td>float</td>
     <td>Предварительно занятая маржа</td>
   </tr>
   <tr>
-    <td>:: getOccClosingFee()</td>
+    <td>IWalletBalanceResponseInterface::getOccClosingFee()</td>
     <td>float</td>
     <td>
-      Занята плата за закрытие позиции. <br />
-      Формула: плата за открытие + ожидаемая максимальная плата за закрытие
+        Комиссия за закрытие позиции. <br />
+        Формула: комиссия за открытие + ожидаемая максимальная комиссия за закрытие.
     </td>
   </tr>
   <tr>
-    <td>:: getOccFundingFee()</td>
+    <td>IWalletBalanceResponseInterface::getOccFundingFee()</td>
     <td>float</td>
     <td>
-      Плата за предварительное финансирование
+      Комиссия за предварительное финансирование
     </td>
   </tr>
   <tr>
-    <td>:: getUnrealisedPnl()</td>
+    <td>IWalletBalanceResponseInterface::getUnrealisedPnl()</td>
     <td>float</td>
     <td>
-      Нереализованный PnL
+      Нереализованный прибыль и убыток
     </td>
   </tr>
   <tr>
-    <td>:: getCumRealisedPnl()</td>
+    <td>IWalletBalanceResponseInterface::getCumRealisedPnl()</td>
     <td>float</td>
     <td>
       Совокупный реализованный PnL (за все время)
     </td>
   </tr>
   <tr>
-    <td>:: getGivenCash()</td>
+    <td>IWalletBalanceResponseInterface::getGivenCash()</td>
     <td>float</td>
     <td>
       -
     </td>
   </tr>
   <tr>
-    <td>:: getServiceCash()</td>
+    <td>IWalletBalanceResponseInterface::getServiceCash()</td>
     <td>float</td>
     <td>
       -
     </td>
   </tr>
   <tr>
-    <td>:: getAccountIM()</td>
+    <td>IWalletBalanceResponseInterface::getAccountIM()</td>
     <td>string</td>
     <td>
-      Начальная маржа счета USDC
+      USDC начальная маржа
     </td>
   </tr>
   <tr>
-    <td>:: getAccountMM()</td>
+    <td>IWalletBalanceResponseInterface::getAccountMM()</td>
     <td>string</td>
     <td>
-      Маржа обслуживания счета USDC
+      USDC поддерживающая маржа
     </td>
   </tr>
 </table>
+
+---

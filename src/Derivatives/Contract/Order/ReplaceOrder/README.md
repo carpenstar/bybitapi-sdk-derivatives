@@ -4,6 +4,12 @@
 
 > You can change open or partially filled orders.
 
+<p align="center" width="100%"><b>EXAMPLE</b></p>
+
+<p align="center" width="100%"><b> ... </b></p>
+
+---
+
 <p align="center" width="100%"><b>REQUEST PARAMETERS</b></p>
 
 ---
@@ -154,3 +160,5 @@ interface IReplaceOrderResponseInterface
      <td>User customised order id</td>
    </tr>
 </table>
+
+---

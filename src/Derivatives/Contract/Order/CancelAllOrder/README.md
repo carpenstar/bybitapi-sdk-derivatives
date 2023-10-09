@@ -2,6 +2,12 @@
 <b>[Official documentation](https://bybit-exchange.github.io/docs/derivatives/contract/cancel-all)</b>
 <p>This endpoint allows you to cancel all open orders.</p>
 
+<p align="center" width="100%"><b>EXAMPLE</b></p>
+
+<p align="center" width="100%"><b> ... </b></p>
+
+---
+
 <p align="center" width="100%"><b>REQUEST PARAMETERS</b></p>
 
 ---
@@ -98,3 +104,5 @@ interface ICancelAllOrderResponseInterface
     <td>Custom Order ID</td>
   </tr>
 </table>
+
+---

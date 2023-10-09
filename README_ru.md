@@ -290,12 +290,17 @@ composer require carpenstar/bybitapi-sdk-derivatives
 
 ### Market Data - Funding Rate History
 <b>[Официальная страница документации](https://bybit-exchange.github.io/docs/derivatives/public/funding-rate)</b>
-<p>История фандинга по указаному символу за определенный период</p>
+<p>История финансирования указанного символа за определенный период</p>
 
 ```php
-// Класс эндпоинта:
-\Carpenstar\ByBitAPI\Derivatives\MarketData\FundingRateHistory\FundingRateHistory::class
-```
+// Endpoint classname
+Carpenstar\ByBitAPI\Derivatives\MarketData\FundingRateHistory\FundingRateHistory::class 
+```  
+
+<p align="center" width="100%"><b>ПРИМЕР</b></p>
+
+---
+
 ```php
 use Carpenstar\ByBitAPI\BybitAPI;
 use Carpenstar\ByBitAPI\Derivatives\MarketData\FundingRateHistory\FundingRateHistory;
@@ -304,14 +309,10 @@ use Carpenstar\ByBitAPI\Derivatives\MarketData\FundingRateHistory\Request\Fundin
 
 $bybit = new BybitAPI("https://api-testnet.bybit.com", "apiKey", "secret");
 
-$options = (new FundingRateHistoryRequest())
-    ->setStartTime((new DateTime("2023-05-08 15:00:00"))->getTimestamp())
-    ->setEndTime((new DateTime("2023-05-09 10:00:00"))->getTimestamp())
-    ->setSymbol("BTCUSDT")->setLimit(3);
+$options = (new FundingRateHistoryRequest())->setSymbol("BTCUSDT")->setLimit(3);
 
 /** @var FundingRateHistoryResponse[] $result */
 $result = $bybit->rest(FundingRateHistory::class, $options)->getBody()->all();
-
 
 
 foreach ($result as $rateItem) {
@@ -338,25 +339,33 @@ foreach ($result as $rateItem) {
  * -----
  */
 ```
-<p><b>Параметры запроса:</b></p>
 
-```php
-Carpenstar\ByBitAPI\Derivatives\MarketData\FundingRateHistory\Interfaces\IFundingRateHistoryRequest::class
-```
+
+<p align="center" width="100%"><b>ПАРАМЕТРЫ ЗАПРОСА</b></p>
+
+---
+
 ```php
 new \Carpenstar\ByBitAPI\Derivatives\MarketData\FundingRateHistory\Request\FundingRateHistoryRequest();
     
 $options = (new FundingRateHistoryRequest())
-    ->setSymbol("BTCUSDT")
-    ->setStartTime((new DateTime("2023-05-08 15:00:00"))->getTimestamp())
-    ->setEndTime((new DateTime("2023-05-09 10:00:00"))->getTimestamp())
-    ->setLimit(200)
+    ->setSymbol("BTCUSDT") // Trading pair
+    ->setStartTime((new DateTime("2023-05-09 10:00:00"))->getTimestamp()) // Временная метка, ОТ которой будет взят срез данных
+    ->setEndTime((new DateTime("2023-05-09 10:00:00"))->getTimestamp()) // Временная метка ДО того, как будет взят срез данных
+    ->setLimit(200) // Ограничение количества записей, возвращаемых по запросу
 ```
 
 <table style="width: 100%">
   <tr>
     <td colspan="3">
-      <b>\Carpenstar\ByBitAPI\Derivatives\MarketData\FundingRateHistory\Interfaces\IFundingRateHistoryRequest</b>
+        <sup><b>INTERFACE:</b></sup> <br />
+        <b>\Carpenstar\ByBitAPI\Derivatives\MarketData\FundingRateHistory\Interfaces\IFundingRateHistoryRequest::class</b>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="3">
+        <sup><b>DTO:</b></sup> <br />
+        <b>\Carpenstar\ByBitAPI\Derivatives\MarketData\FundingRateHistory\Request\FundingRateHistoryRequest::class</b>
     </td>
   </tr>
   <tr>
@@ -365,44 +374,51 @@ $options = (new FundingRateHistoryRequest())
     <th style="width: 50%; text-align: center">Описание</th>
   </tr>
   <tr>
-    <td>:: setSymbol(string $symbol): self</td>
+    <td>IFundingRateHistoryRequest::setSymbol(string $symbol): self</td>
     <td style="text-align: center">НЕТ</td>
-    <td>Строка с тикером торговой пары</td>
+    <td>Торговая пара</td>
   </tr>
   <tr>
-    <td>:: setStartTime(int $timestamp): self</td>
+    <td>IFundingRateHistoryRequest::setStartTime(int $timestamp): self</td>
     <td style="text-align: center"><b>НЕТ<sup>*</sup></b></td>
-    <td>Таймштамп ОТ которого берется срез данных</td>
+    <td>Временная метка, ОТ которой будет взят срез данных</td>
   </tr>
   <tr>
-    <td>:: setEndTime(int $timestamp): self</td>
+    <td>IFundingRateHistoryRequest::setEndTime(int $timestamp): self</td>
     <td style="text-align: center"><b>НЕТ<sup>*</sup></b></td>
-    <td>Таймштамп ДО которого берется срез данных</td>
+    <td>Временная метка ДО того, как будет взят срез данных</td>
   </tr>
   <tr>
-    <td>:: setLimit(int $limit): self</td>
+    <td>IFundingRateHistoryRequest::setLimit(int $limit): self</td>
     <td style="text-align: center">НЕТ</td>
-    <td>Ограничение возвращаемых записей на запрос</td>
+    <td>Ограничение количества записей, возвращаемых по запросу</td>
   </tr>
 </table>
 
 > <sup>*</sup>**Warning:**
-> При установке временных ограничений на выборку, обязательно следует указывать верхнюю и нижнюю границу при помощи `setStartTime(int $timestamp)` и `setEndTime(int $timestamp)`.
-> Иначе будет возвращена ошибка
+> При установке ограничений по времени выборки обязательно укажите верхнюю и нижнюю границы, используя `setStartTime(int $timestamp)` и `setEndTime(int $timestamp)`.
+> В противном случае будет возвращена ошибка
 
 > **Warning:**
-> По умолчанию, запрос на эндпоинт `FundingRateHistory::class` возвращает 200 последних записей до текущего момента по определенному символу
+> По умолчанию запрос к эндпоинту FundingRateHistory::class возвращает последние 200 записей до текущего момента для конкретного символа
 
-<p><b>Структура ответа:</b></p>
 
-```php
-// Интерфейс:
-\Carpenstar\ByBitAPI\Derivatives\MarketData\FundingRateHistory\Interfaces\IFundingRateHistoryResponse::class 
-```
+
+<p align="center" width="100%"><b>СТРУКТУРА ОТВЕТА</b></p>
+
+---
+
 <table style="width: 100%">
   <tr>
     <td colspan="3">
-      <b>\Carpenstar\ByBitAPI\Derivatives\MarketData\FundingRateHistory\Interfaces\IFundingRateHistoryResponse</b>
+        <sup><b>INTERFACE:</b></sup> <br />
+        <b>\Carpenstar\ByBitAPI\Derivatives\MarketData\FundingRateHistory\Interfaces\IFundingRateHistoryResponse::class</b>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="3">
+        <sup><b>DTO:</b></sup> <br /> 
+        <b>\Carpenstar\ByBitAPI\Derivatives\MarketData\FundingRateHistory\Response\FundingRateHistoryResponse::class</b>
     </td>
   </tr>
   <tr>
@@ -411,19 +427,19 @@ $options = (new FundingRateHistoryRequest())
     <th style="width: 50%; text-align: center">Описание</th>
   </tr>
   <tr>
-    <td>:: getSymbol()</td>
+    <td>IFundingRateHistoryResponse::getSymbol()</td>
     <td style="text-align: center">string</td>
-    <td>Символ торговой пары</td>
+    <td>Торговая пара</td>
   </tr>
   <tr>
-    <td>:: getFundingRate()</td>
+    <td>IFundingRateHistoryResponse::getFundingRate()</td>
     <td style="text-align: center">float</td>
     <td>Ставка финансирования</td>
   </tr>
   <tr>
-    <td>:: getFundingRateTimestamp()</td>
+    <td>IFundingRateHistoryResponse::getFundingRateTimestamp()</td>
     <td style="text-align: center">DateTime</td>
-    <td>Время удержания ставки финансирования</td>
+    <td>Время следующего списания ставки финансирования</td>
   </tr>
 </table>
 
@@ -432,14 +448,20 @@ $options = (new FundingRateHistoryRequest())
 
 ### Market Data - Index Price Kline
 <b>[Официальная страница документации](https://bybit-exchange.github.io/docs/derivatives/public/index-kline)</b>
-<p>Запрос истории <b>ИНДЕКСНЫХ</b> цен. <br />
-Тики возвращаются группами в зависимости от запрошенного интервала. <br />
-Эти данные используются для построения свечных и других графиков.</p>
+<p>Запрос истории цены <b>INDEX</b>, рассчитанной на основе цен крупнейших бирж.</p>
+<p>Каждый элемент представляет собой группу цен в зависимости от запрошенного интервала.</p>
+<p>Эти данные можно использовать для построения свечных и других диаграмм.</p>
 
 ```php
-// Класс эндпоинта:
-\Carpenstar\ByBitAPI\Derivatives\MarketData\IndexPriceKline\IndexPriceKline::class
+// Endpoint classname
+Carpenstar\ByBitAPI\Derivatives\MarketData\IndexPriceKline\IndexPriceKline::class 
 ```
+
+<br />
+<p align="center" width="100%"><b>ПРИМЕР</b></p>
+
+---
+
 ```php
 use Carpenstar\ByBitAPI\BybitAPI;
 use Carpenstar\ByBitAPI\Derivatives\MarketData\IndexPriceKline\IndexPriceKline;
@@ -452,12 +474,11 @@ $options = (new IndexPriceKlineRequest())
     ->setSymbol("ETHUSDT")
     ->setInterval(1)
     ->setStartTime((new DateTime("2023-05-01 10:00:00"))->getTimestamp())
-    ->setEndTime((new DateTime("2023-05-01 11:00:00"))->getTimestamp())
+    ->setEndTime((new DateTime("2023-05-01 20:00:00"))->getTimestamp())
     ->setLimit(5);
 
 /** @var IndexPriceKlineResponse[] $result */
 $result = $bybit->rest(IndexPriceKline::class, $options)->getBody()->all();
-
 
 
 foreach ($result as $indexPriceKlineItem) {
@@ -503,28 +524,33 @@ foreach ($result as $indexPriceKlineItem) {
  * Close: 1847.63
  * -----
  */
-```
+``` 
 <br />
-<p><b>Параметры запроса:</b></p>
+<p align="center" width="100%"><b>ПАРАМЕТРЫ ЗАПРОСА:</b></p>
 
-```php
-// Интерфейс: 
-\Carpenstar\ByBitAPI\Derivatives\MarketData\IndexPriceKline\Interfaces\IIndexPriceKlineRequest::class
-```
+---
+
 ```php
 use Carpenstar\ByBitAPI\Derivatives\MarketData\IndexPriceKline\Request\IndexPriceKlineRequest;
     
 $options = (new IndexPriceKlineRequest())
-    ->setSymbol("BTCUSDT") 
-    ->setInterval(1) 
-    ->setStartTime((new DateTime("2023-05-08 15:00:00"))->getTimestamp()) 
-    ->setEndTime((new DateTime("2023-05-08 15:00:00"))->getTimestamp()) 
-    ->setLimit(200) 
+    ->setSymbol("BTCUSDT") // Торговая пара
+    ->setInterval(1) // Интервал тика. 1 3 5 15 30 60 120 240 360 720 D M W
+    ->setStartTime((new DateTime("2023-05-09 10:00:00"))->getTimestamp()) // Таймштам ОТ которого берется срез данных
+    ->setEndTime((new DateTime("2023-05-09 11:00:00"))->getTimestamp()) // Таймштам ДО которого берется срез данных
+    ->setLimit(200) // Ограничение данных на страницу, по умолчанию: 200
 ```
 <table style="width: 100%">
   <tr>
     <td colspan="3">
-      <b>\Carpenstar\ByBitAPI\Derivatives\MarketData\IndexPriceKline\Interfaces\IIndexPriceKlineRequest</b>
+        <sup>INTERFACE:</sup> <br />
+        <b>\Carpenstar\ByBitAPI\Derivatives\MarketData\IndexPriceKline\Interfaces\IIndexPriceKlineRequest::class</b>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="3">
+        <sup>DTO:</sup> <br />
+        <b>\Carpenstar\ByBitAPI\Derivatives\MarketData\IndexPriceKline\Request\IndexPriceKlineRequest::class</b>
     </td>
   </tr>
   <tr>
@@ -533,50 +559,60 @@ $options = (new IndexPriceKlineRequest())
     <th style="width: 50%; text-align: center">Описание</th>
   </tr>
   <tr>
-    <td>:: setSymbol(string $symbol): self</td>
+    <td>IIndexPriceKlineRequest::setSymbol(string $symbol): self</td>
     <td><b>ДА</b></td>
-    <td>Строка с тикером торговой пары</td>
+    <td>Торговая пара</td>
   </tr>
   <tr>
-    <td>:: setInterval(int $interval): self</td>
+    <td>IIndexPriceKlineRequest::setInterval(int $interval): self</td>
     <td><b>ДА</b></td>
-    <td>Размер тика. Возможные значения: 1 3 5 15 30 60 120 240 360 720 D M W</td>
+    <td>Интервал тика. Возможные значения: 1 3 5 15 30 60 120 240 360 720 D M W</td>
   </tr>
   <tr>
-    <td>:: setStartTime(int $timestamp): self</td>
+    <td>IIndexPriceKlineRequest::setStartTime(int $timestamp): self</td>
     <td><b>ДА</b></td>
-    <td>Таймштамп ОТ которого берется срез данных</td>
+    <td>Таймштам ОТ которого берется срез данных</td>
   </tr>
   <tr>
-    <td>:: setEndTime(int $timestamp): self</td>
+    <td>IIndexPriceKlineRequest::setEndTime(int $timestamp): self</td>
     <td><b>ДА</b></td>
-    <td>Таймштамп ДО которого берется срез данных</td>
+    <td>Таймштам ДО которого берется срез данных</td>
   </tr>
   <tr>
-    <td>:: setLimit(int $limit): self</td>
+    <td>IIndexPriceKlineRequest::setLimit(int $limit): self</td>
     <td>НЕТ</td>
-    <td>Ограничение возвращаемых записей на запрос. По умолчанию 200</td>
+    <td>Ограничение данных на страницу, по умолчанию: 200</td>
   </tr>
 </table>
 
-<p><b>Структура ответа:</b></p>
+<br />
+<p align="center" width="100%"><b>СТРУКТУРА ОТВЕТА:</b></p>
+
+---
 
 ```php
 Carpenstar\ByBitAPI\Derivatives\MarketData\IndexPriceKline\Interfaces\IIndexPriceKlineResponse::class
 
 interface IIndexPriceKlineResponse
 {
-public function getStartTime(): \DateTime;
-public function getOpen(): float;
-public function getHigh(): float;
-public function getLow(): float;
-public function getClose(): float;
+    public function getStartTime(): \DateTime;
+    public function getOpen(): float;
+    public function getHigh(): float;
+    public function getLow(): float;
+    public function getClose(): float;
 }
 ```
 <table style="width: 100%">
   <tr>
     <td colspan="3">
-      <b>\Carpenstar\ByBitAPI\Derivatives\MarketData\IndexPriceKline\Interfaces\IIndexPriceKlineResponse</b>
+        <sup>INTERFACE:</sup> <br />
+        <b>\Carpenstar\ByBitAPI\Derivatives\MarketData\IndexPriceKline\Interfaces\IIndexPriceKlineResponse::class </b>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="3">
+        <sup>DTO:</sup> <br />
+        <b>\Carpenstar\ByBitAPI\Derivatives\MarketData\IndexPriceKline\Response\IndexPriceKlineResponse::class</b>
     </td>
   </tr>
   <tr>
@@ -585,27 +621,27 @@ public function getClose(): float;
     <th style="width: 60%; text-align: center">Описание</th>
   </tr>
   <tr>
-    <td>:: getStartTime()</td>
+    <td>IIndexPriceKlineResponse::getStartTime()</td>
     <td>DateTime</td>
-    <td>Время тика</td>
+    <td>Время открытия тика</td>
   </tr>
   <tr>
-    <td>:: getOpen()</td>
+    <td>IIndexPriceKlineResponse::getOpen()</td>
     <td>float</td>
     <td>Цена открытия тика</td>
   </tr>
   <tr>
-    <td>:: getHigh()</td>
+    <td>IIndexPriceKlineResponse::getHigh()</td>
     <td>float</td>
     <td>Максимальная цена тика</td>
   </tr>
   <tr>
-    <td>:: getLow()</td>
+    <td>IIndexPriceKlineResponse::getLow()</td>
     <td>float</td>
     <td>Минимальная цена тика</td>
   </tr>
   <tr>
-    <td>:: getClose()</td>
+    <td>IIndexPriceKlineResponse::getClose()</td>
     <td>float</td>
     <td>Цена закрытия тика</td>
   </tr>
@@ -614,14 +650,19 @@ public function getClose(): float;
 ---
 <br />
 
-## Market Data - Instrument Info
+### Market Data - Instrument Info
 <b>[Официальная страница документации](https://bybit-exchange.github.io/docs/derivatives/public/instrument-info)</b>
-<p>Эндпоинт предоставляет спецификации торгового инструмента.</p> 
+<p>Эндпоинт предоставляет характеристики торгового инструмента.</p> 
 
 ```php
-// Класс эндпоинта:
+// Endpoint classname
 \Carpenstar\ByBitAPI\Derivatives\MarketData\InstrumentInfo\InstrumentInfo::class
-````
+```
+
+<p align="center" width="100%"><b>ПРИМЕР</b></p>
+
+---
+
 ```php
 use Carpenstar\ByBitAPI\BybitAPI;
 use Carpenstar\ByBitAPI\Derivatives\MarketData\InstrumentInfo\InstrumentInfo;
@@ -708,22 +749,28 @@ foreach ($instrumentInfo->getLotSizeFilter()->all() as $filterItem)
  */
 ```  
 
-<p><b>Параметры запроса:</b></p>
+<p align="center" width="100%"><b>ПАРАМЕТРЫ ЗАПРОСА</b></p>
 
-```php
-// Класс эндпоинта:
-\Carpenstar\ByBitAPI\Derivatives\MarketData\InstrumentInfo\Interfaces\IInstrumentInfoRequest::class
-```   
+---
+
 ```php
 use \Carpenstar\ByBitAPI\Derivatives\MarketData\InstrumentInfo\Request\InstrumentInfoRequest;
     
-$options = (new InstrumentInfoRequest())->setSymbol('BTCUSDT');
+$options = (new InstrumentInfoRequest())
+    ->setSymbol('BTCUSDT'); // Торговая пара
 ```  
 
 <table style="width: 100%">
   <tr>
     <td colspan="3">
-      <b>\Carpenstar\ByBitAPI\Derivatives\MarketData\InstrumentInfo\Interfaces\IInstrumentInfoRequest</b>
+        <sup><b>INTERFACE</b></sup> <br />
+        <b>\Carpenstar\ByBitAPI\Derivatives\MarketData\InstrumentInfo\Interfaces\IInstrumentInfoRequest::class</b>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="3">
+        <sup><b>DTO</b></sup> <br />
+        <b>\Carpenstar\ByBitAPI\Derivatives\MarketData\InstrumentInfo\Request\InstrumentInfoRequest::class</b>
     </td>
   </tr>
   <tr>
@@ -732,31 +779,30 @@ $options = (new InstrumentInfoRequest())->setSymbol('BTCUSDT');
     <th style="width: 50%; text-align: center">Описание</th>
   </tr>
   <tr>
-    <td>:: setSymbol(string $symbol): self</td>
+    <td>IInstrumentInfoRequest::setSymbol(string $symbol): self</td>
     <td><b>ДА</b></td>
-    <td>Строка с тикером торговой пары</td>
+    <td>Торговая пара</td>
   </tr>
 </table>
 
-<p><b>Структура ответа:</b></p>
+<p align="center" width="100%"><b>СТРУКТУРА ОТВЕТА</b></p>
+
+---
 
 ```php
 \Carpenstar\ByBitAPI\Derivatives\MarketData\InstrumentInfo\Interfaces\IInstrumentInfoResponse::class
     
 interface IInstrumentInfoResponse
 {
-     public function getSymbol(): ?string;
-     public function getContractType(): ?string;
-     public function getBaseCoin(): ?string;
-     public function getQuoteCoin(): ?string;
-     public function getSettleCoin(): ?string;
-     public function getFundingInterval(): int;
-     public function getUnifiedMarginTrade(): bool;
-     public function getPriceScale(): float;
-     public function getDeliveryFeeRate(): float;
-     public function getDeliveryTime(): ?\DateTime;
-     public function getLaunchTime(): ?\DateTime;
-     public function getStatus(): ?string;
+     public function getSymbol(): ?string; // Торговая пара
+     public function getContractType(): ?string; // Тип контракта
+     public function getBaseCoin(): ?string; // Базовый токена. Например: BTC
+     public function getQuoteCoin(): ?string; // Относительный токен. Например: USDT
+     public function getSettleCoin(): ?string; // Расчетный токена. Например: USDT
+     public function getFundingInterval(): int; // Интервал списания ставки финансирования
+     public function getUnifiedMarginTrade(): bool; // Поддержка единого маржинального счета
+     public function getPriceScale(): float; // Шкала цены
+     public function getStatus(): ?string; // Статус торговли по инструменту
      public function getLotSizeFilter(): EntityCollection; // ILotSizeFilterItem[]
      public function getPriceFilter(): EntityCollection; // IPriceFilterItem[]
      public function getLeverageFilter(): EntityCollection // ILeverageFilterItem[]; 
@@ -766,7 +812,14 @@ interface IInstrumentInfoResponse
 <table style="width: 100%">
   <tr>
     <td colspan="3">
-      <b>\Carpenstar\ByBitAPI\Derivatives\MarketData\InstrumentInfo\Interfaces\IInstrumentInfoResponse</b>
+        <sup><b>INTERFACE</b></sup> <br />
+        <b>\Carpenstar\ByBitAPI\Derivatives\MarketData\InstrumentInfo\Interfaces\IInstrumentInfoResponse::class</b>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="3">
+        <sup><b>DTO</b></sup> <br />
+        <b>\Carpenstar\ByBitAPI\Derivatives\MarketData\InstrumentInfo\Response\InstrumentInfoResponse::class</b>
     </td>
   </tr>
   <tr>
@@ -775,81 +828,71 @@ interface IInstrumentInfoResponse
     <th style="width: 60%; text-align: center">Описание</th>
   </tr>
   <tr>
-    <td>:: getSymbol()</td>
+    <td>IInstrumentInfoResponse::getSymbol()</td>
     <td>string</td>
-    <td>Торговый инструмент</td>
+    <td>Торговая пара</td>
   </tr>
   <tr>
-    <td>:: getContractType()</td>
+    <td>IInstrumentInfoResponse::getContractType()</td>
     <td>string</td>
-    <td>Тип контракта. <b>Примечание: на текущий момент поддержка только Linear</b></td>
+    <td>Тип контракта. <b>Примечание: в настоящее время поддерживается только linear</b></td>
   </tr>
   <tr>
-    <td>:: getBaseCoin()</td>
+    <td>IInstrumentInfoResponse::getBaseCoin()</td>
     <td>string</td>
     <td>Базовый токен. Например: BTC</td>
   </tr>
   <tr>
-    <td>:: getQuoteCoin()</td>
+    <td>IInstrumentInfoResponse::getQuoteCoin()</td>
     <td>string</td>
-    <td> Относительный токен. Например: USDT</td>
+    <td>Относительный токен. Например: USDT</td>
   </tr>
   <tr>
-    <td>:: getSettleCoin()</td>
+    <td>IInstrumentInfoResponse::getSettleCoin()</td>
     <td>string</td>
     <td>Расчетный токен. Например: USDT</td>
   </tr>
   <tr>
-    <td>:: getFundingInterval()</td>
+    <td>IInstrumentInfoResponse::getFundingInterval()</td>
     <td>int</td>
-    <td>Интервал списания ставки финансирования в милисекундах</td>
+    <td>Интервал списания ставки финансирования</td>
   </tr>
   <tr>
-    <td>:: getUnifiedMarginTrade()</td>
+    <td>IInstrumentInfoResponse::getUnifiedMarginTrade()</td>
     <td>bool</td>
-    <td>Поддержка единого счета маржинальной торговли</td>
+    <td>Поддержка единого маржинального счета</td>
   </tr>
   <tr>
-    <td>:: getPriceScale()</td>
+    <td>IInstrumentInfoResponse::getPriceScale()</td>
     <td>float</td>
     <td>Шкала цены</td>
   </tr>
   <tr>
-    <td>:: getDeliveryFeeRate()</td>
-    <td>float</td>
-    <td> - </td>
-  </tr>
-  <tr>
-    <td>:: getDeliveryTime()</td>
-    <td>DateTime</td>
-    <td> - </td>
-  </tr>
-  <tr>
-    <td>:: getLaunchTime()</td>
+    <td>IInstrumentInfoResponse::getLaunchTime()</td>
     <td>DateTime</td>
     <td>
-      Время старта торгов по инструменту
+      Время начала торгов по инструменту
     </td>
   </tr>
   <tr>
-    <td>:: getStatus()</td>
+    <td>IInstrumentInfoResponse::getStatus()</td>
     <td>string</td>
     <td>
-      Статус торговли по инструменты
+      Статус торговли по инструменту
     </td>
   </tr>
   <tr>
-    <td>:: getLotSizeFilter()</td>
+    <td>IInstrumentInfoResponse::getLotSizeFilter()</td>
     <td>ILotSizeFilterItem[]</td>
     <td></td>
   </tr>
   <tr>
-    <td>:: getPriceFilter()</td>
+    <td>IInstrumentInfoResponse::getPriceFilter()</td>
     <td>IPriceFilterItem[]</td>
     <td></td>
   </tr>
   <tr>
-    <td>:: getLeverageFilter()</td>
+    <td>IInstrumentInfoResponse::getLeverageFilter()</td>
     <td>ILeverageFilterItem[]</td>
     <td></td>
   </tr>
@@ -870,7 +913,14 @@ interface ILotSizeFilterItem
 <table style="width: 100%">
   <tr>
     <td colspan="3">
-      <b>\Carpenstar\ByBitAPI\Derivatives\MarketData\InstrumentInfo\Interfaces\ILotSizeFilterItem</b>
+        <sup><b>INTERFACE</b></sup> <br />
+        <b>\Carpenstar\ByBitAPI\Derivatives\MarketData\InstrumentInfo\Interfaces\ILotSizeFilterItem:class</b>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="3">
+        <sup><b>DTO</b></sup> <br />
+        <b>\Carpenstar\ByBitAPI\Derivatives\MarketData\InstrumentInfo\Response\LotSizeFilterItemResponse::class</b>
     </td>
   </tr>
   <tr>
@@ -879,19 +929,19 @@ interface ILotSizeFilterItem
     <th style="width: 60%; text-align: center">Описание</th>
   </tr>
   <tr>
-    <td>:: getMaxOrderQty()</td>
+    <td>ILotSizeFilterItem::getMaxOrderQty()</td>
     <td>float</td>
     <td>Максимальный размер ордера</td>
   </tr>
   <tr>
-    <td>:: getMinOrderQty()</td>
+    <td>ILotSizeFilterItem::getMinOrderQty()</td>
     <td>float</td>
     <td>Минимальный размер ордера</td>
   </tr>
   <tr>
-    <td>:: getQtyStep()</td>
+    <td>ILotSizeFilterItem::getQtyStep()</td>
     <td>float</td>
-    <td>Шаг для изменения размера ордера</td>
+    <td>Шаг изменения размера ордера</td>
   </tr>
 </table>
 
@@ -910,7 +960,14 @@ interface ILeverageFilterItem
 <table style="width: 100%">
   <tr>
     <td colspan="3">
-      <b>\Carpenstar\ByBitAPI\Derivatives\MarketData\InstrumentInfo\Interfaces\ILeverageFilterItem</b>
+        <sup><b>INTERFACE</b></sup> <br />
+        <b>\Carpenstar\ByBitAPI\Derivatives\MarketData\InstrumentInfo\Interfaces\ILeverageFilterItem::class</b>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="3">
+        <sup><b>DTO</b></sup> <br />
+        <b>\Carpenstar\ByBitAPI\Derivatives\MarketData\InstrumentInfo\Response\LeverageFilterItemResponse::class</b>
     </td>
   </tr>
   <tr>
@@ -919,19 +976,19 @@ interface ILeverageFilterItem
     <th style="width: 60%; text-align: center">Описание</th>
   </tr>
   <tr>
-    <td>:: getMinLeverage()</td>
+    <td>ILeverageFilterItem::getMinLeverage()</td>
     <td>int</td>
-    <td>Минимальное кредитное плечо</td>
+    <td>Минимальное кредитное плеча</td>
   </tr>
   <tr>
-    <td>:: getMaxLeverage()</td>
+    <td>ILeverageFilterItem::getMaxLeverage()</td>
     <td>float</td>
     <td>Максимальное кредитное плечо</td>
   </tr>
   <tr>
-    <td>:: getLeverageStep()</td>
+    <td>ILeverageFilterItem::getLeverageStep()</td>
     <td>float</td>
-    <td>Шаг кредитного плеча</td>
+    <td>Шаг изменения кредитного плеча</td>
   </tr>
 </table>
 
@@ -950,26 +1007,33 @@ interface IPriceFilterItem
 <table style="width: 100%">
   <tr>
     <td colspan="3">
-      <b>\Carpenstar\ByBitAPI\Derivatives\MarketData\InstrumentInfo\Interfaces\IPriceFilterItem</b>
+        <sup><b>INTERFACE</b></sup> <br />
+        <b>\Carpenstar\ByBitAPI\Derivatives\MarketData\InstrumentInfo\Interfaces\IPriceFilterItem::class</b>
     </td>
   </tr>
+    <tr>
+    <td colspan="3">
+        <sup><b>DTO</b></sup> <br />
+        <b>\Carpenstar\ByBitAPI\Derivatives\MarketData\InstrumentInfo\Response\PriceFilterItemResponse::class</b>
+    </td>
+    </tr>
   <tr>
     <th style="width: 20%; text-align: center">Метод</th>
     <th style="width: 20%; text-align: center">Тип</th>
     <th style="width: 60%; text-align: center">Описание</th>
   </tr>
   <tr>
-    <td>:: getMinPrice()</td>
+    <td>IPriceFilterItem::getMinPrice()</td>
     <td>int</td>
     <td>Минимальная цена</td>
   </tr>
   <tr>
-    <td>:: getMaxPrice()</td>
+    <td>IPriceFilterItem::getMaxPrice()</td>
     <td>float</td>
     <td>Максимальная цена</td>
   </tr>
   <tr>
-    <td>:: getTickSize()</td>
+    <td>IPriceFilterItem::getTickSize()</td>
     <td>float</td>
     <td>Размер тика</td>
   </tr>
@@ -980,12 +1044,17 @@ interface IPriceFilterItem
 
 ### Market Data - Kline
 <b>[Официальная страница документации](https://bybit-exchange.github.io/docs/derivatives/public/kline)</b>
-<p>Эндпоинт возвращает исторические данные для построения графиков. Свечи возвращаются группами в зависимости от запрошенного интервала.</p>
+<p>Эндпоинт возвращает исторические данные для построения графика. Свечи возвращаются группами в зависимости от запрошенного интервала.</p>
 
 ```php
-// Класс эндпоинта:
+// Endpoint classname
 \Carpenstar\ByBitAPI\Derivatives\MarketData\Kline\Kline::class
 ```
+
+<p align="center" width="100%"><b>ПРИМЕР</b></p>
+
+---
+
 ```php
 use Carpenstar\ByBitAPI\BybitAPI;
 use Carpenstar\ByBitAPI\Derivatives\MarketData\Kline\Request\KlineRequest;
@@ -1051,22 +1120,31 @@ foreach ($klineData as $klineItem) {
  */
 ```  
 
-<p><b>Параметры запроса:</b></p>
+<p align="center" width="100%"><b>ПАРАМЕТРЫ ЗАПРОСА</b></p>
+
+---
 
 ```php
 \Carpenstar\ByBitAPI\Derivatives\MarketData\Kline\Interfaces\IKlineRequestInterface::class
 
 $options = (new KlineRequest())
-    ->setSymbol("BTCUSDT") // Обязательный параметр. Строка с тикером торговой пары.
+    ->setSymbol("BTCUSDT") // Обязательный параметр. Линия с тикером торговой пары.
     ->setInterval(1) // Обязательный параметр. Размер тика. Возможные значения: 1 3 5 15 30 60 120 240 360 720 D M W
-    ->setStartTime((new DateTime("2023-05-08 15:00:00"))->getTimestamp()) // Обязательный параметр. Строка даты/времени ОТ которого берется срез данных 
-    ->setEndTime((new DateTime("2023-05-09 15:00:00"))->getTimestamp()) // Обязательный параметр. Строка даты/времени ДО которого берется срез данных
-    ->setLimit(200) // Необязательный параметр. Ограничение возвращаемых записей на запрос. По умолчанию 200
+    ->setStartTime((new DateTime("2023-05-10 10:00:00"))->getTimestamp()) // Обязательный параметр. Временная метка, ОТ которой будет взят срез данных
+    ->setEndTime((new DateTime("2023-05-10 11:00:00"))->getTimestamp()) // Обязательный параметр. Временная метка ДО того, как будет взят срез данных
+    ->setLimit(200) // Необязательный параметр. Ограничение количества записей, возвращаемых для каждого запроса. По умолчанию 200
 ```  
 <table style="width: 100%">
   <tr>
     <td colspan="3">
-      <b>\Carpenstar\ByBitAPI\Derivatives\MarketData\Kline\Interfaces\IKlineRequestInterface</b>
+        <sup><b>INTERFACE</b></sup> <br />
+        <b>\Carpenstar\ByBitAPI\Derivatives\MarketData\Kline\Interfaces\IKlineRequestInterface::class</b>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="3">
+        <sup><b>DTO</b></sup> <br />
+        <b>\Carpenstar\ByBitAPI\Derivatives\MarketData\Kline\Request\KlineRequest::class</b>
     </td>
   </tr>
   <tr>
@@ -1075,91 +1153,101 @@ $options = (new KlineRequest())
     <th style="width: 50%; text-align: center">Описание</th>
   </tr>
   <tr>
-    <td>:: setSymbol(string $symbol): self</td>
+    <td>IKlineRequestInterface::setSymbol(string $symbol): self</td>
     <td><b>ДА</b></td>
-    <td>Строка с тикером торговой пары</td>
+    <td>Торговая пара</td>
   </tr>
   <tr>
-    <td>:: setInterval(int $interval): self</td>
+    <td>IKlineRequestInterface::setInterval(int $interval): self</td>
     <td><b>ДА</b></td>
     <td>Размер тика. Возможные значения: 1 3 5 15 30 60 120 240 360 720 D M W</td>
   </tr>
   <tr>
-    <td>:: setStartTime(int $timestamp): self</td>
+    <td>IKlineRequestInterface::setStartTime(int $timestamp): self</td>
     <td><b>ДА</b></td>
-    <td>Строка даты/времени ОТ которого берется срез данных </td>
+    <td>Таймштамп ОТ которой берется срез данных </td>
   </tr>
   <tr>
-    <td>:: setEndTime(int $timestamp): self</td>
+    <td>IKlineRequestInterface::setEndTime(int $timestamp): self</td>
     <td><b>ДА</b></td>
-    <td>Строка даты/времени ДО которого берется срез данных</td>
+    <td>Таймштамп ДО которого берется срез данных</td>
   </tr>
   <tr>
-    <td>:: setLimit(int $limit): self</td>
+    <td>IKlineRequestInterface::setLimit(int $limit): self</td>
     <td>НЕТ</td>
-    <td>Ограничение возвращаемых записей на запрос. По умолчанию 200</td>
+    <td>Ограничение количества записей, возвращаемых для каждого запроса. По умолчанию 200</td>
   </tr>
 </table>
 
-<p><b>Структура ответа:</b></p>
+<p align="center" width="100%"><b>СТРУКТУРА ОТВЕТА</b></p>
+
+---
 
 ```php
 namespace Carpenstar\ByBitAPI\Derivatives\MarketData\Kline\Interfaces;
 
 interface IKlineResponseInterface
 {
-    public function getStartTime(): \DateTime;
-    public function getOpen(): float;
-    public function getHigh(): float;
-    public function getLow(): float;
-    public function getClose(): float;
-    public function getVolume(): float;
-    public function getTurnover(): float;
+    public function getStartTime(): \DateTime; // Время начала тика
+    public function getOpen(): float; // Цена открытия
+    public function getHigh(): float; // Максимальная цена тика
+    public function getLow(): float; // Минимальная цена тика
+    public function getClose(): float; // Цена закрытия тика
+    public function getVolume(): float; // Обьем
+    public function getTurnover(): float; // Оборот
 }
 ```
 <table style="width: 100%">
+  <tr>
+    <td colspan="3">
+        <sup><b>INTERFACE</b></sup> <br />
+        <b>\Carpenstar\ByBitAPI\Derivatives\MarketData\Kline\Interfaces\IKlineResponseInterface::class</b>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="3">
+        <sup><b>DTO</b></sup> <br />
+        <b>\Carpenstar\ByBitAPI\Derivatives\MarketData\Kline\Response\KlineResponse::class</b>
+    </td>
+  </tr>
   <tr>
     <th style="width: 20%; text-align: center">Метод</th>
     <th style="width: 20%; text-align: center">Тип</th>
     <th style="width: 60%; text-align: center">Описание</th>
   </tr>
+
   <tr>
-    <td colspan="3">
-      <b>\Carpenstar\ByBitAPI\Derivatives\MarketData\Kline\Interfaces\IKlineResponseInterface</b>
-    </td>
-  </tr>
-  <tr>
-    <td>:: getStartTime()</td>
+    <td>IKlineResponseInterface::getStartTime()</td>
     <td>DateTime</td>
-    <td>Время начала тика</td>
+    <td>Время открытия тика</td>
   </tr>
   <tr>
-    <td>:: getOpen()</td>
+    <td>IKlineResponseInterface::getOpen()</td>
     <td>float</td>
-    <td>Цена открытия</td>
+    <td>Цена открытия тика</td>
   </tr>
   <tr>
-    <td>:: getHigh()</td>
+    <td>IKlineResponseInterface::getHigh()</td>
     <td>float</td>
-    <td>Наибольшая цена</td>
+    <td>Максимальная цена тика</td>
   </tr>
   <tr>
-    <td>:: getLow()</td>
+    <td>IKlineResponseInterface::getLow()</td>
     <td>float</td>
-    <td>Наименьшая цена</td>
+    <td>Минимальная цена тика</td>
   </tr>
   <tr>
-    <td>:: getClose()</td>
+    <td>IKlineResponseInterface::getClose()</td>
     <td>float</td>
-    <td>Цена закрытия</td>
+    <td>Цена закрытия тика</td>
   </tr>
   <tr>
-    <td>:: getVolume()</td>
+    <td>IKlineResponseInterface::getVolume()</td>
     <td>float</td>
     <td>Обьем</td>
   </tr>
   <tr>
-    <td>:: getTurnover()</td>
+    <td>IKlineResponseInterface::getTurnover()</td>
     <td>float</td>
     <td>Оборот</td>
   </tr>
@@ -1170,14 +1258,19 @@ interface IKlineResponseInterface
 
 ### Market Data - Mark Price Kline
 <b>[Официальная страница документации](https://bybit-exchange.github.io/docs/derivatives/public/mark-kline)</b>
-<p>Эндпоинт возвращает исторические данные по <b>цене МАРКИРОВКИ</b>. <br />
-Данные возвращаются группами в зависимости от запрошенного интервала. <br />
-Можно использовать для формирования свечных графиков.</p>
+<p>Эндпоинт возвращает исторические данные о цене <b>МАРКИРОВКИ</b>.</p>
+<p>Данные возвращаются группами в зависимости от запрошенного интервала. </p>
+<p>Может использоваться для создания свечных диаграмм.</p>
 
 ```php
-// Класс эндпоинта:
+// Endpoint classname
 \Carpenstar\ByBitAPI\Derivatives\MarketData\MarkPriceKline\MarkPriceKline::class
 ```
+
+<p align="center" width="100%"><b>ПРИМЕР</b></p>
+
+---
+
 ```php
 use Carpenstar\ByBitAPI\BybitAPI;
 use Carpenstar\ByBitAPI\Derivatives\MarketData\MarkPriceKline\MarkPriceKline;
@@ -1188,9 +1281,9 @@ $bybit = new BybitAPI("https://api-testnet.bybit.com", "apiKey", "secret");
 
 $options = (new MarkPriceKlineRequest())
     ->setSymbol("APTUSDT")
-    ->setInterval('1') // Kline interval. 1 3 5 15 30 60 120 240 360 720 D M W 
-    ->setStartTime((new DateTime("2023-05-08 10:00:00"))->getTimestamp())
-    ->setEndTime((new DateTime("2023-05-08 15:00:00"))->getTimestamp())
+    ->setInterval('1') // Интервал тика. 1 3 5 15 30 60 120 240 360 720 D M W 
+    ->setStartTime('2023-05-08 10:00:00')
+    ->setEndTime('2023-05-08 15:00:00')
     ->setLimit(5);
 
 $result = $bybit->rest(MarkPriceKline::class, $options)->getBody();
@@ -1233,22 +1326,31 @@ foreach ($result->all() as $markPrice) {
  */
 ```  
 
-<p><b>Параметры запроса:</b></p>
+<p align="center" width="100%"><b>ПАРАМЕТРЫ ЗАПРОСА</b></p>
+
+---
 
 ```php
 \Carpenstar\ByBitAPI\Derivatives\MarketData\MarkPriceKline\MarkPriceKlineRequest::class
 
 $options = (new MarkPriceKlineRequest())
-    ->setSymbol("BTCUSDT") // Обязательный параметр. Строка с тикером торговой пары.
+    ->setSymbol("BTCUSDT") // Обязательный параметр. Линия с тикером торговой пары.
     ->setInterval(1) // Обязательный параметр. Размер тика. Возможные значения: 1 3 5 15 30 60 120 240 360 720 D M W
-    ->setStartTime((new DateTime("2023-05-08 15:00:00"))->getTimestamp()) // Обязательный параметр. Строка даты/времени ОТ которого берется срез данных 
-    ->setEndTime((new DateTime("2023-05-09 15:00:00"))->getTimestamp()); // Обязательный параметр. Строка даты/времени ДО которого берется срез данных
-    ->setLimit(200) // Необязательный параметр. Ограничение возвращаемых записей на запрос. По умолчанию 200
+    ->setStartTime((new DateTime("2023-05-10 10:00:00"))->getTimestamp()) // Обязательный параметр. Таймштамп ОТ которого будет взят срез данных
+    ->setEndTime((new DateTime("2023-05-10 11:00:00"))->getTimestamp()) // Обязательный параметр. Таймштамп ДО которого будет взят срез данных
+    ->setLimit(200) // Необязательный параметр. Ограничение количества записей, возвращаемых для каждого запроса. По умолчанию 200
 ```  
 <table style="width: 100%">
   <tr>
     <td colspan="3">
-      <b>\Carpenstar\ByBitAPI\Derivatives\MarketData\MarkPriceKline\MarkPriceKlineRequest</b>
+        <sup><b>INTERFACE</b></sup> <br />
+        <b>\Carpenstar\ByBitAPI\Derivatives\MarketData\MarkPriceKline\Interfaces\IMarkPriceKline::class</b>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="3">
+        <sup><b>DTO</b></sup> <br />
+        <b>\Carpenstar\ByBitAPI\Derivatives\MarketData\MarkPriceKline\Request\MarkPriceKlineRequest::class</b>
     </td>
   </tr>
   <tr>
@@ -1257,12 +1359,12 @@ $options = (new MarkPriceKlineRequest())
     <th style="width: 50%; text-align: center">Описание</th>
   </tr>
   <tr>
-    <td>:: setSymbol(string $symbol): self</td>
+    <td>IMarkPriceKline::setSymbol(string $symbol): self</td>
     <td><b>ДА</b></td>
-    <td>Строка с тикером торговой пары</td>
+    <td>Trading pair</td>
   </tr>
   <tr>
-    <td>:: setInterval(int $interval): self</td>
+    <td>IMarkPriceKline::setInterval(int $interval): self</td>
     <td><b>ДА</b></td>
     <td>
       Размер тика. <br />
@@ -1270,81 +1372,91 @@ $options = (new MarkPriceKlineRequest())
     </td>
   </tr>
   <tr>
-    <td>:: setStartTime(int $timestamp): self</td>
+    <td>IMarkPriceKline::setStartTime(int $timestamp): self</td>
     <td><b>ДА</b></td>
     <td>
-      Таймштамп ОТ которого берется срез данных
+      Таймштамп ОТ которого будет взят срез данных
     </td>
   </tr>
   <tr>
-    <td>:: setEndTime(int $timestamp): self</td>
+    <td>IMarkPriceKline::setEndTime(int $timestamp): self</td>
     <td><b>ДА</b></td>
     <td>
-      Таймштамп ДО которого берется срез данных
+      Таймштамп ДО которого будет взят срез данных
     </td>
   </tr>
   <tr>
-    <td>:: setLimit(int $limit): self</td>
+    <td>IMarkPriceKline::setLimit(int $limit): self</td>
     <td>НЕТ</td>
     <td>
-      Ограничение возвращаемых записей на запрос. По умолчанию: 200
+      Ограничение количества записей, возвращаемых для каждого запроса. По умолчанию 200
     </td>
   </tr>
 </table>
 
 
-<p><b>Структура ответа:</b></p>
+<p align="center" width="100%"><b>СТРУКТУРА ОТВЕТА</b></p>
+
+---
 
 ```php
 Carpenstar\ByBitAPI\Derivatives\MarketData\MarkPriceKline\Interfaces\IMarkPriceKline::class
 
 interface IMarkPriceKline
 {
-    public function getStartTime(): \DateTime;
-    public function getOpen(): float;
-    public function getHigh(): float;
-    public function getLow(): float;
-    public function getClose(): float;
+    public function getStartTime(): \DateTime; // Время открытия тика
+    public function getOpen(): float; // Цена открытия тика
+    public function getHigh(): float; // Максимальная цена тика
+    public function getLow(): float; // Минимальная цена тика
+    public function getClose(): float; // Цена закрытия тика
+    public function getVolume(): float; // Обьем
 }
 ```
 <table style="width: 100%">
-  <tr>
-    <td colspan="3">
-      <b>Carpenstar\ByBitAPI\Derivatives\MarketData\MarkPriceKline\Interfaces\IMarkPriceKline</b>
-    </td>
-  </tr>
+    <tr>
+        <td colspan="3">
+            <sup><b>INTERFACE</b></sup> <br />
+            <b>\Carpenstar\ByBitAPI\Derivatives\MarketData\MarkPriceKline\Interfaces\IMarkPriceKline::class</b>
+        </td>
+    </tr>
+    <tr>
+        <td colspan="3">
+            <sup><b>DTO</b></sup> <br />
+            <b>\Carpenstar\ByBitAPI\Derivatives\MarketData\MarkPriceKline\Request\MarkPriceKlineRequest::class</b>
+        </td>
+    </tr>
   <tr>
     <th style="width: 20%; text-align: center">Метод</th>
     <th style="width: 20%; text-align: center">Тип</th>
     <th style="width: 60%; text-align: center">Описание</th>
   </tr>
   <tr>
-    <td>:: getStartTime()</td>
+    <td>IMarkPriceKline::getStartTime()</td>
     <td>DateTime</td>
-    <td>Время старта тика</td>
+    <td>Время открытия тика</td>
   </tr>
   <tr>
-    <td>:: getOpen()</td>
+    <td>IMarkPriceKline::getOpen()</td>
     <td>float</td>
-    <td>Цена открытия</td>
+    <td>Цена открытия тика</td>
   </tr>
   <tr>
-    <td>:: getHigh()</td>
+    <td>IMarkPriceKline::getHigh()</td>
     <td>float</td>
-    <td>Наибольшая цена</td>
+    <td>Максимальная цена тика</td>
   </tr>
   <tr>
-    <td>:: getLow()</td>
+    <td>IMarkPriceKline::getLow()</td>
     <td>float</td>
-    <td>Наименьшая цена</td>
+    <td>Минимальная цена тика</td>
   </tr>
   <tr>
-    <td>:: getClose()</td>
+    <td>IMarkPriceKline::getClose()</td>
     <td>float</td>
-    <td>Цена закрытия</td>
+    <td>Цена закрытия тика</td>
   </tr>
   <tr>
-    <td>:: getVolume()</td>
+    <td>IMarkPriceKline::getVolume()</td>
     <td>float</td>
     <td>Обьем</td>
   </tr>
@@ -1356,12 +1468,17 @@ interface IMarkPriceKline
 ### Market Data - Open Interest
 <b>[Официальная страница документации](https://bybit-exchange.github.io/docs/derivatives/public/open-interest)</b>
 <p>Эндпоинт возвращает данные об открытом интересе по указанному символу. <br />
-<b>Открытый интерес — это общее количество позиций бессрочных контрактов, которые в настоящее время хранятся на платформе.</b></p>
+<b>Открытый интерес - это общее количество позиций по бессрочным контрактам, которые в настоящее время имеются на платформе.</b></p>
 
 ```php
-// Класс эндпоинта:
-Carpenstar\ByBitAPI\Derivatives\MarketData\OpenInterest\OpenInterest::class
+// Endpoint classname
+\Carpenstar\ByBitAPI\Derivatives\MarketData\OpenInterest\OpenInterest::class
 ```
+
+<p align="center" width="100%"><b>ПРИМЕР</b></p>
+
+---
+
 ```php
 use Carpenstar\ByBitAPI\BybitAPI;
 use Carpenstar\ByBitAPI\Derivatives\MarketData\OpenInterest\OpenInterest;
@@ -1370,12 +1487,7 @@ use Carpenstar\ByBitAPI\Derivatives\MarketData\OpenInterest\Request\OpenInterest
 
 $bybit = new BybitAPI("https://api-testnet.bybit.com", "apiKey", "secret");
 
-$options = (new OpenInterestRequest())
-    ->setStartTime((new DateTime("2023-05-08 00:00:00"))->getTimestamp())
-    ->setEndTime((new DateTime("2023-05-09 15:00:00"))->getTimestamp())
-    ->setSymbol("ETHUSDT")
-    ->setInterval("1h")
-    ->setLimit(5);
+$options = (new OpenInterestRequest())->setSymbol("ETHUSDT")->setInterval("1h")->setLimit(5);
 
 /** @var OpenInterestResponse[] $result */
 $result = $bybit->rest(OpenInterest::class, $options)->getBody()->all();
@@ -1409,22 +1521,31 @@ foreach ($result as $interestItem) {
 */
 ```  
 
-<p><b>Параметры запроса:</b></p>
+<p align="center" width="100%"><b>ПАРАМЕТРЫ ЗАПРОСА</b></p>
+
+---
 
 ```php
 \Carpenstar\ByBitAPI\Derivatives\MarketData\OpenInterest\Request\OpenInterestRequest::class   
 
 $options = (new OpenInterestRequest())
-    ->setSymbol("ETHUSDT")
-    ->setInterval("1h") 
-    ->setLimit(5);
-    ->setStartTime((new DateTime("2023-05-08 15:00:00"))->getTimestamp())
-    ->setEndTime((new DateTime("2023-05-09 15:00:00"))->getTimestamp()); 
+    ->setSymbol("ETHUSDT") // Торговая пара
+    ->setInterval("1h") // Размер тика. Возможные значение: 1h 3h 5h 15h 30h 60h 120h 240h 360h 720h D M W
+    ->setStartTime((new DateTime('2023-05-01 10:00:00'))->getTimestamp()) // Таймштамп ОТ которого берется срез данных
+    ->setEndTime((new DateTime('2023-05-01 20:00:00'))->getTimestamp()) // Таймштамп ДО которого берется срез данных
+    ->setLimit(5); // Ограничение возвращаемых записей на запрос. По умолчанию: 200
 ```  
 <table style="width: 100%">
   <tr>
     <td colspan="3">
-      <b>\Carpenstar\ByBitAPI\Derivatives\MarketData\OpenInterest\Request\OpenInterestRequest</b>
+        <sup><b>INTERFACE</b></sup> <br />
+        <b>\Carpenstar\ByBitAPI\Derivatives\MarketData\OpenInterest\Interfaces\IOpenInterestInterface::class</b>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="3">
+        <sup><b>DTO</b></sup> <br />
+        <b>\Carpenstar\ByBitAPI\Derivatives\MarketData\OpenInterest\Request\OpenInterestRequest::class</b>
     </td>
   </tr>
   <tr>
@@ -1433,12 +1554,12 @@ $options = (new OpenInterestRequest())
     <th style="width: 50%; text-align: center">Описание</th>
   </tr>
   <tr>
-    <td>:: setSymbol(string $symbol): self</td>
+    <td>IOpenInterestInterface::setSymbol(string $symbol): self</td>
     <td><b>ДА</b></td>
-    <td>Строка с тикером торговой пары</td>
+    <td>Торговая пара</td>
   </tr>
   <tr>
-    <td>:: setInterval(int $interval): self</td>
+    <td>IOpenInterestInterface::setInterval(int $interval): self</td>
     <td><b>ДА</b></td>
     <td>
       Размер тика. <br />
@@ -1446,37 +1567,46 @@ $options = (new OpenInterestRequest())
     </td>
   </tr>
   <tr>
-    <td>:: setStartTime(int $timestamp): self</td>
+    <td>IOpenInterestInterface::setStartTime(int $startTime): self</td>
     <td><b>ДА</b></td>
-    <td>Таймштамп ОТ которого берется срез данных </td>
+    <td>Таймштамп ОТ которого берется срез данных</td>
   </tr>
   <tr>
-    <td>:: setEndTime(int $timestamp): self</td>
+    <td>IOpenInterestInterface::setEndTime(string $end): self</td>
     <td><b>ДА</b></td>
     <td>Таймштамп ДО которого берется срез данных</td>
   </tr>
   <tr>
-    <td>:: setLimit(int $limit): self</td>
+    <td>IOpenInterestInterface::setLimit(int $limit): self</td>
     <td>НЕТ</td>
-    <td>Ограничение возвращаемых записей на запрос. По умолчанию 200</td>
+    <td>Ограничение возвращаемых записей на запрос. По умолчанию: 200</td>
   </tr>
 </table>
 
-<p><b>Структура ответа:</b></p>
+<p align="center" width="100%"><b>СТРУКТУРА ОТВЕТА</b></p>
+
+---
 
 ```php
 \Carpenstar\ByBitAPI\Derivatives\MarketData\OpenInterest\Interfaces\IOpenInterestResponse::class
 
 interface IOpenInterestResponse
 {
-    public function getTimestamp(): \DateTime;
-    public function getOpenInterest(): float;
+    public function getTimestamp(): \DateTime; // Время исполнения запроса
+    public function getOpenInterest(): float; // Обьем интереса
 }
 ```
 <table style="width: 100%">
   <tr>
     <td colspan="3">
-      <b>\Carpenstar\ByBitAPI\Derivatives\MarketData\OpenInterest\Interfaces\IOpenInterestResponse</b>
+        <sup><b>INTERFACE</b></sup> <br />
+        <b>\Carpenstar\ByBitAPI\Derivatives\MarketData\OpenInterest\Interfaces\IOpenInterestResponse::class</b>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="3">
+        <sup><b>DTO</b></sup> <br />
+        <b>\Carpenstar\ByBitAPI\Derivatives\MarketData\OpenInterest\Response\OpenInterestResponse::class</b>
     </td>
   </tr>
   <tr>
@@ -1485,12 +1615,12 @@ interface IOpenInterestResponse
     <th style="width: 60%; text-align: center">Описание</th>
   </tr>
   <tr>
-    <td>:: getTimestamp()</td>
+    <td>IOpenInterestResponse::getTimestamp()</td>
     <td>DateTime</td>
     <td>Время исполнения запроса</td>
   </tr>
   <tr>
-    <td>:: getOpenInterest()</td>
+    <td>IOpenInterestResponse::getOpenInterest()</td>
     <td>float</td>
     <td>Обьем интереса</td>
   </tr>
@@ -1501,12 +1631,17 @@ interface IOpenInterestResponse
 
 ### Market Data - Order Book
 <b>[Официальная страница документации](https://bybit-exchange.github.io/docs/derivatives/public/orderbook)</b>
-<p>Эндпоинт возвращает электронный список ордеров на покупку и продажу бессрочных контрактов, организованный и отсортированный по уровню цен.</p>
+<p>Эндпоинт возвращает список ордеров на покупку и продажу бессрочных контрактов, организованный и отсортированный по уровню цен.</p>
 
 ```php
-// Класс эндпоинта:
+// Endpoint classname
 \Carpenstar\ByBitAPI\Derivatives\MarketData\OrderBook\OrderBook::class
 ```
+
+<p align="center" width="100%"><b>ПРИМЕР</b></p>
+
+---
+
 ```php
 use Carpenstar\ByBitAPI\BybitAPI;
 use Carpenstar\ByBitAPI\Derivatives\MarketData\OrderBook\OrderBook;
@@ -1558,19 +1693,28 @@ foreach ($result->getAsk()->all() as $ask) {
 */
 ```  
 
-<p><b>Параметры запроса:</b></p>
+<p align="center" width="100%"><b>ПАРАМЕТРЫ ЗАПРОСА</b></p>
+
+---
 
 ```php
 \Carpenstar\ByBitAPI\Derivatives\MarketData\OrderBook\Request\OrderBookRequest::class
 
 $options = (new OrderBookRequest())
-    ->setSymbol("ETHUSDT")
-    ->setLimit(25);
+    ->setSymbol("ETHUSDT") // Торговая пара
+    ->setLimit(25); // Лимит на количество ордеров в одну сторону: лимит = 50 (25 - бид + 25 - аск)
 ```  
 <table style="width: 100%">
   <tr>
     <td colspan="3">
-      <b>\Carpenstar\ByBitAPI\Derivatives\MarketData\OrderBook\Request\OrderBookRequest</b>
+        <sup><b>INTERFACE</b></sup> <br />
+        <b>\Carpenstar\ByBitAPI\Derivatives\MarketData\OrderBook\Interfaces\IOrderBookRequestInterface::class</b>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="3">
+        <sup><b>DTO</b></sup> <br />
+        <b>\Carpenstar\ByBitAPI\Derivatives\MarketData\OrderBook\Request\OrderBookRequest::class</b>
     </td>
   </tr>
   <tr>
@@ -1579,28 +1723,30 @@ $options = (new OrderBookRequest())
     <th style="width: 50%; text-align: center">Описание</th>
   </tr>
   <tr>
-    <td>:: setSymbol(string $symbol): self</td>
+    <td>IOrderBookResponse::setSymbol(string $symbol): self</td>
     <td><b>ДА</b></td>
-    <td>Торговый инструмент</td>
+    <td>Торговая пара</td>
   </tr>
   <tr>
-    <td>:: setLimit(int $limit): self</td>
+    <td>IOrderBookResponse::setLimit(int $limit): self</td>
     <td>НЕТ</td>
-    <td>Ограничение на количество ордеров по одному направлению: limit = 50 (25 - bid + 25 - ask)</td>
+    <td>Лимит на количество ордеров в одну сторону: лимит = 50 (25 - бид + 25 - аск)</td>
   </tr>
 </table>
 
 
-<p><b>Структура ответа:</b></p>
+<p align="center" width="100%"><b>СТРУКТУРА ОТВЕТА</b></p>
+
+---
 
 ```php
 \Carpenstar\ByBitAPI\Derivatives\MarketData\OrderBook\Interfaces\IOrderBookResponse::class
 
 interface IOrderBookResponse
 {
-    public function getSymbol(): string;
-    public function getTimestamp(): \DateTime;
-    public function getUpdateId(): int;
+    public function getSymbol(): string; // Торговая пара
+    public function getTimestamp(): \DateTime; // Время исполнения запроса
+    public function getUpdateId(): int; // ID обновления данных
     public function getBid(): ICollectionInterface; // IOrderBookPriceResponse[]
     public function getAsk(): ICollectionInterface; // IOrderBookPriceResponse[]
 }
@@ -1608,7 +1754,14 @@ interface IOrderBookResponse
 <table style="width: 100%">
   <tr>
     <td colspan="3">
-      <b>\Carpenstar\ByBitAPI\Derivatives\MarketData\OrderBook\Interfaces\IOrderBookResponse</b>
+        <sup><b>INTERFACE</b></sup> <br />
+        <b>\Carpenstar\ByBitAPI\Derivatives\MarketData\OrderBook\Interfaces\IOrderBookResponse::class</b>
+        </td>
+      </tr>
+    <tr>
+    <td colspan="3">
+        <sup><b>DTO</b></sup> <br />
+        <b>\Carpenstar\ByBitAPI\Derivatives\MarketData\OrderBook\Response\OrderBookResponse::class</b>
     </td>
   </tr>
   <tr>
@@ -1617,32 +1770,31 @@ interface IOrderBookResponse
     <th style="width: 60%; text-align: center">Описание</th>
   </tr>
   <tr>
-    <td>:: getSymbol()</td>
+    <td>IOrderBookResponse::getSymbol()</td>
     <td>float</td>
-    <td>Торговый инструмент</td>
+    <td>Торговая пара</td>
   </tr>
   <tr>
-    <td>:: getTimestamp()</td>
+    <td>IOrderBookResponse::getTimestamp()</td>
     <td>DateTime</td>
     <td>Время исполнения запроса</td>
   </tr>
   <tr>
-    <td>:: getUpdateId()</td>
+    <td>IOrderBookResponse::getUpdateId()</td>
     <td>float</td>
-    <td>ID обновления</td>
+    <td>ID обновления данных</td>
   </tr>
   <tr>
-    <td>:: getBid()</td>
+    <td>IOrderBookResponse::getBid()</td>
     <td>IOrderBookPriceResponse[]</td>
     <td>Список ордеров на продажу</td>
   </tr>
   <tr>
-    <td>:: getAsk()</td>
+    <td>IOrderBookResponse::getAsk()</td>
     <td>IOrderBookPriceResponse[]</td>
     <td>Список ордеров на покупку</td>
   </tr>
 </table>
-<p>&nbsp;</p>
 
 ```php
 \Carpenstar\ByBitAPI\Derivatives\MarketData\OrderBook\Interfaces\IOrderBookPriceResponse::class
@@ -1656,7 +1808,14 @@ interface IOrderBookPriceResponse
 <table style="width: 100%">
   <tr>
     <td colspan="3">
-      <b>\Carpenstar\ByBitAPI\Derivatives\MarketData\OrderBook\Interfaces\IOrderBookPriceResponse</b>
+        <sup><b>INTERFACE</b></sup>
+        <b>\Carpenstar\ByBitAPI\Derivatives\MarketData\OrderBook\Interfaces\IOrderBookPriceItemResponse::class</b>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="3">
+        <sup><b>DTO</b></sup>
+        <b>\Carpenstar\ByBitAPI\Derivatives\MarketData\OrderBook\Interfaces\OrderBookPriceItemResponse::class</b>
     </td>
   </tr>
   <tr>
@@ -1665,12 +1824,12 @@ interface IOrderBookPriceResponse
     <th style="width: 60%; text-align: center">Описание</th>
   </tr>
   <tr>
-    <td>:: getPrice()</td>
+    <td>IOrderBookPriceItemResponse::getPrice()</td>
     <td>float</td>
     <td>Цена</td>
   </tr>
   <tr>
-    <td>:: getQuantity()</td>
+    <td>IOrderBookPriceItemResponse::getQuantity()</td>
     <td>float</td>
     <td>Обьем</td>
   </tr>
@@ -1681,12 +1840,17 @@ interface IOrderBookPriceResponse
 
 ### Market Data - Public Trading History
 <b>[Официальная страница документации](https://bybit-exchange.github.io/docs/derivatives/public/trade)</b>
-<p>Эндпоинт возвращает данные об исполнении торговых ордеров</p>  
+<p>Эндпоинт возвращает данные об исполнении торговых ордеров</p>   
 
 ```php
-// Класс эндпоинта:
+// Endpoint classname
 Carpenstar\ByBitAPI\Derivatives\MarketData\PublicTradingHistory\PublicTradingHistory::class
 ```
+
+<p align="center" width="100%"><b>ПРИМЕР</b></p>
+
+---
+
 ```php
 use Carpenstar\ByBitAPI\BybitAPI;
 use Carpenstar\ByBitAPI\Derivatives\MarketData\PublicTradingHistory\PublicTradingHistory;
@@ -1695,12 +1859,11 @@ use Carpenstar\ByBitAPI\Derivatives\MarketData\PublicTradingHistory\Request\Publ
 
 $bybit = new BybitAPI("https://api-testnet.bybit.com", "apiKey", "secret");
 
-$options = (new PublicTradingHistoryRequest())
-    ->setSymbol("BTCUSDT")
-    ->setLimit(3);
+$options = (new PublicTradingHistoryRequest())->setSymbol("BTCUSDT")->setLimit(3);
 
 /** @var PublicTradingHistoryResponse[] $result */
 $result = $bybit->rest(PublicTradingHistory::class, $options)->getBody()->all();
+
 
 
 foreach ($result as $historyItem) {
@@ -1744,19 +1907,28 @@ foreach ($result as $historyItem) {
  */
 ```  
 
-<p><b>Параметры запроса:</b></p>
+<p align="center" width="100%"><b>ПАРАМЕТРЫ ЗАПРОСА</b></p>
+
+---
 
 ```php
 \Carpenstar\ByBitAPI\Derivatives\MarketData\PublicTradingHistory\Request\PublicTradingHistoryRequest::class
 
 $options = (new PublicTradingHistoryRequest())
-    ->setSymbol("ETHUSDT")
-    ->setLimit(25);
+    ->setSymbol("ETHUSDT") // Торговая пара
+    ->setLimit(25); // Ограничение возвращаемых строк на один запрос
 ```  
 <table style="width: 100%">
   <tr>
     <td colspan="3">
-      <b>\Carpenstar\ByBitAPI\Derivatives\MarketData\PublicTradingHistory\Request\PublicTradingHistoryRequest</b>
+        <sup><b>INTERFACE</b></sup> <br />
+        <b>\Carpenstar\ByBitAPI\Derivatives\MarketData\PublicTradingHistory\Interfaces\IPublicTradingHistoryRequestInterface::class</b>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="3">
+        <sup><b>DTO</b></sup> <br />
+        <b>\Carpenstar\ByBitAPI\Derivatives\MarketData\PublicTradingHistory\Request\PublicTradingHistoryRequest::class</b>
     </td>
   </tr>
   <tr>
@@ -1765,37 +1937,46 @@ $options = (new PublicTradingHistoryRequest())
     <th style="width: 50%; text-align: center">Описание</th>
   </tr>
   <tr>
-    <td>:: setSymbol(string $symbol): self</td>
+    <td>IPublicTradingHistoryRequestInterface::setSymbol(string $symbol): self</td>
     <td><b>ДА</b></td>
-    <td>Торговый инструмент</td>
+    <td>Торговая пара</td>
   </tr>
   <tr>
-    <td>:: setLimit(int $limit): self</td>
+    <td>IPublicTradingHistoryRequestInterface::setLimit(int $limit): self</td>
     <td>НЕТ</td>
-    <td>Ограничение количества на результирующий набор</td>
+    <td>Ограничение возвращаемых строк на один запрос</td>
   </tr>
 </table>
 
-<p><b>Структура ответа:</b></p>
+<p align="center" width="100%"><b>СТРУКТУРА ОТВЕТА</b></p>
+
+---
 
 ```php
 \Carpenstar\ByBitAPI\Derivatives\MarketData\PublicTradingHistory\Interfaces\IPublicTradingHistoryResponse::class;
 
 interface IPublicTradingHistoryResponse
 {
-    public function getExecId(): string;
-    public function getSymbol(): string;
-    public function getPrice(): float;
-    public function getSize(): float;
-    public function getSide(): string;
-    public function getTime(): \DateTime;
-    public function isBlockTrade(): bool;
+    public function getExecId(): string; // ID исполнения
+    public function getSymbol(): string; // Торговая пра
+    public function getPrice(): float; // Цена исполнения
+    public function getSize(): float; // Обьем исполнения
+    public function getSide(): string; // Направление ордера (buy, sell)
+    public function getTime(): \DateTime; // Время исполнения
+    public function isBlockTrade(): bool; // Является-ли сделка внебиржевой?
 }
 ```
 <table style="width: 100%">
   <tr>
     <td colspan="3">
-      <b>\Carpenstar\ByBitAPI\Derivatives\MarketData\PublicTradingHistory\Interfaces\IPublicTradingHistoryResponse</b>
+        <sup><b>INTERFACE</b></sup> <br />
+        <b>\Carpenstar\ByBitAPI\Derivatives\MarketData\PublicTradingHistory\Interfaces\IPublicTradingHistoryResponse::class</b>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="3">
+        <sup><b>DTO</b></sup> <br />
+        <b>\Carpenstar\ByBitAPI\Derivatives\MarketData\PublicTradingHistory\Response\PublicTradingHistoryResponse::class</b>
     </td>
   </tr>
   <tr>
@@ -1804,58 +1985,56 @@ interface IPublicTradingHistoryResponse
     <th style="width: 60%; text-align: center">Описание</th>
   </tr>
   <tr>
-    <td>:: getExecId()</td>
+    <td>IPublicTradingHistoryResponse::getExecId()</td>
     <td>string</td>
     <td>
       ID исполнения
     </td>
   </tr>
   <tr>
-    <td>:: getSymbol()</td>
+    <td>IPublicTradingHistoryResponse::getSymbol()</td>
     <td>string</td>
     <td>
-      Торговый инструмент
+      Торговая пара
     </td>
   </tr>
   <tr>
-    <td>:: getPrice()</td>
+    <td>IPublicTradingHistoryResponse::getPrice()</td>
     <td>float</td>
     <td>
       Цена исполнения
     </td>
   </tr>
   <tr>
-    <td>:: getSize()</td>
+    <td>IPublicTradingHistoryResponse::getSize()</td>
     <td>float</td>
     <td>
       Обьем исполнения
     </td>
   </tr>
   <tr>
-    <td>:: getSide()</td>
+    <td>IPublicTradingHistoryResponse::getSide()</td>
     <td>string</td>
     <td>
-      Направление
+      Направление ордера (buy, sell)
     </td>
   </tr>
   <tr>
-    <td>:: getTime()</td>
+    <td>IPublicTradingHistoryResponse::getTime()</td>
     <td>DateTime</td>
     <td>
       Время исполнения
     </td>
   </tr>
   <tr>
-    <td>:: isBlockTrade()</td>
+    <td>IPublicTradingHistoryResponse::isBlockTrade()</td>
     <td>bool</td>
     <td>
-      -
+      Является-ли сделка внебиржевой?
     </td>
   </tr>
 </table>
 
-
----
 <br />
 
 ### Market Data - Risk Limit
@@ -1864,9 +2043,14 @@ interface IPublicTradingHistoryResponse
 Лимит риска — это мера управления рисками, позволяющая ограничить подверженность трейдеров риску.</p>
 
 ```php
-// Класс эндпоинта
+// Endpoint classname
 \Carpenstar\ByBitAPI\Derivatives\MarketData\RiskLimit\RiskLimit::class
 ```
+
+<p align="center" width="100%"><b>ПРИМЕР</b></p>
+
+---
+
 ```php
 use Carpenstar\ByBitAPI\BybitAPI;
 use Carpenstar\ByBitAPI\Derivatives\MarketData\RiskLimit\RiskLimit;
@@ -1875,8 +2059,7 @@ use Carpenstar\ByBitAPI\Derivatives\MarketData\RiskLimit\Response\RiskLimitsResp
 
 $bybit = new BybitAPI("https://api-testnet.bybit.com", "apiKey", "secret");
 
-$options = (new RiskLimitsRequest())
-    ->setSymbol("BTCUSDT");
+$options = (new RiskLimitsRequest())->setSymbol("BTCUSDT");
 
 /** @var RiskLimitsResponse[] $result */
 $result = $bybit->rest(RiskLimit::class, $options)->getBody()->all();
@@ -1925,18 +2108,27 @@ foreach ($result as $riskItem) {
  */
 ```  
 
-<p><b>Параметры запроса:</b></p>
+<p align="center" width="100%"><b>ПАРАМЕТРЫ ЗАПРОСА</b></p>
+
+---
 
 ```php
 \Carpenstar\ByBitAPI\Derivatives\MarketData\RiskLimit\Request\RiskLimitsRequest::class
 
 $options = (new RiskLimitsRequest())
-    ->setSymbol("BTCUSDT");
+    ->setSymbol("BTCUSDT"); // Торговая пара
 ```  
 <table style="width: 100%">
   <tr>
     <td colspan="3">
-      <b>\Carpenstar\ByBitAPI\Derivatives\MarketData\RiskLimit\Request\RiskLimitsRequest</b>
+        <sup><b>INTERFACE</b></sup> <br />
+        <b>\Carpenstar\ByBitAPI\Derivatives\MarketData\RiskLimit\Interfaces\IRiskLimitsRequestInterface::class</b>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="3">
+        <sup><b>DTO</b></sup> <br />
+        <b>\Carpenstar\ByBitAPI\Derivatives\MarketData\RiskLimit\Request\RiskLimitsRequest::class</b>
     </td>
   </tr>
   <tr>
@@ -1945,32 +2137,41 @@ $options = (new RiskLimitsRequest())
     <th style="width: 50%; text-align: center">Описание</th>
   </tr>
   <tr>
-    <td>:: setSymbol(string $symbol): self</td>
+    <td>IRiskLimitsRequestInterface::setSymbol(string $symbol): self</td>
     <td><b>ДА</b></td>
-    <td>Торговый инструмент</td>
+    <td>Торговая пара</td>
   </tr>
 </table>
 
-<p><b>Структура ответа:</b></p>
+<p align="center" width="100%"><b>СТРУКТУРА ОТВЕТА</b></p>
+
+---
 
 ```php
 \Carpenstar\ByBitAPI\Derivatives\MarketData\RiskLimit\Interfaces\IRiskLimitsResponse::class;
 
 interface IRiskLimitsResponse
 {
-    public function getId(): string;
-    public function getSymbol(): string;
-    public function getLimit(): int;
-    public function getMaintainMargin(): float;
-    public function getInitialMargin(): float;
-    public function getIsLowerRisk(): int;
-    public function getMaxLeverage(): float;
+    public function getId(): string; // ID риска
+    public function getSymbol(): string; // Торговая пара
+    public function getLimit(): int; // Лимит на позицию
+    public function getMaintainMargin(): float; // Маржа поддержки
+    public function getInitialMargin(): float; // Начальная маржа
+    public function getIsLowerRisk(): int; // Торговый инструмент имеет низкий риск?
+    public function getMaxLeverage(): float; // Максимальное кредитное плечо
 }
 ```
 <table style="width: 100%">
   <tr>
     <td colspan="3">
-      <b>\Carpenstar\ByBitAPI\Derivatives\MarketData\RiskLimit\Interfaces\IRiskLimitsResponse</b>
+        <sup><b>INTERFACE</b></sup> <br />
+        <b>\Carpenstar\ByBitAPI\Derivatives\MarketData\RiskLimit\Interfaces\IRiskLimitsResponse:class</b>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="3">
+        <sup><b>DTO</b></sup> <br />
+        <b>\Carpenstar\ByBitAPI\Derivatives\MarketData\RiskLimit\Response\RiskLimitsResponse::class</b>
     </td>
   </tr>
   <tr>
@@ -1979,49 +2180,49 @@ interface IRiskLimitsResponse
     <th style="width: 60%; text-align: center">Описание</th>
   </tr>
   <tr>
-    <td>:: getId()</td>
+    <td>IRiskLimitsResponse::getId()</td>
     <td>string</td>
     <td>
       ID риска
     </td>
   </tr>
   <tr>
-    <td>:: getSymbol()</td>
+    <td>IRiskLimitsResponse::getSymbol()</td>
     <td>string</td>
     <td>
-      Торговый инструмент
+      Торговая пара
     </td>
   </tr>
   <tr>
-    <td>:: getLimit()</td>
+    <td>IRiskLimitsResponse::getLimit()</td>
     <td>int</td>
     <td>
-      Ограничение по позиции
+      Ограничение на позицию
     </td>
   </tr>
   <tr>
-    <td>:: getMaintainMargin()</td>
+    <td>IRiskLimitsResponse::getMaintainMargin()</td>
     <td>float</td>
     <td>
-      Поддержка маржи
+      Поддерживающая маржа
     </td>
   </tr>
   <tr>
-    <td>:: getInitialMargin()</td>
+    <td>IRiskLimitsResponse::getInitialMargin()</td>
     <td>float</td>
     <td>
       Начальная маржа
     </td>
   </tr>
   <tr>
-    <td>:: getIsLowerRisk()</td>
+    <td>IRiskLimitsResponse::getIsLowerRisk()</td>
     <td>int</td>
     <td>
-      Торговый инструмент имеет низкий риск
+     Торговый инструмент имеет низкий риск?
     </td>
   </tr>
   <tr>
-    <td>:: getMaxLeverage()</td>
+    <td>IRiskLimitsResponse::getMaxLeverage()</td>
     <td>float</td>
     <td>
       Максимальное кредитное плечо
@@ -2029,18 +2230,22 @@ interface IRiskLimitsResponse
   </tr>
 </table>
 
-
 ---
 <br />
 
-### Market Data - Ticker Info
+# Market Data - Ticker Info
 <b>[Официальная страница документации](https://bybit-exchange.github.io/docs/derivatives/public/ticker)</b>
 <p>Эндпоинт возвращает данные по символу (последний снимок цены, лучшую цену покупки/продажи и объем торгов) за последние 24 часа.</p>
 
 ```php
-// Класс эндпоинта:
+// Endpoint classname
 Carpenstar\ByBitAPI\Derivatives\MarketData\TickerInfo\Request\TickerInfo::class
 ```
+
+<p align="center" width="100%"><b>ПРИМЕР</b></p>
+
+---
+
 ```php
 use Carpenstar\ByBitAPI\BybitAPI;
 use Carpenstar\ByBitAPI\Derivatives\MarketData\TickerInfo\Request\TickerInfoRequest;
@@ -2108,19 +2313,28 @@ echo "Delivery Time: {$tickerInfo->getDeliveryTime()->format("Y-m-d H:i:s")}" . 
  */
 ```  
 
-<p><b>Параметры запроса:</b></p>
+<p align="center" width="100%"><b>ПАРАМЕТРЫ ЗАПРОСА</b></p>
+
+---
 
 ```php
 \Carpenstar\ByBitAPI\Derivatives\MarketData\TickerInfo\Request\TickerInfoRequest::class
 
 $options = (new TickerInfoRequest())
-    ->setSymbol("APTUSDT");
+    ->setSymbol("APTUSDT"); // Торговая пара
 ```  
 
 <table style="width: 100%">
   <tr>
     <td colspan="3">
-      <b>\Carpenstar\ByBitAPI\Derivatives\MarketData\TickerInfo\Request\TickerInfoRequest</b>
+        <sup><b>INTERFACE</b></sup> <br /> 
+        <b>\Carpenstar\ByBitAPI\Derivatives\MarketData\TickerInfo\Interfaces\ITickerInfoRequestInterface::class</b>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="3">
+        <sup><b>DTO</b></sup> <br /> 
+        <b>\Carpenstar\ByBitAPI\Derivatives\MarketData\TickerInfo\Request\TickerInfoRequest::class</b>
     </td>
   </tr>
   <tr>
@@ -2129,47 +2343,51 @@ $options = (new TickerInfoRequest())
     <th style="width: 50%; text-align: center">Описание</th>
   </tr>
   <tr>
-    <td>:: setSymbol(string $symbol): self</td>
+    <td>ITickerInfoRequestInterface::setSymbol(string $symbol): self</td>
     <td><b>ДА</b></td>
-    <td>Строка с тикером торговой пары</td>
+    <td>Торговая пара</td>
   </tr>
 </table>
 
-<p><b>Структура ответа:</b></p>
+<p align="center" width="100%"><b>СТРУКТУРА ОТВЕТА</b></p>
+
+---
 
 ```php
 \Carpenstar\ByBitAPI\Derivatives\MarketData\TickerInfo\Interfaces\ITickerInfoResponse::class;
 
 interface ITickerInfoResponse
 {    
-    public function getSymbol(): string;
-    public function getBidPrice(): float;
-    public function getAskPrice(): float;
-    public function getLastPrice(): float;
-    public function getLastTickDirection(): string;
-    public function getPrevPrice24h(): float;
-    public function getPrice24hPcnt(): float;
-    public function getHighPrice24h(): float;
-    public function getLowPrice24h(): float;
-    public function getPrevPrice1h(): float;
-    public function getMarkPrice(): float;
-    public function getIndexPrice(): float;
-    public function getOpenInterests(): float;
-    public function getTurnover24h(): float;
-    public function getVolume24h(): float;
-    public function getFundingRate(): float;
-    public function getNextFundingTime(): \DateTime;
-    public function getPredictedDeliveryPrice(): float;
-    public function getBasisRate(): float;
-    public function getDeliveryFeeRate(): float;
-    public function getDeliveryTime(): \DateTime;
-    public function getOpenInterestValue(): float;
+    public function getSymbol(): string; // Торговая пара
+    public function getBidPrice(): float; // Лучшая цена покупки
+    public function getAskPrice(): float; // Лучшая цена продажи
+    public function getLastPrice(): float; // Цена последней транзакции
+    public function getLastTickDirection(): string; // Направление последнего изменения цены
+    public function getPrevPrice24h(): float; // Цена 24 часа назад
+    public function getPrice24hPcnt(): float; // Изменение цены за 24 часа, в процентах
+    public function getHighPrice24h(): float; // Максимальная цена за 24 часа
+    public function getLowPrice24h(): float; // Минимальная цена за 24 часа
+    public function getPrevPrice1h(): float; // Рыночная цена инструмента час назад
+    public function getMarkPrice(): float; // Цена маркировки (ликвидация происходит по этому показателю)
+    public function getIndexPrice(): float; // Цена межбиржевого индекса
+    public function getOpenInterests(): float; // Открытий интерес по торговому инструменту
+    public function getTurnover24h(): float; // Оборот за 24 часа
+    public function getVolume24h(): float; // Совокупный обьем за 24 часа
+    public function getFundingRate(): float; // Ставка финансирования
+    public function getNextFundingTime(): \DateTime; // Время следующего списания ставки финансирования
 }
 ```
 <table style="width: 100%">
   <tr>
     <td colspan="3">
-      <b>\Carpenstar\ByBitAPI\Derivatives\MarketData\TickerInfo\Interfaces\ITickerInfoResponse</b>
+        <sup><b>INTERFACE</b></sup> <br />
+        <b>\Carpenstar\ByBitAPI\Derivatives\MarketData\TickerInfo\Interfaces\ITickerInfoResponse::class</b>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="3">
+        <sup><b>DTO</b></sup> <br />
+        <b>\Carpenstar\ByBitAPI\Derivatives\MarketData\TickerInfo\Response\TickerInfoResponse::class</b>
     </td>
   </tr>
   <tr>
@@ -2178,162 +2396,128 @@ interface ITickerInfoResponse
     <th style="width: 60%; text-align: center">Описание</th>
   </tr>
   <tr>
-    <td>:: getSymbol()</td>
+    <td>ITickerInfoResponse::getSymbol()</td>
     <td>string</td>
     <td>
-      Торговый инструмент
+      Торговая пара
     </td>
   </tr>
   <tr>
-    <td>:: getBidPrice()</td>
-    <td>float</td>
-    <td>
-      Лучшая цена продажи
-    </td>
-  </tr>
-  <tr>
-    <td>:: getAskPrice()</td>
+    <td>ITickerInfoResponse::getBidPrice()</td>
     <td>float</td>
     <td>
       Лучшая цена покупки
     </td>
   </tr>
   <tr>
-    <td>:: getLastPrice()</td>
+    <td>ITickerInfoResponse::getAskPrice()</td>
     <td>float</td>
     <td>
-      Цена последней тразакции
+      Лучшая цена покупки
     </td>
   </tr>
   <tr>
-    <td>:: getLastTickDirection()</td>
+    <td>ITickerInfoResponse::getLastPrice()</td>
+    <td>float</td>
+    <td>
+      Цена последней транзакции
+    </td>
+  </tr>
+  <tr>
+    <td>ITickerInfoResponse::getLastTickDirection()</td>
     <td>string</td>
     <td>
       Направление последнего изменения цены
     </td>
   </tr>
   <tr>
-    <td>:: getPrevPrice24h()</td>
+    <td>ITickerInfoResponse::getPrevPrice24h()</td>
     <td>float</td>
     <td>
-      Цена 24 часа назад
+       Цена 24 часа назад
     </td>
   </tr>
   <tr>
-    <td>:: getPrice24hPcnt()</td>
+    <td>ITickerInfoResponse::getPrice24hPcnt()</td>
     <td>float</td>
     <td>
-      Изменение цены за последние 24 часа в процентах
+      Изменение цены за 24 часа, в процентах
     </td>
   </tr>
   <tr>
-    <td>:: getHighPrice24h()</td>
+    <td>ITickerInfoResponse::getHighPrice24h()</td>
     <td>float</td>
     <td>
-      Максимальная цена за 24 часа
+       Максимальная цена за 24 часа
     </td>
   </tr>
   <tr>
-    <td>:: getLowPrice24h()</td>
+    <td>ITickerInfoResponse::getLowPrice24h()</td>
     <td>float</td>
     <td>
       Минимальная цена за 24 часа
     </td>
   </tr>
   <tr>
-    <td>:: getPrevPrice1h()</td>
+    <td>ITickerInfoResponse::getPrevPrice1h()</td>
     <td>float</td>
     <td>
-      Почасовая рыночная цена час назад
+      Рыночная цена инструмента час назад
     </td>
   </tr>
   <tr>
-    <td>:: getMarkPrice()</td>
+    <td>ITickerInfoResponse::getMarkPrice()</td>
     <td>float</td>
     <td>
       Цена маркировки (ликвидация происходит по этому показателю)
     </td>
   </tr>
   <tr>
-    <td>:: getIndexPrice()</td>
+    <td>ITickerInfoResponse::getIndexPrice()</td>
     <td>float</td>
     <td>
-      Цена индекса
+      Цена межбиржевого индекса
     </td>
   </tr>
   <tr>
-    <td>:: getOpenInterests()</td>
+    <td>ITickerInfoResponse::getOpenInterests()</td>
     <td>float</td>
     <td>
-      Обьем открытого интереса по торговому интсрументу
+      Открытий интерес по торговому инструменту
     </td>
   </tr>
   <tr>
-    <td>:: getTurnover24h()</td>
+    <td>ITickerInfoResponse::getTurnover24h()</td>
     <td>float</td>
     <td>
       Оборот за 24 часа
     </td>
   </tr>
   <tr>
-    <td>:: getVolume24h()</td>
+    <td>ITickerInfoResponse::getVolume24h()</td>
     <td>float</td>
     <td>
       Совокупный обьем за 24 часа
     </td>
   </tr>
   <tr>
-    <td>:: getFundingRate()</td>
+    <td>ITickerInfoResponse::getFundingRate()</td>
     <td>float</td>
     <td>
       Ставка финансирования
     </td>
   </tr>
   <tr>
-    <td>:: getNextFundingTime()</td>
+    <td>ITickerInfoResponse::getNextFundingTime()</td>
     <td>DateTime</td>
     <td>
-      Время следующего списания ставки финансирования
-    </td>
-  </tr>
-  <tr>
-    <td>:: getPredictedDeliveryPrice()</td>
-    <td>float</td>
-    <td> 
-      -
-    </td>
-  </tr>
-  <tr>
-    <td>:: getBasisRate()</td>
-    <td>float</td>
-    <td>
-      -
-    </td>
-  </tr>
-  <tr>
-    <td>:: getDeliveryFeeRate()</td>
-    <td>float</td>
-    <td>
-      -
-    </td>
-  </tr>
-  <tr>
-    <td>:: getDeliveryTime()</td>
-    <td>DateTime</td>
-    <td>
-      -
-    </td>
-  </tr>
-  <tr>
-    <td>:: getOpenInterestValue()</td>
-    <td>float</td>
-    <td>
-      -
+     Время следующего списания ставки финансирования
     </td>
   </tr>
 </table>
 
 ---
+
 <br />
 
 ### Contract - Account - Get Trading Fee Rate
@@ -2341,9 +2525,14 @@ interface ITickerInfoResponse
 <p>Эндпоинт возвращает данные по ставке торговой комиссии для ВСЕХ символов</p>
 
 ```php
-// Класс эндпоинта:
+// Endpoint classname
 Carpenstar\ByBitAPI\Derivatives\Contract\Account\GetTradingFeeRate\GetTradingFeeRate::class
 ```
+
+<p align="center" width="100%"><b>ПРИМЕР</b></p>
+
+---
+
 ```php
 use Carpenstar\ByBitAPI\BybitAPI;
 use Carpenstar\ByBitAPI\Derivatives\Contract\Account\GetTradingFeeRate\GetTradingFeeRate;
@@ -2382,21 +2571,31 @@ foreach ($feeRateData as $feeRate) {
  * ---
  */
 ```
-<p><b>Параметры запроса:</b></p>
+
+<p align="center" width="100%"><b>ПАРАМЕТРЫ ЗАПРОСА</b></p>
+
+---
 
 ```php
 namespace Carpenstar\ByBitAPI\Derivatives\Contract\Account\GetTradingFeeRate\Interfaces\IGetTradingFeeRateRequestInterface;
 
 interface IGetTradingFeeRateRequestInterface
 {
-    public function setSymbol(string $symbol): self;
+    public function setSymbol(string $symbol): self; // Торговая пара
 }
 ```
 
 <table style="width: 100%">
   <tr>
     <td colspan="3">
-      <b>\Carpenstar\ByBitAPI\Derivatives\Contract\Account\GetTradingFeeRate\Interfaces\IGetTradingFeeRateRequestInterface</b>
+        <sup><b>INTERFACE</b></sup> <br />
+        <b>\Carpenstar\ByBitAPI\Derivatives\Contract\Account\GetTradingFeeRate\Interfaces\IGetTradingFeeRateRequestInterface::class</b>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="3">
+        <sup><b>DTO</b></sup> <br />
+        <b>\Carpenstar\ByBitAPI\Derivatives\Contract\Account\GetTradingFeeRate\Request\GetTradingFeeRateRequest::class</b>
     </td>
   </tr>
   <tr>
@@ -2405,28 +2604,37 @@ interface IGetTradingFeeRateRequestInterface
     <th style="width: 50%; text-align: center">Описание</th>
   </tr>
   <tr>
-    <td>:: setSymbol(string $symbol): self</td>
+    <td>IGetTradingFeeRateRequestInterface::setSymbol(string $symbol): self</td>
     <td>НЕТ</td>
-    <td>Торговый инструмент</td>
+    <td>Торговая пара</td>
   </tr>
 </table>
 
-<p><b>Структура ответа:</b></p>
+<p align="center" width="100%"><b>СТРУКТУРА ОТВЕТА</b></p>
+
+---
 
 ```php
 namespace Carpenstar\ByBitAPI\Derivatives\Contract\Account\GetTradingFeeRate\Interfaces\IGetTradingFeeRateResponseInterface;
 
 interface IGetTradingFeeRateResponseInterface
 {
-    public function getSymbol(): string;
-    public function getTakerFeeRate(): float;
-    public function getMakerFeeRate(): float;
+    public function getSymbol(): string; // Торговая пара
+    public function getTakerFeeRate(): float; // Комиссия тэйкера (покупателя)
+    public function getMakerFeeRate(): float; // Комиссия мэйкера (продавца)
 }
 ```
 <table style="width: 100%">
   <tr>
     <td colspan="3">
-      <b>\Carpenstar\ByBitAPI\Derivatives\Contract\Account\GetTradingFeeRate\Interfaces\IGetTradingFeeRateResponseInterface</b>
+        <sup><b>INTERFACE</b></sup> <br />
+        <b>\Carpenstar\ByBitAPI\Derivatives\Contract\Account\GetTradingFeeRate\Interfaces\IGetTradingFeeRateResponseInterface::class</b>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="3">
+        <sup><b>DTO</b></sup> <br />
+        <b>\Carpenstar\ByBitAPI\Derivatives\Contract\Account\GetTradingFeeRate\Response\GetTradingFeeRateResponse::class</b>
     </td>
   </tr>
   <tr>
@@ -2435,21 +2643,21 @@ interface IGetTradingFeeRateResponseInterface
     <th style="width: 60%; text-align: center">Описание</th>
   </tr>
   <tr>
-    <td>:: getSymbol()</td>
+    <td>IGetTradingFeeRateResponseInterface::getSymbol()</td>
     <td>string</td>
     <td>
-      Торговый инструмент
+      Торговая пара
     </td>
   </tr>
   <tr>
-    <td>:: getTakerFeeRate()</td>
+    <td>IGetTradingFeeRateResponseInterface::getTakerFeeRate()</td>
     <td>float</td>
     <td>
       Комиссия тэйкера (покупателя)
     </td>
   </tr>
   <tr>
-    <td>:: getMakerFeeRate()</td>
+    <td>IGetTradingFeeRateResponseInterface::getMakerFeeRate()</td>
     <td>float</td>
     <td>
       Комиссия мэйкера (продавца)
@@ -2457,17 +2665,24 @@ interface IGetTradingFeeRateResponseInterface
   </tr>
 </table>
 
+---
+
 <br />
 
-### Contract - Account - Wallet Balance
+# Contract - Account - Wallet Balance
 <b>[Официальная страница документации](https://bybit-exchange.github.io/docs/derivatives/contract/wallet)</b>
 <p>Эндпоинт возвращает баланс деривативного кошелька, информацию об активах в каждой валюте и информацию о уровне риска счета. <br />
 По умолчанию информация о валюте с активами или обязательствами, равными 0, не возвращается.</p>
 
 ```php
-// Класс эндпоинта:
-Carpenstar\ByBitAPI\Derivatives\Contract\Account\WalletBalance\WalletBalance::class
+// Endpoint classname
+\Carpenstar\ByBitAPI\Derivatives\Contract\Account\WalletBalance\WalletBalance::class 
 ```
+
+<p align="center" width="100%"><b>ПРИМЕР</b></p>
+
+---
+
 ```php
 use Carpenstar\ByBitAPI\BybitAPI;
 use Carpenstar\ByBitAPI\Derivatives\Contract\Account\WalletBalance\WalletBalance;
@@ -2535,33 +2750,42 @@ foreach ($walletBalance as $feeRate) {
  * -----
  */
 ```
-<p><b>Структура ответа:</b></p>
+<p align="center" width="100%"><b>СТРУКТУРА ОТВЕТА</b></p>
+
+---
 
 ```php
 namespace Carpenstar\ByBitAPI\Derivatives\Contract\Account\WalletBalance\Interfaces\IWalletBalanceResponseInterface;
 
 interface IWalletBalanceResponseInterface
 {
-    public function getCoin(): string;
-    public function getEquity(): float;
-    public function getWalletBalance(): float;
-    public function getPositionMargin(): float;
-    public function getAvailableBalance(): float;
-    public function getOrderMargin(): float;
-    public function getOccClosingFee(): float;
-    public function getOccFundingFee(): float;
-    public function getUnrealisedPnl(): float;
-    public function getCumRealisedPnl(): float;
+    public function getCoin(): string; // Токен
+    public function getEquity(): float; // Общий капитал
+    public function getWalletBalance(): float; // Баланс кошелька
+    public function getPositionMargin(): float; // Маржа позиции
+    public function getAvailableBalance(): float; // Доступный баланс
+    public function getOrderMargin(): float; // Предварительно занятая маржа
+    public function getOccClosingFee(): float; // Комиссия за закрытие позиции.
+    public function getOccFundingFee(): float; // Комиссия за предварительное финансирование
+    public function getUnrealisedPnl(): float; // Нереализованный прибыль и убыток
+    public function getCumRealisedPnl(): float; // Совокупный реализованный PnL (за все время)
     public function getGivenCash(): float;
     public function getServiceCash(): float;
-    public function getAccountIM(): string;
-    public function getAccountMM(): string;
+    public function getAccountIM(): string; // USDC начальная маржа
+    public function getAccountMM(): string; // USDC поддерживающая маржа
 }
 ```
 <table style="width: 100%">
   <tr>
     <td colspan="3">
-      <b>\Carpenstar\ByBitAPI\Derivatives\Contract\Account\WalletBalance\Interfaces\IWalletBalanceResponseInterface</b>
+        <sup><b>INTERFACE</b></sup> <br />
+        <b>\Carpenstar\ByBitAPI\Derivatives\Contract\Account\WalletBalance\Interfaces\IWalletBalanceResponseInterface::class</b>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="3">
+        <sup><b>DTO</b></sup> <br />
+        <b>\Carpenstar\ByBitAPI\Derivatives\Contract\Account\WalletBalance\Response\WalletBalanceResponse::class</b>
     </td>
   </tr>
   <tr>
@@ -2570,102 +2794,109 @@ interface IWalletBalanceResponseInterface
     <th style="width: 60%; text-align: center">Описание</th>
   </tr>
   <tr>
-    <td>:: getCoin()</td>
+    <td>IWalletBalanceResponseInterface::getCoin()</td>
     <td>string</td>
     <td>Токен</td>
   </tr>
   <tr>
-    <td>:: getEquity()</td>
+    <td>IWalletBalanceResponseInterface::getEquity()</td>
     <td>float</td>
-    <td>Общий капитал</td>
+    <td> Общий капитал</td>
   </tr>
   <tr>
-    <td>:: getWalletBalance()</td>
+    <td>IWalletBalanceResponseInterface::getWalletBalance()</td>
     <td>float</td>
     <td>Баланс кошелька</td>
   </tr>
   <tr>
-    <td>:: getPositionMargin()</td>
+    <td>IWalletBalanceResponseInterface::getPositionMargin()</td>
     <td>float</td>
     <td>Маржа позиции</td>
   </tr>
   <tr>
-    <td>:: getAvailableBalance()</td>
+    <td>IWalletBalanceResponseInterface::getAvailableBalance()</td>
     <td>float</td>
     <td>Доступный баланс</td>
   </tr>
   <tr>
-    <td>:: getOrderMargin()</td>
+    <td>IWalletBalanceResponseInterface::getOrderMargin()</td>
     <td>float</td>
     <td>Предварительно занятая маржа</td>
   </tr>
   <tr>
-    <td>:: getOccClosingFee()</td>
+    <td>IWalletBalanceResponseInterface::getOccClosingFee()</td>
     <td>float</td>
     <td>
-      Занята плата за закрытие позиции. <br />
-      Формула: плата за открытие + ожидаемая максимальная плата за закрытие
+        Комиссия за закрытие позиции. <br />
+        Формула: комиссия за открытие + ожидаемая максимальная комиссия за закрытие.
     </td>
   </tr>
   <tr>
-    <td>:: getOccFundingFee()</td>
+    <td>IWalletBalanceResponseInterface::getOccFundingFee()</td>
     <td>float</td>
     <td>
-      Плата за предварительное финансирование
+      Комиссия за предварительное финансирование
     </td>
   </tr>
   <tr>
-    <td>:: getUnrealisedPnl()</td>
+    <td>IWalletBalanceResponseInterface::getUnrealisedPnl()</td>
     <td>float</td>
     <td>
-      Нереализованный PnL
+      Нереализованный прибыль и убыток
     </td>
   </tr>
   <tr>
-    <td>:: getCumRealisedPnl()</td>
+    <td>IWalletBalanceResponseInterface::getCumRealisedPnl()</td>
     <td>float</td>
     <td>
       Совокупный реализованный PnL (за все время)
     </td>
   </tr>
   <tr>
-    <td>:: getGivenCash()</td>
+    <td>IWalletBalanceResponseInterface::getGivenCash()</td>
     <td>float</td>
     <td>
       -
     </td>
   </tr>
   <tr>
-    <td>:: getServiceCash()</td>
+    <td>IWalletBalanceResponseInterface::getServiceCash()</td>
     <td>float</td>
     <td>
       -
     </td>
   </tr>
   <tr>
-    <td>:: getAccountIM()</td>
+    <td>IWalletBalanceResponseInterface::getAccountIM()</td>
     <td>string</td>
     <td>
-      Начальная маржа счета USDC
+      USDC начальная маржа
     </td>
   </tr>
   <tr>
-    <td>:: getAccountMM()</td>
+    <td>IWalletBalanceResponseInterface::getAccountMM()</td>
     <td>string</td>
     <td>
-      Маржа обслуживания счета USDC
+      USDC поддерживающая маржа
     </td>
   </tr>
 </table>
 
+---
+
 <br />
 
-### Contract - Account - Order - Place Order
+# Contract - Account - Order - Place Order
 <b>[Официальная страница документации](https://bybit-exchange.github.io/docs/derivatives/contract/place-order)</b>
 ```php
-// Класс эндпоинта:
-Carpenstar\ByBitAPI\Derivatives\Contract\Order\PlaceOrder\PlaceOrder::class
+// Endpoint classname
+\Carpenstar\ByBitAPI\Derivatives\Contract\Order\PlaceOrder\PlaceOrder::class
 ```
+
+<p align="center" width="100%"><b>ПРИМЕР</b></p>
+
+---
+
 ```php
 use Carpenstar\ByBitAPI\BybitAPI;
 use Carpenstar\ByBitAPI\Derivatives\Contract\Order\PlaceOrder\PlaceOrder;
@@ -2698,36 +2929,39 @@ echo "Order Link ID: " . $order->getOrderLinkId() . PHP_EOL;
  * Order Link ID: 64728f00c100d
  */
 ```
-<p><b>Параметры запроса:</b></p>
+
+<p align="center" width="100%"><b>ПАРАМЕТРЫ ЗАПРОСА</b></p>
+
+---
 
 ```php
 namespace Carpenstar\ByBitAPI\Derivatives\Contract\Order\PlaceOrder\Interfaces\IPlaceOrderRequestInterface;
 
 interface IPlaceOrderRequestInterface
 {
-    public function setSymbol(string $symbol): self;
-    public function setSide(string $side): self;
-    public function setOrderType(string $orderType): self;
-    public function setQty(float $quantity): self;
-    public function setTimeInForce(string $timeInForce): self;
-    public function setPrice(float $price): self;
-    public function setTriggerDirection(int $triggerDirection): self;
-    public function setTriggerPrice(string $triggerPrice): self;
-    public function setTriggerBy(string $triggerBy): self;
-    public function setPositionIdx(int $positionIdx): self;
-    public function setOrderLinkId(string $orderLinkId): self;
-    public function setTakeProfit(float $takeProfit): self;
-    public function setStopLoss(float $stopLoss): self;
-    public function setTpTriggerBy(string $tpTriggerBy): self;
-    public function setSlTriggerBy(string $slTriggerBy): self;
-    public function setReduceOnly(bool $reduceOnly): self;
-    public function setSmpType(string $smpType): self;
-    public function setCloseOnTrigger(bool $closeOnTrigger): self;
-    public function setTpslMode(string $tpslMode): self;
-    public function setTpLimitPrice(string $tpLimitPrice): self;
-    public function setSlLimitPrice(string $slLimitPrice): self;
-    public function setTpOrderType(string $tpOrderType): self;
-    public function setSlOrderType(string $slOrderType): self;
+    public function setSymbol(string $symbol): self; // Торговая пара
+    public function setSide(string $side): self; // 'Buy' or 'Sell'
+    public function setOrderType(string $orderType): self; // 'Market' or 'Limit'
+    public function setQty(float $quantity): self; // Количество
+    public function setTimeInForce(string $timeInForce): self; // Режим исполнения заказа. Возможные значения см. в официальной документации.
+    public function setPrice(float $price): self; // Цена лимитного ордера. Оставьте пустым, если orderType = Market.
+    public function setTriggerDirection(int $triggerDirection): self; // Параметр условного ордера. Используется для определения ожидаемого направления условного ордера.
+    public function setTriggerPrice(string $triggerPrice): self; // Параметр условного ордера - цена триггера.
+    public function setTriggerBy(string $triggerBy): self; // Тип триггерной цены. По умолчанию: LastPrice.
+    public function setPositionIdx(int $positionIdx): self; // Индекс позиции. Требуется, если включен режим хеджирования.
+    public function setOrderLinkId(string $orderLinkId): self; // Custom order ID. Максимум 36 символов.
+    public function setTakeProfit(float $takeProfit): self; // Цена тэйк профита
+    public function setStopLoss(float $stopLoss): self; // Цена стоп-лосса 
+    public function setTpTriggerBy(string $tpTriggerBy): self; //Тип цены, при которой активируется тейк-профит. По умолчанию: LastPrice
+    public function setSlTriggerBy(string $slTriggerBy): self; // Тип цены, при которой активируется стоп-лосс. По умолчанию: LastPrice
+    public function setReduceOnly(bool $reduceOnly): self; // true - означает, что ваша позиция может уменьшиться в размере только в случае срабатывания этого ордера
+    public function setSmpType(string $smpType): self; // Тип исполнения SMP.
+    public function setCloseOnTrigger(bool $closeOnTrigger): self; // Параметр закрытия ордера.
+    public function setTpslMode(string $tpslMode): self; // TP/SL mode
+    public function setTpLimitPrice(string $tpLimitPrice): self; // Цена лимитного ордера при срабатывании цены тейк-профита. Работает только тогда, когда tpslMode=Partial или tpOrderType=Limit.
+    public function setSlLimitPrice(string $slLimitPrice): self; // Цена лимитного ордера при срабатывании стоп-лосса. Работает только тогда, когда tpslMode=Partial и slOrderType=Limit.
+    public function setTpOrderType(string $tpOrderType): self; // Тип ордера, который вызывает тейк-профит.
+    public function setSlOrderType(string $slOrderType): self; // Тип ордера, который запускает стоп-лосс.
     
     // ... Getters
     
@@ -2736,7 +2970,14 @@ interface IPlaceOrderRequestInterface
 <table style="width: 100%">
   <tr>
     <td colspan="3" style="text-align: left">
-      <b>\Carpenstar\ByBitAPI\Derivatives\Contract\Order\PlaceOrder\Interfaces\IPlaceOrderRequestInterface</b>
+        <sup><b>INTERFACE</b></sup> <br />
+        <b>\Carpenstar\ByBitAPI\Derivatives\Contract\Order\PlaceOrder\Interfaces\IPlaceOrderRequestInterface::class</b>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="3" style="text-align: left">
+        <sup><b>DTO</b></sup> <br />
+        <b>\Carpenstar\ByBitAPI\Derivatives\Contract\Order\PlaceOrder\Request\PlaceOrderRequest::class</b>
     </td>
   </tr>
   <tr>
@@ -2745,207 +2986,216 @@ interface IPlaceOrderRequestInterface
     <th style="width: 50%; text-align: center">Описание</th>
   </tr>
   <tr>
-    <td>:: setSymbol(string $symbol)</td>
+    <td>IPlaceOrderRequestInterface::setSymbol(string $symbol)</td>
     <td><b>ДА</b></td>
-    <td>Название торгового инструмента</td>
+    <td>Торговая пара</td>
   </tr>
   <tr>
-    <td>:: setSide(string $side)</td>
+    <td>IPlaceOrderRequestInterface::setSide(string $side)</td>
     <td><b>ДА</b></td>
-    <td>Enum: 'Buy' or 'Sell'</td>
+    <td>'Buy' or 'Sell'</td>
   </tr>
   <tr>
-    <td>:: setOrderType(string $orderType)</td>
+    <td>IPlaceOrderRequestInterface::setOrderType(string $orderType)</td>
     <td><b>ДА</b></td>
-    <td>Enum: 'Market' or 'Limit'</td>
+    <td>'Market' or 'Limit'</td>
   </tr>
   <tr>
-    <td>:: setQty(float $quantity)</td>
+    <td>IPlaceOrderRequestInterface::setQty(float $quantity)</td>
     <td><b>ДА</b></td>
-    <td>Обьем ордера</td>
+    <td>Количество</td>
   </tr>
   <tr>
-    <td>:: setTimeInForce(string $timeInForce)</td>
+    <td>IPlaceOrderRequestInterface::setTimeInForce(string $timeInForce)</td>
     <td><b>ДА</b></td>
-    <td> Режим исполнения ордера. Возможные значения смотри в <a href="https://www.bybit.com/en-US/help-center/s/article/What-Are-Time-In-Force-TIF-GTC-IOC-FOK" target="_blank">официальной документации</a></td>
+    <td>Режим исполнения заказа. Возможные значения см. на странице <a href="https://www.bybit.com/en-US/help-center/s/article/What-Are-Time-In-Force-TIF-GTC-IOC-FOK" target="_blank">официальной документации</a></td>
   </tr>
   <tr>
-    <td>:: setPrice(float $price)</td>
+    <td>IPlaceOrderRequestInterface::setPrice(float $price)</td>
     <td>НЕТ</td>
-    <td>Цена лимитного ордера. Оставить пустым если orderType = Market</td>
+    <td>Цена лимитного ордера. Оставьте пустым, если orderType = Market.</td>
   </tr>
   <tr>
-    <td>:: setTriggerDirection(int $triggerDirection)</td>
-    <td>НЕТ</td>
+    <td>IPlaceOrderRequestInterface::setTriggerDirection(int $triggerDirection)</td>
+    <td>NO</td>
     <td>
-      Параметр условного заказа. Используется для определения ожидаемого направления условного ордера. <br />
-      1: Срабатывает, когда рыночная цена поднимается до триггерной цены. <br />
-      2: Срабатывает, когда рыночная цена падает до триггерной цены <br />
+        Параметр условного ордера. Используется для определения ожидаемого направления условного ордера. <br />
+        1: Срабатывает, когда рыночная цена поднимается до триггерной цены. <br />
+        2: Срабатывает, когда рыночная цена падает до триггерной цены <br />
     </td>
   </tr>
   <tr>
-    <td>:: setTriggerPrice(string $triggerPrice)</td>
+    <td>IPlaceOrderRequestInterface::setTriggerPrice(string $triggerPrice)</td>
     <td>НЕТ</td>
     <td>
-      Параметр условного заказа. <br /> 
-      Если вы ожидаете, что цена вырастет и сработает ваш условный ордер, убедитесь, что: <br />
-      triggerPrice > markPrice <br />
-      В противном случае, triggerPrice < markPrice
+        Параметр условного ордера. <br />
+        Если вы ожидаете, что цена вырастет и сработает ваш условный ордер, убедитесь, что: <br />
+        триггерPrice > markPrice <br />
+        В противном случае триггерPrice < markPrice
     </td>
   </tr>
   <tr>
-    <td>:: setTriggerBy(string $triggerBy)</td>
+    <td>IPlaceOrderRequestInterface::setTriggerBy(string $triggerBy)</td>
     <td>НЕТ</td>
     <td>
-      Тип триггерной цены. По умолчанию: LastPrice. <br />
-      Возможные значения: <br />
-      - LastPrice <br />
-      - MarkPrice <br />
-      - IndexPrice <br />
+        Тип триггерной цены. По умолчанию: LastPrice. <br />
+        Возможные значения: <br />
+        - LastPrice <br />
+        - MarkPrice <br />
+        - IndexPrice <br />
     </td>
   </tr>
   <tr>
-    <td>:: setPositionIdx(int $positionIdx)</td>
+    <td>IPlaceOrderRequestInterface::setPositionIdx(int $positionIdx)</td>
     <td>НЕТ</td>
     <td>
-      Индекс позиции. Обязательно если включен режим хеджирования. <br />
-      Возможные значения: <br />
-      - 0: Однонаправленный режим (по умолчанию) <br />
-      - 1: Лонг <br />
-      - 2: Шорт <br />
+        Индекс позиции. Требуется, если включен режим хеджирования. <br />
+        Возможные значения: <br />
+        - 0: Unidirectional mode (default) <br />
+        - 1: Long <br />
+        - 2: Short <br />
     </td>
   </tr>
   <tr>
-    <td>:: setOrderLinkId(string $orderLinkId)</td>
+    <td>IPlaceOrderRequestInterface::setOrderLinkId(string $orderLinkId)</td>
     <td>НЕТ</td>
     <td>
-      Пользовательский идентификатор заказа. Максимум 36 символов. <br />
-      Поддерживаются комбинации цифр, букв (заглавных и строчных), тире и подчеркиваний. <br />
-      OrderLinkId можно использовать повторно после того, как исходный заказ будет исполнен или отменен.
+       Пользовательский ID заказа. Максимум 36 символов. <br />
+       Поддерживаются комбинации цифр, букв (прописных и строчных), тире и подчеркиваний. <br />
+       OrderLinkId можно использовать повторно после исполнения или отмены исходного заказа.
     </td>
   </tr>
   <tr>
-    <td>:: setTakeProfit(float $takeProfit)</td>
+    <td>IPlaceOrderRequestInterface::setTakeProfit(float $takeProfit)</td>
     <td>НЕТ</td>
-    <td>Цена тейк-профита</td>
+    <td>Цена тэйк-профита</td>
   </tr>
   <tr>
-    <td>:: setStopLoss(float $stopLoss)</td>
+    <td>IPlaceOrderRequestInterface::setStopLoss(float $stopLoss)</td>
     <td>НЕТ</td>
-    <td>Цена стоп-лоса</td>
+    <td>Цена стоп-лосса</td>
   </tr>
   <tr>
-    <td>:: setTpTriggerBy(string $tpTriggerBy)</td>
+    <td>IPlaceOrderRequestInterface::setTpTriggerBy(string $tpTriggerBy)</td>
     <td>НЕТ</td>
     <td>
-      Тип цены, по которой активируется тейк-профит. По умолчанию: LastPrice <br />
-      Возможные значения: <br />
-      - LastPrice <br />
-      - MarkPrice <br />
-      - IndexPrice <br />
+        Тип цены, при которой активируется тейк-профит. По умолчанию: Последняя цена <br />
+        Возможные значения: <br />
+        - LastPrice <br />
+        - MarkPrice <br />
+        - IndexPrice <br />
     </td>
   </tr>
   <tr>
-    <td>:: setSlTriggerBy(string $slTriggerBy)</td>
+    <td>IPlaceOrderRequestInterface::setSlTriggerBy(string $slTriggerBy)</td>
     <td>НЕТ</td>
     <td>
-      Тип цены, по которой активируется стоп-лос. По умолчанию: LastPrice <br />
-      Возможные значения: <br />
-      - LastPrice <br />
-      - MarkPrice <br />
-      - IndexPrice <br />
+        Тип цены, при которой активируется стоп-лосс. По умолчанию: Последняя цена <br />
+        Возможные значения: <br />
+        - LastPrice <br />
+        - MarkPrice <br />
+        - IndexPrice <br />
     </td>
   </tr>
   <tr>
-    <td>:: setReduceOnly(bool $reduceOnly)</td>
+    <td>IPlaceOrderRequestInterface::setReduceOnly(bool $reduceOnly)</td>
     <td>НЕТ</td>
     <td>
-      <a href="https://www.bybit.com/en-US/help-center/s/article/What-is-a-Reduce-Only-Order" target="_blank">Описание параметра в оф.документации</a> <br />
-      true означает, что ваша позиция может уменьшиться в размере только в случае срабатывания этого ордера. <br />
-      Если значение «reduce_only» равно true, то невозможно установить тейк-профит/стоп-лосс.
+       <a href="https://www.bybit.com/en-US/help-center/s/article/What-is-a-Reduce-Only-Order" target="_blank">Описание параметра в официальной документации</a> <br />
+       true означает, что ваша позиция может уменьшиться в размере только в случае срабатывания этого ордера. <br />
+       Если «reduce_only» true, то тейк-профит/стоп-лосс установить невозможно.
     </td>
   </tr>
   <tr>
-    <td>:: setSmpType(string $smpType)</td>
+    <td>IPlaceOrderRequestInterface::setSmpType(string $smpType)</td>
     <td>НЕТ</td>
     <td>
-      <a href="https://bybit-exchange.github.io/docs/v3/smp" target="_blank">Описание параметра в оф.документации</a> <br />
+      <a href="https://bybit-exchange.github.io/docs/v3/smp" target="_blank">Описание параметра в официальной документации</a> <br />
       Тип исполнения SMP.
     </td>
   </tr>
   <tr>
-    <td>:: setCloseOnTrigger(bool $closeOnTrigger)</td>
+    <td>IPlaceOrderRequestInterface::setCloseOnTrigger(bool $closeOnTrigger)</td>
     <td>НЕТ</td>
     <td>
-      <a href="https://www.bybit.com/en-US/help-center/bybitHC_Article?language=en_US&id=000001050" target="_blank">Что такое закрытие по триггерному ордеру?</a> <br />
-      Параметр для закрытия заказа. Это может только уменьшить ваше положение, но не увеличить его. <br />
-      Если на счету недостаточно доступного баланса при срабатывании ордера на закрытие, <br />
-      то другие активные ордера аналогичных контрактов будут отменены или уменьшены. <br />
-      Его можно использовать, чтобы гарантировать, что ваш стоп-лосс уменьшает вашу позицию независимо от текущей доступной маржи.
+        <a href="https://www.bybit.com/en-US/help-center/bybitHC_Article?language=en_US&id=000001050" target="_blank">Что такое закрытие триггерным ордером?</a> <br />
+        Параметр закрытия ордера. Это может только уменьшить ваше положение, но не увеличить его. <br />
+        Если на момент срабатывания ордера на закрытие счета недостаточно доступного баланса, <br />
+        тогда другие активные ордера аналогичных контрактов будут отменены или сокращены. <br />
+        Его можно использовать, чтобы гарантировать, что ваш стоп-лосс уменьшит вашу позицию независимо от вашей текущей доступной маржи.
     </td>
   </tr>
   <tr>
-    <td>:: setTpslMode(string $tpslMode)</td>
+    <td>IPlaceOrderRequestInterface::setTpslMode(string $tpslMode)</td>
     <td>НЕТ</td>
     <td>
-      TP/SL режим <br />
-        - Full: вся позиция по TP/SL. Тогда tpOrderType или slOrderType должен быть Market. <br />
-        - Partial: частичное исполнение tp/sl. Поддерживаются лимитные ордера TP/SL. Примечание: при создании ограничения tp/sl требуется параметр tpslMode.
+      Режим TP/SL <br />
+         - Full: вся позиция по TP/SL. Тогда tpOrderType или slOrderType должен быть Market. <br />
+         - Partial: частичное выполнение TP/SL. Поддерживаются лимитные ордера TP/SL. Примечание. При создании ограничения TP/SL требуется параметр tpslMode.
     </td>
   </tr>
   <tr>
-    <td>:: setTpLimitPrice(string $tpLimitPrice)</td>
+    <td>IPlaceOrderRequestInterface::setTpLimitPrice(string $tpLimitPrice)</td>
     <td>НЕТ</td>
     <td>
-      Цена лимитного ордера при срабатывании цены тейк-профита. <br />
-      Работает только тогда, когда <b>tpslMode=Partial</b> или <b>tpOrderType=Limit</b>.
+        Цена лимитного ордера при срабатывании цены тейк-профита. <br />
+        Работает только в том случае, если <b>tpslMode=Partial</b> или <b>tpOrderType=Limit</b>.
     </td>
   </tr>
   <tr>
-    <td>:: setSlLimitPrice(string $slLimitPrice)</td>
+    <td>IPlaceOrderRequestInterface::setSlLimitPrice(string $slLimitPrice)</td>
     <td>НЕТ</td>
     <td>
-      Цена лимитного ордера при срабатывании стоп-лосса. <br />
-      Работает только тогда, когда <b>tpslMode=Partial</b> и <b>slOrderType=Limit</b>.
+        Цена лимитного ордера при срабатывании стоп-лосса. <br />
+        Работает только тогда, когда <b>tpslMode=Partial</b> и <b>slOrderType=Limit</b>.
     </td>
   </tr>
   <tr>
-    <td>:: setTpOrderType(string $tpOrderType)</td>
+    <td>IPlaceOrderRequestInterface::setTpOrderType(string $tpOrderType)</td>
     <td>НЕТ</td>
     <td>
-      Тип ордера, при котором срабатывает тейк-профит. <br />
-      Возможные значения: Market (- по умолчанию) или Limit. <br />
-      Для <b>tpslMode=Full</b> поддерживается только <b>tpOrderType=Market</b>.
+        Тип ордера, который вызывает тейк-профит. <br />
+        Возможные значения: Market (- по умолчанию) или Limit. <br />
+        Для <b>tpslMode=Full</b> поддерживается только <b>tpOrderType=Market</b>.
     </td>
   </tr>
   <tr>
-    <td>:: setSlOrderType(string $slOrderType)</td>
+    <td>IPlaceOrderRequestInterface::setSlOrderType(string $slOrderType)</td>
     <td>НЕТ</td>
     <td>
-      Тип ордера, при котором срабатывает стоп-лосс. <br />
-      Возможные значения: Market (- по умолчанию) или Limit. <br />
-      Для <b>tpslMode=Full</b> поддерживается только <b>tpOrderType=Market</b>.
+        Тип ордера, который запускает стоп-лосс. <br />
+        Возможные значения: Market (- по умолчанию) или Limit. <br />
+        Для <b>tpslMode=Full</b> поддерживается только <b>tpOrderType=Market</b>.
     </td>
   </tr>
 </table>
 
 
 
-<p><b>Структура ответа:</b></p>
+<p align="center" width="100%"><b>СТРУКТУРА ОТВЕТА</b></p>
+
+---
 
 ```php
 namespace Carpenstar\ByBitAPI\Derivatives\Contract\Order\PlaceOrder\Interfaces\IPlaceOrderResponseInterface;
 
 interface IPlaceOrderResponseInterface
 {
-    public function getOrderId(): ?string;
-    public function getOrderLinkId(): string;
+    public function getOrderId(): ?string; // Order ID
+    public function getOrderLinkId(): string; // Пользовательский ID ордера
 }
 ```
 <table style="width: 100%">
   <tr>
     <td colspan="3">
-      <b>\Carpenstar\ByBitAPI\Derivatives\Contract\Order\PlaceOrder\Interfaces\IPlaceOrderResponseInterface</b>
+        <sup><b>INTERFACE</b></sup> <br />
+      <b>\Carpenstar\ByBitAPI\Derivatives\Contract\Order\PlaceOrder\Interfaces\IPlaceOrderResponseInterface::class</b>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="3">
+    <sup><b>DTO</b></sup> <br />
+      <b>\Carpenstar\ByBitAPI\Derivatives\Contract\Order\PlaceOrder\Response\PlaceOrderResponse::class</b>
     </td>
   </tr>
   <tr>
@@ -2954,33 +3204,43 @@ interface IPlaceOrderResponseInterface
     <th style="width: 60%; text-align: center">Описание</th>
   </tr>
   <tr>
-    <td>:: getOrderId()</td>
+    <td>IPlaceOrderResponseInterface::getOrderId()</td>
     <td>string</td>
     <td>Order ID</td>
   </tr>
   <tr>
-    <td>:: getOrderLinkId()</td>
+    <td>IPlaceOrderResponseInterface::getOrderLinkId()</td>
     <td>string</td>
-    <td>Пользовательский Order ID</td>
+    <td>Пользовательский ID ордера</td>
   </tr>
 </table>
 
 ---
 
-### Contract - Contract - Order - Cancel All Order
+<br />
+
+# Contract - Contract - Order - Cancel All Order
 <b>[Официальная страница документации](https://bybit-exchange.github.io/docs/derivatives/contract/cancel-all)</b>
 <p>Этот эндпоинт позволяет отменить все открытые ордера.</p>
 
-<p><b>Параметры запроса:</b></p>
+<p align="center" width="100%"><b>ПРИМЕР</b></p>
+
+<p align="center" width="100%"><b> ... </b></p>
+
+---
+
+<p align="center" width="100%"><b>ПАРАМЕТРЫ ЗАПРОСА</b></p>
+
+---
 
 ```php
 namespace Carpenstar\ByBitAPI\Derivatives\Contract\Order\CancelAllOrder\Interfaces;
 
 interface ICancelAllOrderRequestInterface
 {
-    public function setSymbol(string $symbol): self;
-    public function setBaseCoin(string $baseCoin): self;
-    public function setSettleCoin(string $settleCoin): self;
+    public function setSymbol(string $symbol): self; // Торговая пара
+    public function setBaseCoin(string $baseCoin): self; // Закрыть все ордера по базовой монете 
+    public function setSettleCoin(string $settleCoin): self; // Закрыть все ордера по расчетной монете
     
     // .. Getters
 }
@@ -2989,48 +3249,64 @@ interface ICancelAllOrderRequestInterface
 <table style="width: 100%">
   <tr>
     <td colspan="3" style="text-align: left">
-      <b>\Carpenstar\ByBitAPI\Derivatives\Contract\Order\CancelAllOrder\Interfaces\ICancelAllOrderRequestInterface</b>
+        <sup><b>INTERFACE</b></sup> <br />
+        <b>\Carpenstar\ByBitAPI\Derivatives\Contract\Order\CancelAllOrder\Interfaces\ICancelAllOrderRequestInterface::class</b>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="3" style="text-align: left">
+        <sup><b>DTO</b></sup> <br />
+        <b>\Carpenstar\ByBitAPI\Derivatives\Contract\Order\CancelAllOrder\Request\CancelAllOrderRequest::class</b>
     </td>
   </tr>
   <tr>
     <th style="width: 45%; text-align: center">Метод</th>
-    <th style="width: 5%; text-align: center">Обязательно</th>
+    <th style="width: 5%; text-align: center">Обязтельно</th>
     <th style="width: 50%; text-align: center">Описание</th>
   </tr>
   <tr>
-    <td>:: setSymbol(string $symbol)</td>
+    <td>ICancelAllOrderRequestInterface::setSymbol(string $symbol)</td>
     <td>НЕТ</td>
-    <td>Название торгового инструмента</td>
+    <td>Торговая пара</td>
   </tr>
   <tr>
-    <td>:: setBaseCoin(string $baseCoin)</td>
+    <td>ICancelAllOrderRequestInterface::setBaseCoin(string $baseCoin)</td>
     <td>НЕТ</td>
-    <td>Отменить все открытые ордера по базовой монете</td>
+    <td>Закрыть все ордера по базовой монете</td>
   </tr>
   <tr>
-    <td>:: setSettleCoin(string $settleCoin)</td>
+    <td>ICancelAllOrderRequestInterface::setSettleCoin(string $settleCoin)</td>
     <td>НЕТ</td>
-    <td>Отменить все открытые ордера расчетной монетой</td>
+    <td>Закрыть все ордера по расчетной монете</td>
   </tr>
 </table>
 
-<p><b>Структура ответа:</b></p>
+<p align="center" width="100%"><b>СТРУКТУРА ОТВЕТА</b></p>
 
-> Результат представляет из себя нумерованный массив обьектов реализующих интерфейс ICancelAllOrderResponseInterface
+---
+
+> Результатом является пронумерованный массив объектов, реализующих интерфейс ICancelAllOrder ResponseInterface.
 
 ```php
 namespace Carpenstar\ByBitAPI\Derivatives\Contract\Order\CancelAllOrder\Interfaces;
 
 interface ICancelAllOrderResponseInterface
 {
-    public function getOrderId(): string;
-    public function getOrderLinkId(): string;
+    public function getOrderId(): string; // Order ID
+    public function getOrderLinkId(): string; // Пользовательский ID ордера
 }
 ```
 <table style="width: 100%">
   <tr>
     <td colspan="3">
-      <b>\Carpenstar\ByBitAPI\Derivatives\Contract\Order\CancelAllOrder\Interfaces\ICancelAllOrderResponseInterface</b>
+        <sup><b>INTERFACE</b></sup> <br />
+        <b>\Carpenstar\ByBitAPI\Derivatives\Contract\Order\CancelAllOrder\Interfaces\ICancelAllOrderResponseInterface::class</b>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="3">
+        <sup><b>DTO</b></sup> <br />
+        <b>\Carpenstar\ByBitAPI\Derivatives\Contract\Order\CancelAllOrder\Response\CancelAllOrderResponse::class</b>
     </td>
   </tr>
   <tr>
@@ -3039,37 +3315,45 @@ interface ICancelAllOrderResponseInterface
     <th style="width: 60%; text-align: center">Описание</th>
   </tr>
   <tr>
-    <td>:: getOrderId()</td>
+    <td>ICancelAllOrderResponseInterface::getOrderId()</td>
     <td>string</td>
     <td>Order ID</td>
   </tr>
   <tr>
-    <td>:: getOrderLinkId()</td>
+    <td>ICancelAllOrderResponseInterface::getOrderLinkId()</td>
     <td>string</td>
-    <td>Пользовательский Order ID</td>
+    <td>Пользовательский ID ордера</td>
   </tr>
 </table>
 
-
 ---
+
+<br />
 
 ### Contract - Contract - Order - Cancel Order
 <b>[Официальная страница документации](https://bybit-exchange.github.io/docs/derivatives/contract/cancel)</b>
 <p>Этот эндпоинт позволяет отменить указанный открытый ордер.</p>
 
-> Вы можете отменить указанный частично исполненный заказ.
+> Вы можете отменить указанный частично выполненный заказ.
 
+<p align="center" width="100%"><b>ПРИМЕР</b></p>
 
-<p><b>Параметры запроса:</b></p>
+<p align="center" width="100%"><b> ... </b></p>
+
+---
+
+<p align="center" width="100%"><b>ПАРАМЕТРЫ ЗАПРОСА</b></p>
+
+---
 
 ```php
 namespace Carpenstar\ByBitAPI\Derivatives\Contract\Order\CancelOrder\Interfaces;
 
 interface ICancelOrderRequestInterface
 {
-    public function setSymbol(string $symbol): self;
-    public function setOrderId(string $orderId): self;
-    public function setOrderLinkId(string $orderLinkId): self;
+    public function setSymbol(string $symbol): self; // Торгова пара
+    public function setOrderId(string $orderId): self; // Order ID
+    public function setOrderLinkId(string $orderLinkId): self; // Пользовательский ID ордера
     
     // ... Getters
 }
@@ -3078,7 +3362,14 @@ interface ICancelOrderRequestInterface
 <table style="width: 100%">
   <tr>
     <td colspan="3" style="text-align: left">
-      <b>\Carpenstar\ByBitAPI\Derivatives\Contract\Order\CancelAllOrder\Interfaces\ICancelAllOrderRequestInterface</b>
+        <sup><b>INTERFACE</b></sup> <br />
+        <b>\Carpenstar\ByBitAPI\Derivatives\Contract\Order\CancelOrder\Interfaces\ICancelOrderRequestInterface::class</b>
+    </td>
+  </tr>
+      <tr>
+    <td colspan="3" style="text-align: left">
+        <sup><b>DTO</b></sup> <br />
+        <b>\Carpenstar\ByBitAPI\Derivatives\Contract\Order\CancelOrder\Request\CancelOrderRequest::class</b>
     </td>
   </tr>
   <tr>
@@ -3087,37 +3378,46 @@ interface ICancelOrderRequestInterface
     <th style="width: 50%; text-align: center">Описание</th>
   </tr>
   <tr>
-    <td>:: setSymbol(string $symbol)</td>
+    <td>ICancelOrderRequestInterface::setSymbol(string $symbol)</td>
     <td>НЕТ</td>
-    <td>Название торгового инструмента</td>
+    <td>Торговая пара</td>
   </tr>
   <tr>
-    <td>:: setOrderId(string $orderId)</td>
-    <td>НЕТ</td>
+    <td>ICancelOrderRequestInterface::setOrderId(string $orderId)</td>
+    <td>NO</td>
     <td>Order ID</td>
   </tr>
   <tr>
-    <td>:: setOrderLinkId(string $orderLinkId)</td>
-    <td>НЕТ</td>
-    <td>Пользовательский order ID</td>
+    <td>ICancelOrderRequestInterface::setOrderLinkId(string $orderLinkId)</td>
+    <td>NO</td>
+    <td>Пользовательский ID ордера</td>
   </tr>
 </table>
 
-<p><b>Структура ответа:</b></p>
+<p align="center" width="100%"><b>СТРУКТУРА ОТВЕТА</b></p>
+
+---
 
 ```php
 namespace Carpenstar\ByBitAPI\Derivatives\Contract\Order\CancelOrder\Interfaces;
 
 interface ICancelOrderResponseInterface
 {
-    public function getOrderId(): string;
-    public function getOrderLinkId(): string;
+    public function getOrderId(): string; // Order ID
+    public function getOrderLinkId(): string; // Пользовательский ID ордера
 }
 ```
 <table style="width: 100%">
   <tr>
     <td colspan="3">
-      <b>\Carpenstar\ByBitAPI\Derivatives\Contract\Order\CancelOrder\Interfaces\ICancelOrderResponseInterface</b>
+        <sup><b>INTERFACE</b></sup> <br />
+        <b>\Carpenstar\ByBitAPI\Derivatives\Contract\Order\CancelOrder\Interfaces\ICancelOrderResponseInterface::class</b>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="3">
+        <sup><b>DTO</b></sup> <br />
+        <b>\Carpenstar\ByBitAPI\Derivatives\Contract\Order\CancelOrder\Response\CancelOrderResponse::class</b>
     </td>
   </tr>
   <tr>
@@ -3126,18 +3426,20 @@ interface ICancelOrderResponseInterface
     <th style="width: 60%; text-align: center">Описание</th>
   </tr>
   <tr>
-    <td>:: getOrderId()</td>
+    <td>ICancelOrderResponseInterface::getOrderId()</td>
     <td>string</td>
     <td>Order ID</td>
   </tr>
   <tr>
-    <td>:: getOrderLinkId()</td>
+    <td>ICancelOrderResponseInterface::getOrderLinkId()</td>
     <td>string</td>
-    <td>Пользовательский Order ID</td>
+    <td>Пользовательский ID ордера</td>
   </tr>
 </table>
 
 ---
+
+<br />
 
 ### Contract - Contract - Order - Get Open Orders
 <b>[Официальная страница документации](https://bybit-exchange.github.io/docs/derivatives/contract/open-order)</b>
@@ -3146,20 +3448,28 @@ interface ICancelOrderResponseInterface
 > Если не переданы ни orderId, ни orderLinkId, будет возвращено не более 500 открытых или частично исполненных ордеров.
 > Записи сортируются по времени создания от самых новых к самым старым.
 
-<p><b>Параметры запроса:</b></p>
+<p align="center" width="100%"><b>ПРИМЕР</b></p>
+
+<p align="center" width="100%"><b> ... </b></p>
+
+---
+
+<p align="center" width="100%"><b>ПАРАМЕТРЫ ЗАПРОСА</b></p>
+
+---
 
 ```php
 namespace Carpenstar\ByBitAPI\Derivatives\Contract\Order\GetOpenOrders\Interfaces;
 
 interface IGetOpenOrdersRequestInterface
 {
-    public function setSymbol(string $symbol): self;
-    public function setBaseCoin(string $baseCoin): self;
-    public function setSettleCoin(string $settleCoin): self;
-    public function setOrderId(string $orderId): self;
-    public function setOrderLinkId(string $orderLinkId): self;
-    public function setOrderFilter(string $orderFilter): self;
-    public function setCursor(string $cursor): self;
+    public function setSymbol(string $symbol): self; // Торговая пара
+    public function setBaseCoin(string $baseCoin): self; // Базовый токен
+    public function setSettleCoin(string $settleCoin): self; // Расчетный токен
+    public function setOrderId(string $orderId): self; // Order ID
+    public function setOrderLinkId(string $orderLinkId): self; // Пользовательский ID ордера
+    public function setOrderFilter(string $orderFilter): self; // Возможные значения: Order: активный ордер, StopOrder: условный ордер.
+    public function setCursor(string $cursor): self; // Курсор следующей страницы
     
     // .. Getters
 }
@@ -3168,7 +3478,14 @@ interface IGetOpenOrdersRequestInterface
 <table style="width: 100%">
   <tr>
     <td colspan="3" style="text-align: left">
-      <b>\Carpenstar\ByBitAPI\Derivatives\Contract\Order\GetOpenOrders\Interfaces\IGetOpenOrdersRequestInterface</b>
+        <sup><b>INTERFACE</b></sup> <br />
+      <b>\Carpenstar\ByBitAPI\Derivatives\Contract\Order\GetOpenOrders\Interfaces\IGetOpenOrdersRequestInterface::class</b>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="3" style="text-align: left">
+        <sup><b>DTO</b></sup> <br />
+      <b>\Carpenstar\ByBitAPI\Derivatives\Contract\Order\GetOpenOrders\Request\GetOpenOrdersRequest::class</b>
     </td>
   </tr>
   <tr>
@@ -3177,84 +3494,93 @@ interface IGetOpenOrdersRequestInterface
     <th style="width: 50%; text-align: center">Описание</th>
   </tr>
   <tr>
-    <td>:: setBaseCoin(string $baseCoin)</td>
+    <td>IGetOpenOrdersRequestInterface::setBaseCoin(string $baseCoin)</td>
     <td>НЕТ</td>
-    <td> Базовый токен </td>
+    <td>Базовый токен</td>
   </tr>
   <tr>
-    <td>:: setSettleCoin(string $settleCoin)</td>
+    <td>IGetOpenOrdersRequestInterface::setSettleCoin(string $settleCoin)</td>
     <td>НЕТ</td>
     <td>Расчетный токен</td>
   </tr>
   <tr>
-    <td>:: setOrderId(string $orderId)</td>
+    <td>IGetOpenOrdersRequestInterface::setOrderId(string $orderId)</td>
     <td>НЕТ</td>
-    <td>order ID</td>
+    <td>Order ID</td>
   </tr>
   <tr>
-    <td>:: setOrderLinkId(string $orderLinkId)</td>
+    <td>IGetOpenOrdersRequestInterface::setOrderLinkId(string $orderLinkId)</td>
     <td>НЕТ</td>
-    <td>Пользовательский order ID</td>
+    <td>Пользовательский ID ордера</td>
   </tr>
   <tr>
-    <td>:: setOrderFilter(string $orderFilter)</td>
+    <td>IGetOpenOrdersRequestInterface::setOrderFilter(string $orderFilter)</td>
     <td>НЕТ</td>
-    <td>Возможные значения: <b>Order</b>: активный ордер, <b>StopOrder</b>: условный ордер</td>
+    <td>Возможные значения: Order: активный ордер, StopOrder: условный ордер.</td>
   </tr>
   <tr>
-    <td>:: setCursor(string $cursor)</td>
+    <td>IGetOpenOrdersRequestInterface::setCursor(string $cursor)</td>
     <td>НЕТ</td>
     <td>Курсор следующей страницы</td>
   </tr>
 </table>
 
-<p><b>Структура ответа:</b></p>
+<p align="center" width="100%"><b>СТРУКТУРА ОТВЕТА</b></p>
+
+---
 
 ```php
 namespace Carpenstar\ByBitAPI\Derivatives\Contract\Order\GetOpenOrders\Interfaces;
 
 interface IGetOpenOrdersResponseInterface
 {
-    public function getSymbol(): string;
-    public function getOrderId(): string;
-    public function getOrderLinkId(): string;
-    public function getSide(): string;
-    public function getOrderType(): string;
-    public function getPrice(): float;
-    public function getQty(): float;
-    public function getTimeInForce(): string;
-    public function getOrderStatus(): string;
-    public function getLastPriceOnCreated(): string;
-    public function getCreatedTime(): \DateTime;
-    public function getUpdatedTime(): \DateTime;
-    public function getCancelType(): string;
-    public function getStopOrderType(): string;
-    public function getTriggerDirection(): int;
-    public function getTriggerBy(): string;
-    public function getTriggerPrice(): ?float;
-    public function getCumExecValue(): float;
-    public function getCumExecFee(): float;
-    public function getCumExecQty(): float;
-    public function getLeavesValue(): float;
-    public function getLeavesQty(): float;
-    public function getTakeProfit(): float;
-    public function getStopLoss(): float;
-    public function getTpslMode(): string;
-    public function getTpLimitPrice(): float;
-    public function getSlLimitPrice(): float;
-    public function getTpTriggerBy(): string;
-    public function getSlTriggerBy(): string;
-    public function isReduceOnly(): bool;
-    public function isCloseOnTrigger(): bool;
-    public function getSmpType(): string;
-    public function getSmpGroup(): int;
-    public function getSmpOrderId(): string;
+    public function getSymbol(): string; // Торговая пара
+    public function getOrderId(): string; // Order ID
+    public function getOrderLinkId(): string; // Пользовательский ID ордера
+    public function getSide(): string; // Направление. Buy,Sell
+    public function getOrderType(): string; // Тип ордера. Market, Limit. Для ордера TP/SL это означает тип ордера после его срабатывания.
+    public function getPrice(): float; // Цена оредра
+    public function getQty(): float; // Количество ордера
+    public function getTimeInForce(): string; // Time in force
+    public function getOrderStatus(): string; // Статус ордера
+    public function getLastPriceOnCreated(): string; // Последняя цена когда был создан ордер
+    public function getCreatedTime(): \DateTime; // Время создания ордера
+    public function getUpdatedTime(): \DateTime; // Время обновления ордера
+    public function getCancelType(): string; // Тип отмены
+    public function getStopOrderType(): string; // Тип завершения ордера
+    public function getTriggerDirection(): int; // 1: Рост, 2: Снижение
+    public function getTriggerBy(): string; // Тип триггерной цены
+    public function getTriggerPrice(): ?float; // Цена триггера
+    public function getCumExecValue(): float; //  Суммарное значение исполненной позиции
+    public function getCumExecFee(): float; // Совокупная торговая комиссия
+    public function getCumExecQty(): float; // Совокупное выполненное количество
+    public function getLeavesValue(): float; // Оставшаяся стоимость ожидает обмена
+    public function getLeavesQty(): float; // Оставшееся количество ожидает продажи
+    public function getTakeProfit(): float; // Цена тейк-профита
+    public function getStopLoss(): float; // Цена стоп-лосса
+    public function getTpslMode(): string; // TP/SL mode, Полный: вся позиция по TP/SL. Частичное: частичное положение TP/SL
+    public function getTpLimitPrice(): float; // Цена лимитного ордера при срабатывании цены тейк-профита
+    public function getSlLimitPrice(): float; // Цена лимитного ордера при срабатывании стоп-лосса
+    public function getTpTriggerBy(): string; // Триггерный тип тейк-профита
+    public function getSlTriggerBy(): string; // Цена лимитного ордера при срабатывании стоп-лосса
+    public function isReduceOnly(): bool; // Только уменьшить. true означает уменьшение размера позиции
+    public function isCloseOnTrigger(): bool; 
+    public function getSmpType(): string; // SMP execution type
+    public function getSmpGroup(): int; // Smp group ID. If the uid has no group, it is 0 by default
+    public function getSmpOrderId(): string; // The counterparty's orderID which triggers this SMP execution
 }
 ```
 <table style="width: 100%">
   <tr>
     <td colspan="3">
-      <b>\Carpenstar\ByBitAPI\Derivatives\Contract\Order\GetOpenOrders\Interfaces\IGetOpenOrdersResponseInterface</b>
+        <sup><b>INTERFACE</b></sup> <br />
+        <b>\Carpenstar\ByBitAPI\Derivatives\Contract\Order\GetOpenOrders\Interfaces\IGetOpenOrdersResponseInterface::class</b>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="3">
+        <sup><b>DTO</b></sup> <br />
+        <b>\Carpenstar\ByBitAPI\Derivatives\Contract\Order\GetOpenOrders\Request\GetOpenOrdersRequest::class</b>
     </td>
   </tr>
   <tr>
@@ -3263,242 +3589,259 @@ interface IGetOpenOrdersResponseInterface
     <th style="width: 60%; text-align: center">Описание</th>
   </tr>
   <tr>
-    <td>:: getSymbol()</td>
+    <td>IGetOpenOrdersResponseInterface::getSymbol()</td>
     <td>string</td>
-    <td>Торговый инструмент</td>
+    <td>Торговая пара</td>
   </tr>
   <tr>
-    <td>:: getOrderId()</td>
+    <td>IGetOpenOrdersResponseInterface::getOrderId()</td>
     <td>string</td>
     <td>Order ID</td>
   </tr>
   <tr>
-    <td>:: getOrderLinkId()</td>
+    <td>IGetOpenOrdersResponseInterface::getOrderLinkId()</td>
     <td>string</td>
-    <td>Пользовательский Order ID</td>
+    <td>Пользовательский ID ордера</td>
   </tr>
   <tr>
-    <td>:: getSide()</td>
+    <td>IGetOpenOrdersResponseInterface::getSide()</td>
     <td>string</td>
     <td>
--
+        Направление. Buy,Sell
     </td>
   </tr>
   <tr>
-    <td>:: getOrderType()</td>
+    <td>IGetOpenOrdersResponseInterface::getOrderType()</td>
     <td>string</td>
     <td>
--
+        Тип ордера. Market,Limit. Для ордера TP/SL это означает тип ордера после его срабатывания.
     </td>
   </tr>
   <tr>
-    <td>:: getPrice()</td>
+    <td>IGetOpenOrdersResponseInterface::getPrice()</td>
     <td>float</td>
     <td>
--
+        Цена ордера
     </td>
   </tr>
   <tr>
-    <td>:: getQty()</td>
+    <td>IGetOpenOrdersResponseInterface::getQty()</td>
     <td>float</td>
     <td>
--
+        Количество ордера
     </td>
   </tr>
   <tr>
-    <td>:: getTimeInForce()</td>
+    <td>IGetOpenOrdersResponseInterface::getTimeInForce()</td>
     <td>string</td>
     <td>
--
+        Time in force
     </td>
   </tr>
   <tr>
-    <td>:: getLastPriceOnCreated()</td>
+    <td>IGetOpenOrdersResponseInterface::getLastPriceOnCreated()</td>
     <td>string</td>
     <td>
--
+        Последняя цена при создании заказа
     </td>
   </tr>
   <tr>
-    <td>:: getCreatedTime()</td>
+    <td>IGetOpenOrdersResponseInterface::getCreatedTime()</td>
     <td>DateTime</td>
     <td>
--
+        Время создания ордера
     </td>
   </tr>
   <tr>
-    <td>:: getUpdatedTime()</td>
+    <td>IGetOpenOrdersResponseInterface::getUpdatedTime()</td>
     <td>DateTime</td>
     <td>
--
+        Время обновления ордера
     </td>
   </tr>
   <tr>
-    <td>:: getCancelType()</td>
+    <td>IGetOpenOrdersResponseInterface::getCancelType()</td>
     <td>string</td>
     <td>
--
+        Тип отмены ордера
     </td>
   </tr>
   <tr>
-    <td>:: getStopOrderType()</td>
+    <td>IGetOpenOrdersResponseInterface::getStopOrderType()</td>
     <td>string</td>
     <td>
--
+       Тип завершения ордера
     </td>
   </tr>
   <tr>
-    <td>:: getTriggerDirection()</td>
+    <td>IGetOpenOrdersResponseInterface::getTriggerDirection()</td>
     <td>int</td>
     <td>
--
+        1: рост, 2: снижение
     </td>
   </tr>
   <tr>
-    <td>:: getTriggerBy()</td>
+    <td>IGetOpenOrdersResponseInterface::getTriggerBy()</td>
     <td>string</td>
     <td>
--
+        Тип триггерной цены
     </td>
   </tr>
   <tr>
-    <td>:: getTriggerPrice()</td>
+    <td>IGetOpenOrdersResponseInterface::getTriggerPrice()</td>
     <td>null|float</td>
     <td>
--
+        Триггерная цена
     </td>
   </tr>
   <tr>
-    <td>:: getCumExecValue()</td>
+    <td>IGetOpenOrdersResponseInterface::getCumExecValue()</td>
     <td>float</td>
     <td>
--
+        Суммарное значение исполненной позиции
     </td>
   </tr>
   <tr>
-    <td>:: getCumExecFee()</td>
+    <td>IGetOpenOrdersResponseInterface::getCumExecFee()</td>
     <td>float</td>
     <td>
--
+        Совокупная торговая комиссия
     </td>
   </tr>
   <tr>
-    <td>:: getCumExecQty()</td>
+    <td>IGetOpenOrdersResponseInterface::getCumExecQty()</td>
     <td>float</td>
     <td>
--
+        Совокупное выполненное количество
     </td>
   </tr>
   <tr>
-    <td>:: getLeavesValue()</td>
+    <td>IGetOpenOrdersResponseInterface::getLeavesValue()</td>
     <td>float</td>
     <td>
--
+        Оставшаяся стоимость ожидает обмена
     </td>
   </tr>
   <tr>
-    <td>:: getLeavesQty()</td>
+    <td>IGetOpenOrdersResponseInterface::getLeavesQty()</td>
     <td>float</td>
     <td>
--
+        Оставшееся количество ожидает продажи
     </td>
   </tr>
   <tr>
-    <td>:: getTakeProfit()</td>
+    <td>IGetOpenOrdersResponseInterface::getTakeProfit()</td>
     <td>float</td>
     <td>
--
+        Цена тейк-профита
     </td>
   </tr>
   <tr>
-    <td>:: getStopLoss()</td>
+    <td>IGetOpenOrdersResponseInterface::getStopLoss()</td>
     <td>float</td>
     <td>
--
+        Цена стоп-лосса
     </td>
   </tr>
   <tr>
-    <td>:: getTpslMode()</td>
+    <td>IGetOpenOrdersResponseInterface::getTpslMode()</td>
     <td>string</td>
     <td>
--
+        TP/SL режим, Full: вся позиция по TP/SL. Partial: частичная позиция TP/SL
     </td>
   </tr>
   <tr>
-    <td>:: getSlTriggerBy()</td>
+    <td>IGetOpenOrdersResponseInterface::getSlTriggerBy()</td>
     <td>string</td>
     <td>
--
+        Цена лимитного ордера при срабатывании стоп-лосса
     </td>
   </tr>
   <tr>
-    <td>:: isReduceOnly()</td>
+    <td>IGetOpenOrdersResponseInterface::isReduceOnly()</td>
     <td>bool</td>
     <td>
--
+        true означает уменьшение размера позиции
     </td>
   </tr>
   <tr>
-    <td>:: isCloseOnTrigger()</td>
+    <td>IGetOpenOrdersResponseInterface::isCloseOnTrigger()</td>
     <td>string</td>
     <td>
--
+        Закрытие по триггеру
     </td>
   </tr>
   <tr>
-    <td>:: getSmpType()</td>
+    <td>IGetOpenOrdersResponseInterface::getSmpType()</td>
     <td>string</td>
     <td>
--
+        SMP execution type
     </td>
   </tr>
   <tr>
-    <td>:: getSmpGroup()</td>
+    <td>IGetOpenOrdersResponseInterface::getSmpGroup()</td>
     <td>string</td>
     <td>
-    -
+        Smp group ID. Если у uid нет группы, по умолчанию он равен 0.
     </td>
   </tr>
   <tr>
-    <td>:: getSmpOrderId()</td>
+    <td>IGetOpenOrdersResponseInterface::getSmpOrderId()</td>
     <td>string</td>
     <td>
--
+        Идентификатор заказа контрагента, который инициирует выполнение этого SMP.
     </td>
   </tr>
 </table>
 
 ---
 
-### Contract - Contract - Order - Get Order List
+<br />
+
+# Contract - Contract - Order - Get Order List
 <b>[Официальная страница документации](https://bybit-exchange.github.io/docs/derivatives/contract/order-list)</b>
 <p>Список ордеров</p>
 
-> Поскольку создание/отмена заказа является асинхронным, данные, возвращаемые из этого эндпоинта, могут задерживаться.
+> Since order creation/cancellation is asynchronous, the data returned from this endpoint may be delayed.
 
-<p><b>Параметры запроса:</b></p>
+<p align="center" width="100%"><b>ПРИМЕР</b></p>
+
+<p align="center" width="100%"><b> ... </b></p>
+
+---
+
+<p align="center" width="100%"><b>REQUEST PARAMETERS</b></p>
+
+---
 
 ```php
-namespace Carpenstar\ByBitAPI\Derivatives\Contract\Order\GetOpenOrders\Interfaces;
+namespace Carpenstar\ByBitAPI\Derivatives\Contract\Order\GetOrderList\Interfaces;
 
-interface IGetOpenOrdersRequestInterface
+interface IGetOrderListRequestInterface
 {
-    public function setSymbol(string $symbol): self;
-    public function setBaseCoin(string $baseCoin): self;
-    public function setSettleCoin(string $settleCoin): self;
-    public function setOrderId(string $orderId): self;
-    public function setOrderLinkId(string $orderLinkId): self;
-    public function setOrderFilter(string $orderFilter): self;
-    public function setCursor(string $cursor): self;
+    public function setSymbol(string $symbol): self; // Торговая пара
+    public function setOrderId(string $orderId): self; // Order ID
+    public function setOrderLinkId(string $orderLinkId): self; // Пользовательский ID ордера
+    public function setOrderStatus(string $orderStatus): self; // Статус заказа. Возращает все ордера по определенному статусу
+    public function setOrderFilter(string $orderFilter): self; // Возможные значения: Order: активный ордер, StopOrder: условный ордер.
+    public function setLimit(int $limit): self; // Ограничение размера данных на странице. [1, 50]. По умолчанию: 20
+    public function setCursor(string $cursor): self; // Курсор следующей страницы
     
-    // .. Getters
+    // .. getters
 }
 ```
 
 <table style="width: 100%">
   <tr>
     <td colspan="3" style="text-align: left">
-      <b>\Carpenstar\ByBitAPI\Derivatives\Contract\Order\GetOpenOrders\Interfaces\IGetOpenOrdersRequestInterface</b>
+        <sup><b>INTERFACE</b></sup> <br />
+        <b>\Carpenstar\ByBitAPI\Derivatives\Contract\Order\GetOrderList\Interfaces\IGetOrderListRequestInterface::class</b>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="3" style="text-align: left">
+        <sup><b>DTO</b></sup> <br />
+        <b>\Carpenstar\ByBitAPI\Derivatives\Contract\Order\GetOrderList\Request\GetOrderListRequest::class</b>
     </td>
   </tr>
   <tr>
@@ -3507,84 +3850,98 @@ interface IGetOpenOrdersRequestInterface
     <th style="width: 50%; text-align: center">Описание</th>
   </tr>
   <tr>
-    <td>:: setBaseCoin(string $baseCoin)</td>
+    <td>IGetOrderListRequestInterface::setSymbol(string $symbol)</td>
     <td>НЕТ</td>
-    <td> Базовый токен </td>
+    <td> Торговая пара </td>
   </tr>
   <tr>
-    <td>:: setSettleCoin(string $settleCoin)</td>
-    <td>НЕТ</td>
-    <td>Расчетный токен</td>
-  </tr>
-  <tr>
-    <td>:: setOrderId(string $orderId)</td>
+    <td>IGetOrderListRequestInterface::setOrderId(string $orderId)</td>
     <td>НЕТ</td>
     <td>order ID</td>
   </tr>
   <tr>
-    <td>:: setOrderLinkId(string $orderLinkId)</td>
+    <td>IGetOrderListRequestInterface::setOrderLinkId(string $orderLinkId)</td>
     <td>НЕТ</td>
-    <td>Пользовательский order ID</td>
+    <td>Пользовательский ID ордера</td>
   </tr>
   <tr>
-    <td>:: setOrderFilter(string $orderFilter)</td>
+    <td>IGetOrderListRequestInterface::setOrderStatus(string $orderStatus)</td>
     <td>НЕТ</td>
-    <td>Возможные значения: <b>Order</b>: активный ордер, <b>StopOrder</b>: условный ордер</td>
+    <td>Статус заказа. Вернуть все заказы, если параметр не был передан</td>
   </tr>
   <tr>
-    <td>:: setCursor(string $cursor)</td>
+    <td>IGetOrderListRequestInterface::setOrderFilter(string $orderFilter)</td>
+    <td>НЕТ</td>
+    <td>Возможные значения: <b>Order</b>: активный ордер, <b>StopOrder</b>: условный ордер.</td>
+  </tr>
+  <tr>
+    <td>IGetOrderListRequestInterface::setLimit(int $limit)</td>
+    <td>НЕТ</td>
+    <td>Ограничение размера данных на странице. [1, 50]. По умолчанию: 20</td>
+  </tr>
+  <tr>
+    <td>IGetOrderListRequestInterface::setCursor(string $cursor)</td>
     <td>НЕТ</td>
     <td>Курсор следующей страницы</td>
   </tr>
 </table>
 
-<p><b>Структура ответа:</b></p>
+<p align="center" width="100%"><b>СТРУКТУРА ОТВЕТА</b></p>
+
+---
 
 ```php
-namespace Carpenstar\ByBitAPI\Derivatives\Contract\Order\GetOpenOrders\Interfaces;
+namespace Carpenstar\ByBitAPI\Derivatives\Contract\Order\GetOrderList\Interfaces;
 
-interface IGetOpenOrdersResponseInterface
+interface IGetOrderListResponseInterface
 {
-    public function getSymbol(): string;
-    public function getOrderId(): string;
-    public function getOrderLinkId(): string;
-    public function getSide(): string;
-    public function getOrderType(): string;
-    public function getPrice(): float;
-    public function getQty(): float;
-    public function getTimeInForce(): string;
-    public function getOrderStatus(): string;
-    public function getLastPriceOnCreated(): string;
-    public function getCreatedTime(): \DateTime;
-    public function getUpdatedTime(): \DateTime;
-    public function getCancelType(): string;
-    public function getStopOrderType(): string;
-    public function getTriggerDirection(): int;
-    public function getTriggerBy(): string;
-    public function getTriggerPrice(): ?float;
-    public function getCumExecValue(): float;
-    public function getCumExecFee(): float;
-    public function getCumExecQty(): float;
-    public function getLeavesValue(): float;
-    public function getLeavesQty(): float;
-    public function getTakeProfit(): float;
-    public function getStopLoss(): float;
-    public function getTpslMode(): string;
-    public function getTpLimitPrice(): float;
-    public function getSlLimitPrice(): float;
-    public function getTpTriggerBy(): string;
-    public function getSlTriggerBy(): string;
-    public function isReduceOnly(): bool;
-    public function isCloseOnTrigger(): bool;
-    public function getSmpType(): string;
-    public function getSmpGroup(): int;
-    public function getSmpOrderId(): string;
+    public function getSymbol(): string; // Торговая пара
+    public function getOrderId(): string; // Order ID
+    public function getOrderLinkId(): string; // Пользовательский ID ордера
+    public function getSide(): string; // Buy,Sell
+    public function getOrderType(): string; // Тип ордера. Market, Limit. Для ордера TP/SL это означает тип ордера после его срабатывания.
+    public function getPrice(): float; // Цена ордера
+    public function getQty(): float; // Количество ордера
+    public function getTimeInForce(): string; // Time in force
+    public function getOrderStatus(): string; // Статус ордера
+    public function getLastPriceOnCreated(): string; // Цена последней сделки при размещении ордера
+    public function getCreatedTime(): \DateTime; // Время создания оредра
+    public function getUpdatedTime(): \DateTime; // Время обновления ордера
+    public function getCancelType(): string; // Тип отмены
+    public function getStopOrderType(): string; // Тип завершения ордера
+    public function getTriggerDirection(): int; // Направление триггера. 1: подъем, 2: падение
+    public function getTriggerBy(): string; // Тип триггерной цены
+    public function getTriggerPrice(): ?float; // Триггерная цена
+    public function getCumExecValue(): float; // Совокупная стоимость исполненного ордера
+    public function getCumExecFee(): float; // Совокупная комиссия за исполненную торговлю
+    public function getCumExecQty(): float; // Совокупное количество выполненных заказов
+    public function getLeavesValue(): float; // Не исполненная оценочная стоимость
+    public function getLeavesQty(): float; // Не исполненное количество
+    public function getTakeProfit(): float; // Цена тэйк-профита
+    public function getStopLoss(): float; // Цена стоп-лосса
+    public function getTpslMode(): string; // Режим TP/SL, Full: вся позиция по TP/SL. Partial: частичное положение TP/SL
+    public function getTpLimitPrice(): float; // Цена лимитного ордера при срабатывании цены тейк-профита
+    public function getSlLimitPrice(): float; // Цена лимитного ордера при срабатывании стоп-лосса
+    public function getTpTriggerBy(): string; // Тип цены для активации тейк-профита
+    public function getSlTriggerBy(): string; // Тип цены для срабатывания стоп-лосса
+    public function isReduceOnly(): bool; // Reduce only.true означает уменьшение размера позиции
+    public function isCloseOnTrigger(): bool; //Закрытие по триггеру
+    public function getSmpType(): string; // SMP execution type
+    public function getSmpGroup(): int; // Smp group ID. Если у uid нет группы, по умолчанию он равен 0.
+    public function getSmpOrderId(): string; // Идентификатор заказа контрагента, который запускает выполнение этого SMP. Идентификатор заказа контрагента, который запускает выполнение этого SMP.
 }
 ```
 <table style="width: 100%">
   <tr>
     <td colspan="3">
-      <b>\Carpenstar\ByBitAPI\Derivatives\Contract\Order\GetOpenOrders\Interfaces\IGetOpenOrdersResponseInterface</b>
+        <sup><b>INTERFACE</b></sup> <br />
+        <b>\Carpenstar\ByBitAPI\Derivatives\Contract\Order\GetOrderList\Interfaces\IGetOrderListResponseInterface::class</b>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="3">
+        <sup><b>DTO</b></sup> <br />
+        <b>\Carpenstar\ByBitAPI\Derivatives\Contract\Order\GetOrderList\Response\GetOrderListResponse::class</b>
     </td>
   </tr>
   <tr>
@@ -3593,213 +3950,214 @@ interface IGetOpenOrdersResponseInterface
     <th style="width: 60%; text-align: center">Описание</th>
   </tr>
   <tr>
-    <td>:: getSymbol()</td>
+    <td>IGetOrderListResponseInterface::getSymbol()</td>
     <td>string</td>
-    <td>Торговый инструмент</td>
+    <td>Торговая пара</td>
   </tr>
   <tr>
-    <td>:: getOrderId()</td>
+    <td>IGetOrderListResponseInterface::getOrderId()</td>
     <td>string</td>
     <td>Order ID</td>
   </tr>
   <tr>
-    <td>:: getOrderLinkId()</td>
+    <td>IGetOrderListResponseInterface::getOrderLinkId()</td>
     <td>string</td>
-    <td>Пользовательский Order ID</td>
+    <td>Пользовательский ID ордера</td>
   </tr>
   <tr>
-    <td>:: getSide()</td>
+    <td>IGetOrderListResponseInterface::getSide()</td>
     <td>string</td>
     <td>
--
+        Buy,Sell
     </td>
   </tr>
   <tr>
-    <td>:: getOrderType()</td>
+    <td>IGetOrderListResponseInterface::getOrderType()</td>
     <td>string</td>
     <td>
--
+       Тип ордера. Market, Limit. Для ордера TP/SL это означает тип ордера после его срабатывания.
     </td>
   </tr>
   <tr>
-    <td>:: getPrice()</td>
+    <td>IGetOrderListResponseInterface::getPrice()</td>
     <td>float</td>
     <td>
--
+        Цена ордера
     </td>
   </tr>
   <tr>
-    <td>:: getQty()</td>
+    <td>IGetOrderListResponseInterface::getQty()</td>
     <td>float</td>
     <td>
--
+        Количество ордера
     </td>
   </tr>
   <tr>
-    <td>:: getTimeInForce()</td>
+    <td>IGetOrderListResponseInterface::getTimeInForce()</td>
     <td>string</td>
     <td>
--
+        Time in force
     </td>
   </tr>
   <tr>
-    <td>:: getLastPriceOnCreated()</td>
+    <td>IGetOrderListResponseInterface::getLastPriceOnCreated()</td>
     <td>string</td>
     <td>
--
+       Последняя цена при размещении ордера
     </td>
   </tr>
   <tr>
-    <td>:: getCreatedTime()</td>
+    <td>IGetOrderListResponseInterface::getCreatedTime()</td>
     <td>DateTime</td>
     <td>
--
+        Время создания ордера
     </td>
   </tr>
   <tr>
-    <td>:: getUpdatedTime()</td>
+    <td>IGetOrderListResponseInterface::getUpdatedTime()</td>
     <td>DateTime</td>
     <td>
--
+        Время обновления ордера
     </td>
   </tr>
   <tr>
-    <td>:: getCancelType()</td>
+    <td>IGetOrderListResponseInterface::getCancelType()</td>
     <td>string</td>
     <td>
--
+        Тип отмены
     </td>
   </tr>
   <tr>
-    <td>:: getStopOrderType()</td>
+    <td>IGetOrderListResponseInterface::getStopOrderType()</td>
     <td>string</td>
     <td>
--
+       Тип завершения ордера
     </td>
   </tr>
   <tr>
-    <td>:: getTriggerDirection()</td>
+    <td>IGetOrderListResponseInterface::getTriggerDirection()</td>
     <td>int</td>
     <td>
--
+        Направление триггера. 1: подъем, 2: падение
     </td>
   </tr>
   <tr>
-    <td>:: getTriggerBy()</td>
+    <td>IGetOrderListResponseInterface::getTriggerBy()</td>
     <td>string</td>
     <td>
--
+       Тип триггерной цены
     </td>
   </tr>
   <tr>
-    <td>:: getTriggerPrice()</td>
+    <td>IGetOrderListResponseInterface::getTriggerPrice()</td>
     <td>null|float</td>
     <td>
--
+        Триггерная цена
     </td>
   </tr>
   <tr>
-    <td>:: getCumExecValue()</td>
+    <td>IGetOrderListResponseInterface::getCumExecValue()</td>
     <td>float</td>
     <td>
--
+        Совокупная стоимость исполненного ордера
     </td>
   </tr>
   <tr>
-    <td>:: getCumExecFee()</td>
+    <td>IGetOrderListResponseInterface::getCumExecFee()</td>
     <td>float</td>
     <td>
--
+        Совокупная комиссия за исполненную торговлю
     </td>
   </tr>
   <tr>
-    <td>:: getCumExecQty()</td>
+    <td>IGetOrderListResponseInterface::getCumExecQty()</td>
     <td>float</td>
     <td>
--
+        Совокупное количество выполненных заказов
     </td>
   </tr>
   <tr>
-    <td>:: getLeavesValue()</td>
+    <td>IGetOrderListResponseInterface::getLeavesValue()</td>
     <td>float</td>
     <td>
--
+        Неисполненная стоимость ордера
     </td>
   </tr>
   <tr>
-    <td>:: getLeavesQty()</td>
+    <td>IGetOrderListResponseInterface::getLeavesQty()</td>
     <td>float</td>
     <td>
--
+        Не исполненное оставшееся количество
     </td>
   </tr>
   <tr>
-    <td>:: getTakeProfit()</td>
+    <td>IGetOrderListResponseInterface::getTakeProfit()</td>
     <td>float</td>
     <td>
--
+        Цена тейк-профита
     </td>
   </tr>
   <tr>
-    <td>:: getStopLoss()</td>
+    <td>IGetOrderListResponseInterface::getStopLoss()</td>
     <td>float</td>
     <td>
--
+       Цена стоп-лосса
     </td>
   </tr>
   <tr>
-    <td>:: getTpslMode()</td>
+    <td>IGetOrderListResponseInterface::getTpslMode()</td>
     <td>string</td>
     <td>
--
+        Режим TP/SL, Full: вся позиция по TP/SL. Частичное: частичное положение TP/SL
     </td>
   </tr>
   <tr>
-    <td>:: getSlTriggerBy()</td>
+    <td>IGetOrderListResponseInterface::getSlTriggerBy()</td>
     <td>string</td>
     <td>
--
+        Тип цены для срабатывания стоп-лосса
     </td>
   </tr>
   <tr>
-    <td>:: isReduceOnly()</td>
+    <td>IGetOrderListResponseInterface::isReduceOnly()</td>
     <td>bool</td>
     <td>
--
+        Reduce only. true означает уменьшение размера позиции
     </td>
   </tr>
   <tr>
-    <td>:: isCloseOnTrigger()</td>
+    <td>IGetOrderListResponseInterface::isCloseOnTrigger()</td>
     <td>string</td>
     <td>
--
+        Закрытие по триггеру
     </td>
   </tr>
   <tr>
-    <td>:: getSmpType()</td>
+    <td>IGetOrderListResponseInterface::getSmpType()</td>
     <td>string</td>
     <td>
--
+        SMP execution type
     </td>
   </tr>
   <tr>
-    <td>:: getSmpGroup()</td>
+    <td>IGetOrderListResponseInterface::getSmpGroup()</td>
     <td>string</td>
     <td>
-    -
+        Smp group ID. Если у uid нет группы, по умолчанию он равен 0.
     </td>
   </tr>
   <tr>
-    <td>:: getSmpOrderId()</td>
+    <td>IGetOrderListResponseInterface::getSmpOrderId()</td>
     <td>string</td>
     <td>
--
+        Идентификатор заказа контрагента, который инициирует выполнение этого SMP.
     </td>
   </tr>
 </table>
 
-
 ---
+
+<br />
 
 ### Contract - Contract - Order - Replace Order
 <b>[Официальная страница документации](https://bybit-exchange.github.io/docs/derivatives/contract/replace-order)</b>
@@ -3807,25 +4165,33 @@ interface IGetOpenOrdersResponseInterface
 
 > Вы можете изменить открытые или частично исполненные ордера.
 
-<p><b>Параметры запроса:</b></p>
+<p align="center" width="100%"><b>ПРИМЕР</b></p>
+
+<p align="center" width="100%"><b> ... </b></p>
+
+---
+
+<p align="center" width="100%"><b>ПАРАМЕТРЫ ЗАПРОСА</b></p>
+
+---
 
 ```php
 namespace Carpenstar\ByBitAPI\Derivatives\Contract\Order\ReplaceOrder\Interfaces;
 
 interface IReplaceOrderRequestInterface
 {
-    public function setSymbol(string $symbol): self;
-    public function setOrderId(string $orderId): self;
-    public function setOrderLinkId(string $orderLinkId): self;
-    public function setPrice(float $price): self;
-    public function setQty(float $qty): self;
-    public function setTriggerPrice(float $triggerPrice): self;
-    public function setTakeProfit(float $takeProfit): self;
-    public function setStopLoss(float $stopLoss): self;
-    public function setTpTriggerBy(string $tpTriggerBy): self;
-    public function setSlTriggerBy(string $slTriggerBy): self;
-    public function setTriggerBy(string $triggerBy): self;
-    public function setTpLimitPrice(float $tpLimitPrice): self;
+    public function setSymbol(string $symbol): self; // Торговая пара
+    public function setOrderId(string $orderId): self; // Order ID
+    public function setOrderLinkId(string $orderLinkId): self; // Пользовательский ID ордера
+    public function setPrice(float $price): self; // Новая цена оредра
+    public function setQty(float $qty): self; // Новое количество ордера
+    public function setTriggerPrice(float $triggerPrice): self; // Установка/изменение триггерной цены
+    public function setTakeProfit(float $takeProfit): self; // Установка/изменение тейк-профита
+    public function setStopLoss(float $stopLoss): self; // Установка/изменение стоп-лосса
+    public function setTpTriggerBy(string $tpTriggerBy): self; // Тип цены, по которой активируется тейк-профит. При установке тейк-профита этот параметр обязателен, если для ордера нет начального значения.
+    public function setSlTriggerBy(string $slTriggerBy): self; // Тип цены, по которому активируется стоп-лосс. При установке стоп-лосса этот параметр обязателен, если для ордера нет начального значения.
+    public function setTriggerBy(string $triggerBy): self; // Тип триггерной цены. LastPrice, IndexPrice, MarkPrice, LastPrice
+    public function setTpLimitPrice(float $tpLimitPrice): self; // Цена лимитного ордера при срабатывании тейк-профита. Работает только тогда, когда исходный ордер устанавливает частичный лимит tp/sl
     
     // .. Getters
 }
@@ -3834,7 +4200,14 @@ interface IReplaceOrderRequestInterface
 <table style="width: 100%">
   <tr>
     <td colspan="3" style="text-align: left">
-      <b>\Carpenstar\ByBitAPI\Derivatives\Contract\Order\ReplaceOrder\Interfaces\IReplaceOrderRequestInterface</b>
+        <sup><b>INTERFACE</b></sup> <br />
+        <b>\Carpenstar\ByBitAPI\Derivatives\Contract\Order\ReplaceOrder\Interfaces\IReplaceOrderRequestInterface::class</b>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="3" style="text-align: left">
+        <sup><b>DTO</b></sup> <br />
+        <b>\Carpenstar\ByBitAPI\Derivatives\Contract\Order\ReplaceOrder\Request\ReplaceOrderRequest::class</b>
     </td>
   </tr>
   <tr>
@@ -3843,839 +4216,1011 @@ interface IReplaceOrderRequestInterface
     <th style="width: 50%; text-align: center">Описание</th>
   </tr>
   <tr>
-    <td>:: setSymbol(string $symbol)</td>
+    <td>IReplaceOrderRequestInterface::setSymbol(string $symbol)</td>
     <td>НЕТ</td>
-    <td> Торговый инструмент </td>
+    <td>Торговая пара</td>
   </tr>
   <tr>
-    <td>:: setOrderId(string $orderId)</td>
+    <td>IReplaceOrderRequestInterface::setOrderId(string $orderId)</td>
     <td>НЕТ</td>
     <td>Order ID</td>
   </tr>
   <tr>
-    <td>:: setOrderLinkId(string $orderLinkId)</td>
+    <td>IReplaceOrderRequestInterface::setOrderLinkId(string $orderLinkId)</td>
     <td>НЕТ</td>
-    <td>Пользовательский order ID</td>
+    <td>Пользовательский ID ордера</td>
   </tr>
   <tr>
-    <td>:: setPrice(float $price)</td>
+    <td>IReplaceOrderRequestInterface::setPrice(float $price)</td>
     <td>НЕТ</td>
-    <td> Новая цена ордера </td>
+    <td>Новая цена ордера </td>
   </tr>
   <tr>
-    <td>:: setQty(float $qty)</td>
+    <td>IReplaceOrderRequestInterface::setQty(float $qty)</td>
     <td>НЕТ</td>
     <td>
-      Новый обьем ордера
+      Новое количество ордера
     </td>
   </tr>
   <tr>
-    <td>:: setTriggerPrice(float $triggerPrice)</td>
+    <td>IReplaceOrderRequestInterface::setTriggerPrice(float $triggerPrice)</td>
     <td>НЕТ</td>
-    <td>Установка/изменения цены триггера</td>
+    <td>Установка/изменение триггерной цены</td>
   </tr>
   <tr>
-    <td>:: setTakeProfit(float $takeProfit)</td>
+    <td>IReplaceOrderRequestInterface::setTakeProfit(float $takeProfit)</td>
     <td>НЕТ</td>
-    <td>Установка/изменения тейк-профита</td>
+    <td>Установка/изменение тейк-профита</td>
   </tr>
   <tr>
-    <td>:: setStopLoss(float $stopLoss)</td>
+    <td>IReplaceOrderRequestInterface::setStopLoss(float $stopLoss)</td>
     <td>НЕТ</td>
-    <td>Установка/изменения стоп-лоса</td>
+    <td>Установка/изменение стоп-лосса</td>
   </tr>
   <tr>
-    <td>:: setTpTriggerBy(string $tpTriggerBy)</td>
+    <td>IReplaceOrderRequestInterface::setTpTriggerBy(string $tpTriggerBy)</td>
     <td>НЕТ</td>
-    <td>Установка/изменения - </td>
+    <td>Тип цены, по которой активируется тейк-профит. При установке тейк-профита этот параметр обязателен, если для ордера нет начального значения. </td>
   </tr>
   <tr>
-    <td>:: setSlTriggerBy(string $slTriggerBy)</td>
+    <td>IReplaceOrderRequestInterface::setSlTriggerBy(string $slTriggerBy)</td>
     <td>НЕТ</td>
-    <td>Установка/изменения - </td>
+    <td>Тип цены, по которому активируется стоп-лосс. При установке стоп-лосса этот параметр обязателен, если для ордера нет начального значения.</td>
   </tr>
   <tr>
-    <td>:: setTriggerBy(string $triggerBy)</td>
+    <td>IReplaceOrderRequestInterface::setTriggerBy(string $triggerBy)</td>
     <td>НЕТ</td>
-    <td>Установка/изменения - </td>
+    <td>Тип триггерной цены. LastPrice, IndexPrice, MarkPrice, LastPrice</td>
   </tr>
   <tr>
-    <td>:: setTpLimitPrice(float $tpLimitPrice)</td>
+    <td>IReplaceOrderRequestInterface::setTpLimitPrice(float $tpLimitPrice)</td>
     <td>НЕТ</td>
-    <td>Установка/изменения цены триггера</td>
+    <td>Цена лимитного ордера при срабатывании тейк-профита. Работает только тогда, когда исходный ордер устанавливает частичный лимит tp/sl</td>
   </tr>
 </table>
 
+<p align="center" width="100%"><b>СТРУКТУРА ОТВЕТА</b></p>
+
+```php
+namespace Carpenstar\ByBitAPI\Derivatives\Contract\Order\ReplaceOrder\Interfaces;
+
+interface IReplaceOrderResponseInterface
+{
+    public function getOrderId(): string;
+    public function getOrderLinkId(): string; // Пользовательский ID ордера
+}
+```
+
+
+<table style="width: 100%">
+  <tr>
+    <td colspan="3" style="text-align: left">
+        <sup><b>INTERFACE</b></sup> <br />
+        <b>\Carpenstar\ByBitAPI\Derivatives\Contract\Order\ReplaceOrder\Interfaces\IReplaceOrderRequestInterface::class</b>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="3" style="text-align: left">
+        <sup><b>DTO</b></sup> <br />
+        <b>\Carpenstar\ByBitAPI\Derivatives\Contract\Order\ReplaceOrder\Request\ReplaceOrderRequest::class</b>
+    </td>
+  </tr>
+   <tr>
+     <th style="width: 45%; text-align: center">Метод</th>
+     <th style="width: 5%; text-align: center">Тип</th>
+     <th style="width: 50%; text-align: center">Описание</th>
+   </tr>
+   <tr>
+     <td>IReplaceOrderRequestInterface::getOrderId()</td>
+     <td>string</td>
+     <td>Order ID</td>
+   </tr>
+   <tr>
+     <td>IReplaceOrderRequestInterface::getOrderLinkId()</td>
+     <td>string</td>
+     <td>Пользовательский идентификатор ордера</td>
+   </tr>
+</table>
 
 ---
 
-### Contract - Contract - Position - Get Closed PnL
+<br />
+
+### Contract - Position - Get Closed PnL
 <b>[Официальная страница документации](https://bybit-exchange.github.io/docs/derivatives/contract/closepnl)</b>
 
 <p>Запрос информации о закрытых позициях с данными о прибылях и убытках пользователя.</p>
 
 > Результат сортируется по createdAt в порядке убывания.
 
-<p><b>Параметры запроса:</b></p>
+<p align="center" width="100%"><b>ПРИМЕР</b></p>
+
+<p align="center" width="100%"><b> --- </b></p>
+
+<p align="center" width="100%"><b>ПАРАМЕТРЫ ЗАПРОСА</b></p>
+
+---
 
 ```php
 namespace Carpenstar\ByBitAPI\Derivatives\Contract\Position\GetClosedPnL\Interfaces;
 
 interface IGetClosedPnLRequestInterface
 {
-    public function setSymbol(string $symbol): self;
-    public function setStartTime(int $timestamp): self;
-    public function setEndTime(int $timestamp): self;
-    public function setLimit(int $limit): self;
-    public function setCursor(string $cursor): self;
+    public function setSymbol(string $symbol): self; // Торговая пара
+    public function setStartTime(int $timestamp): self; // Таймштамп начиная с которого следует получить записи
+    public function setEndTime(int $timestamp): self; // Таймштамп до которого следует получить записи
+    public function setLimit(int $limit): self; // Лимит записей на запрос
+    public function setCursor(string $cursor): self; // Курсор следующей страницы
     
     // .. Getters
 }
 ```
 
 <table style="width: 100%">
-  <tr>
-    <td colspan="3" style="text-align: left">
-      <b>\Carpenstar\ByBitAPI\Derivatives\Contract\Position\GetClosedPnL\Interfaces\IGetClosedPnLRequestInterface</b>
-    </td>
-  </tr>
-  <tr>
-    <th style="width: 45%; text-align: center">Метод</th>
-    <th style="width: 5%; text-align: center">Обязательно</th>
-    <th style="width: 50%; text-align: center">Описание</th>
-  </tr>
-  <tr>
-    <td>:: setSymbol(string $symbol)</td>
-    <td><b>ДА</b></td>
-    <td>Торговый инструмент</td>
-  </tr>
-  <tr>
-    <td>:: setStartTime(int $timestamp)</td>
-    <td>НЕТ</td>
-    <td>Нижняя граница даты от которой брать записи</td>
-  </tr>
-  <tr>
-    <td>:: setEndTime(int $timestamp)</td>
-    <td>НЕТ</td>
-    <td>Верхняя граница даты от которой брать записи</td>
-  </tr>
-  <tr>
-    <td>:: setLimit(int $limit)</td>
-    <td>НЕТ</td>
-    <td>Лимит записей на запрос</td>
-  </tr>
-  <tr>
-    <td>:: setCursor(string $cursor)</td>
-    <td>НЕТ</td>
-    <td>Курсор следующей страницы</td>
-  </tr>
+   <tr>
+     <td colspan="3" style="text-align: left">
+        <sup><b>INTERFACE</b></sup> <br />
+        <b>\Carpenstar\ByBitAPI\Derivatives\Contract\Position\GetClosedPnL\Interfaces\IGetClosedPnLRequestInterface::class</b>
+     </td>
+   </tr>
+   <tr>
+     <td colspan="3" style="text-align: left">
+        <sup><b>DTO</b></sup> <br />
+        <b>\Carpenstar\ByBitAPI\Derivatives\Contract\Position\GetClosedPnL\Request\GetClosedPnLRequest::class</b>
+     </td>
+   </tr>
+   <tr>
+     <th style="width: 45%; text-align: center">Метод</th>
+     <th style="width: 5%; text-align: center">Обязательно</th>
+     <th style="width: 50%; text-align: center">Описание</th>
+   </tr>
+   <tr>
+     <td>IGetClosedPnLRequestInterface::setSymbol(string $symbol)</td>
+     <td><b>ДА</b></td>
+     <td>Торговая пара</td>
+   </tr>
+   <tr>
+     <td>IGetClosedPnLRequestInterface::setStartTime(int $timestamp)</td>
+     <td>НЕТ</td>
+     <td>Нижний предел даты, начиная с которой следует вести записи</td>
+   </tr>
+   <tr>
+     <td>IGetClosedPnLRequestInterface::setEndTime(int $timestamp)</td>
+     <td>НЕТ</td>
+     <td>Верхний предел даты, начиная с которой следует вести учет</td>
+   </tr>
+   <tr>
+     <td>IGetClosedPnLRequestInterface::setLimit(int $limit)</td>
+     <td>НЕТ</td>
+     <td>Лимит записей на запрос</td>
+   </tr>
+   <tr>
+     <td>IGetClosedPnLRequestInterface::setCursor(string $cursor)</td>
+     <td>НЕТ</td>
+     <td>Курсор следующей страницы</td>
+   </tr>
 </table>
 
-<p><b>Структура ответа:</b></p>
+<p align="center" width="100%"><b>СТРУКТУРА ОТВЕТА</b></p>
+
+---
 
 ```php
 namespace Carpenstar\ByBitAPI\Derivatives\Contract\Position\GetClosedPnL\Interfaces;
 
 interface IGetClosedPnLResponseInterface
 {
-    public function getSymbol(): string;
-    public function getOrderId(): string;
-    public function getSide(): string;
-    public function getQty(): float;
-    public function getLeverage(): float;
-    public function getOrderPrice(): float;
-    public function getOrderType(): string;
-    public function getExecType(): string;
-    public function getClosedSize(): float;
-    public function getCumEntryValue(): float;
-    public function getAvgEntryPrice(): float;
-    public function getCumExitValue(): float;
-    public function getAvgExitPrice(): float;
-    public function getClosedPnl(): float;
-    public function getFillCount(): int;
-    public function getCreatedAt(): \DateTime;
+    public function getSymbol(): string; // Торговая пара
+    public function getOrderId(): string; // order ID
+    public function getSide(): string; // Направление ордера
+    public function getQty(): float; // Обьем ордера
+    public function getLeverage(): float; // Кредитное плечо
+    public function getOrderPrice(): float; // Цена ордера
+    public function getOrderType(): string; // Тип оредра. Market,Limit
+    public function getExecType(): string; // Тип исполнения
+    public function getClosedSize(): float; // Закрытый размер
+    public function getCumEntryValue(): float; // Накопленное значение позиции входа
+    public function getAvgEntryPrice(): float; // Средняя цена входа
+    public function getCumExitValue(): float; // Накопленное значение позиции выхода
+    public function getAvgExitPrice(): float; // Средняя цена выхода
+    public function getClosedPnl(): float; // Закрытый PnL
+    public function getFillCount(): int; // Количество исполнений в одном ордере
+    public function getCreatedAt(): \DateTime; // Время создания
 }
 ```
 <table style="width: 100%">
-  <tr>
-    <td colspan="3">
-      <b>\Carpenstar\ByBitAPI\Derivatives\Contract\Position\GetClosedPnL\Interfaces\IGetClosedPnLResponseInterface</b>
-    </td>
-  </tr>
-  <tr>
-    <th style="width: 20%; text-align: center">Метод</th>
-    <th style="width: 20%; text-align: center">Тип</th>
-    <th style="width: 60%; text-align: center">Описание</th>
-  </tr>
-  <tr>
-    <td>:: getSymbol()</td>
-    <td>string</td>
-    <td>Торговый инструмент</td>
-  </tr>
-  <tr>
-    <td>:: getOrderId()</td>
-    <td>string</td>
-    <td>order ID</td>
-  </tr>
-  <tr>
-    <td>:: getSide()</td>
-    <td>string</td>
-    <td>Направление ордера</td>
-  </tr>
-  <tr>
-    <td>:: getQty()</td>
-    <td>float</td>
-    <td>Обьем ордера</td>
-  </tr>
-  <tr>
-    <td>:: getLeverage()</td>
-    <td>float</td>
-    <td>Кредитное плечо</td>
-  </tr>
-  <tr>
-    <td>:: getOrderPrice()</td>
-    <td>float</td>
-    <td>Цена ордера</td>
-  </tr>
-  <tr>
-    <td>:: getExecType()</td>
-    <td>string</td>
-    <td> - </td>
-  </tr>
-  <tr>
-    <td>:: getClosedSize()</td>
-    <td>float</td>
-    <td> - </td>
-  </tr>
-  <tr>
-    <td>:: getCumEntryValue()</td>
-    <td>float</td>
-    <td> - </td>
-  </tr>
-  <tr>
-    <td>:: getAvgEntryPrice()</td>
-    <td>float</td>
-    <td> - </td>
-  </tr>
-  <tr>
-    <td>:: getCumExitValue()</td>
-    <td>float</td>
-    <td> - </td>
-  </tr>
-  <tr>
-    <td>:: getAvgExitPrice()</td>
-    <td>float</td>
-    <td> - </td>
-  </tr>
-  <tr>
-    <td>:: getClosedPnl()</td>
-    <td>float</td>
-    <td> - </td>
-  </tr>
-  <tr>
-    <td>:: getFillCount()</td>
-    <td>float</td>
-    <td> - </td>
-  </tr>
-  <tr>
-    <td>:: getCreatedAt()</td>
-    <td>DateTime</td>
-    <td> - </td>
-  </tr>
+   <tr>
+     <td colspan="3">
+        <sup><b>INTERFACE</b></sup> <br />
+        <b>\Carpenstar\ByBitAPI\Derivatives\Contract\Position\GetClosedPnL\Interfaces\IGetClosedPnLResponseInterface::class</b>
+     </td>
+   </tr>
+   <tr>
+     <td colspan="3">
+        <sup><b>DTO</b></sup> <br />
+        <b>\Carpenstar\ByBitAPI\Derivatives\Contract\Position\GetClosedPnL\Response\GetClosedPnLResponse::class</b>
+     </td>
+   </tr>
+   <tr>
+     <th style="width: 20%; text-align: center">Метод</th>
+     <th style="width: 20%; text-align: center">Тип</th>
+     <th style="width: 60%; text-align: center">Описание</th>
+   </tr>
+   <tr>
+     <td>IGetClosedPnLResponseInterface::getSymbol()</td>
+     <td>string</td>
+     <td>Торговая пара</td>
+   </tr>
+   <tr>
+     <td>IGetClosedPnLResponseInterface::getOrderId()</td>
+     <td>string</td>
+     <td>order ID</td>
+   </tr>
+   <tr>
+     <td>IGetClosedPnLResponseInterface::getSide()</td>
+     <td>string</td>
+     <td>Направление ордера</td>
+   </tr>
+   <tr>
+     <td>IGetClosedPnLResponseInterface::getQty()</td>
+     <td>float</td>
+     <td>Обьем ордера</td>
+   </tr>
+   <tr>
+     <td>IGetClosedPnLResponseInterface::getLeverage()</td>
+     <td>float</td>
+     <td>Кредитное плечо</td>
+   </tr>
+   <tr>
+     <td>IGetClosedPnLResponseInterface::getOrderPrice()</td>
+     <td>float</td>
+     <td>Цена ордера</td>
+   </tr>
+   <tr>
+     <td>IGetClosedPnLResponseInterface::getExecType()</td>
+     <td>string</td>
+     <td>Тип исполнения</td>
+   </tr>
+   <tr>
+     <td>IGetClosedPnLResponseInterface::getClosedSize()</td>
+     <td>float</td>
+     <td>Закрытый размер</td>
+   </tr>
+   <tr>
+     <td>IGetClosedPnLResponseInterface::getCumEntryValue()</td>
+     <td>float</td>
+     <td> Накопленное значение позиции входа </td>
+   </tr>
+   <tr>
+     <td>IGetClosedPnLResponseInterface::getAvgEntryPrice()</td>
+     <td>float</td>
+     <td> Средняя цена входа </td>
+   </tr>
+   <tr>
+     <td>IGetClosedPnLResponseInterface::getCumExitValue()</td>
+     <td>float</td>
+     <td> Накопленное значение позиции выхода </td>
+   </tr>
+   <tr>
+     <td>IGetClosedPnLResponseInterface::getAvgExitPrice()</td>
+     <td>float</td>
+     <td> Средняя цена выхода </td>
+   </tr>
+   <tr>
+     <td>IGetClosedPnLResponseInterface::getClosedPnl()</td>
+     <td>float</td>
+     <td> Закрытый PnL </td>
+   </tr>
+   <tr>
+     <td>IGetClosedPnLResponseInterface::getFillCount()</td>
+     <td>float</td>
+     <td> Количество исполнений в одном ордере </td>
+   </tr>
+   <tr>
+     <td>IGetClosedPnLResponseInterface::getCreatedAt()</td>
+     <td>DateTime</td>
+     <td>Время создания ордера</td>
+   </tr>
 </table>
 
 ---
 
-### Contract - Contract - Position - Get Execution List
+<br />
+
+### Contract - Position - Get Execution List
 <b>[Официальная страница документации](https://bybit-exchange.github.io/docs/derivatives/contract/execution-list)</b>
 <p>Список исполненных ордеров пользователя, отсортированный по времени исполнения в порядке убывания. Поддерживает бессрочные валютные пары USDT</p>
 
 > У пользователя может быть несколько исполнений в одном ордере.
 
-<p><b>Параметры запроса:</b></p>
+<p align="center" width="100%"><b>ПРИМЕР</b></p>
+
+<p align="center" width="100%"><b> --- </b></p>
+
+<p align="center" width="100%"><b>ПАРАМЕТРЫ ЗАПРОСА</b></p>
+
+---
 
 ```php
 namespace Carpenstar\ByBitAPI\Derivatives\Contract\Position\GetExecutionList\Interfaces;
 
 interface IGetExecutionListRequestInterface
 {
-    public function setSymbol(string $symbol): self;
-    public function setStartTime(int $timestamp): self;
-    public function setEndTime(int $timestamp): self;
-    public function setLimit(int $limit): self;
-    public function setCursor(string $cursor): self;
+     public function setSymbol(string $symbol): self; // Торговая пара
+     public function setStartTime(int $timestamp): self; // Таймштамп, начиная с которого следует получить записи
+     public function setEndTime(int $timestamp): self; // Таймштамп, до которого следует получить записи
+     public function setLimit(int $limit): self; // Лимит записей на запрос
+     public function setCursor(string $cursor): self; // Курсор следующей страницы
     
-    // .. Getters
+     // .. Getters
 }
 ```
 
 <table style="width: 100%">
-  <tr>
-    <td colspan="3" style="text-align: left">
-      <b>\Carpenstar\ByBitAPI\Derivatives\Contract\Position\GetExecutionList\Interfaces\IGetExecutionListRequestInterface</b>
-    </td>
-  </tr>
-  <tr>
-    <th style="width: 45%; text-align: center">Метод</th>
-    <th style="width: 5%; text-align: center">Обязательно</th>
-    <th style="width: 50%; text-align: center">Описание</th>
-  </tr>
-  <tr>
-    <td>:: setSymbol(string $symbol)</td>
-    <td><b>ДА</b></td>
-    <td>Торговый инструмент</td>
-  </tr>
-  <tr>
-    <td>:: setStartTime(int $timestamp)</td>
-    <td>НЕТ</td>
-    <td>Нижняя граница даты от которой брать записи</td>
-  </tr>
-  <tr>
-    <td>:: setEndTime(int $timestamp)</td>
-    <td>НЕТ</td>
-    <td>Верхняя граница даты от которой брать записи</td>
-  </tr>
-  <tr>
-    <td>:: setLimit(int $limit)</td>
-    <td>НЕТ</td>
-    <td>Лимит записей на запрос</td>
-  </tr>
-  <tr>
-    <td>:: setCursor(string $cursor)</td>
-    <td>НЕТ</td>
-    <td>Курсор следующей страницы</td>
-  </tr>
+   <tr>
+     <td colspan="3" style="text-align: left">
+        <sup><b>INTERFACE</b></sup> <br />
+        <b>\Carpenstar\ByBitAPI\Derivatives\Contract\Position\GetExecutionList\Interfaces\IGetExecutionListRequestInterface::class</b>
+     </td>
+   </tr>
+   <tr>
+     <td colspan="3" style="text-align: left">
+        <sup><b>DTO</b></sup> <br />
+        <b>\Carpenstar\ByBitAPI\Derivatives\Contract\Position\GetExecutionList\Request\GetExecutionListRequest::class</b>
+     </td>
+   </tr>
+   <tr>
+     <th style="width: 45%; text-align: center">Метод</th>
+     <th style="width: 5%; text-align: center">Обязательно</th>
+     <th style="width: 50%; text-align: center">Описание</th>
+   </tr>
+   <tr>
+     <td>IGetExecutionListRequestInterface::setSymbol(string $symbol)</td>
+     <td><b>ДА</b></td>
+     <td>Торговая пара</td>
+   </tr>
+   <tr>
+     <td>IGetExecutionListRequestInterface::setStartTime(int $startTime)</td>
+     <td>НЕТ</td>
+     <td> Таймштамп, начиная с которого следует получить записи</td>
+   </tr>
+   <tr>
+     <td>IGetExecutionListRequestInterface::setEndTime(int $endTime)</td>
+     <td>НЕТ</td>
+     <td>Таймштамп, до которого следует получить записи</td>
+   </tr>
+   <tr>
+     <td>IGetExecutionListRequestInterface::setLimit(int $limit)</td>
+     <td>НЕТ</td>
+     <td>Лимит записей на запрос</td>
+   </tr>
+   <tr>
+     <td>IGetExecutionListRequestInterface::setCursor(string $cursor)</td>
+     <td>НЕТ</td>
+     <td>Курсор следующей страницы</td>
+   </tr>
 </table>
 
-<p><b>Структура ответа:</b></p>
+<p align="center" width="100%"><b>СТРУКТУРА ОТВЕТА</b></p>
+
+---
 
 ```php
 namespace Carpenstar\ByBitAPI\Derivatives\Contract\Position\GetExecutionList\Interfaces;
 
 interface IGetExecutionListResponseInterface
 {
-    public function getSymbol(): string;
-    public function getOrderId(): string;
-    public function getSide(): string;
-    public function getQty(): float;
-    public function getLeverage(): float;
-    public function getOrderPrice(): float;
-    public function getOrderType(): string;
-    public function getExecType(): string;
-    public function getClosedSize(): float;
-    public function getCumEntryValue(): float;
-    public function getAvgEntryPrice(): float;
-    public function getCumExitValue(): float;
-    public function getAvgExitPrice(): float;
-    public function getClosedPnl(): float;
-    public function getFillCount(): int;
-    public function getCreatedAt(): \DateTime;
+     public function getSymbol(): string; // Торговая пара
+     public function getOrderId(): string; // order ID
+     public function getSide(): string; // Направление ордера
+     public function getQty(): float; // Обьем ордера
+     public function getLeverage(): float; // Кредитное плечо
+     public function getOrderPrice(): float; // Цена ордера
+     public function getOrderType(): string; // Market,Limit
+     public function getExecType(): string; // Тип исполнения
+     public function getClosedSize(): float; // Закрытый размер
+     public function getCumEntryValue(): float; // Накопленное значение позиции входа
+     public function getAvgEntryPrice(): float; // Средняя цена входа
+     public function getCumExitValue(): float; // Накопленное значение позиции выхода
+     public function getAvgExitPrice(): float; // Средняя цена выхода
+     public function getClosedPnl(): float; // Закрытый PnL
+     public function getFillCount(): int; // Количество исполнений в одном ордере
+     public function getCreatedAt(): \DateTime; // Время создания
 }
 ```
 <table style="width: 100%">
-  <tr>
-    <td colspan="3">
-      <b>\Carpenstar\ByBitAPI\Derivatives\Contract\Position\GetExecutionList\Interfaces\IGetExecutionListResponseInterface</b>
-    </td>
-  </tr>
-  <tr>
-    <th style="width: 20%; text-align: center">Метод</th>
-    <th style="width: 20%; text-align: center">Тип</th>
-    <th style="width: 60%; text-align: center">Описание</th>
-  </tr>
-  <tr>
-    <td>:: getSymbol()</td>
-    <td>string</td>
-    <td>Торговый инструмент</td>
-  </tr>
-  <tr>
-    <td>:: getOrderId()</td>
-    <td>string</td>
-    <td>order ID</td>
-  </tr>
-  <tr>
-    <td>:: getSide()</td>
-    <td>string</td>
-    <td>Направление ордера</td>
-  </tr>
-  <tr>
-    <td>:: getQty()</td>
-    <td>float</td>
-    <td>Обьем ордера</td>
-  </tr>
-  <tr>
-    <td>:: getLeverage()</td>
-    <td>float</td>
-    <td>Кредитное плечо</td>
-  </tr>
-  <tr>
-    <td>:: getOrderPrice()</td>
-    <td>float</td>
-    <td>Цена ордера</td>
-  </tr>
-  <tr>
-    <td>:: getExecType()</td>
-    <td>string</td>
-    <td> - </td>
-  </tr>
-  <tr>
-    <td>:: getClosedSize()</td>
-    <td>float</td>
-    <td> - </td>
-  </tr>
-  <tr>
-    <td>:: getCumEntryValue()</td>
-    <td>float</td>
-    <td> - </td>
-  </tr>
-  <tr>
-    <td>:: getAvgEntryPrice()</td>
-    <td>float</td>
-    <td> - </td>
-  </tr>
-  <tr>
-    <td>:: getCumExitValue()</td>
-    <td>float</td>
-    <td> - </td>
-  </tr>
-  <tr>
-    <td>:: getAvgExitPrice()</td>
-    <td>float</td>
-    <td> - </td>
-  </tr>
-  <tr>
-    <td>:: getClosedPnl()</td>
-    <td>float</td>
-    <td> - </td>
-  </tr>
-  <tr>
-    <td>:: getFillCount()</td>
-    <td>float</td>
-    <td> - </td>
-  </tr>
-  <tr>
-    <td>:: getCreatedAt()</td>
-    <td>DateTime</td>
-    <td> - </td>
-  </tr>
+   <tr>
+     <td colspan="3">
+        <sup><b>INTERFACE</b></sup> <br />
+       <b>\Carpenstar\ByBitAPI\Derivatives\Contract\Position\GetExecutionList\Interfaces\IGetExecutionListResponseInterface::class</b>
+     </td>
+   </tr>
+   <tr>
+     <td colspan="3">
+        <sup><b>DTO</b></sup> <br />
+       <b>\Carpenstar\ByBitAPI\Derivatives\Contract\Position\GetExecutionList\Response\GetExecutionListResponse::class</b>
+     </td>
+   </tr>
+   <tr>
+     <th style="width: 20%; text-align: center">Метод</th>
+     <th style="width: 20%; text-align: center">Тип</th>
+     <th style="width: 60%; text-align: center">Описание</th>
+   </tr>
+   <tr>
+     <td>IGetExecutionListResponseInterface::getSymbol()</td>
+     <td>string</td>
+     <td>Торговая пара</td>
+   </tr>
+   <tr>
+     <td>IGetExecutionListResponseInterface::getOrderId()</td>
+     <td>string</td>
+     <td>order ID</td>
+   </tr>
+   <tr>
+     <td>IGetExecutionListResponseInterface::getSide()</td>
+     <td>string</td>
+     <td>Направление ордера</td>
+   </tr>
+   <tr>
+     <td>IGetExecutionListResponseInterface::getQty()</td>
+     <td>float</td>
+     <td>Обьем ордера</td>
+   </tr>
+   <tr>
+     <td>IGetExecutionListResponseInterface::getLeverage()</td>
+     <td>float</td>
+     <td>Кредитное плечо</td>
+   </tr>
+   <tr>
+     <td>IGetExecutionListResponseInterface::getOrderPrice()</td>
+     <td>float</td>
+     <td>Цена ордера</td>
+   </tr>
+   <tr>
+     <td>IGetExecutionListResponseInterface::getExecType()</td>
+     <td>string</td>
+     <td> Тип исполнения </td>
+   </tr>
+   <tr>
+     <td>IGetExecutionListResponseInterface::getClosedSize()</td>
+     <td>float</td>
+     <td> Закрытый размер </td>
+   </tr>
+   <tr>
+     <td>IGetExecutionListResponseInterface::getCumEntryValue()</td>
+     <td>float</td>
+     <td> Накопленное значение позиции входа </td>
+   </tr>
+   <tr>
+     <td>IGetExecutionListResponseInterface::getAvgEntryPrice()</td>
+     <td>float</td>
+     <td> Средняя цена входа </td>
+   </tr>
+   <tr>
+     <td>IGetExecutionListResponseInterface::getCumExitValue()</td>
+     <td>float</td>
+     <td> Накопленное значение позиции выхода </td>
+   </tr>
+   <tr>
+     <td>IGetExecutionListResponseInterface::getAvgExitPrice()</td>
+     <td>float</td>
+     <td> Средняя цена выхода </td>
+   </tr>
+   <tr>
+     <td>IGetExecutionListResponseInterface::getClosedPnl()</td>
+     <td>float</td>
+     <td> Закрытый PnL </td>
+   </tr>
+   <tr>
+     <td>IGetExecutionListResponseInterface::getFillCount()</td>
+     <td>float</td>
+     <td> Количество исполнений в одном ордере </td>
+   </tr>
+   <tr>
+     <td>IGetExecutionListResponseInterface::getCreatedAt()</td>
+     <td>DateTime</td>
+     <td> Время создания </td>
+   </tr>
 </table>
 
 ---
 
-### Contract - Contract - Position - My Position
+<br />
+
+### Contract - Position - My Position
 <b>[Официальная страница документации](https://bybit-exchange.github.io/docs/derivatives/contract/position-list)</b>
 <p>Получение списка открытых позиций пользователя</p>
 
-<p><b>Параметры запроса:</b></p>
+<p align="center" width="100%"><b>ПРИМЕР</b></p>
+
+<p align="center" width="100%"><b> --- </b></p>
+
+<p align="center" width="100%"><b>ПАРАМЕТРЫ ЗАПРОСА</b></p>
+
+---
 
 ```php
 namespace Carpenstar\ByBitAPI\Derivatives\Contract\Position\MyPosition\Interfaces;
 
 interface IMyPositionRequestInterface
 {
-    public function setSymbol(string $symbol): self;
-    public function setSettleCoin(string $symbol): self;
+     public function setSymbol(string $symbol): self; // Торговая пара
+     public function setSettleCoin(string $symbol): self; // Расчетная монета
     
-    // .. Getters
+     // .. Getters
 }
 ```
 
 <table style="width: 100%">
-  <tr>
-    <td colspan="3" style="text-align: left">
-      <b>\Carpenstar\ByBitAPI\Derivatives\Contract\Position\MyPosition\Interfaces\IMyPositionRequestInterface</b>
-    </td>
-  </tr>
-  <tr>
-    <th style="width: 45%; text-align: center">Метод</th>
-    <th style="width: 5%; text-align: center">Обязательно</th>
-    <th style="width: 50%; text-align: center">Описание</th>
-  </tr>
-  <tr>
-    <td>:: setSymbol(string $symbol)</td>
-    <td>НЕТ</td>
-    <td>Торговый инструмент</td>
-  </tr>
-  <tr>
-    <td>:: setSettleCoin(string $symbol)</td>
-    <td>НЕТ</td>
-    <td>Расчетная монета</td>
-  </tr>
+   <tr>
+     <td colspan="3" style="text-align: left">
+        <sup><b>INTERFACE</b></sup> <br />
+       <b>\Carpenstar\ByBitAPI\Derivatives\Contract\Position\MyPosition\Interfaces\IMyPositionRequestInterface::class</b>
+     </td>
+   </tr>
+   <tr>
+     <td colspan="3" style="text-align: left">
+        <sup><b>DTO</b></sup> <br />
+       <b>\Carpenstar\ByBitAPI\Derivatives\Contract\Position\MyPosition\Request\MyPositionRequest::class</b>
+     </td>
+   </tr>
+   <tr>
+     <th style="width: 45%; text-align: center">Метод</th>
+     <th style="width: 5%; text-align: center">Обязательно</th>
+     <th style="width: 50%; text-align: center">Описание</th>
+   </tr>
+   <tr>
+     <td>IMyPositionRequestInterface::setSymbol(string $symbol)</td>
+     <td>НЕТ</td>
+     <td>Торговая пара</td>
+   </tr>
+   <tr>
+     <td>IMyPositionRequestInterface::setSettleCoin(string $symbol)</td>
+     <td>НЕТ</td>
+     <td>Расчетный токен</td>
+   </tr>
 </table>
 
-<p><b>Структура ответа:</b></p>
+<p align="center" width="100%"><b>Структура ответа</b></p>
+
+---
 
 ```php
 namespace Carpenstar\ByBitAPI\Derivatives\Contract\Position\MyPosition\Interfaces;
 
 interface IMyPositionResponseInterface
 {
-    public function getSymbol(): string;
-    public function getSide(): string;
-    public function getSize(): float;
-    public function getEntryPrice(): float;
-    public function getLeverage(): float;
-    public function getPositionValue(): float;
-    public function getPositionIdx(): int;
-    public function getRiskId(): int;
-    public function getRiskLimitValue(): string;
-    public function getTradeMode(): int;
-    public function getAutoAddMargin(): int;
-    public function getPositionBalance(): float;
-    public function getLiqPrice(): float;
-    public function getBustPrice(): float;
-    public function getTpSlMode(): string;
-    public function getTakeProfit(): float;
-    public function getStopLoss(): float;
-    public function getCreatedTime(): \DateTime;
-    public function getUpdatedTime(): \DateTime;
-    public function getTrailingStop(): string;
-    public function getActivePrice(): float;
-    public function getMarkPrice(): float;
-    public function getUnrealisedPnl(): float;
-    public function getCumRealisedPnl(): float;
-    public function getPositionMM(): float;
-    public function getPositionIM(): float;
-    public function getPositionStatus(): string;
-    public function getSessionAvgPrice(): float;
-    public function getOccClosingFee(): float;
-    public function getAdlRankIndicator(): int;
+     public function getSymbol(): string; // Торговая пара
+     public function getSide(): string; // Направление. Buy, Sell. Возврат None, когда нулевое положение одностороннего режима
+     public function getSize(): float; // Размер позиции
+     public function getEntryPrice(): float; // Цена входа
+     public function getLeverage(): float; // Кредитное плечо
+     public function getPositionValue(): float; // Значение позиции
+     public function getPositionIdx(): int; // Индекс позиции
+     public function getRiskId(): int; // ID лимита риска
+     public function getRiskLimitValue(): string; // Значение лимита позиции, соответствующее идентификатору риска
+     public function getTradeMode(): int; // 0: cross margin mode. 1: isolated margin mode
+     public function getAutoAddMargin(): int; // 0: false. 1: true
+     public function getPositionBalance(): float; // Маржа позиции
+     public function getLiqPrice(): float; // Ориентировочная цена ликвидации. Он возвращает значение только тогда, когда minPrice < liqPrice < maxPrice
+     public function getBustPrice(): float; // Ориентировочная цена ликвидации
+     public function getTpSlMode(): string; // Depreciated, всегда "Full"
+     public function getTakeProfit(): float; // Цена тейк-профита
+     public function getStopLoss(): float; // Цена стоп-лосса
+     public function getCreatedTime(): \DateTime; // Время создания позиции
+     public function getUpdatedTime(): \DateTime; // Время обновления позиции
+     public function getTrailingStop(): string; // Трейлинг-стоп
+     public function getActivePrice(): float; // Активация цены трейлинг-стопа
+     public function getMarkPrice(): float; // Маркировочная цена в реальном времени
+     public function getUnrealizedPnl(): float; // нереализованный PNL
+     public function getCumRealisedPnl(): float; //совокупный реализованный PNL
+     public function getPositionMM(): float; // Маржа поддержания позиции
+     public function getPositionIM(): float; // Начальная маржа позиции
+     public function getPositionStatus(): string; // Статус позиции
+     public function getSessionAvgPrice(): float; // Расчетная цена
+     public function getOccClosingFee(): float; // Pre-occupancy closing fee
+     public function getAdlRankIndicator(): int; // Auto-deleverage rank indicator.
 }
 ```
 <table style="width: 100%">
-  <tr>
-    <td colspan="3">
-      <b>\Carpenstar\ByBitAPI\Derivatives\Contract\Position\MyPosition\Interfaces\IMyPositionResponseInterface</b>
-    </td>
-  </tr>
-  <tr>
-    <th style="width: 20%; text-align: center">Метод</th>
-    <th style="width: 20%; text-align: center">Тип</th>
-    <th style="width: 60%; text-align: center">Описание</th>
-  </tr>
-  <tr>
-    <td>:: getSymbol()</td>
-    <td>string</td>
-    <td>Торговый инструмент</td>
-  </tr>
-  <tr>
-    <td>:: getSide()</td>
-    <td>string</td>
-    <td> - </td>
-  </tr>
-  <tr>
-    <td>:: getSize()</td>
-    <td>float</td>
-    <td> - </td>
-  </tr>
-  <tr>
-    <td>:: getEntryPrice()</td>
-    <td>float</td>
-    <td> - </td>
-  </tr>
-  <tr>
-    <td>:: getLeverage()</td>
-    <td>float</td>
-    <td> - </td>
-  </tr>
-  <tr>
-    <td>:: getPositionValue()</td>
-    <td>float</td>
-    <td> - </td>
-  </tr>
-  <tr>
-    <td>:: getPositionIdx()</td>
-    <td>int</td>
-    <td> - </td>
-  </tr>
-  <tr>
-    <td>:: getRiskId()</td>
-    <td>int</td>
-    <td> - </td>
-  </tr>
-  <tr>
-    <td>:: getRiskLimitValue()</td>
-    <td>string</td>
-    <td> - </td>
-  </tr>
-  <tr>
-    <td>:: getTradeMode()</td>
-    <td>int</td>
-    <td> - </td>
-  </tr>
-  <tr>
-    <td>:: getAutoAddMargin()</td>
-    <td>int</td>
-    <td> - </td>
-  </tr>
-  <tr>
-    <td>:: getPositionBalance()</td>
-    <td>float</td>
-    <td> - </td>
-  </tr>
-  <tr>
-    <td>:: getLiqPrice()</td>
-    <td>float</td>
-    <td> - </td>
-  </tr>
-  <tr>
-    <td>:: getBustPrice()</td>
-    <td>float</td>
-    <td> - </td>
-  </tr>
-  <tr>
-    <td>:: getTpSlMode()</td>
-    <td>string</td>
-    <td> - </td>
-  </tr>
-  <tr>
-    <td>:: getTakeProfit()</td>
-    <td>float</td>
-    <td> - </td>
-  </tr>
-  <tr>
-    <td>:: getStopLoss()</td>
-    <td>float</td>
-    <td> - </td>
-  </tr>
-  <tr>
-    <td>:: getCreatedTime()</td>
-    <td>DateTime</td>
-    <td> - </td>
-  </tr>
-  <tr>
-    <td>:: getUpdatedTime()</td>
-    <td>DateTime</td>
-    <td> - </td>
-  </tr>
-  <tr>
-    <td>:: getTrailingStop()</td>
-    <td>string</td>
-    <td> - </td>
-  </tr>
-  <tr>
-    <td>:: getActivePrice()</td>
-    <td>float</td>
-    <td> - </td>
-  </tr>
-  <tr>
-    <td>:: getMarkPrice()</td>
-    <td>float</td>
-    <td> - </td>
-  </tr>
-  <tr>
-    <td>:: getUnrealisedPnl()</td>
-    <td>float</td>
-    <td> - </td>
-  </tr>
-  <tr>
-    <td>:: getCumRealisedPnl()</td>
-    <td>float</td>
-    <td> - </td>
-  </tr>
-  <tr>
-    <td>:: getPositionMM()</td>
-    <td>float</td>
-    <td> - </td>
-  </tr>
-  <tr>
-    <td>:: getPositionIM()</td>
-    <td>float</td>
-    <td> - </td>
-  </tr>
-  <tr>
-    <td>:: getPositionStatus()</td>
-    <td>string</td>
-    <td> - </td>
-  </tr>
-  <tr>
-    <td>:: getSessionAvgPrice()</td>
-    <td>float</td>
-    <td> - </td>
-  </tr>
-  <tr>
-    <td>:: getOccClosingFee()</td>
-    <td>float</td>
-    <td> - </td>
-  </tr>
-  <tr>
-    <td>:: getAdlRankIndicator()</td>
-    <td>string</td>
-    <td> - </td>
-  </tr>
+   <tr>
+     <td colspan="3">
+        <sup><b>INTERFACE</b></sup> <br />
+        <b>\Carpenstar\ByBitAPI\Derivatives\Contract\Position\MyPosition\Interfaces\IMyPositionResponseInterface::class</b>
+     </td>
+   </tr>
+   <tr>
+     <td colspan="3">
+        <sup><b>DTO</b></sup> <br />
+        <b>\Carpenstar\ByBitAPI\Derivatives\Contract\Position\MyPosition\Response\MyPositionResponse::class</b>
+     </td>
+   </tr>
+   <tr>
+     <th style="width: 20%; text-align: center">Метод</th>
+     <th style="width: 20%; text-align: center">Тип</th>
+     <th style="width: 60%; text-align: center">Описание</th>
+   </tr>
+   <tr>
+     <td>IMyPositionResponseInterface::getSymbol()</td>
+     <td>string</td>
+     <td>Торговая пара</td>
+   </tr>
+   <tr>
+     <td>IMyPositionResponseInterface::getSide()</td>
+     <td>string</td>
+     <td> Side. Buy, Sell. Возврат None, когда нулевое положение одностороннего режима</td>
+   </tr>
+   <tr>
+     <td>IMyPositionResponseInterface::getSize()</td>
+     <td>float</td>
+     <td> Размер позиции </td>
+   </tr>
+   <tr>
+     <td>IMyPositionResponseInterface::getEntryPrice()</td>
+     <td>float</td>
+     <td> Цена входа </td>
+   </tr>
+   <tr>
+     <td>IMyPositionResponseInterface::getLeverage()</td>
+     <td>float</td>
+     <td> Кредитое плечо </td>
+   </tr>
+   <tr>
+     <td>IMyPositionResponseInterface::getPositionValue()</td>
+     <td>float</td>
+     <td> Значение позиции </td>
+   </tr>
+   <tr>
+     <td>IMyPositionResponseInterface::getPositionIdx()</td>
+     <td>int</td>
+     <td> Индекс позиции </td>
+   </tr>
+   <tr>
+     <td>IMyPositionResponseInterface::getRiskId()</td>
+     <td>int</td>
+     <td> ID риска </td>
+   </tr>
+   <tr>
+     <td>IMyPositionResponseInterface::getRiskLimitValue()</td>
+     <td>string</td>
+     <td> Значение лимита позиции, соответствующее идентификатору риска </td>
+   </tr>
+   <tr>
+     <td>IMyPositionResponseInterface::getTradeMode()</td>
+     <td>int</td>
+     <td> 0: cross margin mode. 1: isolated margin mode </td>
+   </tr>
+   <tr>
+     <td>IMyPositionResponseInterface::getAutoAddMargin()</td>
+     <td>int</td>
+     <td> 0: false. 1: true </td>
+   </tr>
+   <tr>
+     <td>IMyPositionResponseInterface::getPositionBalance()</td>
+     <td>float</td>
+     <td> Маржа позиции </td>
+   </tr>
+   <tr>
+     <td>IMyPositionResponseInterface::getLiqPrice()</td>
+     <td>float</td>
+     <td>Ориентировочная цена ликвидации. Он возвращает значение только тогда, когда minPrice < liqPrice < maxPrice</td>
+   </tr>
+   <tr>
+     <td>IMyPositionResponseInterface::getBustPrice()</td>
+     <td>float</td>
+     <td>Ориентировочная цена ликвидации</td>
+   </tr>
+   <tr>
+     <td>IMyPositionResponseInterface::getTpSlMode()</td>
+     <td>string</td>
+     <td>всегда "Full" </td>
+   </tr>
+   <tr>
+     <td>IMyPositionResponseInterface::getTakeProfit()</td>
+     <td>float</td>
+     <td>Цена тейк-профита</td>
+   </tr>
+   <tr>
+     <td>IMyPositionResponseInterface::getStopLoss()</td>
+     <td>float</td>
+     <td>Цена стоп-лоса</td>
+   </tr>
+   <tr>
+     <td>IMyPositionResponseInterface::getCreatedTime()</td>
+     <td>DateTime</td>
+     <td>Время создания позиции</td>
+   </tr>
+   <tr>
+     <td>IMyPositionResponseInterface::getUpdatedTime()</td>
+     <td>DateTime</td>
+     <td>Время обновления позиции</td>
+   </tr>
+   <tr>
+     <td>IMyPositionResponseInterface::getTrailingStop()</td>
+     <td>string</td>
+     <td>Трейлинг стоп</td>
+   </tr>
+   <tr>
+     <td>IMyPositionResponseInterface::getActivePrice()</td>
+     <td>float</td>
+     <td>Активация цены трейлинг-стопа</td>
+   </tr>
+   <tr>
+     <td>IMyPositionResponseInterface::getMarkPrice()</td>
+     <td>float</td>
+     <td>Маркировочная цена в реальном времени</td>
+   </tr>
+   <tr>
+     <td>IMyPositionResponseInterface::getUnrealisedPnl()</td>
+     <td>float</td>
+     <td> нереализованный PNL </td>
+   </tr>
+   <tr>
+     <td>IMyPositionResponseInterface::getCumRealisedPnl()</td>
+     <td>float</td>
+     <td> совокупный реализованный PNL </td>
+   </tr>
+   <tr>
+     <td>IMyPositionResponseInterface::getPositionMM()</td>
+     <td>float</td>
+     <td> Поддерживающая маржа </td>
+   </tr>
+   <tr>
+     <td>IMyPositionResponseInterface::getPositionIM()</td>
+     <td>float</td>
+     <td> Начальная маржа </td>
+   </tr>
+   <tr>
+     <td>IMyPositionResponseInterface::getPositionStatus()</td>
+     <td>string</td>
+     <td> Статус позиции </td>
+   </tr>
+   <tr>
+     <td>IMyPositionResponseInterface::getSessionAvgPrice()</td>
+     <td>float</td>
+     <td> Расчетная цена </td>
+   </tr>
+   <tr>
+     <td>IMyPositionResponseInterface::getOccClosingFee()</td>
+     <td>float</td>
+     <td> Pre-occupancy closing fee </td>
+   </tr>
+   <tr>
+     <td>IMyPositionResponseInterface::getAdlRankIndicator()</td>
+     <td>string</td>
+     <td> Auto-deleverage rank indicator </td>
+   </tr>
 </table>
 
 ---
 
-### Contract - Contract - Position - Set Auto Add Margin
+<br />
+
+##### Contract - Position - Set Auto Add Margin
 <b>[Официальная страница документации](https://bybit-exchange.github.io/docs/derivatives/contract/auto-margin)</b>
 <p>Включить/выключить автоматическое добавление маржи позиции. Чтобы понять больше, пожалуйста, прочитайте <a href="https://www.bybit.com/en-US/help-center/s/article/Introduction-to-Auto-Margin-Replenishment-USDT-Contract" target="_blank">здесь</a></p>
 
-<p><b>Параметры запроса</b></p>
+<p align="center" width="100%"><b>ПРИМЕР</b></p>
+
+<p align="center" width="100%"><b> --- </b></p>
+
+
+<p align="center" width="100%"><b>ПАРАМЕТРЫ ЗАПРОСА</b></p>
+
+---
 
 ```php
 namespace Carpenstar\ByBitAPI\Derivatives\Contract\Position\SetAutoAddMargin\Interfaces;
 
 interface ISetAutoAddMarginRequestInterface
 {
-    public function setSymbol(string $symbol): self;
-    public function setSide(string $side): self;
-    public function setAutoAddMargin(int $autoAddMargin): self;
-    public function setPositionIdx(int $positionIdx): self;
+     public function setSymbol(string $symbol): self; // Торговая пара
+     public function setSide(string $side): self; // Side. Buy,Sell
+     public function setAutoAddMargin(int $autoAddMargin): self; // Включить/выключить автоматическое добавление маржи. 0: off. 1: on
+     public function setPositionIdx(int $positionIdx): self; // Индекс позиции
     
-    // .. Getters
+     // .. Getters
 }
 ```
 
 <table style="width: 100%">
-  <tr>
-    <td colspan="3" style="text-align: left">
-      <b>\Carpenstar\ByBitAPI\Derivatives\Contract\Position\SetAutoAddMargin\Interfaces\ISetAutoAddMarginRequestInterface</b>
-    </td>
-  </tr>
-  <tr>
-    <th style="width: 45%; text-align: center">Метод</th>
-    <th style="width: 5%; text-align: center">Обязательно</th>
-    <th style="width: 50%; text-align: center">Описание</th>
-  </tr>
-  <tr>
-    <td>:: setSymbol(string $symbol)</td>
-    <td><b>ДА</b></td>
-    <td>Торговый инструмент</td>
-  </tr>
-  <tr>
-    <td>:: setSide(string $side)</td>
-    <td><b>ДА</b></td>
-    <td> - </td>
-  </tr>
-  <tr>
-    <td>:: setAutoAddMargin(int $autoAddMargin)</td>
-    <td><b>ДА</b></td>
-    <td> - </td>
-  </tr>
-  <tr>
-    <td>:: setPositionIdx(int $positionIdx)</td>
-    <td><b>ДА</b></td>
-    <td> - </td>
-  </tr>
+   <tr>
+     <td colspan="3" style="text-align: left">
+        <sup><b>INTERFACE</b></sup> <br />
+       <b>\Carpenstar\ByBitAPI\Derivatives\Contract\Position\SetAutoAddMargin\Interfaces\ISetAutoAddMarginRequestInterface::class</b>
+     </td>
+   </tr>
+   <tr>
+     <td colspan="3" style="text-align: left">
+        <sup><b>DTO</b></sup> <br />
+       <b>\Carpenstar\ByBitAPI\Derivatives\Contract\Position\SetAutoAddMargin\Request\SetAutoAddMarginRequest::class</b>
+     </td>
+   </tr>
+   <tr>
+     <th style="width: 45%; text-align: center">Метод</th>
+     <th style="width: 5%; text-align: center">Обязательно</th>
+     <th style="width: 50%; text-align: center">Описание</th>
+   </tr>
+   <tr>
+     <td>ISetAutoAddMarginRequestInterface::setSymbol(string $symbol)</td>
+     <td><b>ДА</b></td>
+     <td>Торговая пара</td>
+   </tr>
+   <tr>
+     <td>ISetAutoAddMarginRequestInterface::setSide(string $side)</td>
+     <td><b>ДА</b></td>
+     <td> Side. Buy,Sell </td>
+   </tr>
+   <tr>
+     <td>ISetAutoAddMarginRequestInterface::setAutoAddMargin(int $autoAddMargin)</td>
+     <td><b>ДА</b></td>
+     <td> Включить/выключить автоматическое добавление маржи. 0: off. 1: on </td>
+   </tr>
+   <tr>
+     <td>ISetAutoAddMarginRequestInterface::setPositionIdx(int $positionIdx)</td>
+     <td><b>ДА</b></td>
+     <td> Индекс позиции </td>
+   </tr>
 </table>
 
-<p><b>Структура ответа:</b></p>
-
-> Эндпоинт в качестве успешного ответа возвращает пустой массив
+<p align="center" width="100%"><b>СТРУКТУРА ОТВЕТА</b></p>
 
 ---
 
-### Contract - Contract - Position - Set Leverage
+> Эндпоинт возвращает пустой массив в качестве успешного ответа.
+
+---
+
+<br />
+
+### Contract - Position - Set Leverage
 <b>[Официальная страница документации](https://bybit-exchange.github.io/docs/derivatives/contract/leverage)</b>
 <p>Установить кредитное плечо позции</p>
 
-<p><b>Параметры запроса</b></p>
+<p align="center" width="100%"><b>ПРИМЕР</b></p>
+
+<p align="center" width="100%"><b> --- </b></p>
+
+<p align="center" width="100%"><b>ПАРАМЕТРЫ ЗАПРОСА</b></p>
+
+---
 
 ```php
 namespace Carpenstar\ByBitAPI\Derivatives\Contract\Position\SetLeverage\Interfaces;
 
 interface ISetLeverageRequestInterface
 {
-    public function setSymbol(string $symbol): self;
-    public function setBuyLeverage(float $buyLeverage): self;
-    public function setSellLeverage(float $sellLeverage): self;
+     public function setSymbol(string $symbol): self; // Торговая пара
+     public function setBuyLeverage(float $buyLeverage): self; // (0, максимальное кредитное плечо соответствующего лимита риска]. Для одностороннего режима убедитесь, что buyLeverage=sellLeverage
+     public function setSellLeverage(float $sellLeverage): self; // (0, максимальное кредитное плечо соответствующего лимита риска]. Для одностороннего режима убедитесь, что buyLeverage=sellLeverage
     
-    // .. Getters
+     // .. Getters
 }
 ```
 
 <table style="width: 100%">
-  <tr>
-    <td colspan="3" style="text-align: left">
-      <b>\Carpenstar\ByBitAPI\Derivatives\Contract\Position\SetLeverage\Interfaces\ISetLeverageRequestInterface</b>
-    </td>
-  </tr>
-  <tr>
-    <th style="width: 45%; text-align: center">Метод</th>
-    <th style="width: 5%; text-align: center">Обязательно</th>
-    <th style="width: 50%; text-align: center">Описание</th>
-  </tr>
-  <tr>
-    <td>:: setSymbol(string $symbol)</td>
-    <td><b>ДА</b></td>
-    <td>Торговый инструмент</td>
-  </tr>
-  <tr>
-    <td>:: setBuyLeverage(float $buyLeverage)</td>
-    <td><b>ДА</b></td>
-    <td> - </td>
-  </tr>
-  <tr>
-    <td>:: setSellLeverage(float $sellLeverage)</td>
-    <td><b>ДА</b></td>
-    <td> - </td>
-  </tr>
+   <tr>
+     <td colspan="3" style="text-align: left">
+        <sup><b>INTERFACE</b></sup> <br />
+       <b>\Carpenstar\ByBitAPI\Derivatives\Contract\Position\SetLeverage\Interfaces\ISetLeverageRequestInterface::class</b>
+     </td>
+   </tr>
+   <tr>
+     <td colspan="3" style="text-align: left">
+        <sup><b>DTO</b></sup> <br />
+       <b>\Carpenstar\ByBitAPI\Derivatives\Contract\Position\SetLeverage\Request\SetLeverageRequest::class</b>
+     </td>
+   </tr>
+   <tr>
+     <th style="width: 45%; text-align: center">Метод</th>
+     <th style="width: 5%; text-align: center">Обязательно</th>
+     <th style="width: 50%; text-align: center">Описание</th>
+   </tr>
+   <tr>
+     <td>ISetLeverageRequestInterface::setSymbol(string $symbol)</td>
+     <td><b>ДА</b></td>
+     <td>Торговая пара</td>
+   </tr>
+   <tr>
+     <td>ISetLeverageRequestInterface::setBuyLeverage(float $buyLeverage)</td>
+     <td><b>ДА</b></td>
+     <td> (0, максимальное кредитное плечо соответствующего лимита риска]. Для одностороннего режима убедитесь, что buyLeverage=sellLeverage </td>
+   </tr>
+   <tr>
+     <td>ISetLeverageRequestInterface::setSellLeverage(float $sellLeverage)</td>
+     <td><b>ДА</b></td>
+     <td>(0, максимальное кредитное плечо соответствующего лимита риска]. Для одностороннего режима убедитесь, что buyLeverage=sellLeverage</td>
+   </tr>
 </table>
 
-<p><b>Структура ответа:</b></p>
-
-> Эндпоинт в качестве успешного ответа возвращает пустой массив
+<p align="center" width="100%"><b>СТРУКТУРА ОТВЕТА</b></p>
 
 ---
 
-### Contract - Contract - Position - Set Risk Limit
+> Эндпоинт возвращает пустой массив в качестве успешного ответа
+
+---
+
+<br />
+
+### Contract - Position - Set Risk Limit
 <b>[Официальная страница документации](https://bybit-exchange.github.io/docs/derivatives/contract/set-risk-limit)</b>
 <p>Лимит риска будет ограничивать максимальную сумму позиции, которую вы можете удерживать при различных маржинальных требованиях. <br />
 Если вы хотите удерживать позицию большего размера, вам потребуется больше маржи. <br />
 Этот запрос может установить лимит риска для одной позиции. Если при размещении ордера превышен текущий лимит риска, он будет отклонен.</p>
 
-<p><b>Параметры запроса</b></p>
+<p align="center" width="100%"><b>ПРИМЕР</b></p>
+
+<p align="center" width="100%"><b> --- </b></p>
+
+
+<p align="center" width="100%"><b>ПАРАМЕТРЫ ЗАПРОСА</b></p>
+
+---
 
 ```php
 namespace Carpenstar\ByBitAPI\Derivatives\Contract\Position\SetRiskLimit\Interfaces;
 
 interface ISetRiskLimitRequestInterface
 {
-    public function setSymbol(string $symbol): self;
-    public function setRiskId(int $riskId): self;
-    public function setPositionIdx(int $positionIdx): self;
+     public function setSymbol(string $symbol): self; // Торговая пара
+     public function setRiskId(int $riskId): self; // ID риска
+     public function setPositionIdx(int $positionIdx): self; // Используется для идентификации позиций в различных режимах позиционирования.
 
-    // .. Getters
+     // .. Getters
 }
 ```
 
 <table style="width: 100%">
-  <tr>
-    <td colspan="3" style="text-align: left">
-      <b>\Carpenstar\ByBitAPI\Derivatives\Contract\Position\SetRiskLimit\Interfaces\ISetRiskLimitRequestInterface</b>
-    </td>
-  </tr>
-  <tr>
-    <th style="width: 45%; text-align: center">Метод</th>
-    <th style="width: 5%; text-align: center">Обязательно</th>
-    <th style="width: 50%; text-align: center">Описание</th>
-  </tr>
-  <tr>
-    <td>:: setSymbol(string $symbol)</td>
-    <td><b>ДА</b></td>
-    <td>Торговый инструмент</td>
-  </tr>
-  <tr>
-    <td>:: setRiskId(int $riskId)</td>
-    <td><b>ДА</b></td>
-    <td> - </td>
-  </tr>
-  <tr>
-    <td>:: setPositionIdx(int $positionIdx)</td>
-    <td><b>ДА</b></td>
-    <td> - </td>
-  </tr>
+   <tr>
+     <td colspan="3" style="text-align: left">
+        <sup><b>INTERFACE</b></sup> <br />
+       <b>\Carpenstar\ByBitAPI\Derivatives\Contract\Position\SetRiskLimit\Interfaces\ISetRiskLimitRequestInterface::class</b>
+     </td>
+   </tr>
+   <tr>
+     <td colspan="3" style="text-align: left">
+        <sup><b>DTO</b></sup> <br />
+       <b>\Carpenstar\ByBitAPI\Derivatives\Contract\Position\SetRiskLimit\Request\SetRiskLimitRequest::class</b>
+     </td>
+   </tr>
+   <tr>
+     <th style="width: 45%; text-align: center">Метож</th>
+     <th style="width: 5%; text-align: center">Обязательно</th>
+     <th style="width: 50%; text-align: center">Описание</th>
+   </tr>
+   <tr>
+     <td>ISetRiskLimitRequestInterface::setSymbol(string $symbol)</td>
+     <td><b>ДА</b></td>
+     <td>Торговая пара</td>
+   </tr>
+   <tr>
+     <td>ISetRiskLimitRequestInterface::setRiskId(int $riskId)</td>
+     <td><b>YES</b></td>
+     <td> ID риска </td>
+   </tr>
+   <tr>
+     <td>ISetRiskLimitRequestInterface::setPositionIdx(int $positionIdx)</td>
+     <td><b>YES</b></td>
+     <td> Используется для идентификации позиций в различных режимах позиционирования. Для режима хеджирования этот параметр является обязательным.
+            0: односторонний режим
+            1: Режим хеджирования Buy side
+            2: Режим хеджирования Sell side 
+     </td>
+   </tr>
 </table>
 
-<p><b>Структура ответа:</b></p>
-
-> Эндпоинт в качестве успешного ответа возвращает пустой массив
-
+<p align="center" width="100%"><b>СТРУКТУРА ОТВЕТА</b></p>
 
 ---
 
-### Contract - Contract - Position - Set Trading Stop
+> Эндпоинт возвращает пустой массив в качестве успешного ответа
+
+---
+
+<br />
+
+### Contract - Position - Set Trading Stop
 <b>[Официальная страница документации](https://bybit-exchange.github.io/docs/derivatives/contract/trading-stop)</b>
 
 <p>Запрос устанавливает значение тейк-профита, стоп-лоса или трейлинга</p>
@@ -4686,290 +5231,362 @@ interface ISetRiskLimitRequestInterface
 
 > Поддержка бессрочных USDT и USDC Perpetual. Примечание: USDC Perpetual не поддерживает частичный режим TP/SL.
 
-<p><b>Параметры запроса</b></p>
+<p align="center" width="100%"><b>ПРИМЕР</b></p>
+
+<p align="center" width="100%"><b> --- </b></p>
+
+
+<p align="center" width="100%"><b>ПАРАМЕТРЫ ЗАПРОСА</b></p>
+
+---
 
 ```php
 namespace Carpenstar\ByBitAPI\Derivatives\Contract\Position\SetTradingStop\Interfaces;
 
 interface ISetTradingStopRequestInterface
 {
-    public function setSymbol(string $symbol): self;
-    public function setTakeProfit(float $takeProfit): self;
-    public function setStopLoss(float $stopLoss): self;
-    public function setTpslMode(string $tpslMode): self;
-    public function setTpSize(float $tpSize): self;
-    public function setSlSize(float $slSize): self;
-    public function setTpTriggerBy(string $tpTriggerBy): self;
-    public function setSlTriggerBy(string $slTriggerBy): self;
-    public function setTrailingStop(float $trailingStop): self;
-    public function setActivePrice(float $activePrice): self;
-    public function setTpLimitPrice(float $tpLimitPrice): self;
-    public function setSlLimitPrice(float $slLimitPrice): self;
-    public function setTpOrderType(string $tpOrderType): self;
-    public function setSlOrderType(string $slOrderType): self;
-    public function setPositionIdx(int $positionIdx): self;
+     public function setSymbol(string $symbol): self; // Торговая пара
+     public function setTakeProfit(float $takeProfit): self; // Не может быть меньше 0, 0 означает отмену Take Profit. Частичный TP/SL не может быть отменен установкой 0
+     public function setStopLoss(float $stopLoss): self; // Не может быть меньше 0, 0 означает отмену Stop Loss. Частичный TP/SL не может быть отменен установкой 0
+     public function setTpslMode(string $tpslMode): self; // TP/SL mode
+     public function setTpSize(float $tpSize): self; // Размер тейк-профита. Действует только в частичном режиме TP/SL. Примечание: значения tpSize и slSize должны быть равны
+     public function setSlSize(float $slSize): self; // Размер стоп-лосса. Действует только в частичном режиме TP/SL. Примечание: значения tpSize и slSize должны быть равны
+     public function setTpTriggerBy(string $tpTriggerBy): self; // Тип триггерной цены тейк-профита. по умолчанию: LastPrice
+     public function setSlTriggerBy(string $slTriggerBy): self; // Тип цены срабатывания стоп-лосса. по умолчанию: LastPrice
+     public function setTrailingStop(float $trailingStop): self; // Не может быть меньше 0, 0 означает отмену Trailing Stop
+     public function setActivePrice(float $activePrice): self; // Цена триггера трейлинг-стопа. Трейлинг-стоп сработает только при достижении этой цены.
+     public function setTpLimitPrice(float $tpLimitPrice): self; // Цена лимитного ордера при срабатывании цены тейк-профита. Работает только тогда, когда tpslMode=Partial и tpOrderType=Limit.
+     public function setSlLimitPrice(float $slLimitPrice): self; // Цена лимитного ордера при срабатывании стоп-лосса. Работает только тогда, когда tpslMode=Partial и slOrderType=Limit.
+     public function setTpOrderType(string $tpOrderType): self; // Тип ордера, при котором срабатывает тейк-профит. Рынок (по умолчанию), Лимит. Для tpslMode=Full поддерживается только tpOrderType=Market.
+     public function setSlOrderType(string $slOrderType): self; // Тип ордера при срабатывании тейк-профита
+     public function setPositionIdx(int $positionIdx): self; // Используется для идентификации позиций в различных режимах позиции. Для режима хеджирования этот параметр является обязательным.
 
-    // .. Getters
+     // .. Getters
 }
 ```
 
 <table style="width: 100%">
-  <tr>
-    <td colspan="3" style="text-align: left">
-      <b>\Carpenstar\ByBitAPI\Derivatives\Contract\Position\SetTradingStop\Interfaces\ISetTradingStopRequestInterface</b>
-    </td>
-  </tr>
-  <tr>
-    <th style="width: 45%; text-align: center">Метод</th>
-    <th style="width: 5%; text-align: center">Обязательно</th>
-    <th style="width: 50%; text-align: center">Описание</th>
-  </tr>
-  <tr>
-    <td>:: setSymbol(string $symbol)</td>
-    <td><b>ДА</b></td>
-    <td>Торговый инструмент</td>
-  </tr>
-  <tr>
-    <td>:: setTakeProfit(float $takeProfit)</td>
-    <td>НЕТ</td>
-    <td> - </td>
-  </tr>
-  <tr>
-    <td>:: setStopLoss(float $stopLoss)</td>
-    <td>НЕТ</td>
-    <td> - </td>
-  </tr>
-  <tr>
-    <td>:: setTpslMode(string $tpslMode)</td>
-    <td>НЕТ</td>
-    <td> - </td>
-  </tr>
-  <tr>
-    <td>:: setTpSize(float $tpSize)</td>
-    <td>НЕТ</td>
-    <td> - </td>
-  </tr>
-  <tr>
-    <td>:: setSlSize(float $slSize)</td>
-    <td>НЕТ</td>
-    <td> - </td>
-  </tr>
-  <tr>
-    <td>:: setTpTriggerBy(string $tpTriggerBy)</td>
-    <td>НЕТ</td>
-    <td> - </td>
-  </tr>
-  <tr>
-    <td>:: setSlTriggerBy(string $slTriggerBy)</td>
-    <td>НЕТ</td>
-    <td> - </td>
-  </tr>
-  <tr>
-    <td>:: setTrailingStop(float $trailingStop)</td>
-    <td>НЕТ</td>
-    <td> - </td>
-  </tr>
-  <tr>
-    <td>:: setActivePrice(float $activePrice)</td>
-    <td>НЕТ</td>
-    <td> - </td>
-  </tr>
-  <tr>
-    <td>:: setTpLimitPrice(float $tpLimitPrice)</td>
-    <td>НЕТ</td>
-    <td> - </td>
-  </tr>
-  <tr>
-    <td>:: setSlLimitPrice(float $slLimitPrice)</td>
-    <td>НЕТ</td>
-    <td> - </td>
-  </tr>
-  <tr>
-    <td>:: setTpOrderType(string $tpOrderType)</td>
-    <td>НЕТ</td>
-    <td> - </td>
-  </tr>
-  <tr>
-    <td>:: setSlOrderType(string $slOrderType)</td>
-    <td>НЕТ</td>
-    <td> - </td>
-  </tr>
-  <tr>
-    <td>:: setPositionIdx(int $positionIdx)</td>
-    <td>НЕТ</td>
-    <td> - </td>
-  </tr>
+   <tr>
+     <td colspan="3" style="text-align: left">
+        <sup><b>INTERFACE</b></sup> <br />
+       <b>\Carpenstar\ByBitAPI\Derivatives\Contract\Position\SetTradingStop\Interfaces\ISetTradingStopRequestInterface::class</b>
+     </td>
+   </tr>
+   <tr>
+     <td colspan="3" style="text-align: left">
+        <sup><b>DTO</b></sup> <br />
+       <b>\Carpenstar\ByBitAPI\Derivatives\Contract\Position\SetTradingStop\Request\SetTradingStopRequest::class</b>
+     </td>
+   </tr>
+   <tr>
+     <th style="width: 45%; text-align: center">Метод</th>
+     <th style="width: 5%; text-align: center">Обязательно</th>
+     <th style="width: 50%; text-align: center">Описание</th>
+   </tr>
+   <tr>
+     <td>ISetTradingStopRequestInterface::setSymbol(string $symbol)</td>
+     <td><b>ДА</b></td>
+     <td>Торговая пара</td>
+   </tr>
+   <tr>
+     <td>ISetTradingStopRequestInterface::setTakeProfit(float $takeProfit)</td>
+     <td>НЕТ</td>
+     <td>Не может быть меньше 0, 0 означает отмену Take Profit. Частичный TP/SL не может быть отменен установкой 0</td>
+   </tr>
+   <tr>
+     <td>ISetTradingStopRequestInterface::setStopLoss(float $stopLoss)</td>
+     <td>НЕТ</td>
+     <td> Не может быть меньше 0, 0 означает отмену Stop Loss. Частичный TP/SL не может быть отменен установкой 0 </td>
+   </tr>
+   <tr>
+     <td>ISetTradingStopRequestInterface::setTpslMode(string $tpslMode)</td>
+     <td>НЕТ</td>
+     <td>TP/SL mode</td>
+   </tr>
+   <tr>
+     <td>ISetTradingStopRequestInterface::setTpSize(float $tpSize)</td>
+     <td>НЕТ</td>
+     <td>Размер тейк-профита. Действует только в частичном режиме TP/SL. Примечание: значения tpSize и slSize должны быть равны</td>
+   </tr>
+   <tr>
+     <td>ISetTradingStopRequestInterface::setSlSize(float $slSize)</td>
+     <td>НЕТ</td>
+     <td>Размер стоп-лосса. Действует только в частичном режиме TP/SL. Примечание: значения tpSize и slSize должны быть равны</td>
+   </tr>
+   <tr>
+     <td>ISetTradingStopRequestInterface::setTpTriggerBy(string $tpTriggerBy)</td>
+     <td>НЕТ</td>
+     <td>Тип триггерной цены тейк-профита. по умолчанию: LastPrice</td>
+   </tr>
+   <tr>
+     <td>ISetTradingStopRequestInterface::setSlTriggerBy(string $slTriggerBy)</td>
+     <td>НЕТ</td>
+     <td> Тип цены срабатывания стоп-лосса. по умолчанию: LastPrice </td>
+   </tr>
+   <tr>
+     <td>ISetTradingStopRequestInterface::setTrailingStop(float $trailingStop)</td>
+     <td>НЕТ</td>
+     <td> Не может быть меньше 0, 0 означает отмену Trailing Stop </td>
+   </tr>
+   <tr>
+     <td>ISetTradingStopRequestInterface::setActivePrice(float $activePrice)</td>
+     <td>НЕТ</td>
+     <td> Цена триггера трейлинг-стопа. Трейлинг-стоп сработает только при достижении этой цены. </td>
+   </tr>
+   <tr>
+     <td>ISetTradingStopRequestInterface::setTpLimitPrice(float $tpLimitPrice)</td>
+     <td>НЕТ</td>
+     <td> Цена лимитного ордера при срабатывании цены тейк-профита. Работает только тогда, когда tpslMode=Partial и tpOrderType=Limit. </td>
+   </tr>
+   <tr>
+     <td>ISetTradingStopRequestInterface::setSlLimitPrice(float $slLimitPrice)</td>
+     <td>НЕТ</td>
+     <td> Цена лимитного ордера при срабатывании стоп-лосса. Работает только тогда, когда tpslMode=Partial и slOrderType=Limit. </td>
+   </tr>
+   <tr>
+     <td>ISetTradingStopRequestInterface::setTpOrderType(string $tpOrderType)</td>
+     <td>НЕТ</td>
+     <td> Тип ордера, при котором срабатывает тейк-профит. Рынок (по умолчанию), Лимит. Для tpslMode=Full поддерживается только tpOrderType=Market. </td>
+   </tr>
+   <tr>
+     <td>ISetTradingStopRequestInterface::setSlOrderType(string $slOrderType)</td>
+     <td>НЕТ</td>
+     <td> Тип ордера при срабатывании тейк-профита </td>
+   </tr>
+   <tr>
+     <td>ISetTradingStopRequestInterface::setPositionIdx(int $positionIdx)</td>
+     <td>НЕТ</td>
+     <td> 
+        Используется для идентификации позиций в различных режимах позиции. Для режима хеджирования этот параметр является обязательным.
+        0: односторонний режим
+        1: Режим хеджирования Buy side
+        2: Режим хеджирования Sell side 
+     </td>
+   </tr>
 </table>
 
-<p><b>Структура ответа:</b></p>
-
-> Эндпоинт в качестве успешного ответа возвращает пустой массив
+<p align="center" width="100%"><b>СТРУКТУРА ОТВЕТА</b></p>
 
 ---
 
-### Contract - Contract - Position - Switch Cross Isolated Margin
+> Эндпоинт возвращает пустой массив в качестве успешного ответа
+
+---
+
+<br />
+
+### Contract - Position - Switch Cross Isolated Margin
 <b>[Официальная страница документации](https://bybit-exchange.github.io/docs/derivatives/contract/cross-isolated)</b>
 
 <p>Запрос изменяет режим маржи (Кросс или Изолированная)</p>
 
-<p><b>Параметры запроса</b></p>
+<p align="center" width="100%"><b>ПРИМЕР</b></p>
+
+<p align="center" width="100%"><b> --- </b></p>
+
+
+<p align="center" width="100%"><b>ПАРАМЕТРЫ ЗАПРОСА</b></p>
+
+---
 
 ```php
 namespace Carpenstar\ByBitAPI\Derivatives\Contract\Position\SwitchCrossIsolatedMargin\Interfaces;
 
 interface ISwitchCrossIsolatedMarginRequestInterface
 {
-    public function setSymbol(string $symbol): self;
-    public function setTradeMode(int $tradeMode): self;
-    public function setBuyLeverage(float $buyLeverage): self;
-    public function setSellLeverage(float $sellLeverage): self;
+     public function setSymbol(string $symbol): self; // Торговая пара
+     public function setTradeMode(int $tradeMode): self; // 0: cross margin. 1: isolated margin
+     public function setBuyLeverage(float $buyLeverage): self; // Установка кредитного плеча направления покупки. Убедитесь, что кредитное плечо покупки равно кредитному плечу продажи.
+     public function setSellLeverage(float $sellLeverage): self; // Установка кредитного плеча направления продажи. Убедитесь, что кредитное плечо покупки равно кредитному плечу продажи.
     
-    // .. Getters
+     // .. Getters
 }
 ```
 
 <table style="width: 100%">
-  <tr>
-    <td colspan="3" style="text-align: left">
-      <b>\Carpenstar\ByBitAPI\Derivatives\Contract\Position\SwitchCrossIsolatedMargin\Interfaces\ISwitchCrossIsolatedMarginRequestInterface</b>
-    </td>
-  </tr>
-  <tr>
-    <th style="width: 45%; text-align: center">Метод</th>
-    <th style="width: 5%; text-align: center">Обязательно</th>
-    <th style="width: 50%; text-align: center">Описание</th>
-  </tr>
-  <tr>
-    <td>:: setSymbol(string $symbol)</td>
-    <td><b>ДА</b></td>
-    <td>Торговый инструмент</td>
-  </tr>
-  <tr>
-    <td>:: setTradeMode(int $tradeMode)</td>
-    <td>НЕТ</td>
-    <td> - </td>
-  </tr>
-  <tr>
-    <td>:: setBuyLeverage(float $buyLeverage)</td>
-    <td>НЕТ</td>
-    <td> - </td>
-  </tr>
-  <tr>
-    <td>:: setSellLeverage(float $sellLeverage)</td>
-    <td>НЕТ</td>
-    <td> - </td>
-  </tr>
+   <tr>
+     <td colspan="3" style="text-align: left">
+        <sup><b>INTERFACE</b></sup> <br />
+        <b>\Carpenstar\ByBitAPI\Derivatives\Contract\Position\SwitchCrossIsolatedMargin\Interfaces\ISwitchCrossIsolatedMarginRequestInterface::class</b>
+     </td>
+   </tr>
+   <tr>
+     <td colspan="3" style="text-align: left">
+        <sup><b>DTO</b></sup> <br />
+        <b>\Carpenstar\ByBitAPI\Derivatives\Contract\Position\SwitchCrossIsolatedMargin\Request\SwitchCrossIsolatedMarginRequest::class</b>
+     </td>
+   </tr>
+   <tr>
+     <th style="width: 45%; text-align: center">Метод</th>
+     <th style="width: 5%; text-align: center">Обязательно</th>
+     <th style="width: 50%; text-align: center">Описание</th>
+   </tr>
+   <tr>
+     <td>ISwitchCrossIsolatedMarginRequestInterface::setSymbol(string $symbol)</td>
+     <td><b>ДА</b></td>
+     <td>Торговая пара</td>
+   </tr>
+   <tr>
+     <td>ISwitchCrossIsolatedMarginRequestInterface::setTradeMode(int $tradeMode)</td>
+     <td><b>ДА</b></td>
+     <td> 0: cross margin. 1: isolated margin </td>
+   </tr>
+   <tr>
+     <td>ISwitchCrossIsolatedMarginRequestInterface::setBuyLeverage(float $buyLeverage)</td>
+     <td><b>ДА</b></td>
+     <td> Установка кредитного плеча направления покупки. Убедитесь, что кредитное плечо покупки равно кредитному плечу продажи. </td>
+   </tr>
+   <tr>
+     <td>ISwitchCrossIsolatedMarginRequestInterface::setSellLeverage(float $sellLeverage)</td>
+     <td><b>ДА</b></td>
+     <td> Установка кредитного плеча направления продажи. Убедитесь, что кредитное плечо покупки равно кредитному плечу продажи </td>
+   </tr>
 </table>
 
-<p><b>Структура ответа:</b></p>
-
-> Эндпоинт в качестве успешного ответа возвращает пустой массив
-
+<p align="center" width="100%"><b>СТРУКТУРА ОТВЕТА</b></p>
 
 ---
 
-### Contract - Contract - Position - Switch Position Mode
+> Эндпоинт возвращает пустой массив в качестве успешного ответа
+
+---
+
+<br />
+
+### Contract - Position - Switch Position Mode
 <b>[Официальная страница документации](https://bybit-exchange.github.io/docs/derivatives/contract/position-mode)</b>
 <p>Запрос поддерживает переключение режима позиции для бессрочных и обратных фьючерсов USDT. <br />
 Если вы находитесь в одностороннем режиме, вы можете открыть только одну позицию на стороне покупки или продажи. <br />
 Если вы находитесь в режиме хеджирования, вы можете одновременно открывать позиции на покупку и продажу.</p>
 
-<p><b>Параметры запроса</b></p>
+<p align="center" width="100%"><b>ПРИМЕР</b></p>
+
+<p align="center" width="100%"><b> --- </b></p>
+
+
+<p align="center" width="100%"><b>ПАРАМЕТРЫ ЗАПРОСА</b></p>
+
+---
 
 ```php
 namespace Carpenstar\ByBitAPI\Derivatives\Contract\Position\SwitchPositionMode\Interfaces;
 
 interface ISwitchPositionModeRequestInterface
 {
-    public function setSymbol(string $symbol): self;
-    public function setCoin(string $coin): self;
-    public function setPositionMode(int $positionMode): self;
+     public function setSymbol(string $symbol): self; // Торговая пара
+     public function setCoin(string $coin): self; // Токен
+     public function setPositionMode(int $positionMode): self; // Режим позиции. 0: Merged Single. 3: Both Side
     
-    // .. Getters
+     // .. Getters
 }
 ```
 
 <table style="width: 100%">
-  <tr>
-    <td colspan="3" style="text-align: left">
-      <b>\Carpenstar\ByBitAPI\Derivatives\Contract\Position\SwitchPositionMode\Interfaces\ISwitchPositionModeRequestInterface</b>
-    </td>
-  </tr>
-  <tr>
-    <th style="width: 45%; text-align: center">Метод</th>
-    <th style="width: 5%; text-align: center">Обязательно</th>
-    <th style="width: 50%; text-align: center">Описание</th>
-  </tr>
-  <tr>
-    <td>:: setSymbol(string $symbol)</td>
-    <td>НЕТ</td>
-    <td>Торговый инструмент</td>
-  </tr>
-  <tr>
-    <td>:: setCoin(string $coin)</td>
-    <td>НЕТ</td>
-    <td> - </td>
-  </tr>
-  <tr>
-    <td>:: setPositionMode(int $positionMode)</td>
-    <td><b>ДА</b></td>
-    <td> - </td>
-  </tr>
+   <tr>
+     <td colspan="3" style="text-align: left">
+        <sup><b>INTERFACE</b></sup> <br />
+       <b>\Carpenstar\ByBitAPI\Derivatives\Contract\Position\SwitchPositionMode\Interfaces\ISwitchPositionModeRequestInterface::class</b>
+     </td>
+   </tr>
+   <tr>
+     <td colspan="3" style="text-align: left">
+        <sup><b>DTO</b></sup> <br />
+       <b>\Carpenstar\ByBitAPI\Derivatives\Contract\Position\SwitchPositionMode\Request\SwitchPositionModeRequest::class</b>
+     </td>
+   </tr>
+   <tr>
+     <th style="width: 45%; text-align: center">Метод</th>
+     <th style="width: 5%; text-align: center">Обязательно</th>
+     <th style="width: 50%; text-align: center">Описание</th>
+   </tr>
+   <tr>
+     <td>ISwitchPositionModeRequestInterface::setSymbol(string $symbol)</td>
+     <td>НЕТ</td>
+     <td>Торговая пара</td>
+   </tr>
+   <tr>
+     <td>ISwitchPositionModeRequestInterface::setCoin(string $coin)</td>
+     <td>НЕТ</td>
+     <td> Токен </td>
+   </tr>
+   <tr>
+     <td>ISwitchPositionModeRequestInterface::setPositionMode(int $positionMode)</td>
+     <td><b>ДА</b></td>
+     <td> Редим позиции. 0: Merged Single. 3: Both Side </td>
+   </tr>
 </table>
 
-<p><b>Структура ответа:</b></p>
-
-> Эндпоинт в качестве успешного ответа возвращает пустой массив
-
+<p align="center" width="100%"><b>Структура ответа</b></p>
 
 ---
 
-### Contract - Contract - Position - Switch TpSl Mode
+> Эндпоинт возвращает пустой массив в качестве успешного ответа
+
+---
+
+<br />
+
+##### Contract - Contract - Position - Switch TpSl Mode
 <b>[Официальная страница документации](https://bybit-exchange.github.io/docs/derivatives/contract/tpsl-mode)</b>
 
 <p>Запрос устанавливает неявный режим tpsl для определенного торгового инструмента. 
 Имеет смысл использовать если вы не передали «tpslMode» в ордере при размещении или в запросе на остановку торговли т.к в таком случае система установит tpslMode по умолчанию.</p>
 
-<p><b>Параметры запроса</b></p>
+<p align="center" width="100%"><b>ПРИМЕР</b></p>
+
+<p align="center" width="100%"><b> --- </b></p>
+
+
+<p align="center" width="100%"><b>ПАРАМЕТРЫ ЗАПРОСА</b></p>
+
+---
 
 ```php
 namespace Carpenstar\ByBitAPI\Derivatives\Contract\Position\SwitchTpSlMode\Interfaces;
 
 interface ISwitchTpSlModeRequestInterface
 {
-    public function setSymbol(string $symbol): self;
-    public function setTpSlMode(string $tpSlMode): self;
+     public function setSymbol(string $symbol): self; // Trading pair
+     public function setTpSlMode(string $tpSlMode): self; // Full: set TP/SL to full position. Partial: set TP/SL to partial mode
     
-    // .. Getters
+     // .. Getters
 }
 ```
 
 <table style="width: 100%">
-  <tr>
-    <td colspan="3" style="text-align: left">
-      <b>\Carpenstar\ByBitAPI\Derivatives\Contract\Position\SwitchTpSlMode\Interface\ISwitchTpSlModeRequestInterface</b>
-    </td>
-  </tr>
-  <tr>
-    <th style="width: 45%; text-align: center">Метод</th>
-    <th style="width: 5%; text-align: center">Обязательно</th>
-    <th style="width: 50%; text-align: center">Описание</th>
-  </tr>
-  <tr>
-    <td>:: setSymbol(string $symbol)</td>
-    <td><b>ДА</b></td>
-    <td>Торговый инструмент</td>
-  </tr>
-  <tr>
-    <td>:: setTpSlMode(string $tpSlMode)</td>
-    <td><b>ДА</b></td>
-    <td> - </td>
-  </tr>
+   <tr>
+     <td colspan="3" style="text-align: left">
+        <sup><b>INTERFACE</b></sup> <br />
+       <b>\Carpenstar\ByBitAPI\Derivatives\Contract\Position\SwitchTpSlMode\Interface\ISwitchTpSlModeRequestInterface::class</b>
+     </td>
+   </tr>
+   <tr>
+     <td colspan="3" style="text-align: left">
+        <sup><b>DTO</b></sup> <br />
+       <b>\Carpenstar\ByBitAPI\Derivatives\Contract\Position\SwitchTpSlMode\Request\SwitchTpSlModeRequest::class</b>
+     </td>
+   </tr>
+   <tr>
+     <th style="width: 45%; text-align: center">Метод</th>
+     <th style="width: 5%; text-align: center">Обязательно</th>
+     <th style="width: 50%; text-align: center">Описание</th>
+   </tr>
+   <tr>
+     <td>ISwitchTpSlModeRequestInterface::setSymbol(string $symbol)</td>
+     <td><b>ДА</b></td>
+     <td>Торговая пара</td>
+   </tr>
+   <tr>
+     <td>ISwitchTpSlModeRequestInterface::setTpSlMode(string $tpSlMode)</td>
+     <td><b>ДА</b></td>
+     <td> Full: установка TP/SL для полной позиции. Partial: установить TP/SL для части позиции </td>
+   </tr>
 </table>
 
-<p><b>Структура ответа:</b></p>
+<p align="center" width="100%"><b>СТРУКТУРА ОТВЕТА</b></p>
 
-> Эндпоинт в качестве успешного ответа возвращает пустой массив
+---
 
+> Эндпоинт возвращает пустой массив в качестве успешного ответа
 
 ---

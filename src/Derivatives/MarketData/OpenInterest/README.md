@@ -148,12 +148,12 @@ interface IOpenInterestResponse
     <th style="width: 60%; text-align: center">Description</th>
   </tr>
   <tr>
-    <td>:: getTimestamp()</td>
+    <td>IOpenInterestResponse::getTimestamp()</td>
     <td>DateTime</td>
     <td>Request execution time</td>
   </tr>
   <tr>
-    <td>:: getOpenInterest()</td>
+    <td>IOpenInterestResponse::getOpenInterest()</td>
     <td>float</td>
     <td>Volume of interest</td>
   </tr>

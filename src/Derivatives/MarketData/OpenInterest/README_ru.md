@@ -1,12 +1,17 @@
-### Market Data - Open Interest
-<b>[Официальная страница документации](https://bybit-exchange.github.io/docs/derivatives/public/open-interest)</b>
+# Market Data - Open Interest
+<b>[Official documentation](https://bybit-exchange.github.io/docs/derivatives/public/open-interest)</b>
 <p>Эндпоинт возвращает данные об открытом интересе по указанному символу. <br />
-<b>Открытый интерес — это общее количество позиций бессрочных контрактов, которые в настоящее время хранятся на платформе.</b></p>
+<b>Открытый интерес - это общее количество позиций по бессрочным контрактам, которые в настоящее время имеются на платформе.</b></p>
 
 ```php
-// Класс эндпоинта:
-Carpenstar\ByBitAPI\Derivatives\MarketData\OpenInterest\OpenInterest::class
+// Endpoint classname
+\Carpenstar\ByBitAPI\Derivatives\MarketData\OpenInterest\OpenInterest::class
 ```
+
+<p align="center" width="100%"><b>ПРИМЕР</b></p>
+
+---
+
 ```php
 use Carpenstar\ByBitAPI\BybitAPI;
 use Carpenstar\ByBitAPI\Derivatives\MarketData\OpenInterest\OpenInterest;
@@ -49,22 +54,31 @@ foreach ($result as $interestItem) {
 */
 ```  
 
-<p><b>Параметры запроса:</b></p>
+<p align="center" width="100%"><b>ПАРАМЕТРЫ ЗАПРОСА</b></p>
+
+---
 
 ```php
 \Carpenstar\ByBitAPI\Derivatives\MarketData\OpenInterest\Request\OpenInterestRequest::class   
 
 $options = (new OpenInterestRequest())
-    ->setSymbol("ETHUSDT")
-    ->setInterval("1h") 
-    ->setLimit(5);
-    ->setStartTime((new DateTime('2023-05-01 10:00:00'))->getTimestamp())
-    ->setEndTime((new DateTime('2023-05-01 20:00:00'))->getTimestamp()); 
+    ->setSymbol("ETHUSDT") // Торговая пара
+    ->setInterval("1h") // Размер тика. Возможные значение: 1h 3h 5h 15h 30h 60h 120h 240h 360h 720h D M W
+    ->setStartTime((new DateTime('2023-05-01 10:00:00'))->getTimestamp()) // Таймштамп ОТ которого берется срез данных
+    ->setEndTime((new DateTime('2023-05-01 20:00:00'))->getTimestamp()) // Таймштамп ДО которого берется срез данных
+    ->setLimit(5); // Ограничение возвращаемых записей на запрос. По умолчанию: 200
 ```  
 <table style="width: 100%">
   <tr>
     <td colspan="3">
-      <b>\Carpenstar\ByBitAPI\Derivatives\MarketData\OpenInterest\Request\OpenInterestRequest</b>
+        <sup><b>INTERFACE</b></sup> <br />
+        <b>\Carpenstar\ByBitAPI\Derivatives\MarketData\OpenInterest\Interfaces\IOpenInterestInterface::class</b>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="3">
+        <sup><b>DTO</b></sup> <br />
+        <b>\Carpenstar\ByBitAPI\Derivatives\MarketData\OpenInterest\Request\OpenInterestRequest::class</b>
     </td>
   </tr>
   <tr>
@@ -73,12 +87,12 @@ $options = (new OpenInterestRequest())
     <th style="width: 50%; text-align: center">Описание</th>
   </tr>
   <tr>
-    <td>:: setSymbol(string $symbol): self</td>
+    <td>IOpenInterestInterface::setSymbol(string $symbol): self</td>
     <td><b>ДА</b></td>
-    <td>Строка с тикером торговой пары</td>
+    <td>Торговая пара</td>
   </tr>
   <tr>
-    <td>:: setInterval(int $interval): self</td>
+    <td>IOpenInterestInterface::setInterval(int $interval): self</td>
     <td><b>ДА</b></td>
     <td>
       Размер тика. <br />
@@ -86,37 +100,46 @@ $options = (new OpenInterestRequest())
     </td>
   </tr>
   <tr>
-    <td>:: setStartTime(int $startTime): self</td>
+    <td>IOpenInterestInterface::setStartTime(int $startTime): self</td>
     <td><b>ДА</b></td>
-    <td>Таймштамп ОТ которого берется срез данных </td>
+    <td>Таймштамп ОТ которого берется срез данных</td>
   </tr>
   <tr>
-    <td>:: setEndTime(int $endTime): self</td>
+    <td>IOpenInterestInterface::setEndTime(string $end): self</td>
     <td><b>ДА</b></td>
     <td>Таймштамп ДО которого берется срез данных</td>
   </tr>
   <tr>
-    <td>:: setLimit(int $limit): self</td>
+    <td>IOpenInterestInterface::setLimit(int $limit): self</td>
     <td>НЕТ</td>
-    <td>Ограничение возвращаемых записей на запрос. По умолчанию 200</td>
+    <td>Ограничение возвращаемых записей на запрос. По умолчанию: 200</td>
   </tr>
 </table>
 
-<p><b>Структура ответа:</b></p>
+<p align="center" width="100%"><b>СТРУКТУРА ОТВЕТА</b></p>
+
+---
 
 ```php
 \Carpenstar\ByBitAPI\Derivatives\MarketData\OpenInterest\Interfaces\IOpenInterestResponse::class
 
 interface IOpenInterestResponse
 {
-    public function getTimestamp(): \DateTime;
-    public function getOpenInterest(): float;
+    public function getTimestamp(): \DateTime; // Время исполнения запроса
+    public function getOpenInterest(): float; // Обьем интереса
 }
 ```
 <table style="width: 100%">
   <tr>
     <td colspan="3">
-      <b>\Carpenstar\ByBitAPI\Derivatives\MarketData\OpenInterest\Interfaces\IOpenInterestResponse</b>
+        <sup><b>INTERFACE</b></sup> <br />
+        <b>\Carpenstar\ByBitAPI\Derivatives\MarketData\OpenInterest\Interfaces\IOpenInterestResponse::class</b>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="3">
+        <sup><b>DTO</b></sup> <br />
+        <b>\Carpenstar\ByBitAPI\Derivatives\MarketData\OpenInterest\Response\OpenInterestResponse::class</b>
     </td>
   </tr>
   <tr>
@@ -125,13 +148,15 @@ interface IOpenInterestResponse
     <th style="width: 60%; text-align: center">Описание</th>
   </tr>
   <tr>
-    <td>:: getTimestamp()</td>
+    <td>IOpenInterestResponse::getTimestamp()</td>
     <td>DateTime</td>
     <td>Время исполнения запроса</td>
   </tr>
   <tr>
-    <td>:: getOpenInterest()</td>
+    <td>IOpenInterestResponse::getOpenInterest()</td>
     <td>float</td>
     <td>Обьем интереса</td>
   </tr>
 </table>
+
+---
