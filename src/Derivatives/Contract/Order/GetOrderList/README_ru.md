@@ -1,32 +1,47 @@
-### Contract - Contract - Order - Get Order List
+# Contract - Contract - Order - Get Order List
 <b>[Официальная страница документации](https://bybit-exchange.github.io/docs/derivatives/contract/order-list)</b>
 <p>Список ордеров</p>
 
-> Поскольку создание/отмена заказа является асинхронным, данные, возвращаемые из этого эндпоинта, могут задерживаться.
+> Since order creation/cancellation is asynchronous, the data returned from this endpoint may be delayed.
 
-<p><b>Параметры запроса:</b></p>
+<p align="center" width="100%"><b>ПРИМЕР</b></p>
+
+<p align="center" width="100%"><b> ... </b></p>
+
+---
+
+<p align="center" width="100%"><b>REQUEST PARAMETERS</b></p>
+
+---
 
 ```php
-namespace Carpenstar\ByBitAPI\Derivatives\Contract\Order\GetOpenOrders\Interfaces;
+namespace Carpenstar\ByBitAPI\Derivatives\Contract\Order\GetOrderList\Interfaces;
 
-interface IGetOpenOrdersRequestInterface
+interface IGetOrderListRequestInterface
 {
-    public function setSymbol(string $symbol): self;
-    public function setBaseCoin(string $baseCoin): self;
-    public function setSettleCoin(string $settleCoin): self;
-    public function setOrderId(string $orderId): self;
-    public function setOrderLinkId(string $orderLinkId): self;
-    public function setOrderFilter(string $orderFilter): self;
-    public function setCursor(string $cursor): self;
+    public function setSymbol(string $symbol): self; // Торговая пара
+    public function setOrderId(string $orderId): self; // Order ID
+    public function setOrderLinkId(string $orderLinkId): self; // Пользовательский ID ордера
+    public function setOrderStatus(string $orderStatus): self; // Статус заказа. Возращает все ордера по определенному статусу
+    public function setOrderFilter(string $orderFilter): self; // Возможные значения: Order: активный ордер, StopOrder: условный ордер.
+    public function setLimit(int $limit): self; // Ограничение размера данных на странице. [1, 50]. По умолчанию: 20
+    public function setCursor(string $cursor): self; // Курсор следующей страницы
     
-    // .. Getters
+    // .. getters
 }
 ```
 
 <table style="width: 100%">
   <tr>
     <td colspan="3" style="text-align: left">
-      <b>\Carpenstar\ByBitAPI\Derivatives\Contract\Order\GetOpenOrders\Interfaces\IGetOpenOrdersRequestInterface</b>
+        <sup><b>INTERFACE</b></sup> <br />
+        <b>\Carpenstar\ByBitAPI\Derivatives\Contract\Order\GetOrderList\Interfaces\IGetOrderListRequestInterface::class</b>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="3" style="text-align: left">
+        <sup><b>DTO</b></sup> <br />
+        <b>\Carpenstar\ByBitAPI\Derivatives\Contract\Order\GetOrderList\Request\GetOrderListRequest::class</b>
     </td>
   </tr>
   <tr>
@@ -35,84 +50,98 @@ interface IGetOpenOrdersRequestInterface
     <th style="width: 50%; text-align: center">Описание</th>
   </tr>
   <tr>
-    <td>:: setBaseCoin(string $baseCoin)</td>
+    <td>IGetOrderListRequestInterface::setSymbol(string $symbol)</td>
     <td>НЕТ</td>
-    <td> Базовый токен </td>
+    <td> Торговая пара </td>
   </tr>
   <tr>
-    <td>:: setSettleCoin(string $settleCoin)</td>
-    <td>НЕТ</td>
-    <td>Расчетный токен</td>
-  </tr>
-  <tr>
-    <td>:: setOrderId(string $orderId)</td>
+    <td>IGetOrderListRequestInterface::setOrderId(string $orderId)</td>
     <td>НЕТ</td>
     <td>order ID</td>
   </tr>
   <tr>
-    <td>:: setOrderLinkId(string $orderLinkId)</td>
+    <td>IGetOrderListRequestInterface::setOrderLinkId(string $orderLinkId)</td>
     <td>НЕТ</td>
-    <td>Пользовательский order ID</td>
+    <td>Пользовательский ID ордера</td>
   </tr>
   <tr>
-    <td>:: setOrderFilter(string $orderFilter)</td>
+    <td>IGetOrderListRequestInterface::setOrderStatus(string $orderStatus)</td>
     <td>НЕТ</td>
-    <td>Возможные значения: <b>Order</b>: активный ордер, <b>StopOrder</b>: условный ордер</td>
+    <td>Статус заказа. Вернуть все заказы, если параметр не был передан</td>
   </tr>
   <tr>
-    <td>:: setCursor(string $cursor)</td>
+    <td>IGetOrderListRequestInterface::setOrderFilter(string $orderFilter)</td>
+    <td>НЕТ</td>
+    <td>Возможные значения: <b>Order</b>: активный ордер, <b>StopOrder</b>: условный ордер.</td>
+  </tr>
+  <tr>
+    <td>IGetOrderListRequestInterface::setLimit(int $limit)</td>
+    <td>НЕТ</td>
+    <td>Ограничение размера данных на странице. [1, 50]. По умолчанию: 20</td>
+  </tr>
+  <tr>
+    <td>IGetOrderListRequestInterface::setCursor(string $cursor)</td>
     <td>НЕТ</td>
     <td>Курсор следующей страницы</td>
   </tr>
 </table>
 
-<p><b>Структура ответа:</b></p>
+<p align="center" width="100%"><b>СТРУКТУРА ОТВЕТА</b></p>
+
+---
 
 ```php
-namespace Carpenstar\ByBitAPI\Derivatives\Contract\Order\GetOpenOrders\Interfaces;
+namespace Carpenstar\ByBitAPI\Derivatives\Contract\Order\GetOrderList\Interfaces;
 
-interface IGetOpenOrdersResponseInterface
+interface IGetOrderListResponseInterface
 {
-    public function getSymbol(): string;
-    public function getOrderId(): string;
-    public function getOrderLinkId(): string;
-    public function getSide(): string;
-    public function getOrderType(): string;
-    public function getPrice(): float;
-    public function getQty(): float;
-    public function getTimeInForce(): string;
-    public function getOrderStatus(): string;
-    public function getLastPriceOnCreated(): string;
-    public function getCreatedTime(): \DateTime;
-    public function getUpdatedTime(): \DateTime;
-    public function getCancelType(): string;
-    public function getStopOrderType(): string;
-    public function getTriggerDirection(): int;
-    public function getTriggerBy(): string;
-    public function getTriggerPrice(): ?float;
-    public function getCumExecValue(): float;
-    public function getCumExecFee(): float;
-    public function getCumExecQty(): float;
-    public function getLeavesValue(): float;
-    public function getLeavesQty(): float;
-    public function getTakeProfit(): float;
-    public function getStopLoss(): float;
-    public function getTpslMode(): string;
-    public function getTpLimitPrice(): float;
-    public function getSlLimitPrice(): float;
-    public function getTpTriggerBy(): string;
-    public function getSlTriggerBy(): string;
-    public function isReduceOnly(): bool;
-    public function isCloseOnTrigger(): bool;
-    public function getSmpType(): string;
-    public function getSmpGroup(): int;
-    public function getSmpOrderId(): string;
+    public function getSymbol(): string; // Торговая пара
+    public function getOrderId(): string; // Order ID
+    public function getOrderLinkId(): string; // Пользовательский ID ордера
+    public function getSide(): string; // Buy,Sell
+    public function getOrderType(): string; // Тип ордера. Market, Limit. Для ордера TP/SL это означает тип ордера после его срабатывания.
+    public function getPrice(): float; // Цена ордера
+    public function getQty(): float; // Количество ордера
+    public function getTimeInForce(): string; // Time in force
+    public function getOrderStatus(): string; // Статус ордера
+    public function getLastPriceOnCreated(): string; // Цена последней сделки при размещении ордера
+    public function getCreatedTime(): \DateTime; // Время создания оредра
+    public function getUpdatedTime(): \DateTime; // Время обновления ордера
+    public function getCancelType(): string; // Тип отмены
+    public function getStopOrderType(): string; // Тип завершения ордера
+    public function getTriggerDirection(): int; // Направление триггера. 1: подъем, 2: падение
+    public function getTriggerBy(): string; // Тип триггерной цены
+    public function getTriggerPrice(): ?float; // Триггерная цена
+    public function getCumExecValue(): float; // Совокупная стоимость исполненного ордера
+    public function getCumExecFee(): float; // Совокупная комиссия за исполненную торговлю
+    public function getCumExecQty(): float; // Совокупное количество выполненных заказов
+    public function getLeavesValue(): float; // Не исполненная оценочная стоимость
+    public function getLeavesQty(): float; // Не исполненное количество
+    public function getTakeProfit(): float; // Цена тэйк-профита
+    public function getStopLoss(): float; // Цена стоп-лосса
+    public function getTpslMode(): string; // Режим TP/SL, Full: вся позиция по TP/SL. Partial: частичное положение TP/SL
+    public function getTpLimitPrice(): float; // Цена лимитного ордера при срабатывании цены тейк-профита
+    public function getSlLimitPrice(): float; // Цена лимитного ордера при срабатывании стоп-лосса
+    public function getTpTriggerBy(): string; // Тип цены для активации тейк-профита
+    public function getSlTriggerBy(): string; // Тип цены для срабатывания стоп-лосса
+    public function isReduceOnly(): bool; // Reduce only.true означает уменьшение размера позиции
+    public function isCloseOnTrigger(): bool; //Закрытие по триггеру
+    public function getSmpType(): string; // SMP execution type
+    public function getSmpGroup(): int; // Smp group ID. Если у uid нет группы, по умолчанию он равен 0.
+    public function getSmpOrderId(): string; // Идентификатор заказа контрагента, который запускает выполнение этого SMP. Идентификатор заказа контрагента, который запускает выполнение этого SMP.
 }
 ```
 <table style="width: 100%">
   <tr>
     <td colspan="3">
-      <b>\Carpenstar\ByBitAPI\Derivatives\Contract\Order\GetOpenOrders\Interfaces\IGetOpenOrdersResponseInterface</b>
+        <sup><b>INTERFACE</b></sup> <br />
+        <b>\Carpenstar\ByBitAPI\Derivatives\Contract\Order\GetOrderList\Interfaces\IGetOrderListResponseInterface::class</b>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="3">
+        <sup><b>DTO</b></sup> <br />
+        <b>\Carpenstar\ByBitAPI\Derivatives\Contract\Order\GetOrderList\Response\GetOrderListResponse::class</b>
     </td>
   </tr>
   <tr>
@@ -121,208 +150,209 @@ interface IGetOpenOrdersResponseInterface
     <th style="width: 60%; text-align: center">Описание</th>
   </tr>
   <tr>
-    <td>:: getSymbol()</td>
+    <td>IGetOrderListResponseInterface::getSymbol()</td>
     <td>string</td>
-    <td>Торговый инструмент</td>
+    <td>Торговая пара</td>
   </tr>
   <tr>
-    <td>:: getOrderId()</td>
+    <td>IGetOrderListResponseInterface::getOrderId()</td>
     <td>string</td>
     <td>Order ID</td>
   </tr>
   <tr>
-    <td>:: getOrderLinkId()</td>
+    <td>IGetOrderListResponseInterface::getOrderLinkId()</td>
     <td>string</td>
-    <td>Пользовательский Order ID</td>
+    <td>Пользовательский ID ордера</td>
   </tr>
   <tr>
-    <td>:: getSide()</td>
+    <td>IGetOrderListResponseInterface::getSide()</td>
     <td>string</td>
     <td>
--
+        Buy,Sell
     </td>
   </tr>
   <tr>
-    <td>:: getOrderType()</td>
+    <td>IGetOrderListResponseInterface::getOrderType()</td>
     <td>string</td>
     <td>
--
+       Тип ордера. Market, Limit. Для ордера TP/SL это означает тип ордера после его срабатывания.
     </td>
   </tr>
   <tr>
-    <td>:: getPrice()</td>
+    <td>IGetOrderListResponseInterface::getPrice()</td>
     <td>float</td>
     <td>
--
+        Цена ордера
     </td>
   </tr>
   <tr>
-    <td>:: getQty()</td>
+    <td>IGetOrderListResponseInterface::getQty()</td>
     <td>float</td>
     <td>
--
+        Количество ордера
     </td>
   </tr>
   <tr>
-    <td>:: getTimeInForce()</td>
+    <td>IGetOrderListResponseInterface::getTimeInForce()</td>
     <td>string</td>
     <td>
--
+        Time in force
     </td>
   </tr>
   <tr>
-    <td>:: getLastPriceOnCreated()</td>
+    <td>IGetOrderListResponseInterface::getLastPriceOnCreated()</td>
     <td>string</td>
     <td>
--
+       Последняя цена при размещении ордера
     </td>
   </tr>
   <tr>
-    <td>:: getCreatedTime()</td>
+    <td>IGetOrderListResponseInterface::getCreatedTime()</td>
     <td>DateTime</td>
     <td>
--
+        Время создания ордера
     </td>
   </tr>
   <tr>
-    <td>:: getUpdatedTime()</td>
+    <td>IGetOrderListResponseInterface::getUpdatedTime()</td>
     <td>DateTime</td>
     <td>
--
+        Время обновления ордера
     </td>
   </tr>
   <tr>
-    <td>:: getCancelType()</td>
+    <td>IGetOrderListResponseInterface::getCancelType()</td>
     <td>string</td>
     <td>
--
+        Тип отмены
     </td>
   </tr>
   <tr>
-    <td>:: getStopOrderType()</td>
+    <td>IGetOrderListResponseInterface::getStopOrderType()</td>
     <td>string</td>
     <td>
--
+       Тип завершения ордера
     </td>
   </tr>
   <tr>
-    <td>:: getTriggerDirection()</td>
+    <td>IGetOrderListResponseInterface::getTriggerDirection()</td>
     <td>int</td>
     <td>
--
+        Направление триггера. 1: подъем, 2: падение
     </td>
   </tr>
   <tr>
-    <td>:: getTriggerBy()</td>
+    <td>IGetOrderListResponseInterface::getTriggerBy()</td>
     <td>string</td>
     <td>
--
+       Тип триггерной цены
     </td>
   </tr>
   <tr>
-    <td>:: getTriggerPrice()</td>
+    <td>IGetOrderListResponseInterface::getTriggerPrice()</td>
     <td>null|float</td>
     <td>
--
+        Триггерная цена
     </td>
   </tr>
   <tr>
-    <td>:: getCumExecValue()</td>
+    <td>IGetOrderListResponseInterface::getCumExecValue()</td>
     <td>float</td>
     <td>
--
+        Совокупная стоимость исполненного ордера
     </td>
   </tr>
   <tr>
-    <td>:: getCumExecFee()</td>
+    <td>IGetOrderListResponseInterface::getCumExecFee()</td>
     <td>float</td>
     <td>
--
+        Совокупная комиссия за исполненную торговлю
     </td>
   </tr>
   <tr>
-    <td>:: getCumExecQty()</td>
+    <td>IGetOrderListResponseInterface::getCumExecQty()</td>
     <td>float</td>
     <td>
--
+        Совокупное количество выполненных заказов
     </td>
   </tr>
   <tr>
-    <td>:: getLeavesValue()</td>
+    <td>IGetOrderListResponseInterface::getLeavesValue()</td>
     <td>float</td>
     <td>
--
+        Неисполненная стоимость ордера
     </td>
   </tr>
   <tr>
-    <td>:: getLeavesQty()</td>
+    <td>IGetOrderListResponseInterface::getLeavesQty()</td>
     <td>float</td>
     <td>
--
+        Не исполненное оставшееся количество
     </td>
   </tr>
   <tr>
-    <td>:: getTakeProfit()</td>
+    <td>IGetOrderListResponseInterface::getTakeProfit()</td>
     <td>float</td>
     <td>
--
+        Цена тейк-профита
     </td>
   </tr>
   <tr>
-    <td>:: getStopLoss()</td>
+    <td>IGetOrderListResponseInterface::getStopLoss()</td>
     <td>float</td>
     <td>
--
+       Цена стоп-лосса
     </td>
   </tr>
   <tr>
-    <td>:: getTpslMode()</td>
+    <td>IGetOrderListResponseInterface::getTpslMode()</td>
     <td>string</td>
     <td>
--
+        Режим TP/SL, Full: вся позиция по TP/SL. Частичное: частичное положение TP/SL
     </td>
   </tr>
   <tr>
-    <td>:: getSlTriggerBy()</td>
+    <td>IGetOrderListResponseInterface::getSlTriggerBy()</td>
     <td>string</td>
     <td>
--
+        Тип цены для срабатывания стоп-лосса
     </td>
   </tr>
   <tr>
-    <td>:: isReduceOnly()</td>
+    <td>IGetOrderListResponseInterface::isReduceOnly()</td>
     <td>bool</td>
     <td>
--
+        Reduce only. true означает уменьшение размера позиции
     </td>
   </tr>
   <tr>
-    <td>:: isCloseOnTrigger()</td>
+    <td>IGetOrderListResponseInterface::isCloseOnTrigger()</td>
     <td>string</td>
     <td>
--
+        Закрытие по триггеру
     </td>
   </tr>
   <tr>
-    <td>:: getSmpType()</td>
+    <td>IGetOrderListResponseInterface::getSmpType()</td>
     <td>string</td>
     <td>
--
+        SMP execution type
     </td>
   </tr>
   <tr>
-    <td>:: getSmpGroup()</td>
+    <td>IGetOrderListResponseInterface::getSmpGroup()</td>
     <td>string</td>
     <td>
-    -
+        Smp group ID. Если у uid нет группы, по умолчанию он равен 0.
     </td>
   </tr>
   <tr>
-    <td>:: getSmpOrderId()</td>
+    <td>IGetOrderListResponseInterface::getSmpOrderId()</td>
     <td>string</td>
     <td>
--
+        Идентификатор заказа контрагента, который инициирует выполнение этого SMP.
     </td>
   </tr>
 </table>
 
+---

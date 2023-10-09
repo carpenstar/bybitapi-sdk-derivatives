@@ -614,9 +614,9 @@ interface IIndexPriceKlineResponse
     </td>
   </tr>
   <tr>
-    <th style="width: 20%; text-align: center">Метод</th>
-    <th style="width: 20%; text-align: center">Тип</th>
-    <th style="width: 60%; text-align: center">Описание</th>
+    <th style="width: 20%; text-align: center">Method</th>
+    <th style="width: 20%; text-align: center">Type</th>
+    <th style="width: 60%; text-align: center">Description</th>
   </tr>
   <tr>
     <td>IIndexPriceKlineResponse::getStartTime()</td>
@@ -3225,6 +3225,12 @@ interface IPlaceOrderResponseInterface
 <b>[Official documentation](https://bybit-exchange.github.io/docs/derivatives/contract/cancel-all)</b>
 <p>This endpoint allows you to cancel all open orders.</p>
 
+<p align="center" width="100%"><b>EXAMPLE</b></p>
+
+<p align="center" width="100%"><b> ... </b></p>
+
+---
+
 <p align="center" width="100%"><b>REQUEST PARAMETERS</b></p>
 
 ---
@@ -3438,6 +3444,12 @@ interface ICancelOrderResponseInterface
 
 > If neither orderId nor orderLinkId is passed, no more than 500 open or partially filled orders will be returned.
 > Entries are sorted by creation time from newest to oldest.
+
+<p align="center" width="100%"><b>EXAMPLE</b></p>
+
+<p align="center" width="100%"><b> ... </b></p>
+
+---
 
 <p align="center" width="100%"><b>REQUEST PARAMETERS</b></p>
 
@@ -3788,6 +3800,12 @@ interface IGetOpenOrdersResponseInterface
 <p>List of orders</p>
 
 > Since order creation/cancellation is asynchronous, the data returned from this endpoint may be delayed.
+
+<p align="center" width="100%"><b>EXAMPLE</b></p>
+
+<p align="center" width="100%"><b> ... </b></p>
+
+---
 
 <p align="center" width="100%"><b>REQUEST PARAMETERS</b></p>
 
@@ -4143,6 +4161,12 @@ interface IGetOrderListResponseInterface
 <p>Order modification</p>
 
 > You can change open or partially filled orders.
+
+<p align="center" width="100%"><b>EXAMPLE</b></p>
+
+<p align="center" width="100%"><b> ... </b></p>
+
+---
 
 <p align="center" width="100%"><b>REQUEST PARAMETERS</b></p>
 

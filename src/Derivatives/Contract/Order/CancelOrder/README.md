@@ -4,6 +4,11 @@
 
 > You can cancel the specified partially completed order.
 
+<p align="center" width="100%"><b>EXAMPLE</b></p>
+
+<p align="center" width="100%"><b> ... </b></p>
+
+---
 
 <p align="center" width="100%"><b>REQUEST PARAMETERS</b></p>
 
@@ -99,3 +104,5 @@ interface ICancelOrderResponseInterface
     <td>Custom Order ID</td>
   </tr>
 </table>
+
+---

@@ -1,20 +1,27 @@
-### Contract - Contract - Order - Cancel Order
+# Contract - Contract - Order - Cancel Order
 <b>[Официальная страница документации](https://bybit-exchange.github.io/docs/derivatives/contract/cancel)</b>
 <p>Этот эндпоинт позволяет отменить указанный открытый ордер.</p>
 
-> Вы можете отменить указанный частично исполненный заказ.
+> Вы можете отменить указанный частично выполненный заказ.
 
+<p align="center" width="100%"><b>ПРИМЕР</b></p>
 
-<p><b>Параметры запроса:</b></p>
+<p align="center" width="100%"><b> ... </b></p>
+
+---
+
+<p align="center" width="100%"><b>ПАРАМЕТРЫ ЗАПРОСА</b></p>
+
+---
 
 ```php
 namespace Carpenstar\ByBitAPI\Derivatives\Contract\Order\CancelOrder\Interfaces;
 
 interface ICancelOrderRequestInterface
 {
-    public function setSymbol(string $symbol): self;
-    public function setOrderId(string $orderId): self;
-    public function setOrderLinkId(string $orderLinkId): self;
+    public function setSymbol(string $symbol): self; // Торгова пара
+    public function setOrderId(string $orderId): self; // Order ID
+    public function setOrderLinkId(string $orderLinkId): self; // Пользовательский ID ордера
     
     // ... Getters
 }
@@ -23,7 +30,14 @@ interface ICancelOrderRequestInterface
 <table style="width: 100%">
   <tr>
     <td colspan="3" style="text-align: left">
-      <b>\Carpenstar\ByBitAPI\Derivatives\Contract\Order\CancelAllOrder\Interfaces\ICancelAllOrderRequestInterface</b>
+        <sup><b>INTERFACE</b></sup> <br />
+        <b>\Carpenstar\ByBitAPI\Derivatives\Contract\Order\CancelOrder\Interfaces\ICancelOrderRequestInterface::class</b>
+    </td>
+  </tr>
+      <tr>
+    <td colspan="3" style="text-align: left">
+        <sup><b>DTO</b></sup> <br />
+        <b>\Carpenstar\ByBitAPI\Derivatives\Contract\Order\CancelOrder\Request\CancelOrderRequest::class</b>
     </td>
   </tr>
   <tr>
@@ -32,37 +46,46 @@ interface ICancelOrderRequestInterface
     <th style="width: 50%; text-align: center">Описание</th>
   </tr>
   <tr>
-    <td>:: setSymbol(string $symbol)</td>
+    <td>ICancelOrderRequestInterface::setSymbol(string $symbol)</td>
     <td>НЕТ</td>
-    <td>Название торгового инструмента</td>
+    <td>Торговая пара</td>
   </tr>
   <tr>
-    <td>:: setOrderId(string $orderId)</td>
-    <td>НЕТ</td>
+    <td>ICancelOrderRequestInterface::setOrderId(string $orderId)</td>
+    <td>NO</td>
     <td>Order ID</td>
   </tr>
   <tr>
-    <td>:: setOrderLinkId(string $orderLinkId)</td>
-    <td>НЕТ</td>
-    <td>Пользовательский order ID</td>
+    <td>ICancelOrderRequestInterface::setOrderLinkId(string $orderLinkId)</td>
+    <td>NO</td>
+    <td>Пользовательский ID ордера</td>
   </tr>
 </table>
 
-<p><b>Структура ответа:</b></p>
+<p align="center" width="100%"><b>СТРУКТУРА ОТВЕТА</b></p>
+
+---
 
 ```php
 namespace Carpenstar\ByBitAPI\Derivatives\Contract\Order\CancelOrder\Interfaces;
 
 interface ICancelOrderResponseInterface
 {
-    public function getOrderId(): string;
-    public function getOrderLinkId(): string;
+    public function getOrderId(): string; // Order ID
+    public function getOrderLinkId(): string; // Пользовательский ID ордера
 }
 ```
 <table style="width: 100%">
   <tr>
     <td colspan="3">
-      <b>\Carpenstar\ByBitAPI\Derivatives\Contract\Order\CancelOrder\Interfaces\ICancelOrderResponseInterface</b>
+        <sup><b>INTERFACE</b></sup> <br />
+        <b>\Carpenstar\ByBitAPI\Derivatives\Contract\Order\CancelOrder\Interfaces\ICancelOrderResponseInterface::class</b>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="3">
+        <sup><b>DTO</b></sup> <br />
+        <b>\Carpenstar\ByBitAPI\Derivatives\Contract\Order\CancelOrder\Response\CancelOrderResponse::class</b>
     </td>
   </tr>
   <tr>
@@ -71,13 +94,15 @@ interface ICancelOrderResponseInterface
     <th style="width: 60%; text-align: center">Описание</th>
   </tr>
   <tr>
-    <td>:: getOrderId()</td>
+    <td>ICancelOrderResponseInterface::getOrderId()</td>
     <td>string</td>
     <td>Order ID</td>
   </tr>
   <tr>
-    <td>:: getOrderLinkId()</td>
+    <td>ICancelOrderResponseInterface::getOrderLinkId()</td>
     <td>string</td>
-    <td>Пользовательский Order ID</td>
+    <td>Пользовательский ID ордера</td>
   </tr>
 </table>
+
+---

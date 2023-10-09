@@ -60,3 +60,5 @@ interface ISwitchTpSlModeRequestInterface
 ---
 
 > Endpoint returns an empty array as a successful response
+
+---

@@ -1,12 +1,17 @@
-### Market Data - Risk Limit
+# Market Data - Risk Limit
 <b>[Официальная страница документации](https://bybit-exchange.github.io/docs/derivatives/public/risk-limit)</b>
 <p>Эндпоинт возвращает данные по лимиту рисков для указанного символа. <br />
 Лимит риска — это мера управления рисками, позволяющая ограничить подверженность трейдеров риску.</p>
 
 ```php
-// Класс эндпоинта
+// Endpoint classname
 \Carpenstar\ByBitAPI\Derivatives\MarketData\RiskLimit\RiskLimit::class
 ```
+
+<p align="center" width="100%"><b>ПРИМЕР</b></p>
+
+---
+
 ```php
 use Carpenstar\ByBitAPI\BybitAPI;
 use Carpenstar\ByBitAPI\Derivatives\MarketData\RiskLimit\RiskLimit;
@@ -64,18 +69,27 @@ foreach ($result as $riskItem) {
  */
 ```  
 
-<p><b>Параметры запроса:</b></p>
+<p align="center" width="100%"><b>ПАРАМЕТРЫ ЗАПРОСА</b></p>
+
+---
 
 ```php
 \Carpenstar\ByBitAPI\Derivatives\MarketData\RiskLimit\Request\RiskLimitsRequest::class
 
 $options = (new RiskLimitsRequest())
-    ->setSymbol("BTCUSDT");
+    ->setSymbol("BTCUSDT"); // Торговая пара
 ```  
 <table style="width: 100%">
   <tr>
     <td colspan="3">
-      <b>\Carpenstar\ByBitAPI\Derivatives\MarketData\RiskLimit\Request\RiskLimitsRequest</b>
+        <sup><b>INTERFACE</b></sup> <br />
+        <b>\Carpenstar\ByBitAPI\Derivatives\MarketData\RiskLimit\Interfaces\IRiskLimitsRequestInterface::class</b>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="3">
+        <sup><b>DTO</b></sup> <br />
+        <b>\Carpenstar\ByBitAPI\Derivatives\MarketData\RiskLimit\Request\RiskLimitsRequest::class</b>
     </td>
   </tr>
   <tr>
@@ -84,32 +98,41 @@ $options = (new RiskLimitsRequest())
     <th style="width: 50%; text-align: center">Описание</th>
   </tr>
   <tr>
-    <td>:: setSymbol(string $symbol): self</td>
+    <td>IRiskLimitsRequestInterface::setSymbol(string $symbol): self</td>
     <td><b>ДА</b></td>
-    <td>Торговый инструмент</td>
+    <td>Торговая пара</td>
   </tr>
 </table>
 
-<p><b>Структура ответа:</b></p>
+<p align="center" width="100%"><b>СТРУКТУРА ОТВЕТА</b></p>
+
+---
 
 ```php
 \Carpenstar\ByBitAPI\Derivatives\MarketData\RiskLimit\Interfaces\IRiskLimitsResponse::class;
 
 interface IRiskLimitsResponse
 {
-    public function getId(): string;
-    public function getSymbol(): string;
-    public function getLimit(): int;
-    public function getMaintainMargin(): float;
-    public function getInitialMargin(): float;
-    public function getIsLowerRisk(): int;
-    public function getMaxLeverage(): float;
+    public function getId(): string; // ID риска
+    public function getSymbol(): string; // Торговая пара
+    public function getLimit(): int; // Лимит на позицию
+    public function getMaintainMargin(): float; // Маржа поддержки
+    public function getInitialMargin(): float; // Начальная маржа
+    public function getIsLowerRisk(): int; // Торговый инструмент имеет низкий риск?
+    public function getMaxLeverage(): float; // Максимальное кредитное плечо
 }
 ```
 <table style="width: 100%">
   <tr>
     <td colspan="3">
-      <b>\Carpenstar\ByBitAPI\Derivatives\MarketData\RiskLimit\Interfaces\IRiskLimitsResponse</b>
+        <sup><b>INTERFACE</b></sup> <br />
+        <b>\Carpenstar\ByBitAPI\Derivatives\MarketData\RiskLimit\Interfaces\IRiskLimitsResponse:class</b>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="3">
+        <sup><b>DTO</b></sup> <br />
+        <b>\Carpenstar\ByBitAPI\Derivatives\MarketData\RiskLimit\Response\RiskLimitsResponse::class</b>
     </td>
   </tr>
   <tr>
@@ -118,52 +141,54 @@ interface IRiskLimitsResponse
     <th style="width: 60%; text-align: center">Описание</th>
   </tr>
   <tr>
-    <td>:: getId()</td>
+    <td>IRiskLimitsResponse::getId()</td>
     <td>string</td>
     <td>
       ID риска
     </td>
   </tr>
   <tr>
-    <td>:: getSymbol()</td>
+    <td>IRiskLimitsResponse::getSymbol()</td>
     <td>string</td>
     <td>
-      Торговый инструмент
+      Торговая пара
     </td>
   </tr>
   <tr>
-    <td>:: getLimit()</td>
+    <td>IRiskLimitsResponse::getLimit()</td>
     <td>int</td>
     <td>
-      Ограничение по позиции
+      Ограничение на позицию
     </td>
   </tr>
   <tr>
-    <td>:: getMaintainMargin()</td>
+    <td>IRiskLimitsResponse::getMaintainMargin()</td>
     <td>float</td>
     <td>
-      Поддержка маржи
+      Поддерживающая маржа
     </td>
   </tr>
   <tr>
-    <td>:: getInitialMargin()</td>
+    <td>IRiskLimitsResponse::getInitialMargin()</td>
     <td>float</td>
     <td>
       Начальная маржа
     </td>
   </tr>
   <tr>
-    <td>:: getIsLowerRisk()</td>
+    <td>IRiskLimitsResponse::getIsLowerRisk()</td>
     <td>int</td>
     <td>
-      Торговый инструмент имеет низкий риск
+     Торговый инструмент имеет низкий риск?
     </td>
   </tr>
   <tr>
-    <td>:: getMaxLeverage()</td>
+    <td>IRiskLimitsResponse::getMaxLeverage()</td>
     <td>float</td>
     <td>
       Максимальное кредитное плечо
     </td>
   </tr>
 </table>
+
+---

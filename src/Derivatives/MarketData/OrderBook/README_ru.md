@@ -1,11 +1,16 @@
-### Market Data - Order Book
-<b>[Официальная страница документации](https://bybit-exchange.github.io/docs/derivatives/public/orderbook)</b>
-<p>Эндпоинт возвращает электронный список ордеров на покупку и продажу бессрочных контрактов, организованный и отсортированный по уровню цен.</p>
+# Market Data - Order Book
+<b>[Official documentation](https://bybit-exchange.github.io/docs/derivatives/public/orderbook)</b>
+<p>Эндпоинт возвращает список ордеров на покупку и продажу бессрочных контрактов, организованный и отсортированный по уровню цен.</p>
 
 ```php
-// Класс эндпоинта:
+// Endpoint classname
 \Carpenstar\ByBitAPI\Derivatives\MarketData\OrderBook\OrderBook::class
 ```
+
+<p align="center" width="100%"><b>ПРИМЕР</b></p>
+
+---
+
 ```php
 use Carpenstar\ByBitAPI\BybitAPI;
 use Carpenstar\ByBitAPI\Derivatives\MarketData\OrderBook\OrderBook;
@@ -57,19 +62,28 @@ foreach ($result->getAsk()->all() as $ask) {
 */
 ```  
 
-<p><b>Параметры запроса:</b></p>
+<p align="center" width="100%"><b>ПАРАМЕТРЫ ЗАПРОСА</b></p>
+
+---
 
 ```php
 \Carpenstar\ByBitAPI\Derivatives\MarketData\OrderBook\Request\OrderBookRequest::class
 
 $options = (new OrderBookRequest())
-    ->setSymbol("ETHUSDT")
-    ->setLimit(25);
+    ->setSymbol("ETHUSDT") // Торговая пара
+    ->setLimit(25); // Лимит на количество ордеров в одну сторону: лимит = 50 (25 - бид + 25 - аск)
 ```  
 <table style="width: 100%">
   <tr>
     <td colspan="3">
-      <b>\Carpenstar\ByBitAPI\Derivatives\MarketData\OrderBook\Request\OrderBookRequest</b>
+        <sup><b>INTERFACE</b></sup> <br />
+        <b>\Carpenstar\ByBitAPI\Derivatives\MarketData\OrderBook\Interfaces\IOrderBookRequestInterface::class</b>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="3">
+        <sup><b>DTO</b></sup> <br />
+        <b>\Carpenstar\ByBitAPI\Derivatives\MarketData\OrderBook\Request\OrderBookRequest::class</b>
     </td>
   </tr>
   <tr>
@@ -78,28 +92,30 @@ $options = (new OrderBookRequest())
     <th style="width: 50%; text-align: center">Описание</th>
   </tr>
   <tr>
-    <td>:: setSymbol(string $symbol): self</td>
+    <td>IOrderBookResponse::setSymbol(string $symbol): self</td>
     <td><b>ДА</b></td>
-    <td>Торговый инструмент</td>
+    <td>Торговая пара</td>
   </tr>
   <tr>
-    <td>:: setLimit(int $limit): self</td>
+    <td>IOrderBookResponse::setLimit(int $limit): self</td>
     <td>НЕТ</td>
-    <td>Ограничение на количество ордеров по одному направлению: limit = 50 (25 - bid + 25 - ask)</td>
+    <td>Лимит на количество ордеров в одну сторону: лимит = 50 (25 - бид + 25 - аск)</td>
   </tr>
 </table>
 
 
-<p><b>Структура ответа:</b></p>
+<p align="center" width="100%"><b>СТРУКТУРА ОТВЕТА</b></p>
+
+---
 
 ```php
 \Carpenstar\ByBitAPI\Derivatives\MarketData\OrderBook\Interfaces\IOrderBookResponse::class
 
 interface IOrderBookResponse
 {
-    public function getSymbol(): string;
-    public function getTimestamp(): \DateTime;
-    public function getUpdateId(): int;
+    public function getSymbol(): string; // Торговая пара
+    public function getTimestamp(): \DateTime; // Время исполнения запроса
+    public function getUpdateId(): int; // ID обновления данных
     public function getBid(): ICollectionInterface; // IOrderBookPriceResponse[]
     public function getAsk(): ICollectionInterface; // IOrderBookPriceResponse[]
 }
@@ -107,7 +123,14 @@ interface IOrderBookResponse
 <table style="width: 100%">
   <tr>
     <td colspan="3">
-      <b>\Carpenstar\ByBitAPI\Derivatives\MarketData\OrderBook\Interfaces\IOrderBookResponse</b>
+        <sup><b>INTERFACE</b></sup> <br />
+        <b>\Carpenstar\ByBitAPI\Derivatives\MarketData\OrderBook\Interfaces\IOrderBookResponse::class</b>
+        </td>
+      </tr>
+    <tr>
+    <td colspan="3">
+        <sup><b>DTO</b></sup> <br />
+        <b>\Carpenstar\ByBitAPI\Derivatives\MarketData\OrderBook\Response\OrderBookResponse::class</b>
     </td>
   </tr>
   <tr>
@@ -116,32 +139,31 @@ interface IOrderBookResponse
     <th style="width: 60%; text-align: center">Описание</th>
   </tr>
   <tr>
-    <td>:: getSymbol()</td>
+    <td>IOrderBookResponse::getSymbol()</td>
     <td>float</td>
-    <td>Торговый инструмент</td>
+    <td>Торговая пара</td>
   </tr>
   <tr>
-    <td>:: getTimestamp()</td>
+    <td>IOrderBookResponse::getTimestamp()</td>
     <td>DateTime</td>
     <td>Время исполнения запроса</td>
   </tr>
   <tr>
-    <td>:: getUpdateId()</td>
+    <td>IOrderBookResponse::getUpdateId()</td>
     <td>float</td>
-    <td>ID обновления</td>
+    <td>ID обновления данных</td>
   </tr>
   <tr>
-    <td>:: getBid()</td>
+    <td>IOrderBookResponse::getBid()</td>
     <td>IOrderBookPriceResponse[]</td>
     <td>Список ордеров на продажу</td>
   </tr>
   <tr>
-    <td>:: getAsk()</td>
+    <td>IOrderBookResponse::getAsk()</td>
     <td>IOrderBookPriceResponse[]</td>
     <td>Список ордеров на покупку</td>
   </tr>
 </table>
-<p>&nbsp;</p>
 
 ```php
 \Carpenstar\ByBitAPI\Derivatives\MarketData\OrderBook\Interfaces\IOrderBookPriceResponse::class
@@ -155,7 +177,14 @@ interface IOrderBookPriceResponse
 <table style="width: 100%">
   <tr>
     <td colspan="3">
-      <b>\Carpenstar\ByBitAPI\Derivatives\MarketData\OrderBook\Interfaces\IOrderBookPriceResponse</b>
+        <sup><b>INTERFACE</b></sup>
+        <b>\Carpenstar\ByBitAPI\Derivatives\MarketData\OrderBook\Interfaces\IOrderBookPriceItemResponse::class</b>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="3">
+        <sup><b>DTO</b></sup>
+        <b>\Carpenstar\ByBitAPI\Derivatives\MarketData\OrderBook\Interfaces\OrderBookPriceItemResponse::class</b>
     </td>
   </tr>
   <tr>
@@ -164,13 +193,15 @@ interface IOrderBookPriceResponse
     <th style="width: 60%; text-align: center">Описание</th>
   </tr>
   <tr>
-    <td>:: getPrice()</td>
+    <td>IOrderBookPriceItemResponse::getPrice()</td>
     <td>float</td>
     <td>Цена</td>
   </tr>
   <tr>
-    <td>:: getQuantity()</td>
+    <td>IOrderBookPriceItemResponse::getQuantity()</td>
     <td>float</td>
     <td>Обьем</td>
   </tr>
 </table>
+
+---
