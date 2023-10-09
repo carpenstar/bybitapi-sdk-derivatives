@@ -1,16 +1,22 @@
-### Contract - Position - My Position
+# Contract - Position - My Position
 <b>[Official documentation page](https://bybit-exchange.github.io/docs/derivatives/contract/position-list)</b>
 <p>Getting a list of the user's open positions</p>
 
-<p><b>Request parameters:</b></p>
+<p align="center" width="100%"><b>EXAMPLE</b></p>
+
+<p align="center" width="100%"><b> --- </b></p>
+
+<p align="center" width="100%"><b>REQUEST PARAMETERS</b></p>
+
+---
 
 ```php
 namespace Carpenstar\ByBitAPI\Derivatives\Contract\Position\MyPosition\Interfaces;
 
 interface IMyPositionRequestInterface
 {
-     public function setSymbol(string $symbol): self;
-     public function setSettleCoin(string $symbol): self;
+     public function setSymbol(string $symbol): self; // Trading pair
+     public function setSettleCoin(string $symbol): self; // Calculation coin
     
      // .. Getters
 }
@@ -19,7 +25,14 @@ interface IMyPositionRequestInterface
 <table style="width: 100%">
    <tr>
      <td colspan="3" style="text-align: left">
-       <b>\Carpenstar\ByBitAPI\Derivatives\Contract\Position\MyPosition\Interfaces\IMyPositionRequestInterface</b>
+        <sup><b>INTERFACE</b></sup> <br />
+       <b>\Carpenstar\ByBitAPI\Derivatives\Contract\Position\MyPosition\Interfaces\IMyPositionRequestInterface::class</b>
+     </td>
+   </tr>
+   <tr>
+     <td colspan="3" style="text-align: left">
+        <sup><b>DTO</b></sup> <br />
+       <b>\Carpenstar\ByBitAPI\Derivatives\Contract\Position\MyPosition\Request\MyPositionRequest::class</b>
      </td>
    </tr>
    <tr>
@@ -28,60 +41,69 @@ interface IMyPositionRequestInterface
      <th style="width: 50%; text-align: center">Description</th>
    </tr>
    <tr>
-     <td>:: setSymbol(string $symbol)</td>
+     <td>IMyPositionRequestInterface::setSymbol(string $symbol)</td>
      <td>NO</td>
      <td>Trading pair</td>
    </tr>
    <tr>
-     <td>:: setSettleCoin(string $symbol)</td>
+     <td>IMyPositionRequestInterface::setSettleCoin(string $symbol)</td>
      <td>NO</td>
      <td>Calculation coin</td>
    </tr>
 </table>
 
-<p><b>Response structure:</b></p>
+<p align="center" width="100%"><b>RESPONSE STRUCTURE</b></p>
+
+---
 
 ```php
 namespace Carpenstar\ByBitAPI\Derivatives\Contract\Position\MyPosition\Interfaces;
 
 interface IMyPositionResponseInterface
 {
-     public function getSymbol(): string;
-     public function getSide(): string;
-     public function getSize(): float;
-     public function getEntryPrice(): float;
-     public function getLeverage(): float;
-     public function getPositionValue(): float;
-     public function getPositionIdx(): int;
-     public function getRiskId(): int;
-     public function getRiskLimitValue(): string;
-     public function getTradeMode(): int;
-     public function getAutoAddMargin(): int;
-     public function getPositionBalance(): float;
-     public function getLiqPrice(): float;
-     public function getBustPrice(): float;
-     public function getTpSlMode(): string;
-     public function getTakeProfit(): float;
-     public function getStopLoss(): float;
-     public function getCreatedTime(): \DateTime;
-     public function getUpdatedTime(): \DateTime;
-     public function getTrailingStop(): string;
-     public function getActivePrice(): float;
-     public function getMarkPrice(): float;
-     public function getUnrealizedPnl(): float;
-     public function getCumRealisedPnl(): float;
-     public function getPositionMM(): float;
-     public function getPositionIM(): float;
-     public function getPositionStatus(): string;
-     public function getSessionAvgPrice(): float;
-     public function getOccClosingFee(): float;
-     public function getAdlRankIndicator(): int;
+     public function getSymbol(): string; // Trading pair
+     public function getSide(): string; // Side. Buy, Sell. Return None when zero position of one-way mode
+     public function getSize(): float; // Position size
+     public function getEntryPrice(): float; // Entry price
+     public function getLeverage(): float; // leverage
+     public function getPositionValue(): float; // Position value
+     public function getPositionIdx(): int; // Position index
+     public function getRiskId(): int; // Risk limit id
+     public function getRiskLimitValue(): string; // Position limit value corresponding to the risk id
+     public function getTradeMode(): int; // 0: cross margin mode. 1: isolated margin mode
+     public function getAutoAddMargin(): int; // 0: false. 1: true
+     public function getPositionBalance(): float; // Position margin
+     public function getLiqPrice(): float; // Estimated liquidation price. It returns value only when minPrice < liqPrice < maxPrice
+     public function getBustPrice(): float; // Estimated bankruptcy price
+     public function getTpSlMode(): string; // Depreciated, meaningless here, always "Full"
+     public function getTakeProfit(): float; // Take profit price
+     public function getStopLoss(): float; // Stop loss price
+     public function getCreatedTime(): \DateTime; // Position created timestamp
+     public function getUpdatedTime(): \DateTime; // Position data updated timestamp
+     public function getTrailingStop(): string; // Trailing stop
+     public function getActivePrice(): float; // Activate price of trailing stop
+     public function getMarkPrice(): float; // Real-time mark price
+     public function getUnrealizedPnl(): float; // unrealised PNL
+     public function getCumRealisedPnl(): float; // cumulative realised PNL
+     public function getPositionMM(): float; // Position maintenance margin
+     public function getPositionIM(): float; // Position initial margin
+     public function getPositionStatus(): string; // Position status
+     public function getSessionAvgPrice(): float; // Settlement price
+     public function getOccClosingFee(): float; // Pre-occupancy closing fee
+     public function getAdlRankIndicator(): int; // Auto-deleverage rank indicator.
 }
 ```
 <table style="width: 100%">
    <tr>
      <td colspan="3">
-       <b>\Carpenstar\ByBitAPI\Derivatives\Contract\Position\MyPosition\Interfaces\IMyPositionResponseInterface</b>
+        <sup><b>INTERFACE</b></sup> <br />
+        <b>\Carpenstar\ByBitAPI\Derivatives\Contract\Position\MyPosition\Interfaces\IMyPositionResponseInterface::class</b>
+     </td>
+   </tr>
+   <tr>
+     <td colspan="3">
+        <sup><b>DTO</b></sup> <br />
+        <b>\Carpenstar\ByBitAPI\Derivatives\Contract\Position\MyPosition\Response\MyPositionResponse::class</b>
      </td>
    </tr>
    <tr>
@@ -90,153 +112,153 @@ interface IMyPositionResponseInterface
      <th style="width: 60%; text-align: center">Description</th>
    </tr>
    <tr>
-     <td>::getSymbol()</td>
+     <td>IMyPositionResponseInterface::getSymbol()</td>
      <td>string</td>
      <td>Trading pair</td>
    </tr>
    <tr>
-     <td>::getSide()</td>
+     <td>IMyPositionResponseInterface::getSide()</td>
      <td>string</td>
-     <td> - </td>
+     <td> Side. Buy, Sell. Return None when zero position of one-way mode </td>
    </tr>
    <tr>
-     <td>::getSize()</td>
+     <td>IMyPositionResponseInterface::getSize()</td>
      <td>float</td>
-     <td> - </td>
+     <td> Position size </td>
    </tr>
    <tr>
-     <td>::getEntryPrice()</td>
+     <td>IMyPositionResponseInterface::getEntryPrice()</td>
      <td>float</td>
-     <td> - </td>
+     <td> Entry price </td>
    </tr>
    <tr>
-     <td>::getLeverage()</td>
+     <td>IMyPositionResponseInterface::getLeverage()</td>
      <td>float</td>
-     <td> - </td>
+     <td> leverage </td>
    </tr>
    <tr>
-     <td>::getPositionValue()</td>
+     <td>IMyPositionResponseInterface::getPositionValue()</td>
      <td>float</td>
-     <td> - </td>
+     <td> Position value </td>
    </tr>
    <tr>
-     <td>::getPositionIdx()</td>
+     <td>IMyPositionResponseInterface::getPositionIdx()</td>
      <td>int</td>
-     <td> - </td>
+     <td> Position index </td>
    </tr>
    <tr>
-     <td>::getRiskId()</td>
+     <td>IMyPositionResponseInterface::getRiskId()</td>
      <td>int</td>
-     <td> - </td>
+     <td> Risk limit id </td>
    </tr>
    <tr>
-     <td>::getRiskLimitValue()</td>
+     <td>IMyPositionResponseInterface::getRiskLimitValue()</td>
      <td>string</td>
-     <td> - </td>
+     <td> Position limit value corresponding to the risk id </td>
    </tr>
    <tr>
-     <td>::getTradeMode()</td>
+     <td>IMyPositionResponseInterface::getTradeMode()</td>
      <td>int</td>
-     <td> - </td>
+     <td> 0: cross margin mode. 1: isolated margin mode </td>
    </tr>
    <tr>
-     <td>::getAutoAddMargin()</td>
+     <td>IMyPositionResponseInterface::getAutoAddMargin()</td>
      <td>int</td>
-     <td> - </td>
+     <td> 0: false. 1: true </td>
    </tr>
    <tr>
-     <td>::getPositionBalance()</td>
+     <td>IMyPositionResponseInterface::getPositionBalance()</td>
      <td>float</td>
-     <td> - </td>
+     <td> Position margin </td>
    </tr>
    <tr>
-     <td>::getLiqPrice()</td>
+     <td>IMyPositionResponseInterface::getLiqPrice()</td>
      <td>float</td>
-     <td> - </td>
+     <td> Estimated liquidation price. It returns value only when minPrice < liqPrice < maxPrice </td>
    </tr>
    <tr>
-     <td>::getBustPrice()</td>
+     <td>IMyPositionResponseInterface::getBustPrice()</td>
      <td>float</td>
-     <td> - </td>
+     <td> Estimated bankruptcy price </td>
    </tr>
    <tr>
-     <td>::getTpSlMode()</td>
+     <td>IMyPositionResponseInterface::getTpSlMode()</td>
      <td>string</td>
-     <td> - </td>
+     <td> Depreciated, meaningless here, always "Full" </td>
    </tr>
    <tr>
-     <td>::getTakeProfit()</td>
+     <td>IMyPositionResponseInterface::getTakeProfit()</td>
      <td>float</td>
-     <td> - </td>
+     <td> Take profit price </td>
    </tr>
    <tr>
-     <td>::getStopLoss()</td>
+     <td>IMyPositionResponseInterface::getStopLoss()</td>
      <td>float</td>
-     <td> - </td>
+     <td> Stop loss price </td>
    </tr>
    <tr>
-     <td>::getCreatedTime()</td>
+     <td>IMyPositionResponseInterface::getCreatedTime()</td>
      <td>DateTime</td>
-     <td> - </td>
+     <td> Position created timestamp </td>
    </tr>
    <tr>
-     <td>::getUpdatedTime()</td>
+     <td>IMyPositionResponseInterface::getUpdatedTime()</td>
      <td>DateTime</td>
-     <td> - </td>
+     <td> Position data updated timestamp </td>
    </tr>
    <tr>
-     <td>::getTrailingStop()</td>
+     <td>IMyPositionResponseInterface::getTrailingStop()</td>
      <td>string</td>
-     <td> - </td>
+     <td> Trailing stop </td>
    </tr>
    <tr>
-     <td>::getActivePrice()</td>
+     <td>IMyPositionResponseInterface::getActivePrice()</td>
      <td>float</td>
-     <td> - </td>
+     <td> Activate price of trailing stop </td>
    </tr>
    <tr>
-     <td>::getMarkPrice()</td>
+     <td>IMyPositionResponseInterface::getMarkPrice()</td>
      <td>float</td>
-     <td> - </td>
+     <td> Real-time mark price </td>
    </tr>
    <tr>
-     <td>::getUnrealisedPnl()</td>
+     <td>IMyPositionResponseInterface::getUnrealisedPnl()</td>
      <td>float</td>
-     <td> - </td>
+     <td> unrealised PNL </td>
    </tr>
    <tr>
-     <td>::getCumRealisedPnl()</td>
+     <td>IMyPositionResponseInterface::getCumRealisedPnl()</td>
      <td>float</td>
-     <td> - </td>
+     <td> cumulative realised PNL </td>
    </tr>
    <tr>
-     <td>::getPositionMM()</td>
+     <td>IMyPositionResponseInterface::getPositionMM()</td>
      <td>float</td>
-     <td> - </td>
+     <td> Position maintenance margin </td>
    </tr>
    <tr>
-     <td>::getPositionIM()</td>
+     <td>IMyPositionResponseInterface::getPositionIM()</td>
      <td>float</td>
-     <td> - </td>
+     <td> Position initial margin </td>
    </tr>
    <tr>
-     <td>::getPositionStatus()</td>
+     <td>IMyPositionResponseInterface::getPositionStatus()</td>
      <td>string</td>
-     <td> - </td>
+     <td> Position status </td>
    </tr>
    <tr>
-     <td>::getSessionAvgPrice()</td>
+     <td>IMyPositionResponseInterface::getSessionAvgPrice()</td>
      <td>float</td>
-     <td> - </td>
+     <td> Settlement price </td>
    </tr>
    <tr>
-     <td>::getOccClosingFee()</td>
+     <td>IMyPositionResponseInterface::getOccClosingFee()</td>
      <td>float</td>
-     <td> - </td>
+     <td> Pre-occupancy closing fee </td>
    </tr>
    <tr>
-     <td>::getAdlRankIndicator()</td>
+     <td>IMyPositionResponseInterface::getAdlRankIndicator()</td>
      <td>string</td>
-     <td> - </td>
+     <td> Auto-deleverage rank indicator </td>
    </tr>
 </table>

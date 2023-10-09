@@ -387,7 +387,7 @@ $options = (new FundingRateHistoryRequest())
 </table>
 
 > <sup>*</sup>**Warning:**
-> При установке временных ограничений на выборку, обязательно следует указывать верхнюю и нижнюю границу при помощи `setStart(string $start)` и `setEnd(string $end)`.
+> При установке временных ограничений на выборку, обязательно следует указывать верхнюю и нижнюю границу при помощи `setStartTime(int $timestamp)` и `setEndTime(int $timestamp)`.
 > Иначе будет возвращена ошибка
 
 > **Warning:**
@@ -1270,17 +1270,17 @@ $options = (new MarkPriceKlineRequest())
     </td>
   </tr>
   <tr>
-    <td>:: setStart(string $start): self</td>
+    <td>:: setStartTime(int $timestamp): self</td>
     <td><b>ДА</b></td>
     <td>
-      Строка даты/времени ОТ которого берется срез данных
+      Таймштамп ОТ которого берется срез данных
     </td>
   </tr>
   <tr>
-    <td>:: setEnd(string $end): self</td>
+    <td>:: setEndTime(int $timestamp): self</td>
     <td><b>ДА</b></td>
     <td>
-      Строка даты/времени ДО которого берется срез данных
+      Таймштамп ДО которого берется срез данных
     </td>
   </tr>
   <tr>

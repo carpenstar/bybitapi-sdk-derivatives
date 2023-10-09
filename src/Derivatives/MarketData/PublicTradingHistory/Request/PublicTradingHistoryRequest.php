@@ -2,8 +2,9 @@
 namespace Carpenstar\ByBitAPI\Derivatives\MarketData\PublicTradingHistory\Request;
 
 use Carpenstar\ByBitAPI\Core\Objects\AbstractParameters;
+use Carpenstar\ByBitAPI\Derivatives\MarketData\PublicTradingHistory\Interfaces\IPublicTradingHistoryRequestInterface;
 
-class PublicTradingHistoryRequest extends AbstractParameters
+class PublicTradingHistoryRequest extends AbstractParameters implements IPublicTradingHistoryRequestInterface
 {
     /**
      * Product type.linear

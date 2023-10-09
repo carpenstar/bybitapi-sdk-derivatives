@@ -1,10 +1,16 @@
-### Market Data - Kline
+# Market Data - Kline
 <b>[Official documentation](https://bybit-exchange.github.io/docs/derivatives/public/kline)</b>
 <p>Endpoint returns historical data for plotting. Candles are returned in groups depending on the requested interval.</p>
 
 ```php
-\Carpenstar\ByBitAPI\Derivatives\MarketData\Kline\Kline::class // Endpoint classname
+// Endpoint classname
+\Carpenstar\ByBitAPI\Derivatives\MarketData\Kline\Kline::class
 ```
+
+<p align="center" width="100%"><b>EXAMPLE</b></p>
+
+---
+
 ```php
 use Carpenstar\ByBitAPI\BybitAPI;
 use Carpenstar\ByBitAPI\Derivatives\MarketData\Kline\Request\KlineRequest;
@@ -70,7 +76,9 @@ foreach ($klineData as $klineItem) {
  */
 ```  
 
-<p><b>Request parameters:</b></p>
+<p align="center" width="100%"><b>REQUEST PARAMETERS</b></p>
+
+---
 
 ```php
 \Carpenstar\ByBitAPI\Derivatives\MarketData\Kline\Interfaces\IKlineRequestInterface::class
@@ -85,7 +93,14 @@ $options = (new KlineRequest())
 <table style="width: 100%">
   <tr>
     <td colspan="3">
-      <b>\Carpenstar\ByBitAPI\Derivatives\MarketData\Kline\Interfaces\IKlineRequestInterface</b>
+        <sup><b>INTERFACE</b></sup> <br />
+        <b>\Carpenstar\ByBitAPI\Derivatives\MarketData\Kline\Interfaces\IKlineRequestInterface::class</b>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="3">
+        <sup><b>DTO</b></sup> <br />
+        <b>\Carpenstar\ByBitAPI\Derivatives\MarketData\Kline\Request\KlineRequest::class</b>
     </td>
   </tr>
   <tr>
@@ -94,91 +109,101 @@ $options = (new KlineRequest())
     <th style="width: 50%; text-align: center">Description</th>
   </tr>
   <tr>
-    <td>:: setSymbol(string $symbol): self</td>
+    <td>IKlineRequestInterface::setSymbol(string $symbol): self</td>
     <td><b>YES</b></td>
     <td>Trading pair</td>
   </tr>
   <tr>
-    <td>:: setInterval(int $interval): self</td>
+    <td>IKlineRequestInterface::setInterval(int $interval): self</td>
     <td><b>YES</b></td>
     <td>Teak size. Possible values: 1 3 5 15 30 60 120 240 360 720 D M W</td>
   </tr>
   <tr>
-    <td>:: setStartTime(string $startTime): self</td>
+    <td>IKlineRequestInterface::setStartTime(int $timestamp): self</td>
     <td><b>YES</b></td>
     <td>Timestamp FROM which the data slice is taken </td>
   </tr>
   <tr>
-    <td>:: setEndTime(int $endTime): self</td>
+    <td>IKlineRequestInterface::setEndTime(int $timestamp): self</td>
     <td><b>YES</b></td>
     <td>Timestamp BEFORE which the data slice is taken</td>
   </tr>
   <tr>
-    <td>:: setLimit(int $limit): self</td>
+    <td>IKlineRequestInterface::setLimit(int $limit): self</td>
     <td>NO</td>
     <td>Limit the records returned per query. Default 200</td>
   </tr>
 </table>
 
-<p><b>Response structures:</b></p>
+<p align="center" width="100%"><b>RESPONSE STRUCTURE</b></p>
+
+---
 
 ```php
 namespace Carpenstar\ByBitAPI\Derivatives\MarketData\Kline\Interfaces;
 
 interface IKlineResponseInterface
 {
-    public function getStartTime(): \DateTime;
-    public function getOpen(): float;
-    public function getHigh(): float;
-    public function getLow(): float;
-    public function getClose(): float;
-    public function getVolume(): float;
-    public function getTurnover(): float;
+    public function getStartTime(): \DateTime; // Tick start time
+    public function getOpen(): float; // Opening price
+    public function getHigh(): float; // Highest price
+    public function getLow(): float; // Lowest price
+    public function getClose(): float; // Closing price
+    public function getVolume(): float; // Volume
+    public function getTurnover(): float; // Turnover
 }
 ```
 <table style="width: 100%">
+  <tr>
+    <td colspan="3">
+        <sup><b>INTERFACE</b></sup> <br />
+        <b>\Carpenstar\ByBitAPI\Derivatives\MarketData\Kline\Interfaces\IKlineResponseInterface::class</b>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="3">
+        <sup><b>DTO</b></sup> <br />
+        <b>\Carpenstar\ByBitAPI\Derivatives\MarketData\Kline\Response\KlineResponse::class</b>
+    </td>
+  </tr>
   <tr>
     <th style="width: 20%; text-align: center">Method</th>
     <th style="width: 20%; text-align: center">Type</th>
     <th style="width: 60%; text-align: center">Description</th>
   </tr>
+
   <tr>
-    <td colspan="3">
-      <b>\Carpenstar\ByBitAPI\Derivatives\MarketData\Kline\Interfaces\IKlineResponseInterface</b>
-    </td>
-  </tr>
-  <tr>
-    <td>:: getStartTime()</td>
+    <td>IKlineResponseInterface::getStartTime()</td>
     <td>DateTime</td>
     <td>Tick start time</td>
   </tr>
   <tr>
-    <td>:: getOpen()</td>
+    <td>IKlineResponseInterface::getOpen()</td>
     <td>float</td>
     <td>Opening price</td>
   </tr>
   <tr>
-    <td>:: getHigh()</td>
+    <td>IKlineResponseInterface::getHigh()</td>
     <td>float</td>
     <td>Highest price</td>
   </tr>
   <tr>
-    <td>:: getLow()</td>
+    <td>IKlineResponseInterface::getLow()</td>
     <td>float</td>
     <td>Lowest price</td>
   </tr>
   <tr>
-    <td>:: getClose()</td>
+    <td>IKlineResponseInterface::getClose()</td>
     <td>float</td>
     <td>Closing price</td>
   </tr>
   <tr>
-    <td>:: getVolume()</td>
+    <td>IKlineResponseInterface::getVolume()</td>
     <td>float</td>
     <td>Volume</td>
   </tr>
   <tr>
-    <td>:: getTurnover()</td>
+    <td>IKlineResponseInterface::getTurnover()</td>
     <td>float</td>
     <td>Turnover</td>
   </tr>

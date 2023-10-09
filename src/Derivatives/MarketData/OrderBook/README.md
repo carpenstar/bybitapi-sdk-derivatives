@@ -1,10 +1,16 @@
-### Market Data - Order Book
+# Market Data - Order Book
 <b>[Official documentation](https://bybit-exchange.github.io/docs/derivatives/public/orderbook)</b>
 <p>Endpoint returns a list of orders to buy and sell perpetual contracts, organized and sorted by price level.</p>
 
 ```php
-\Carpenstar\ByBitAPI\Derivatives\MarketData\OrderBook\OrderBook::class // Endpoint classname
+// Endpoint classname
+\Carpenstar\ByBitAPI\Derivatives\MarketData\OrderBook\OrderBook::class
 ```
+
+<p align="center" width="100%"><b>EXAMPLE</b></p>
+
+---
+
 ```php
 use Carpenstar\ByBitAPI\BybitAPI;
 use Carpenstar\ByBitAPI\Derivatives\MarketData\OrderBook\OrderBook;
@@ -56,19 +62,28 @@ foreach ($result->getAsk()->all() as $ask) {
 */
 ```  
 
-<p><b>Request parameters:</b></p>
+<p align="center" width="100%"><b>REQUEST PARAMETERS</b></p>
+
+---
 
 ```php
 \Carpenstar\ByBitAPI\Derivatives\MarketData\OrderBook\Request\OrderBookRequest::class
 
 $options = (new OrderBookRequest())
-    ->setSymbol("ETHUSDT")
-    ->setLimit(25);
+    ->setSymbol("ETHUSDT") // Trading pair
+    ->setLimit(25); // Limit on the number of orders in one direction: limit = 50 (25 - bid + 25 - ask)
 ```  
 <table style="width: 100%">
   <tr>
     <td colspan="3">
-      <b>\Carpenstar\ByBitAPI\Derivatives\MarketData\OrderBook\Request\OrderBookRequest</b>
+        <sup><b>INTERFACE</b></sup> <br />
+        <b>\Carpenstar\ByBitAPI\Derivatives\MarketData\OrderBook\Interfaces\IOrderBookRequestInterface::class</b>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="3">
+        <sup><b>DTO</b></sup> <br />
+        <b>\Carpenstar\ByBitAPI\Derivatives\MarketData\OrderBook\Request\OrderBookRequest::class</b>
     </td>
   </tr>
   <tr>
@@ -77,28 +92,30 @@ $options = (new OrderBookRequest())
     <th style="width: 50%; text-align: center">Description</th>
   </tr>
   <tr>
-    <td>:: setSymbol(string $symbol): self</td>
+    <td>IOrderBookResponse::setSymbol(string $symbol): self</td>
     <td><b>YES</b></td>
     <td>Trading pair</td>
   </tr>
   <tr>
-    <td>:: setLimit(int $limit): self</td>
+    <td>IOrderBookResponse::setLimit(int $limit): self</td>
     <td>NO</td>
     <td>Limit on the number of orders in one direction: limit = 50 (25 - bid + 25 - ask)</td>
   </tr>
 </table>
 
 
-<p><b>Response structure:</b></p>
+<p align="center" width="100%"><b>RESPONSE STRUCTURE</b></p>
+
+---
 
 ```php
 \Carpenstar\ByBitAPI\Derivatives\MarketData\OrderBook\Interfaces\IOrderBookResponse::class
 
 interface IOrderBookResponse
 {
-    public function getSymbol(): string;
-    public function getTimestamp(): \DateTime;
-    public function getUpdateId(): int;
+    public function getSymbol(): string; // Trading pair
+    public function getTimestamp(): \DateTime; // Execution time
+    public function getUpdateId(): int; // update ID
     public function getBid(): ICollectionInterface; // IOrderBookPriceResponse[]
     public function getAsk(): ICollectionInterface; // IOrderBookPriceResponse[]
 }
@@ -106,7 +123,14 @@ interface IOrderBookResponse
 <table style="width: 100%">
   <tr>
     <td colspan="3">
-      <b>\Carpenstar\ByBitAPI\Derivatives\MarketData\OrderBook\Interfaces\IOrderBookResponse</b>
+        <sup><b>INTERFACE</b></sup> <br />
+        <b>\Carpenstar\ByBitAPI\Derivatives\MarketData\OrderBook\Interfaces\IOrderBookResponse::class</b>
+        </td>
+      </tr>
+    <tr>
+    <td colspan="3">
+        <sup><b>DTO</b></sup> <br />
+        <b>\Carpenstar\ByBitAPI\Derivatives\MarketData\OrderBook\Response\OrderBookResponse::class</b>
     </td>
   </tr>
   <tr>
@@ -115,32 +139,31 @@ interface IOrderBookResponse
     <th style="width: 60%; text-align: center">Description</th>
   </tr>
   <tr>
-    <td>:: getSymbol()</td>
+    <td>IOrderBookResponse::getSymbol()</td>
     <td>float</td>
     <td>Trading pair</td>
   </tr>
   <tr>
-    <td>:: getTimestamp()</td>
+    <td>IOrderBookResponse::getTimestamp()</td>
     <td>DateTime</td>
     <td>Execution time</td>
   </tr>
   <tr>
-    <td>:: getUpdateId()</td>
+    <td>IOrderBookResponse::getUpdateId()</td>
     <td>float</td>
     <td>update ID</td>
   </tr>
   <tr>
-    <td>:: getBid()</td>
+    <td>IOrderBookResponse::getBid()</td>
     <td>IOrderBookPriceResponse[]</td>
     <td>List of sell orders</td>
   </tr>
   <tr>
-    <td>:: getAsk()</td>
+    <td>IOrderBookResponse::getAsk()</td>
     <td>IOrderBookPriceResponse[]</td>
     <td>List of buy orders</td>
   </tr>
 </table>
-<p>&nbsp;</p>
 
 ```php
 \Carpenstar\ByBitAPI\Derivatives\MarketData\OrderBook\Interfaces\IOrderBookPriceResponse::class
@@ -154,7 +177,14 @@ interface IOrderBookPriceResponse
 <table style="width: 100%">
   <tr>
     <td colspan="3">
-      <b>\Carpenstar\ByBitAPI\Derivatives\MarketData\OrderBook\Interfaces\IOrderBookPriceResponse</b>
+        <sup><b>INTERFACE</b></sup>
+        <b>\Carpenstar\ByBitAPI\Derivatives\MarketData\OrderBook\Interfaces\IOrderBookPriceItemResponse::class</b>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="3">
+        <sup><b>DTO</b></sup>
+        <b>\Carpenstar\ByBitAPI\Derivatives\MarketData\OrderBook\Interfaces\OrderBookPriceItemResponse::class</b>
     </td>
   </tr>
   <tr>
@@ -163,12 +193,12 @@ interface IOrderBookPriceResponse
     <th style="width: 60%; text-align: center">Description</th>
   </tr>
   <tr>
-    <td>:: getPrice()</td>
+    <td>IOrderBookPriceItemResponse::getPrice()</td>
     <td>float</td>
     <td>Price</td>
   </tr>
   <tr>
-    <td>:: getQuantity()</td>
+    <td>IOrderBookPriceItemResponse::getQuantity()</td>
     <td>float</td>
     <td>Volume</td>
   </tr>

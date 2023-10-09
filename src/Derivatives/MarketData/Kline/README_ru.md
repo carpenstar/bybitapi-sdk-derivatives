@@ -105,14 +105,14 @@ $options = (new KlineRequest())
     <td>Размер тика. Возможные значения: 1 3 5 15 30 60 120 240 360 720 D M W</td>
   </tr>
   <tr>
-    <td>:: setStart(string $start): self</td>
+    <td>:: setStartTime(int $timestamp): self</td>
     <td><b>ДА</b></td>
-    <td>Строка даты/времени ОТ которого берется срез данных </td>
+    <td>Таймштамп ОТ которого берется срез данных </td>
   </tr>
   <tr>
-    <td>:: setEnd(string $end): self</td>
+    <td>:: setEndTime(int $timestamp): self</td>
     <td><b>ДА</b></td>
-    <td>Строка даты/времени ДО которого берется срез данных</td>
+    <td>Таймштамп ДО которого берется срез данных</td>
   </tr>
   <tr>
     <td>:: setLimit(int $limit): self</td>

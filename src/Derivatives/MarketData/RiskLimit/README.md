@@ -1,11 +1,17 @@
-### Market Data - Risk Limit
+# Market Data - Risk Limit
 <b>[Official documentation](https://bybit-exchange.github.io/docs/derivatives/public/risk-limit)</b>
 <p>Endpoint returns data on the risk limit for the specified symbol. </p>
 <p>Risk limit is a risk management measure to limit traders' exposure to risk.</p>
 
 ```php
-\Carpenstar\ByBitAPI\Derivatives\MarketData\RiskLimit\RiskLimit::class // Endpoint classname
+// Endpoint classname
+\Carpenstar\ByBitAPI\Derivatives\MarketData\RiskLimit\RiskLimit::class
 ```
+
+<p align="center" width="100%"><b>EXAMPLE</b></p>
+
+---
+
 ```php
 use Carpenstar\ByBitAPI\BybitAPI;
 use Carpenstar\ByBitAPI\Derivatives\MarketData\RiskLimit\RiskLimit;
@@ -63,18 +69,27 @@ foreach ($result as $riskItem) {
  */
 ```  
 
-<p><b>Request parameters:</b></p>
+<p align="center" width="100%"><b>REQUEST PARAMETERS</b></p>
+
+---
 
 ```php
 \Carpenstar\ByBitAPI\Derivatives\MarketData\RiskLimit\Request\RiskLimitsRequest::class
 
 $options = (new RiskLimitsRequest())
-    ->setSymbol("BTCUSDT");
+    ->setSymbol("BTCUSDT"); // Trading pair
 ```  
 <table style="width: 100%">
   <tr>
     <td colspan="3">
-      <b>\Carpenstar\ByBitAPI\Derivatives\MarketData\RiskLimit\Request\RiskLimitsRequest</b>
+        <sup><b>INTERFACE</b></sup> <br />
+        <b>\Carpenstar\ByBitAPI\Derivatives\MarketData\RiskLimit\Interfaces\IRiskLimitsRequestInterface::class</b>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="3">
+        <sup><b>DTO</b></sup> <br />
+        <b>\Carpenstar\ByBitAPI\Derivatives\MarketData\RiskLimit\Request\RiskLimitsRequest::class</b>
     </td>
   </tr>
   <tr>
@@ -83,32 +98,41 @@ $options = (new RiskLimitsRequest())
     <th style="width: 50%; text-align: center">Description</th>
   </tr>
   <tr>
-    <td>:: setSymbol(string $symbol): self</td>
+    <td>IRiskLimitsRequestInterface::setSymbol(string $symbol): self</td>
     <td><b>YES</b></td>
     <td>Trading pair</td>
   </tr>
 </table>
 
-<p><b>Response structure:</b></p>
+<p align="center" width="100%"><b>RESPONSE STRUCTURE</b></p>
+
+---
 
 ```php
 \Carpenstar\ByBitAPI\Derivatives\MarketData\RiskLimit\Interfaces\IRiskLimitsResponse::class;
 
 interface IRiskLimitsResponse
 {
-    public function getId(): string;
-    public function getSymbol(): string;
-    public function getLimit(): int;
-    public function getMaintainMargin(): float;
-    public function getInitialMargin(): float;
-    public function getIsLowerRisk(): int;
-    public function getMaxLeverage(): float;
+    public function getId(): string; // Risk ID
+    public function getSymbol(): string; // Trading pair
+    public function getLimit(): int; // Position limit
+    public function getMaintainMargin(): float; // Margin maintenance
+    public function getInitialMargin(): float; // Initial margin
+    public function getIsLowerRisk(): int; // Is the trading instrument low risk?
+    public function getMaxLeverage(): float; // Maximum leverage
 }
 ```
 <table style="width: 100%">
   <tr>
     <td colspan="3">
-      <b>\Carpenstar\ByBitAPI\Derivatives\MarketData\RiskLimit\Interfaces\IRiskLimitsResponse</b>
+        <sup><b>INTERFACE</b></sup> <br />
+        <b>\Carpenstar\ByBitAPI\Derivatives\MarketData\RiskLimit\Interfaces\IRiskLimitsResponse:class</b>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="3">
+        <sup><b>DTO</b></sup> <br />
+        <b>\Carpenstar\ByBitAPI\Derivatives\MarketData\RiskLimit\Response\RiskLimitsResponse::class</b>
     </td>
   </tr>
   <tr>
@@ -117,49 +141,49 @@ interface IRiskLimitsResponse
     <th style="width: 60%; text-align: center">Description</th>
   </tr>
   <tr>
-    <td>:: getId()</td>
+    <td>IRiskLimitsResponse::getId()</td>
     <td>string</td>
     <td>
       Risk ID
     </td>
   </tr>
   <tr>
-    <td>:: getSymbol()</td>
+    <td>IRiskLimitsResponse::getSymbol()</td>
     <td>string</td>
     <td>
       Trading pair
     </td>
   </tr>
   <tr>
-    <td>:: getLimit()</td>
+    <td>IRiskLimitsResponse::getLimit()</td>
     <td>int</td>
     <td>
       Position limit
     </td>
   </tr>
   <tr>
-    <td>:: getMaintainMargin()</td>
+    <td>IRiskLimitsResponse::getMaintainMargin()</td>
     <td>float</td>
     <td>
       Margin maintenance
     </td>
   </tr>
   <tr>
-    <td>:: getInitialMargin()</td>
+    <td>IRiskLimitsResponse::getInitialMargin()</td>
     <td>float</td>
     <td>
       Initial margin
     </td>
   </tr>
   <tr>
-    <td>:: getIsLowerRisk()</td>
+    <td>IRiskLimitsResponse::getIsLowerRisk()</td>
     <td>int</td>
     <td>
       Is the trading instrument low risk?
     </td>
   </tr>
   <tr>
-    <td>:: getMaxLeverage()</td>
+    <td>IRiskLimitsResponse::getMaxLeverage()</td>
     <td>float</td>
     <td>
       Maximum leverage

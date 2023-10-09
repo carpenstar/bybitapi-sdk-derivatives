@@ -4,8 +4,9 @@ namespace Carpenstar\ByBitAPI\Derivatives\MarketData\OpenInterest\Request;
 use Carpenstar\ByBitAPI\Core\Helpers\DateTimeHelper;
 use Carpenstar\ByBitAPI\Core\Helpers\StringHelper;
 use Carpenstar\ByBitAPI\Core\Objects\AbstractParameters;
+use Carpenstar\ByBitAPI\Derivatives\MarketData\OpenInterest\Interfaces\IOpenInterestInterface;
 
-class OpenInterestRequest extends AbstractParameters
+class OpenInterestRequest extends AbstractParameters implements IOpenInterestInterface
 {
     /**
      *

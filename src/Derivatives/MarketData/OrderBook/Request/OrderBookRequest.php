@@ -2,8 +2,9 @@
 namespace Carpenstar\ByBitAPI\Derivatives\MarketData\OrderBook\Request;
 
 use Carpenstar\ByBitAPI\Core\Objects\AbstractParameters;
+use Carpenstar\ByBitAPI\Derivatives\MarketData\OrderBook\Interfaces\IOrderBookRequestInterface;
 
-class OrderBookRequest extends AbstractParameters
+class OrderBookRequest extends AbstractParameters implements IOrderBookRequestInterface
 {
     /**
      * @var string $category

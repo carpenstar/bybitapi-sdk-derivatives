@@ -1,10 +1,16 @@
-### Market Data - Public Trading History
+# Market Data - Public Trading History
 <b>[Official documentation](https://bybit-exchange.github.io/docs/derivatives/public/trade)</b>
 <p>Endpoint returns data on the execution of trading orders</p>  
 
 ```php
-Carpenstar\ByBitAPI\Derivatives\MarketData\PublicTradingHistory\PublicTradingHistory::class // Endpoint classname
+// Endpoint classname
+Carpenstar\ByBitAPI\Derivatives\MarketData\PublicTradingHistory\PublicTradingHistory::class
 ```
+
+<p align="center" width="100%"><b>EXAMPLE</b></p>
+
+---
+
 ```php
 use Carpenstar\ByBitAPI\BybitAPI;
 use Carpenstar\ByBitAPI\Derivatives\MarketData\PublicTradingHistory\PublicTradingHistory;
@@ -61,19 +67,28 @@ foreach ($result as $historyItem) {
  */
 ```  
 
-<p><b>Request parameters:</b></p>
+<p align="center" width="100%"><b>REQUEST PARAMETERS</b></p>
+
+---
 
 ```php
 \Carpenstar\ByBitAPI\Derivatives\MarketData\PublicTradingHistory\Request\PublicTradingHistoryRequest::class
 
 $options = (new PublicTradingHistoryRequest())
-    ->setSymbol("ETHUSDT")
-    ->setLimit(25);
+    ->setSymbol("ETHUSDT") // Trading pair
+    ->setLimit(25); // Quantity limit per result set
 ```  
 <table style="width: 100%">
   <tr>
     <td colspan="3">
-      <b>\Carpenstar\ByBitAPI\Derivatives\MarketData\PublicTradingHistory\Request\PublicTradingHistoryRequest</b>
+        <sup><b>INTERFACE</b></sup> <br />
+        <b>\Carpenstar\ByBitAPI\Derivatives\MarketData\PublicTradingHistory\Interfaces\IPublicTradingHistoryRequestInterface::class</b>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="3">
+        <sup><b>DTO</b></sup> <br />
+        <b>\Carpenstar\ByBitAPI\Derivatives\MarketData\PublicTradingHistory\Request\PublicTradingHistoryRequest::class</b>
     </td>
   </tr>
   <tr>
@@ -82,37 +97,46 @@ $options = (new PublicTradingHistoryRequest())
     <th style="width: 50%; text-align: center">Description</th>
   </tr>
   <tr>
-    <td>:: setSymbol(string $symbol): self</td>
+    <td>IPublicTradingHistoryRequestInterface::setSymbol(string $symbol): self</td>
     <td><b>YES</b></td>
     <td>Trading pair</td>
   </tr>
   <tr>
-    <td>:: setLimit(int $limit): self</td>
+    <td>IPublicTradingHistoryRequestInterface::setLimit(int $limit): self</td>
     <td>NO</td>
     <td>Quantity limit per result set</td>
   </tr>
 </table>
 
-<p><b>Response structure:</b></p>
+<p align="center" width="100%"><b>RESPONSE STRUCTURE</b></p>
+
+---
 
 ```php
 \Carpenstar\ByBitAPI\Derivatives\MarketData\PublicTradingHistory\Interfaces\IPublicTradingHistoryResponse::class;
 
 interface IPublicTradingHistoryResponse
 {
-    public function getExecId(): string;
-    public function getSymbol(): string;
-    public function getPrice(): float;
-    public function getSize(): float;
-    public function getSide(): string;
-    public function getTime(): \DateTime;
-    public function isBlockTrade(): bool;
+    public function getExecId(): string; // Execution ID
+    public function getSymbol(): string; // Trading pair
+    public function getPrice(): float; // Execution price
+    public function getSize(): float; // Execution volume
+    public function getSide(): string; // Direction (buy, sell)
+    public function getTime(): \DateTime; // Execution time
+    public function isBlockTrade(): bool; // is OTC trade
 }
 ```
 <table style="width: 100%">
   <tr>
     <td colspan="3">
-      <b>\Carpenstar\ByBitAPI\Derivatives\MarketData\PublicTradingHistory\Interfaces\IPublicTradingHistoryResponse</b>
+        <sup><b>INTERFACE</b></sup> <br />
+        <b>\Carpenstar\ByBitAPI\Derivatives\MarketData\PublicTradingHistory\Interfaces\IPublicTradingHistoryResponse::class</b>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="3">
+        <sup><b>DTO</b></sup> <br />
+        <b>\Carpenstar\ByBitAPI\Derivatives\MarketData\PublicTradingHistory\Response\PublicTradingHistoryResponse::class</b>
     </td>
   </tr>
   <tr>
@@ -121,49 +145,49 @@ interface IPublicTradingHistoryResponse
     <th style="width: 60%; text-align: center">Description</th>
   </tr>
   <tr>
-    <td>:: getExecId()</td>
+    <td>IPublicTradingHistoryResponse::getExecId()</td>
     <td>string</td>
     <td>
       Execution ID
     </td>
   </tr>
   <tr>
-    <td>:: getSymbol()</td>
+    <td>IPublicTradingHistoryResponse::getSymbol()</td>
     <td>string</td>
     <td>
       Trading pair
     </td>
   </tr>
   <tr>
-    <td>:: getPrice()</td>
+    <td>IPublicTradingHistoryResponse::getPrice()</td>
     <td>float</td>
     <td>
       Execution price
     </td>
   </tr>
   <tr>
-    <td>:: getSize()</td>
+    <td>IPublicTradingHistoryResponse::getSize()</td>
     <td>float</td>
     <td>
       Execution volume
     </td>
   </tr>
   <tr>
-    <td>:: getSide()</td>
+    <td>IPublicTradingHistoryResponse::getSide()</td>
     <td>string</td>
     <td>
       Direction (buy, sell)
     </td>
   </tr>
   <tr>
-    <td>:: getTime()</td>
+    <td>IPublicTradingHistoryResponse::getTime()</td>
     <td>DateTime</td>
     <td>
       Execution time
     </td>
   </tr>
   <tr>
-    <td>:: isBlockTrade()</td>
+    <td>IPublicTradingHistoryResponse::isBlockTrade()</td>
     <td>bool</td>
     <td>
       -
